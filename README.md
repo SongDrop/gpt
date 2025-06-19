@@ -1,2 +1,168 @@
-# gpt-chat
-gpt-chat
+# Azure AI Chat Assistant Deployment
+
+One-click deployment of a fully automated AI chat assistant with GPT-4.1-mini and GPT-image-1 image generation capabilities.
+
+[🌐 Deploy Now](https://azure-ai-assistant.netlify.app/)
+
+---
+
+## High-Level Overview
+
+This solution automates the creation, configuration, and deployment of an AI chat assistant application on Azure with advanced vector search capabilities.
+
+### Key Features
+
+- Automated Azure resource provisioning with quota checks  
+- Azure OpenAI service deployments: GPT-4.1-mini (chat) and GPT-image-1 (image generation)  
+- Azure File upload storage for vector database embedding  
+- Azure OpenAI vector search database integration  
+- Secure networking setup: Virtual Network (VNet), Network Security Group (NSG), and Public IP  
+- Automated Ubuntu VM setup via Custom Script Extension  
+- DNS configuration with Azure DNS  
+- SSL certificates via Let's Encrypt with certbot  
+- Built-in logging and monitoring readiness  
+
+---
+
+## Prerequisites
+
+Before deploying, ensure you have the following:
+
+- **Azure Portal Account**  
+  [https://portal.azure.com](https://portal.azure.com)  
+  Active subscription with sufficient quotas.
+
+- **Domain Name**  
+  Purchase from Namecheap or another registrar (e.g., `yourdomain.com`).
+
+- **DNS Configuration**  
+  Point your domain's nameservers to Azure DNS:  
+  ```
+  ns1-03.azure-dns.com  
+  ns2-03.azure-dns.net  
+  ns3-03.azure-dns.org  
+  ns4-03.azure-dns.info
+  ```
+
+- **Service Principal**  
+  Azure AD application with Contributor permissions, with these environment variables:  
+  - `AZURE_CLIENT_ID`  
+  - `AZURE_CLIENT_SECRET`  
+  - `AZURE_TENANT_ID`
+
+- **Azure CLI**  
+  Installed and authenticated for manual deployment.
+
+---
+
+## Solution Architecture
+
+The deployment provisions and configures:
+
+- **Compute**  
+  Ubuntu 22.04 LTS Virtual Machine with custom script extension and SSL setup.
+
+- **AI Services**  
+  Azure OpenAI resource with GPT-4.1-mini (chat) and GPT-image-1 (image gen) deployments.
+
+- **Vector Search Database**  
+  Azure OpenAI vector search database for custom large language model (LLM)-ready vector indexing.
+
+- **Storage**  
+  Azure Blob Storage container for scripts and file uploads.
+
+- **Networking**  
+  Virtual Network, Public IP, Network Security Group with inbound rules (ports 22, 80, 443, 8000).
+
+- **DNS**  
+  Azure DNS zone configured for your domain with A record pointing to the VM.
+
+---
+
+## Detailed Deployment Process
+
+1. **Authentication**  
+   Uses `ClientSecretCredential` to authenticate with Azure using service principal credentials.
+
+2. **Quota Checks**  
+   Verifies quotas for OpenAI service usage, VM vCPU cores, storage, and network resources.
+
+3. **Resource Group & Storage**  
+   Creates/updates Azure Resource Group and Storage Account (Standard_LRS, StorageV2).
+
+4. **Azure Container Storage**  
+   Creates container for file uploads to enable vector database embedding.
+
+5. **Azure OpenAI Resource & Deployments**  
+   Deploys Azure OpenAI resource with SKU `S0` and two deployments:  
+   - `gpt-4.1-mini` (chat/completions)  
+   - `gpt-image-1` (image generation)
+
+6. **Setup Script Generation**  
+   Generates a bash setup script run on the VM after provisioning to install dependencies and configure the app.
+
+7. **Networking Setup**  
+   Creates Virtual Network, subnet, Public IP, Network Security Group with inbound rules.
+
+8. **Virtual Machine Creation**  
+   Provisions Ubuntu 22.04 LTS VM with network interface.
+
+9. **DNS Setup**  
+   Creates or updates Azure DNS zone and adds A record pointing to VM's public IP.
+
+10. **VM Custom Script Extension**  
+    Attaches script extension to download and execute setup script from Blob Storage.
+
+---
+
+## Deployment Options
+
+### One-Click Deployment
+
+Click the button below to start the deployment:
+
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://azure-ai-assistant.netlify.app/)
+
+> *Note: Requires Azure subscription with appropriate permissions and service principal credentials.*
+
+### Manual Deployment
+
+1. Install and authenticate Azure CLI.  
+2. Clone this repository.  
+3. Configure environment variables in `.env` file:  
+   ```
+   AZURE_CLIENT_ID=your_client_id
+   AZURE_CLIENT_SECRET=your_client_secret
+   AZURE_TENANT_ID=your_tenant_id
+   ```
+4. Run the deployment script:  
+   ```bash
+   ./deploy.sh
+   ```
+
+---
+
+## Use Cases
+
+- Deploy scalable AI chat assistants on Azure OpenAI.  
+- Applications requiring integrated text and image generation.  
+- Solutions leveraging vector search for contextual AI responses.  
+- Projects needing fully automated infrastructure provisioning.
+
+---
+
+## License & Credits
+
+Azure AI Chat Assistant Deployment Template | © 2025 Gabriel Majorsky
+
+---
+
+## Links
+
+- [Official Deployment Site](https://azure-ai-assistant.netlify.app/)  
+- [Azure Portal](https://portal.azure.com)  
+- [Azure OpenAI Documentation](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/)
+
+---
+
+*For questions or support, please open an issue or contact the maintainer.*
