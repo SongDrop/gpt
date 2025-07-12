@@ -6,21 +6,31 @@ One-click deployment of a fully automated AI chat assistant with GPT-4.1-mini an
 
 ---
 
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+export NODE_OPTIONS=--openssl-legacy-provider
+node -v
+npm -v
+chmod +x restart_services.sh
+./restart_services.sh
+
 ## High-Level Overview
 
 This solution automates the creation, configuration, and deployment of an AI chat assistant application on Azure with advanced vector search capabilities.
 
 ### Key Features
 
-- Automated Azure resource provisioning with quota checks  
-- Azure OpenAI service deployments: GPT-4.1-mini (chat) and GPT-image-1 (image generation)  
-- Azure File upload storage for vector database embedding  
-- Azure OpenAI vector search database integration  
-- Secure networking setup: Virtual Network (VNet), Network Security Group (NSG), and Public IP  
-- Automated Ubuntu VM setup via Custom Script Extension  
-- DNS configuration with Azure DNS  
-- SSL certificates via Let's Encrypt with certbot  
-- Built-in logging and monitoring readiness  
+- Automated Azure resource provisioning with quota checks
+- Azure OpenAI service deployments: GPT-4.1-mini (chat) and GPT-image-1 (image generation)
+- Azure File upload storage for vector database embedding
+- Azure OpenAI vector search database integration
+- Secure networking setup: Virtual Network (VNet), Network Security Group (NSG), and Public IP
+- Automated Ubuntu VM setup via Custom Script Extension
+- DNS configuration with Azure DNS
+- SSL certificates via Let's Encrypt with certbot
+- Built-in logging and monitoring readiness
+- Code translator supporting multiple languages
 
 ---
 
@@ -36,18 +46,20 @@ Before deploying, ensure you have the following:
   Purchase from Namecheap or another registrar (e.g., `yourdomain.com`).
 
 - **DNS Configuration**  
-  Point your domain's nameservers to Azure DNS:  
+  Point your domain's nameservers to Azure DNS:
+
   ```
-  ns1-03.azure-dns.com  
-  ns2-03.azure-dns.net  
-  ns3-03.azure-dns.org  
+  ns1-03.azure-dns.com
+  ns2-03.azure-dns.net
+  ns3-03.azure-dns.org
   ns4-03.azure-dns.info
   ```
 
 - **Service Principal**  
-  Azure AD application with Contributor permissions, with these environment variables:  
-  - `AZURE_CLIENT_ID`  
-  - `AZURE_CLIENT_SECRET`  
+  Azure AD application with Contributor permissions, with these environment variables:
+
+  - `AZURE_CLIENT_ID`
+  - `AZURE_CLIENT_SECRET`
   - `AZURE_TENANT_ID`
 
 - **Azure CLI**  
@@ -94,8 +106,9 @@ The deployment provisions and configures:
    Creates container for file uploads to enable vector database embedding.
 
 5. **Azure OpenAI Resource & Deployments**  
-   Deploys Azure OpenAI resource with SKU `S0` and two deployments:  
-   - `gpt-4.1-mini` (chat/completions)  
+   Deploys Azure OpenAI resource with SKU `S0` and two deployments:
+
+   - `gpt-4.1-mini` (chat/completions)
    - `gpt-image-1` (image generation)
 
 6. **Setup Script Generation**  
@@ -123,19 +136,19 @@ Click the button below to start the deployment:
 
 [![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://azure-ai-assistant.netlify.app/)
 
-> *Note: Requires Azure subscription with appropriate permissions and service principal credentials.*
+> _Note: Requires Azure subscription with appropriate permissions and service principal credentials._
 
 ### Manual Deployment
 
-1. Install and authenticate Azure CLI.  
-2. Clone this repository.  
-3. Configure environment variables in `.env` file:  
+1. Install and authenticate Azure CLI.
+2. Clone this repository.
+3. Configure environment variables in `.env` file:
    ```
    AZURE_CLIENT_ID=your_client_id
    AZURE_CLIENT_SECRET=your_client_secret
    AZURE_TENANT_ID=your_tenant_id
    ```
-4. Run the deployment script:  
+4. Run the deployment script:
    ```bash
    ./deploy.sh
    ```
@@ -144,9 +157,9 @@ Click the button below to start the deployment:
 
 ## Use Cases
 
-- Deploy scalable AI chat assistants on Azure OpenAI.  
-- Applications requiring integrated text and image generation.  
-- Solutions leveraging vector search for contextual AI responses.  
+- Deploy scalable AI chat assistants on Azure OpenAI.
+- Applications requiring integrated text and image generation.
+- Solutions leveraging vector search for contextual AI responses.
 - Projects needing fully automated infrastructure provisioning.
 
 ---
@@ -159,10 +172,10 @@ Azure AI Chat Assistant Deployment Template | © 2025 Gabriel Majorsky
 
 ## Links
 
-- [Official Deployment Site](https://azure-ai-assistant.netlify.app/)  
-- [Azure Portal](https://portal.azure.com)  
+- [Official Deployment Site](https://azure-ai-assistant.netlify.app/)
+- [Azure Portal](https://portal.azure.com)
 - [Azure OpenAI Documentation](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/)
 
 ---
 
-*For questions or support, please open an issue or contact the maintainer.*
+_For questions or support, please open an issue or contact the maintainer._

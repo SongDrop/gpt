@@ -1,0 +1,441 @@
+/* ImageGenerator.css */
+.image-generator-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh; /* Use height instead of min-height */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  margin: 0;
+  z-index: 1000;
+}
+
+.image-generator-card {
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 42rem;
+  max-height: 80%;
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+.image-generator-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.image-generator-title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #2563eb 0%, #0078d4 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  margin-bottom: 0.5rem;
+}
+
+.image-generator-subtitle {
+  color: #6b7280;
+  margin-top: 0.5rem;
+}
+
+.image-generator-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0rem;
+}
+
+.form-group {
+  padding: 0;
+  margin: 0;
+  background: none; /* remove debug red */
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; /* control space between label and input */
+}
+
+.form-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 0.25rem;
+}
+
+.form-textarea {
+  width: 100%;
+  border: 1px solid #d1d5db;
+  border-radius: 0.75rem;
+  padding: 0.75rem;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+.form-textarea:focus {
+  outline: none;
+  border-color: transparent;
+  box-shadow: 0 0 0 2px #3b82f6;
+}
+
+.form-select {
+  width: 100%;
+  border: 1px solid #d1d5db;
+  border-radius: 0.75rem;
+  padding: 0.5rem;
+  font-size: 1rem;
+  transition: all 0.2s;
+  cursor: pointer;
+}
+
+.form-select:focus {
+  outline: none;
+  border-color: transparent;
+  box-shadow: 0 0 0 2px #3b82f6;
+}
+
+.file-upload-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.file-upload-input {
+  display: none;
+}
+
+.file-upload-label {
+  flex: 1;
+  border: 1px solid #d1d5db;
+  border-radius: 0.75rem;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.file-upload-label:hover {
+  background-color: #f9fafb;
+}
+
+.file-clear-btn {
+  color: #ef4444;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: color 0.2s;
+}
+
+.file-clear-btn:hover {
+  color: #dc2626;
+}
+
+.file-hint {
+  font-size: 0.75rem;
+  color: #6b7280;
+  margin-top: 0.25rem;
+}
+
+.error-message {
+  background-color: #fef2f2;
+  color: #dc2626;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.form-actions {
+  display: flex;
+  gap: 0.75rem;
+  padding-top: 0.5rem;
+}
+
+.generate-btn {
+  flex: 1;
+  background: linear-gradient(90deg, #2563eb 0%, #0078d4 100%);
+  color: white;
+  padding: 0.75rem 1rem;
+  border-radius: 0.75rem;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.generate-btn:hover {
+  opacity: 0.9;
+}
+
+.generate-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.clear-btn {
+  padding: 0.75rem 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.75rem;
+  background: white;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.clear-btn:hover {
+  background-color: #f9fafb;
+}
+
+.result-container {
+  margin-top: 2rem;
+}
+
+.result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.result-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.download-btn {
+  font-size: 0.875rem;
+  background: white;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  padding: 0.25rem 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  text-decoration: none;
+  color: inherit;
+  transition: background-color 0.2s;
+}
+
+.download-btn:hover {
+  background-color: #f9fafb;
+}
+
+.result-image-container {
+  background-color: #f3f4f6;
+  border-radius: 0.75rem;
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+}
+
+.result-image {
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  max-width: 100%;
+  height: auto;
+  max-height: 24rem;
+  object-fit: contain;
+}
+
+.prompt-display {
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  background-color: #eff6ff;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  color: #1e40af;
+}
+
+.prompt-display strong {
+  font-weight: 500;
+}
+
+#back-button-gpt-1 {
+  padding: 0.5rem 1rem;
+  background-color: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: #374151;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+#back-button-gpt-1:hover {
+  background-color: #f9fafb;
+  border-color: #9ca3af;
+}
+
+#back-button-gpt-1 svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+#minimize-button-gpt-1 {
+  padding: 0.5rem 1rem;
+  background-color: #ffffff;
+  border: 1px solid #d1d5db;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: #374151;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+#minimize-button-gpt-1:hover {
+  background-color: #f9fafb;
+  border-color: #9ca3af;
+}
+
+#minimize-button-gpt-1 svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.grid-2-col {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .grid-2-col {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.spinner {
+  animation: spin 1s linear infinite;
+  width: 1rem; /* 16px */
+  height: 1rem; /* 16px */
+  margin-right: 0.5rem;
+}
+
+/* Keep your existing keyframes */
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.image-grid {
+  padding: 6px;
+  border-radius: 4px;
+  background-color: rgb(234, 234, 234);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 16px;
+  position: relative;
+}
+
+.grid-title {
+  padding: 12px;
+  margin-top: 6px;
+  margin-bottom: 6px;
+}
+
+.grid-item {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.grid-image {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+  border-radius: 8px;
+  position: relative;
+}
+
+#image-del-btn {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  font-size: 18px;
+  line-height: 26px;
+  cursor: pointer;
+  color: #c00;
+  font-weight: bold;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+  transition: background 0.3s;
+}
+
+.delete-all-images {
+  border: none;
+  line-height: 26px;
+  cursor: pointer;
+  color: rgba(255, 0, 0, 0.9);
+  font-weight: bold;
+}
+
+#image-del-btn:hover {
+  background: rgba(255, 0, 0, 0.9);
+  color: white;
+}
+
+.mini-view-container {
+  width: 4rem;
+  height: 4rem;
+  background: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+/* Shimmer animation */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.shimmer-effect {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 0.25rem; /* match container */
+  background: linear-gradient(90deg, #f3f3f3 25%, #e0e0e0 37%, #f3f3f3 63%);
+  background-size: 400% 100%;
+  animation: shimmer 1.5s infinite;
+  z-index: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* No flex here, it's just a background */
+}

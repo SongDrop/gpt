@@ -1,0 +1,251 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#chat {
+  overflow: hidden;
+  overflow-y: auto;
+}
+
+/* Message truncation styling */
+.message-truncated {
+  position: relative;
+  padding-bottom: 1.5rem;
+}
+
+.message-truncated::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2rem;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.1),
+    rgba(255, 255, 255, 1)
+  );
+  pointer-events: none;
+}
+
+/* Code block styling */
+.code-block-wrapper {
+  position: relative;
+  margin: 1rem 0;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+.code-block-wrapper pre {
+  margin: 0 !important;
+  padding: 1rem !important;
+  background-color: #1e1e1e !important;
+  overflow-x: auto;
+  max-height: 600px;
+}
+
+.code-block-wrapper code {
+  background-color: transparent !important;
+  padding: 0 !important;
+  font-size: 0.875em !important;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace !important;
+}
+
+/* Improved inline code styling */
+.prose code:not([class*="language-"]) {
+  color: white !important;
+  background-color: rgba(75, 85, 99, 0.8) !important;
+  padding: 0.2em 0.4em !important;
+  border-radius: 0.25rem !important;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace !important;
+}
+
+/* Scrollbars for code blocks */
+.code-block-wrapper pre::-webkit-scrollbar {
+  height: 8px;
+  width: 8px;
+}
+
+.code-block-wrapper pre::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.code-block-wrapper pre::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+
+.code-block-wrapper pre::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* Message spacing */
+.justify-start > div {
+  margin-top: 1rem !important;
+}
+
+.justify-end > div {
+  margin-top: 2rem !important;
+}
+
+.copy-message-button {
+  /* Style copied button */
+}
+
+.code-block-wrapper {
+  position: relative;
+  overflow: auto;
+}
+
+.sticky-buttons {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  float: right;
+}
+
+.copy-code-button:hover {
+  background-color: #4b5563; /* slightly lighter gray for hover effect */
+}
+
+.copy-code-button.copied {
+  background-color: #10b981; /* emerald-500 */
+  color: white;
+  cursor: default;
+}
+
+#messages {
+  /* existing styles ... */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  overflow-y: scroll;
+}
+#messages::-webkit-scrollbar {
+  display: none;
+}
+
+#prompt_categories {
+  /* existing styles ... */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  overflow-x: scroll;
+}
+#prompt_categories::-webkit-scrollbar {
+  display: none;
+}
+
+#top-scroll {
+  /* existing styles ... */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  overflow-x: scroll;
+}
+#top-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+#bottom-scroll {
+  /* existing styles ... */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  overflow-x: scroll;
+}
+#bottom-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.code-block-wrapper pre {
+  /* existing styles ... */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+.code-block-wrapper pre::-webkit-scrollbar {
+  display: none;
+}
+
+.w-support {
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  cursor: pointer;
+  border: 0px solid black;
+  border-radius: 6px;
+  height: 16px;
+  width: 16px;
+  cursor: pointer;
+  overflow: hidden;
+  z-index: 10000;
+  background-color: transparent;
+  background-image: url("https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20coffee&emoji=%E2%98%95&slug=gabzlabs&button_colour=000000&font_colour=000000&font_family=Arial&outline_colour=000000&coffee_colour=ffffff");
+  background-size: cover;
+  background-position: right;
+}
+.g-support {
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  cursor: pointer;
+  border: 0px solid black;
+  border-radius: 6px;
+  height: 16px;
+  width: 16px;
+  cursor: pointer;
+  overflow: hidden;
+  z-index: 10000;
+  background-color: transparent;
+  background-image: url("https://i.postimg.cc/L4G4h8yn/github.png");
+  background-size: cover;
+  background-position: center;
+}
+
+@keyframes pulseHighlight {
+  0% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 10px 10px rgba(59, 130, 246, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(59, 130, 246, 0);
+  }
+}
+
+.highlight-animation {
+  animation: pulseHighlight 2s ease forwards;
+  /* optional: border or background change */
+  border: 2px solid #3b82f6;
+}
+
+.code-translator-container {
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+.code-translator-container .translator-controls {
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+}
+
+.code-translator-container .editor-header {
+  background-color: #f3f4f6;
+}
+
+.code-translator-container textarea {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
+  background-color: white;
+  color: #111827;
+}
+
+.code-translator-container select {
+  background-color: white;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+}
+
+.code-translator-container button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}

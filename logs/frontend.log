@@ -1,0 +1,72 @@
+
+> ai-chat-assistant@0.1.0 start
+> react-scripts start
+
+(node:47159) [DEP_WEBPACK_DEV_SERVER_ON_AFTER_SETUP_MIDDLEWARE] DeprecationWarning: 'onAfterSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+(Use `node --trace-deprecation ...` to show where the warning was created)
+(node:47159) [DEP_WEBPACK_DEV_SERVER_ON_BEFORE_SETUP_MIDDLEWARE] DeprecationWarning: 'onBeforeSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+Starting the development server...
+
+Compiled successfully!
+
+You can now view ai-chat-assistant in the browser.
+
+  Local:            http://localhost:3000
+  On Your Network:  http://192.168.0.21:3000
+
+Note that the development build is not optimized.
+To create a production build, use npm run build.
+
+webpack compiled successfully
+Files successfully emitted, waiting for typecheck results...
+Issues checking in progress...
+No issues found.
+Compiling...
+Failed to compile.
+
+Module parse failed: Cannot parse JSON: Expected ',' or ']' after array element in JSON at position 32772 (line 307 column 6) while parsing '{
+  "modding": [
+    {
+      "title": "U'
+You may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders
+Error: Cannot parse JSON: Expected ',' or ']' after array element in JSON at position 32772 (line 307 column 6) while parsing '{
+  "modding": [
+    {
+      "title": "U'
+ERROR in ./src/components/prompt-templates.json
+Module parse failed: Cannot parse JSON: Expected ',' or ']' after array element in JSON at position 32772 (line 307 column 6) while parsing '{
+  "modding": [
+    {
+      "title": "U'
+You may need an appropriate loader to handle this file type, currently no loaders are configured to process this file. See https://webpack.js.org/concepts#loaders
+Error: Cannot parse JSON: Expected ',' or ']' after array element in JSON at position 32772 (line 307 column 6) while parsing '{
+  "modding": [
+    {
+      "title": "U'
+    at JsonParser.parse (/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/chat/frontend/node_modules/webpack/lib/json/JsonParser.js:54:10)
+    at /Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/chat/frontend/node_modules/webpack/lib/NormalModule.js:1357:19
+    at processResult (/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/chat/frontend/node_modules/webpack/lib/NormalModule.js:986:11)
+    at /Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/chat/frontend/node_modules/webpack/lib/NormalModule.js:1084:5
+    at /Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/chat/frontend/node_modules/loader-runner/lib/LoaderRunner.js:407:3
+    at iterateNormalLoaders (/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/chat/frontend/node_modules/loader-runner/lib/LoaderRunner.js:233:10)
+    at /Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/chat/frontend/node_modules/loader-runner/lib/LoaderRunner.js:224:4
+    at /Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/chat/frontend/node_modules/webpack/lib/NormalModule.js:1039:15
+    at Array.eval (eval at create (/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/chat/frontend/node_modules/tapable/lib/HookCodeFactory.js:33:10), <anonymous>:12:1)
+    at runCallbacks (/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/chat/frontend/node_modules/enhanced-resolve/lib/CachedInputFileSystem.js:45:15)
+
+webpack compiled with 1 error
+No issues found.
+Compiling...
+Compiled successfully!
+webpack compiled successfully
+Files successfully emitted, waiting for typecheck results...
+Issues checking in progress...
+No issues found.
+Compiling...
+Compiled successfully!
+webpack compiled successfully
+No issues found.
+Compiling...
+Compiled successfully!
+webpack compiled successfully
+No issues found.

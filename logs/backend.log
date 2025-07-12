@@ -1,0 +1,324 @@
+INFO:     Will watch for changes in these directories: ['/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/chat/backend']
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [46624] using WatchFiles
+2025-07-05 15:40:05,436 - main - INFO - Starting application initialization...
+2025-07-05 15:40:05,687 - main - INFO - Configured CORS origins: ['https://localhost:3000', 'http://localhost:3000', 'https://localhost:5000', 'http://localhost:5000']
+INFO:     Started server process [46927]
+INFO:     Waiting for application startup.
+2025-07-05 15:40:05,714 - main - INFO - Validating OpenAI configuration...
+2025-07-05 15:40:05,714 - main - INFO - API Base: https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2025-01-01-preview
+2025-07-05 15:40:05,830 - main - INFO - API Version: 2023-05-15
+2025-07-05 15:40:05,830 - main - INFO - Deployment Name: gpt-4.1-mini
+2025-07-05 15:40:11,069 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-05 15:40:11,082 - main - INFO - OpenAI configuration validated successfully
+INFO:     Application startup complete.
+INFO:     127.0.0.1:50754 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50754 - "GET /health HTTP/1.1" 200 OK
+INFO:     ('127.0.0.1', 50756) - "WebSocket /ws" [accepted]
+2025-07-05 15:40:40,715 - main - INFO - Client 127.0.0.1:50756 connected. Active connections: 1
+INFO:     connection open
+2025-07-05 15:41:02,002 - main - INFO - Received WebSocket message
+2025-07-05 15:41:02,828 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-05 15:41:08,959 - main - INFO - WebSocket disconnected
+2025-07-05 15:41:08,959 - main - INFO - Client 127.0.0.1:50756 disconnected. Active connections: 0
+INFO:     connection closed
+INFO:     ('127.0.0.1', 50765) - "WebSocket /ws" [accepted]
+2025-07-05 15:41:09,008 - main - INFO - Client 127.0.0.1:50765 connected. Active connections: 1
+INFO:     connection open
+2025-07-05 15:41:09,308 - main - INFO - WebSocket disconnected
+2025-07-05 15:41:09,308 - main - INFO - Client 127.0.0.1:50765 disconnected. Active connections: 0
+INFO:     connection closed
+INFO:     127.0.0.1:52567 - "OPTIONS /chat HTTP/1.1" 200 OK
+2025-07-05 17:35:35,074 - main - INFO - Received chat request
+2025-07-05 17:35:42,689 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-05 17:35:42,692 - main - INFO - Successfully processed chat request
+INFO:     127.0.0.1:52567 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52572 - "OPTIONS /chat HTTP/1.1" 200 OK
+2025-07-05 17:36:20,613 - main - INFO - Received chat request
+2025-07-05 17:36:40,219 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-05 17:36:40,221 - main - INFO - Successfully processed chat request
+2025-07-05 17:36:40,225 - main - INFO - Received chat request
+2025-07-05 17:37:00,145 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-05 17:37:00,147 - main - INFO - Successfully processed chat request
+INFO:     127.0.0.1:52575 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52751 - "OPTIONS /chat HTTP/1.1" 200 OK
+2025-07-05 17:49:07,247 - main - INFO - Received chat request
+2025-07-05 17:49:12,296 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-05 17:49:12,300 - main - INFO - Successfully processed chat request
+INFO:     127.0.0.1:52751 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52755 - "OPTIONS /translate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52756 - "OPTIONS /translate HTTP/1.1" 200 OK
+2025-07-05 17:49:57,844 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-05 17:49:59,091 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+INFO:     127.0.0.1:52755 - "POST /translate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52756 - "POST /translate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52759 - "OPTIONS /chat HTTP/1.1" 200 OK
+2025-07-05 17:50:42,597 - main - INFO - Received chat request
+2025-07-05 17:51:03,879 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-05 17:51:03,885 - main - INFO - Successfully processed chat request
+INFO:     127.0.0.1:52759 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52778 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52778 - "GET /health HTTP/1.1" 200 OK
+INFO:     ('127.0.0.1', 52780) - "WebSocket /ws" [accepted]
+2025-07-05 17:52:37,044 - main - INFO - Client 127.0.0.1:52780 connected. Active connections: 1
+INFO:     connection open
+2025-07-05 17:53:03,897 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 17:53:07,242 - main - INFO - Received WebSocket message
+2025-07-05 17:53:07,740 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-05 17:53:08,319 - main - INFO - WebSocket disconnected
+2025-07-05 17:53:08,325 - main - INFO - Client 127.0.0.1:52780 disconnected. Active connections: 0
+INFO:     connection closed
+INFO:     ('127.0.0.1', 52789) - "WebSocket /ws" [accepted]
+2025-07-05 17:53:08,371 - main - INFO - Client 127.0.0.1:52789 connected. Active connections: 1
+INFO:     connection open
+2025-07-05 17:53:08,804 - main - INFO - WebSocket disconnected
+2025-07-05 17:53:08,805 - main - INFO - Client 127.0.0.1:52789 disconnected. Active connections: 0
+INFO:     connection closed
+INFO:     127.0.0.1:52803 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52803 - "GET /health HTTP/1.1" 200 OK
+INFO:     ('127.0.0.1', 52805) - "WebSocket /ws" [accepted]
+2025-07-05 17:57:01,401 - main - INFO - Client 127.0.0.1:52805 connected. Active connections: 1
+INFO:     connection open
+2025-07-05 17:57:03,905 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 17:57:19,364 - main - INFO - Received WebSocket message
+2025-07-05 17:57:19,788 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-05 17:57:23,206 - main - INFO - WebSocket disconnected
+2025-07-05 17:57:23,208 - main - INFO - Client 127.0.0.1:52805 disconnected. Active connections: 0
+INFO:     connection closed
+INFO:     ('127.0.0.1', 52807) - "WebSocket /ws" [accepted]
+2025-07-05 17:57:23,213 - main - INFO - Client 127.0.0.1:52807 connected. Active connections: 1
+INFO:     connection open
+2025-07-05 17:57:33,908 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 17:58:03,911 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 17:58:33,914 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 17:59:03,916 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 17:59:33,916 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 18:00:03,916 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 18:00:33,918 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 18:01:03,919 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 18:01:33,919 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 18:02:03,923 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 18:02:33,924 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 18:03:03,739 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 18:03:33,739 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+INFO:     127.0.0.1:52832 - "OPTIONS /chat HTTP/1.1" 200 OK
+2025-07-05 18:03:37,594 - main - INFO - Received chat request
+2025-07-05 18:03:42,126 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-05 18:03:42,127 - main - INFO - Successfully processed chat request
+INFO:     127.0.0.1:52832 - "POST /chat HTTP/1.1" 200 OK
+2025-07-05 18:04:03,744 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 18:04:33,743 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 18:05:03,744 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 18:05:33,747 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 18:06:03,749 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 18:06:33,750 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+INFO:     127.0.0.1:52847 - "OPTIONS /chat HTTP/1.1" 200 OK
+2025-07-05 18:06:40,232 - main - INFO - Received chat request
+2025-07-05 18:06:47,357 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-05 18:06:47,358 - main - INFO - Successfully processed chat request
+INFO:     127.0.0.1:52847 - "POST /chat HTTP/1.1" 200 OK
+2025-07-05 18:07:03,752 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 18:07:33,754 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 18:08:03,756 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 18:08:33,756 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 18:09:03,758 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 18:09:33,763 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 18:10:03,763 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 18:10:33,764 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 18:11:03,765 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 18:11:33,769 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 18:12:03,770 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 18:12:33,772 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 18:13:03,772 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 18:13:33,776 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 18:14:03,780 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 18:14:33,785 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 18:15:03,785 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 18:15:33,785 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 18:16:03,785 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 18:16:33,785 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 18:17:03,788 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 18:17:33,789 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 18:18:03,917 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 18:18:33,921 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 18:19:03,924 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 18:19:33,925 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 18:20:03,927 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 18:20:33,928 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 18:21:03,929 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 18:21:33,934 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 18:22:03,935 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 18:22:33,937 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 18:23:03,939 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 18:23:33,941 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 18:24:03,947 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 18:24:33,949 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 18:25:03,950 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 18:25:23,451 - main - INFO - WebSocket disconnected
+2025-07-05 18:25:23,451 - main - INFO - Client 127.0.0.1:52807 disconnected. Active connections: 0
+INFO:     connection closed
+INFO:     127.0.0.1:52972 - "OPTIONS /chat HTTP/1.1" 200 OK
+2025-07-05 18:27:05,539 - main - INFO - Received chat request
+2025-07-05 18:27:08,727 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-05 18:27:08,728 - main - INFO - Successfully processed chat request
+INFO:     127.0.0.1:52972 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52976 - "OPTIONS /chat HTTP/1.1" 200 OK
+2025-07-05 18:27:28,405 - main - INFO - Received chat request
+2025-07-05 18:27:30,841 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-05 18:27:30,842 - main - INFO - Successfully processed chat request
+INFO:     127.0.0.1:52976 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52990 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52991 - "GET /health HTTP/1.1" 200 OK
+INFO:     ('127.0.0.1', 52992) - "WebSocket /ws" [accepted]
+2025-07-05 18:28:12,118 - main - INFO - Client 127.0.0.1:52992 connected. Active connections: 1
+INFO:     connection open
+2025-07-05 18:28:24,051 - main - INFO - Received WebSocket message
+2025-07-05 18:28:25,737 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-05 18:28:26,742 - main - INFO - WebSocket disconnected
+2025-07-05 18:28:26,742 - main - INFO - Client 127.0.0.1:52992 disconnected. Active connections: 0
+INFO:     connection closed
+INFO:     ('127.0.0.1', 52996) - "WebSocket /ws" [accepted]
+2025-07-05 18:28:26,765 - main - INFO - Client 127.0.0.1:52996 connected. Active connections: 1
+INFO:     connection open
+2025-07-05 18:28:26,906 - main - INFO - WebSocket disconnected
+2025-07-05 18:28:26,907 - main - INFO - Client 127.0.0.1:52996 disconnected. Active connections: 0
+INFO:     connection closed
+INFO:     127.0.0.1:52997 - "OPTIONS /chat HTTP/1.1" 200 OK
+2025-07-05 18:28:32,269 - main - INFO - Received chat request
+2025-07-05 18:28:35,569 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-05 18:28:35,570 - main - INFO - Successfully processed chat request
+INFO:     127.0.0.1:52997 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53001 - "OPTIONS /chat HTTP/1.1" 200 OK
+2025-07-05 18:28:53,891 - main - INFO - Received chat request
+2025-07-05 18:28:56,271 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-05 18:28:56,272 - main - INFO - Successfully processed chat request
+INFO:     127.0.0.1:53001 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53003 - "OPTIONS /chat HTTP/1.1" 200 OK
+2025-07-05 18:29:01,984 - main - INFO - Received chat request
+2025-07-05 18:29:04,653 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-05 18:29:04,654 - main - INFO - Successfully processed chat request
+INFO:     127.0.0.1:53003 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53006 - "OPTIONS /chat HTTP/1.1" 200 OK
+2025-07-05 18:29:18,905 - main - INFO - Received chat request
+2025-07-05 18:29:21,015 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-05 18:29:21,015 - main - INFO - Successfully processed chat request
+INFO:     127.0.0.1:53006 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53009 - "OPTIONS /chat HTTP/1.1" 200 OK
+2025-07-05 18:29:57,920 - main - INFO - Received chat request
+2025-07-05 18:30:03,307 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-05 18:30:03,308 - main - INFO - Successfully processed chat request
+INFO:     127.0.0.1:53009 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53035 - "OPTIONS /chat HTTP/1.1" 200 OK
+2025-07-05 18:34:16,062 - main - INFO - Received chat request
+2025-07-05 18:34:18,817 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-05 18:34:18,818 - main - INFO - Successfully processed chat request
+INFO:     127.0.0.1:53035 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53459 - "OPTIONS /chat HTTP/1.1" 200 OK
+2025-07-05 19:51:09,562 - main - INFO - Received chat request
+2025-07-05 19:51:17,186 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-05 19:51:17,189 - main - INFO - Successfully processed chat request
+INFO:     127.0.0.1:53459 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53472 - "OPTIONS /chat HTTP/1.1" 200 OK
+2025-07-05 19:52:28,383 - main - INFO - Received chat request
+2025-07-05 19:52:33,313 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-05 19:52:33,315 - main - INFO - Successfully processed chat request
+INFO:     127.0.0.1:53472 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53975 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53976 - "GET /health HTTP/1.1" 200 OK
+INFO:     ('127.0.0.1', 53977) - "WebSocket /ws" [accepted]
+2025-07-05 21:18:38,925 - main - INFO - Client 127.0.0.1:53977 connected. Active connections: 1
+INFO:     connection open
+2025-07-05 21:18:43,137 - main - INFO - Received WebSocket message
+2025-07-05 21:18:43,664 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-05 21:18:49,680 - main - INFO - WebSocket disconnected
+2025-07-05 21:18:49,680 - main - INFO - Client 127.0.0.1:53977 disconnected. Active connections: 0
+INFO:     connection closed
+INFO:     ('127.0.0.1', 53979) - "WebSocket /ws" [accepted]
+2025-07-05 21:18:49,684 - main - INFO - Client 127.0.0.1:53979 connected. Active connections: 1
+INFO:     connection open
+2025-07-05 21:19:06,750 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 21:19:36,630 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+INFO:     127.0.0.1:54009 - "OPTIONS /chat HTTP/1.1" 200 OK
+2025-07-05 21:19:53,268 - main - INFO - Received chat request
+2025-07-05 21:20:12,834 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-05 21:20:12,837 - main - INFO - Successfully processed chat request
+2025-07-05 21:20:12,837 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+INFO:     127.0.0.1:54009 - "POST /chat HTTP/1.1" 200 OK
+2025-07-05 21:20:42,841 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 21:21:12,840 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 21:21:42,838 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 21:22:12,839 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 21:22:42,839 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 21:23:12,841 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 21:23:42,841 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 21:24:12,843 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 21:24:42,842 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 21:25:12,846 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 21:25:42,845 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 21:26:12,848 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 21:26:42,847 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 21:27:12,850 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 21:27:42,852 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 21:28:12,856 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 21:28:42,857 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 21:29:12,857 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 21:29:42,860 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 21:30:12,859 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 21:30:42,858 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 21:31:12,862 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 21:31:42,864 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 21:32:12,866 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 21:32:42,866 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 21:33:12,867 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 21:33:42,867 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 21:34:12,866 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 21:34:42,870 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 21:35:12,873 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 21:35:42,877 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 21:36:12,878 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 21:36:42,878 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 21:37:12,876 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 21:37:42,877 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 21:38:12,880 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 21:38:42,884 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 21:39:12,883 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 21:39:42,883 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 21:40:12,882 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 21:40:42,883 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 21:41:12,883 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 21:41:42,886 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 21:42:12,886 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 21:42:42,886 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 21:43:12,886 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 21:43:42,886 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 21:44:12,886 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 21:44:30,184 - main - INFO - WebSocket disconnected
+2025-07-05 21:44:30,184 - main - INFO - Client 127.0.0.1:53979 disconnected. Active connections: 0
+INFO:     connection closed
+INFO:     127.0.0.1:54789 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54789 - "GET /health HTTP/1.1" 200 OK
+INFO:     ('127.0.0.1', 54791) - "WebSocket /ws" [accepted]
+2025-07-05 22:12:44,888 - main - INFO - Client 127.0.0.1:54791 connected. Active connections: 1
+INFO:     connection open
+2025-07-05 22:13:12,969 - main - ERROR - Error in periodic cleanup: 'WebSocketState' object has no attribute 'connected'
+2025-07-05 22:13:15,212 - main - INFO - Received WebSocket message
+2025-07-05 22:13:15,660 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-05 22:13:15,971 - main - INFO - WebSocket disconnected
+2025-07-05 22:13:15,971 - main - INFO - Client 127.0.0.1:54791 disconnected. Active connections: 0
+INFO:     connection closed
+INFO:     ('127.0.0.1', 54806) - "WebSocket /ws" [accepted]
+2025-07-05 22:13:15,975 - main - INFO - Client 127.0.0.1:54806 connected. Active connections: 1
+INFO:     connection open
+2025-07-05 22:13:16,072 - main - INFO - WebSocket disconnected
+2025-07-05 22:13:16,072 - main - INFO - Client 127.0.0.1:54806 disconnected. Active connections: 0
+INFO:     connection closed
+INFO:     127.0.0.1:57419 - "OPTIONS /chat HTTP/1.1" 200 OK
+2025-07-06 01:38:44,378 - main - INFO - Received chat request
+2025-07-06 01:38:50,254 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-06 01:38:50,262 - main - INFO - Successfully processed chat request
+INFO:     127.0.0.1:57419 - "POST /chat HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [46927]
+INFO:     Stopping reloader process [46624]
