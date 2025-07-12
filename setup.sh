@@ -54,33 +54,21 @@ echo -e "${GREEN}Configuring frontend development environment variables...${NC}"
 REACT_APP_API_URL=$(prompt_env_var "REACT_APP_API_URL" "Enter Backend API URL for development" "http://localhost:8000")
 REACT_APP_WS_URL=$(prompt_env_var "REACT_APP_WS_URL" "Enter Backend WebSocket URL for development" "ws://localhost:8000/ws")
 REACT_APP_LOGO=$(prompt_env_var "APP_LOGO" "Enter your Logo URL" "https://i.postimg.cc/C53CqTfx/chatgpt.png")
+REACT_APP_GPT_IMAGE_URL=$(prompt_env_var "REACT_APP_GPT_IMAGE_URL" "Enter OpenAI Image Base URL (e.g. https://your-resource.openai.azure.com)")
+REACT_APP_GPT_IMAGE_KEY=$(prompt_env_var "REACT_APP_GPT_IMAGE_KEY" "Enter OpenAI Image API Key")
+REACT_APP_GPT_IMAGE_VERSION=$(prompt_env_var "REACT_APP_GPT_IMAGE_VERSION" "2025-04-01-preview")
 
-cat > ./frontend/.env.development <<EOF
+cat > ./frontend/.env <<EOF
 REACT_APP_API_URL=$REACT_APP_API_URL
 REACT_APP_WS_URL=$REACT_APP_WS_URL
-REACT_APP_LOGO=$REACT_APP_LOGO
-
+REACT_APP_GPT_IMAGE_URL=$REACT_APP_GPT_IMAGE_URL
+REACT_APP_GPT_IMAGE_KEY=$REACT_APP_GPT_IMAGE_KEY
+REACT_APP_GPT_IMAGE_VERSION=$REACT_APP_GPT_IMAGE_VERSION
 EOF
 
-echo -e "${GREEN}frontend/.env.development created.${NC}"
+echo -e "${GREEN}frontend/.env created.${NC}"
 
-# --- Setup frontend/.env.production ---
-echo -e "${GREEN}Configuring frontend production environment variables...${NC}"
-
-# Prompt for your domain name for SSL and hosting
-DOMAIN=$(prompt_env_var "DOMAIN" "Enter your domain name for SSL (e.g. chat.example.com)")
-
-REACT_APP_API_URL_PROD="https://$DOMAIN"
-REACT_APP_WS_URL_PROD="wss://$DOMAIN/ws"
-
-cat > ./frontend/.env.production <<EOF
-REACT_APP_API_URL=$REACT_APP_API_URL_PROD
-REACT_APP_WS_URL=$REACT_APP_WS_URL_PROD
-REACT_APP_LOGO=$REACT_APP_LOGO
-EOF
-
-echo -e "${GREEN}frontend/.env.production created.${NC}"
-
+ 
 # --- Install system dependencies for SSL, Nginx, and cron ---
 echo -e "${GREEN}Installing system dependencies (certbot, nginx, python3-certbot-nginx, cron)...${NC}"
 sudo apt-get update
