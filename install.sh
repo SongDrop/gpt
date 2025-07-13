@@ -49,13 +49,25 @@ stop_service "frontend" "npm start"
 sleep 2
 
 # ========================
-# FRONTEND CLEANUP & SETUP
+# CLEANUP
+# ========================
+echo -e "\n=== Performing cleanup ==="
+
+# Frontend cleanup
+echo "Cleaning frontend,removing frontend/node_modules..."
+cd "$FRONTEND_DIR" || { echo "❌ Frontend directory not found"; exit 1; }
+rm -rf node_modules package-lock.json .cache .parcel-cache dist
+
+# Backend cleanup
+echo "Cleaning backend,removing backend/venv..."
+cd "$BACKEND_DIR" || { echo "❌ Backend directory not found"; exit 1; }
+rm -rf venv
+
+# ========================
+# FRONTEND SETUP
 # ========================
 echo -e "\n=== Setting up frontend ==="
-cd "$FRONTEND_DIR" || { echo "❌ Frontend directory not found"; exit 1; }
-
-echo "Cleaning frontend cache and reinstalling dependencies..."
-rm -rf dist .cache node_modules/.cache node_modules package-lock.json .parcel-cache
+cd "$FRONTEND_DIR"
 
 echo "Installing frontend dependencies..."
 npm cache clean --force
@@ -78,15 +90,11 @@ fi
 # BACKEND SETUP
 # ========================
 echo -e "\n=== Setting up backend ==="
-cd "$BACKEND_DIR" || { echo "❌ Backend directory not found"; exit 1; }
+cd "$BACKEND_DIR"
 
-# Recreate virtual environment if missing or pip not found
-if [ ! -d "venv" ] || ! ./venv/bin/pip --version > /dev/null 2>&1; then
-  echo "Creating virtual environment with pip..."
-  rm -rf venv
-  python3 -m venv --upgrade-deps venv
-fi
-
+# Create fresh virtual environment
+echo "Creating virtual environment..."
+python3 -m venv --upgrade-deps venv
 source venv/bin/activate
 
 echo "Upgrading pip and installing dependencies..."
@@ -98,20 +106,6 @@ if ! command -v uvicorn &> /dev/null; then
   echo "Installing uvicorn..."
   pip install "uvicorn[standard]"
 fi
-
-echo "Launching backend..."
-nohup uvicorn main:app --reload > "$LOG_DIR/backend.log" 2>&1 &
-BACKEND_PID=$!
-sleep 2
-
-if ! ps -p $BACKEND_PID > /dev/null; then
-  echo "❌ Backend failed to start. Check logs:"
-  tail -n 20 "$LOG_DIR/backend.log"
-  exit 1
-fi
-
-echo "✅ Backend started with PID $BACKEND_PID"
-echo "Backend logs: $LOG_DIR/backend.log"
 
 # ========================
 # START SERVICES

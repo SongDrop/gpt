@@ -80,7 +80,7 @@ async def main():
     username = prompt_input("Enter VM username", "azureuser")
     password = prompt_input("Enter VM password", "azurepassword1234!", secret=True)
     domain = prompt_input("Enter main domain", "win10dev.xyz")
-    subdomain = prompt_input("Enter subdomain (e.g., 'forgejo')", "forgejo")
+    subdomain = prompt_input("Enter subdomain (e.g., 'gpt')", "gpt")
     if subdomain:
         subdomain = subdomain.strip().strip('.')
         fqdn = f"{subdomain}.{domain}"
@@ -88,14 +88,14 @@ async def main():
         fqdn = domain
     print_info(f"Full domain to configure: {fqdn}")
     resource_group = prompt_input("Enter resource group name", "win10dev")
-    pc_name = 'forgejo'#''.join(random.choices(string.ascii_lowercase, k=6))
+    pc_name = 'gpt'#''.join(random.choices(string.ascii_lowercase, k=6))
     vm_name = prompt_input("Enter VM name", pc_name)
     location = prompt_input("Enter Azure region", "uksouth")
     vm_size = prompt_input("Enter VM size", "Standard_B2s")
     #storage_account_base = prompt_input("Enter base storage account name (globally unique). Storage account name must be between 3 and 24 characters in length and use numbers and lower-case letters only", "vmstorage")
     storage_account_base = vm_name
     admin_email =  prompt_input("Enter admin email", f"admin@{domain}")
-    random_admin_password = 'forgejopass123!'#''.join(random.choices(string.ascii_lowercase, k=6))
+    random_admin_password = 'gptpass123!'#''.join(random.choices(string.ascii_lowercase, k=6))
     admin_password = prompt_input("Enter admin password", random_admin_password)
     OS_DISK_SSD_GB = prompt_input("Enter disk size in GB", '1024')
     PORT = 3000

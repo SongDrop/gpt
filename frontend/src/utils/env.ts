@@ -5,7 +5,7 @@
  * @returns The environment variable value or default value
  */
 export const getEnvValue = (key: string, defaultValue?: string): string => {
-    const fullKey = `REACT_APP_${key}`;
+    const fullKey = `${key}`;
     const value = process.env[fullKey];
     
     if (value === undefined) {

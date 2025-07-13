@@ -1,9 +1,9 @@
 import { Config } from "./types";
 
 const getEnvVar = (key: string, defaultValue?: string): string => {
-  const value = process.env[`REACT_APP_${key}`] ?? defaultValue;
+  const value = process.env[`${key}`] ?? defaultValue;
   if (value === undefined) {
-    console.error(`Environment variable REACT_APP_${key} is not defined`);
+    console.error(`Environment variable ${key} is not defined`);
     return defaultValue || "";
   }
   return value;
@@ -12,17 +12,17 @@ const getEnvVar = (key: string, defaultValue?: string): string => {
 // Create the configuration object
 export const config: Config = {
   // Basic configuration
-  APP_NAME: getEnvVar("APP_NAME", "AI Chat Assistant"),
+  APP_NAME: getEnvVar("REACT_APP_NAME", "AI Chat Assistant"),
 
   // API Configuration
   API_URL: getEnvVar(
-    "API_URL",
+    "REACT_APP_API_URL",
     window.location.protocol === "https:"
       ? `${window.location.protocol}//${window.location.hostname}:8000`
       : `${window.location.protocol}//${window.location.hostname}:8000`
   ),
   WS_URL: getEnvVar(
-    "WS_URL",
+    "REACT_APP_WS_URL",
     window.location.protocol === "https:"
       ? `wss://${window.location.hostname}:8000/ws`
       : `ws://${window.location.hostname}:8000/ws`
@@ -34,7 +34,7 @@ export const config: Config = {
   DEFAULT_TEMPERATURE: parseFloat(getEnvVar("DEFAULT_TEMPERATURE", "0.7")),
 
   // UI Configuration
-  MESSAGE_HISTORY_LIMIT: parseInt(getEnvVar("MESSAGE_HISTORY_LIMIT", "100")),
+  MESSAGE_HISTORY_LIMIT: parseInt(getEnvVar("MESSAGE_HISTORY_LIMIT", "1000")),
   CODE_LANGUAGES: [
     "python",
     "javascript",

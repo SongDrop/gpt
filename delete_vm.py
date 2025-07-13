@@ -119,7 +119,7 @@ async def delete_vm_and_resources(subscription_id, resource_group, vm_name, doma
     print_success("Deletion process completed.")
 
 if __name__ == "__main__":
-    vm_name = prompt_input("Enter the VM name to delete","forgejo")
+    vm_name = prompt_input("Enter the VM name to delete","gpt")
     if not vm_name.strip():
         print_error("VM name cannot be empty. Exiting.")
         sys.exit(1)
