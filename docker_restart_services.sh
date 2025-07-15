@@ -30,23 +30,7 @@ pkill -f "uvicorn main:app" || true
 pkill -f "npm start" || true
 pkill -f "node" || true
 
-# echo "Checking for process using port 8000..."
-# PID_8000=$(lsof -ti tcp:8000 || true)
-# if [ -n "$PID_8000" ]; then
-#   echo "Killing process $PID_8000 on port 8000..."
-#   kill -9 $PID_8000 || true
-# else
-#   echo "No process on port 8000"
-# fi
-
-# echo "Checking for process using port 3000..."
-# PID_3000=$(lsof -ti tcp:3000 || true)
-# if [ -n "$PID_3000" ]; then
-#   echo "Killing process $PID_3000 on port 3000..."
-#   kill -9 $PID_3000 || true
-# else
-#   echo "No process on port 3000"
-# fi
+sleep 2
 
 # ========================
 # START BACKEND
@@ -74,8 +58,8 @@ if ! command -v uvicorn &> /dev/null; then
 fi
 
 echo "Launching backend..."
-nohup uvicorn main:app > "$LOG_DIR/backend.log" 2>&1 &
-#nohup uvicorn main:app --host 0.0.0.0 --port 8000 > "$LOG_DIR/backend.log" 2>&1 &
+# nohup uvicorn main:app --reload > "$LOG_DIR/backend.log" 2>&1 &
+nohup uvicorn main:app --host 0.0.0.0 --port 8000 > "$LOG_DIR/backend.log" 2>&1 &
 BACKEND_PID=$!
 sleep 2
 
@@ -94,8 +78,8 @@ echo "Backend logs: $LOG_DIR/backend.log"
 echo "Starting frontend..."
 cd "$FRONTEND_DIR" || { echo "❌ Frontend directory not found"; exit 1; }
 
-nohup npm start > "$LOG_DIR/frontend.log" 2>&1 &
-#nohup HOST=0.0.0.0 npm start > "$LOG_DIR/frontend.log" 2>&1 &
+#nohup npm start > "$LOG_DIR/frontend.log" 2>&1 &
+nohup HOST=0.0.0.0 npm start > "$LOG_DIR/frontend.log" 2>&1 &
 
 FRONTEND_PID=$!
 sleep 2
@@ -118,3 +102,6 @@ echo "Frontend PID: $FRONTEND_PID"
 echo ""
 echo "To view backend logs: tail -f $LOG_DIR/backend.log"
 echo "To view frontend logs: tail -f $LOG_DIR/frontend.log"
+# After starting backend and frontend, add:
+
+tail -f /app/logs/backend.log

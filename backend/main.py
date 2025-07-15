@@ -3,12 +3,8 @@ import contextlib
 import weakref
 from typing import Set, Optional, Dict
 import asyncio
-from fastapi import WebSocket, WebSocketDisconnect, status
 import aiohttp
 import time
-from fastapi import FastAPI, HTTPException, WebSocket, status
-from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 from typing import List, Optional, Dict, Any
 from datetime import datetime
@@ -17,6 +13,13 @@ import re
 from openai import AzureOpenAI
 from config import settings
 import uvicorn
+from fastapi import WebSocket, WebSocketDisconnect, status
+from starlette.websockets import WebSocketState
+from fastapi import FastAPI, HTTPException, WebSocket, status
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
+from fastapi import Form
+from fastapi import UploadFile, File, BackgroundTasks
 
 # Configure logging first
 logging.basicConfig(
@@ -25,6 +28,16 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 logger.info("Starting application initialization...")
+
+# Create FastAPI app
+app = FastAPI(title=settings.app_name)
+
+# Initialize OpenAI client with configuration
+client = AzureOpenAI(
+    azure_endpoint=str(settings.openai_api_base),
+    api_key=settings.openai_api_key,
+    api_version="2024-05-01-preview"
+)
 
 # Classes
 class ChatMessage(BaseModel):
@@ -40,6 +53,9 @@ class ChatRequest(BaseModel):
     continue_last: bool
     systemPrompt: Optional[str] = None
     databaseId: Optional[str] = None
+    databaseEndpoint: Optional[str] = None
+    databaseKey: Optional[str] = None
+    databaseIndex: Optional[str] = None
 
 class TranslationRequest(BaseModel):
     source: str
@@ -74,17 +90,6 @@ class StreamMetrics:
             "chunks_per_second": round(self.chunk_count / duration if duration > 0 else 0, 2)
         }
 
-
-# Create FastAPI app
-app = FastAPI(title=settings.app_name)
-
-
-# Initialize OpenAI client with configuration
-client = AzureOpenAI(
-    azure_endpoint=str(settings.openai_api_base),
-    api_key=settings.openai_api_key,
-    api_version="2024-05-01-preview"
-)
 
 #Allowed origins
 def get_allowed_origins():
@@ -161,41 +166,26 @@ async def monitor_stream(stream):
         logger.info(f"Stream metrics: {metrics.get_metrics()}")
 
 
-def prepare_vector_search_config() -> Dict[str, Any]:
-    """Prepare vector search configuration based on working reference"""
-    return {
-        "data_sources": [{
-            "type": "azure_search",
-            "parameters": {
-                "filter": None,
-                "endpoint": str(settings.vector_search_endpoint),
-                "index_name": settings.vector_search_index,
-                "semantic_configuration": "azureml-default",
-                "authentication": {
-                    "type": "api_key",
-                    "key": settings.vector_search_key
-                },
-                "embedding_dependency": {
-                    "type": "endpoint",
-                    "endpoint": f"{settings.openai_api_base}/openai/deployments/text-embedding-ada-002/embeddings?api-version=2023-07-01-preview",
-                    "authentication": {
-                        "type": "api_key",
-                        "key": settings.openai_api_key
-                    }
-                },
-                "query_type": "vector_simple_hybrid",
-                "in_scope": True,
-                "role_information": settings.system_prompt,
-                "strictness": 3,
-                "top_n_documents": 5
-            }
-        }]
-    }
+async def generate_chat_completion(messages: List[Dict[str, str]], max_tokens: int, temperature: float, stream: bool = False, vector_search_endpoint: str='', vector_search_key: str='', vector_search_index:str=''):
+    """
+    Generate chat completion with optional vector search and streaming.
 
+    Args:
+        messages (List[Dict[str, str]]): List of chat messages.
+        max_tokens (int): Maximum number of tokens to generate.
+        temperature (float): Sampling temperature.
+        stream (bool): Whether to stream results.
+        vector_search_endpoint (str): Endpoint URL for vector search service.
+        vector_search_key (str): API key for vector search.
+        vector_search_index (str): Index name for vector search.
 
+    Returns:
+        Completion result or stream of results.
+    """
+    search_endpoint = vector_search_endpoint or settings.vector_search_endpoint
+    search_key = vector_search_key or settings.vector_search_key
+    search_index = vector_search_index or settings.vector_search_index
 
-async def generate_chat_completion(messages: List[Dict[str, str]], max_tokens: int, temperature: float, stream: bool = False):
-    """Generate chat completion with robust stream handling and proper vector search"""
     try:
         completion_kwargs = {
             "model": settings.openai_deployment_name,
@@ -211,33 +201,43 @@ async def generate_chat_completion(messages: List[Dict[str, str]], max_tokens: i
         if settings.vector_search_enabled:
             # Validate required settings
             if not all([
-                settings.vector_search_endpoint,
-                settings.vector_search_key,
-                settings.vector_search_index
+                search_endpoint,
+                search_key,
+                search_index
             ]):
                 logger.error("Vector search is enabled but required settings are missing")
                 raise ValueError("Incomplete vector search configuration")
 
             # Configure vector search with explicit data source
-            completion_kwargs["dataSources"] = [{
-                "type": "azure_search",
-                "parameters": {
-                    "endpoint": str(settings.vector_search_endpoint),
-                    "key": settings.vector_search_key,
-                    "indexName": settings.vector_search_index,
-                    "semanticConfiguration": settings.vector_search_semantic_config,
-                    "queryType": "vector_simple_hybrid",
-                    "inScope": True,
-                    "roleInformation": settings.system_prompt,
-                    "strictness": 3,
-                    "topNDocuments": 5,
-                    "filter": "",  # Add any filtering conditions if needed
-                    "embeddingDeploymentName": settings.vector_search_embedding_deployment
-                }
-            }]
+            completion_kwargs["extra_body"] = {
+                "data_sources": [{
+                    "type": "azure_search",
+                    "parameters": {
+                        "endpoint": str(search_endpoint),
+                        "key": search_key,
+                        "index_name": search_index,
+                        "semantic_configuration": settings.vector_search_semantic_config,
+                        "query_type": "vector_simple_hybrid",
+                        "fields_mapping": {},
+                        "in_scope": True,
+                        "role_information": settings.system_prompt,
+                        "strictness": 3,
+                        "top_n_documents": 5,
+                        "filter": "",  # Add any filtering conditions if needed
+                        "authentication": {
+                            "type": "api_key",
+                            "key": settings.vector_search_key
+                        },
+                        "embedding_dependency": {
+                            "type": "deployment_name",
+                            "deployment_name": settings.vector_search_embedding_deployment
+                        }
+                    }
+                }]
+            }
             
-            logger.info(f"Vector search enabled with index: {settings.vector_search_index}")
-            logger.debug(f"Vector search configuration: {completion_kwargs['dataSources']}")
+            logger.info(f"Vector search enabled with index: {search_index}")
+            #logger.debug(f"Vector search configuration: {completion_kwargs['extra_body']}")
         
         logger.debug(f"Calling OpenAI with parameters: {completion_kwargs}")
         
@@ -250,6 +250,7 @@ async def generate_chat_completion(messages: List[Dict[str, str]], max_tokens: i
         else:
             completion = client.chat.completions.create(**completion_kwargs)
             return completion
+
         
     except Exception as e:
         logger.error(f"Error in chat completion: {str(e)}")
@@ -319,6 +320,10 @@ async def chat(request: ChatRequest):
     logger.debug(f"Request body: {request}")
     
     system_prompt = request.systemPrompt or settings.system_prompt
+    search_endpoint = request.databaseEndpoint or settings.vector_search_endpoint
+    search_key = request.databaseKey or settings.vector_search_key
+    search_index = request.databaseIndex or settings.vector_search_index
+
     try:
         messages = [
             {"role": "system", "content": system_prompt}
@@ -327,17 +332,82 @@ async def chat(request: ChatRequest):
             for m in request.messages
         ]
         
+        if settings.vector_search_enabled:
+            logger.info("Using vector search for this chat request")
+        else:
+            logger.info("Not using vector search for this chat request")
+
         completion = await generate_chat_completion(
             messages=messages,
             max_tokens=request.max_tokens,
             temperature=request.temperature,
-            stream=False
+            stream=False,
+            vector_search_endpoint="", 
+            vector_search_key="", 
+            vector_search_index=""
         )
 
+        # --- Step 1: Parse the response and extract citations ---
+        retrieved_docs = []
+
+        if isinstance(completion, dict):
+            choices = completion.get("choices", [])
+            if choices:
+                message = choices[0].get("message", {})
+                context = message.get("context", {})
+                retrieved_docs = context.get("citations", [])
+        elif hasattr(completion.choices[0].message, "context"):
+            context = completion.choices[0].message.context
+            retrieved_docs = context.get("citations", [])
+
+        # --- Step 2: Sanitize [docX] markers from the content ---
+        raw_response = completion.choices[0].message.content
+        clean_response = re.sub(r'\[doc\d+\]', '', raw_response).strip()
+
+        def auto_link(text):
+            url_pattern = re.compile(r'(https?://[^\s]+|www\.[^\s]+)')
+            return url_pattern.sub(lambda m: f'<a href="{m.group(0)}" target="_blank" rel="noopener noreferrer">{m.group(0)}</a>', text)
+
+        # --- Step 3: Append actual citation info ---
+        if retrieved_docs:
+            citation_lines = []
+            for i, doc in enumerate(retrieved_docs):
+                title = doc.get("title", "Untitled Document")
+                full_snippet = doc.get("content", "").strip().replace('\n', ' ')
+                teaser = full_snippet[:100]
+                full_snippet = auto_link(full_snippet)
+
+                citation_lines.append(
+                    f'<p style="background-color:#f3f4f6; padding:8px; border-radius:4px; margin:0px;">'
+                    f'<strong>[{i+1}]{title}</strong> – {teaser}... <details><summary style="cursor:pointer; color:#555; margin:0px; margin-top:2px;">Read more</summary>{full_snippet}</details>'
+                    f'</p>'
+                )
+
+            citation_section = "\n".join(citation_lines)
+            full_response = (
+                clean_response +
+                "\n\n<div style='margin-top:10px;'>"
+                "<h3>Sources:</h3>" +
+                citation_section +
+                "</div>"
+            )
+        else:
+            full_response = clean_response
+
+        # logger.info(full_response)
+        # logger.info(completion.choices[0])
+
+        # --- Step 4: Return the final payload ---
         response_data = {
-            "response": completion.choices[0].message.content,
-            "timestamp": datetime.now().isoformat()
+            "response": full_response,
+            "timestamp": datetime.now().isoformat(),
+            "retrieved_docs": retrieved_docs
         }
+        # response_data = {
+        #     "response": completion.choices[0].message.content,
+        #     "timestamp": datetime.now().isoformat(),
+        # }
+
         logger.info("Successfully processed chat request")
         return response_data
         
@@ -348,7 +418,6 @@ async def chat(request: ChatRequest):
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=str(e)
         )
-
 
 @app.post("/translate", response_model=TranslationResponse)
 async def translate_code(req: TranslationRequest):
@@ -370,6 +439,9 @@ async def translate_code(req: TranslationRequest):
             max_tokens=1000,
             temperature=0,
             stream=False,
+            vector_search_endpoint="", 
+            vector_search_key="", 
+            vector_search_index=""
         )
         translated_code = completion.choices[0].message.content.strip()
         return TranslationResponse(translatedCode=translated_code)
@@ -466,11 +538,12 @@ class ConnectionManager:
                     stale_connections = []
                     
                     for client_id, ws in self.active_connections.items():
-                        if not ws.client_state.connected:
+                        # FIXED: Use WebSocketState enum for connection check
+                        if ws.client_state == WebSocketState.DISCONNECTED:
                             stale_connections.append(client_id)
                         elif (now - self.connection_times[client_id]).total_seconds() > self.timeout:
                             stale_connections.append(client_id)
-                    
+                        
                     for client_id in stale_connections:
                         await self.disconnect_cleanup(client_id)
                             
@@ -494,6 +567,52 @@ class ConnectionManager:
                 for client_id in self.active_connections
             ]
         }
+
+
+@app.post("/upload-files")
+async def upload_files(files: List[UploadFile] = File(...), background_tasks: BackgroundTasks = None):
+    uploaded_file_urls = []
+    for file in files:
+        # Upload file to Azure Blob Storage
+        blob_url = await upload_file_to_blob_storage(file)
+        uploaded_file_urls.append(blob_url)
+
+    # Trigger background ingestion to Cognitive Search
+    if background_tasks:
+        background_tasks.add_task(process_and_index_documents, uploaded_file_urls)
+
+    return {"uploaded_files": uploaded_file_urls, "message": "Upload started"}
+
+async def upload_file_to_blob_storage(file: UploadFile) -> str:
+    from azure.storage.blob.aio import BlobServiceClient
+
+    blob_service_client = BlobServiceClient.from_connection_string(settings.azure_storage_connection_string)
+    container_client = blob_service_client.get_container_client(settings.azure_storage_container)
+
+    blob_client = container_client.get_blob_client(file.filename)
+    contents = await file.read()
+    await blob_client.upload_blob(contents, overwrite=True)
+
+    return blob_client.url
+
+async def process_and_index_documents(file_urls: List[str]):
+    # For each file URL:
+    # - Download file or read from blob storage
+    # - Extract text (e.g. PDF text extraction, JSON parsing, transcript extraction)
+    # - Chunk text if needed
+    # - Generate embeddings using AzureOpenAI embeddings endpoint
+    # - Upload documents with embeddings to Azure Cognitive Search index
+    pass
+
+@app.post("/chunk-files")
+async def chunk_files(files: List[UploadFile] = File(...), background_tasks: BackgroundTasks = None):
+    # For each file URL:
+    # - Download file or read from blob storage
+    # - Extract text (e.g. PDF text extraction, JSON parsing, transcript extraction)
+    # - Chunk text if needed
+    # - Generate embeddings using AzureOpenAI embeddings endpoint
+    # - Upload documents with embeddings to Azure Cognitive Search index
+    pass
 
 # Initialize the connection manager
 manager = ConnectionManager()
@@ -541,13 +660,19 @@ async def stream_generator(stream, stop_event: asyncio.Event, min_buffer_length:
 async def websocket_endpoint(websocket: WebSocket):
     """WebSocket endpoint for real-time chat functionality with proper stream handling"""
     client_id = f"{websocket.client.host}:{websocket.client.port}"
-    
+    logger.info(f"WebSocket connection attempt from {client_id}")
     try:
+        # Only proceed if we successfully connect
         if not await manager.connect(websocket):
             return
 
         while True:
             try:
+                # Check connection state before receiving
+                if websocket.client_state != WebSocketState.CONNECTED:
+                    logger.warning(f"WebSocket not connected for {client_id}")
+                    break
+
                 data = await websocket.receive_text()
                 logger.info("Received WebSocket message")
                 logger.debug(f"Message content: {data[:100]}...")
@@ -592,7 +717,10 @@ async def websocket_endpoint(websocket: WebSocket):
                         messages=messages,
                         max_tokens=chat_request.max_tokens,
                         temperature=chat_request.temperature,
-                        stream=True
+                        stream=True,
+                        vector_search_endpoint="", 
+                        vector_search_key="", 
+                        vector_search_index=""
                     )
                     
                     # Create a task for the stream processing
@@ -629,13 +757,27 @@ async def websocket_endpoint(websocket: WebSocket):
                         await websocket.send_text(f"Error: {str(e)}")
                     
             except WebSocketDisconnect:
-                logger.info("WebSocket disconnected")
+                logger.info(f"WebSocket disconnected: {client_id}")
+                break
+            except asyncio.CancelledError:
+                logger.info(f"Stream cancelled for {client_id}")
                 break
             except Exception as e:
-                logger.error(f"Error processing message: {str(e)}")
-                logger.exception(e)
-                await websocket.send_text(f"Error: {str(e)}")
-                
+                logger.error(f"Unexpected error for {client_id}: {e}")
+                try:
+                    # Try to send error message if still connected
+                    if websocket.client_state == WebSocketState.CONNECTED:
+                        await websocket.send_text(f"Error: {str(e)}")
+                except Exception:
+                    pass
+                break
+            finally:
+                try:
+                    await manager.disconnect(websocket)
+                    logger.info(f"Connection cleaned up for {client_id}")
+                except Exception as e:
+                    logger.error(f"Error during cleanup for {client_id}: {e}")
+                        
     except Exception as e:
         logger.error(f"WebSocket connection error: {str(e)}")
         logger.exception(e)

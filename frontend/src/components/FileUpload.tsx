@@ -310,7 +310,10 @@ const FileUpload: React.FC<FileUploadProps> = ({
     uploadJobs.every((job) => job.status === "completed");
 
   return (
-    <div className="fixed inset-0 z-50 pointer-events-none">
+    <div
+      className="fixed inset-0 z-50 pointer-events-none"
+      style={{ zIndex: 1000 }}
+    >
       {isLoading && (
         <div className="pointer-events-auto flex flex-col items-center justify-center p-6 bg-white rounded-lg shadow-lg w-80 m-auto mt-24">
           <Loader className="w-10 h-10 animate-spin text-blue-600" />

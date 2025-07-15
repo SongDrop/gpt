@@ -2,13 +2,34 @@ def generate_setup(
     DOMAIN_NAME,
     ADMIN_EMAIL,
     ADMIN_PASSWORD,
-    PORT,
+    FRONTEND_PORT=3000,
+    BACKEND_PORT=8000,
+    REACT_APP_APP_NAME='AI Chat Assistant',
+    REACT_APP_LOGO='https://i.postimg.cc/C53CqTfx/chatgpt.png',
+    VECTOR_SEARCH_ENABLED='true',
+    VECTOR_SEARCH_ENDPOINT='https://ragaisearchrtx.search.windows.net',
+    VECTOR_SEARCH_INDEX='your-search-index-name',
+    VECTOR_SEARCH_KEY='96gVOBvNd67ykoDtaNhQEMeoQzYZ1sXtN31muEIyb0AzSeCPLRZH',
+    VECTOR_SEARCH_SEMANTIC_CONFIG='azureml-default',
+    VECTOR_SEARCH_EMBEDDING_DEPLOYMENT='text-embedding-ada-002',
+    VECTOR_SEARCH_EMBEDDING_ENDPOINT='',
+    VECTOR_SEARCH_EMBEDDING_KEY='',
+    VECTOR_SEARCH_STORAGE_ENDPOINT='',
+    VECTOR_SEARCH_STORAGE_ACCESS_KEY='',
+    VECTOR_SEARCH_STORAGE_CONNECTION_STRING='',
+    OPENAI_API_BASE="https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2025-01-01-preview",
+    OPENAI_API_KEY="2uuCuqEe3xwrsCsuOWHrsnrznxN2bZKSHMABGevRmN6KtIZgYfaVJQQJ99BEACfhMk5XJ3w3AAAAACOGHc9F",
+    OPENAI_DEPLOYMENT_NAME="gpt-4.1-mini",
+    OPENAI_API_VERSION="2023-05-15",
+    GPT_IMAGE_URL="https://gabz-mbtgx2um-westus3.cognitiveservices.azure.com/openai/deployments/gpt-image-1/images",
+    GPT_IMAGE_KEY="6UR6v5uTDie85YAr8IM4CZ3FyxYB0RrFcsRVYgehEFmwOmPh41LaJQQJ99BFACMsfrFXJ3w3AAAAACOG7n60",
+    GPT_IMAGE_VERSION="2025-04-01-preview"
 ):
-    # ========== CONFIGURABLE URLs ==========
+    # URLs for certbot stuff, etc.
     gpt_repo = "https://github.com/SongDrop/gpt.git"
     letsencrypt_options_url = "https://raw.githubusercontent.com/certbot/certbot/master/certbot-nginx/certbot_nginx/_internal/tls_configs/options-ssl-nginx.conf"
     ssl_dhparams_url = "https://raw.githubusercontent.com/certbot/certbot/master/certbot/certbot/ssl-dhparams.pem"
-    # =======================================
+
     MAX_UPLOAD_FILE_SIZE_IN_MB = 1024
     INSTALL_DIR = "/opt/gpt"
     LOG_DIR = f"{INSTALL_DIR}/logs"
@@ -25,7 +46,6 @@ fi
 
 # Configuration
 DOMAIN_NAME="{DOMAIN_NAME}"
-PORT="{PORT}"
 INSTALL_DIR="{INSTALL_DIR}"
 LOG_DIR="{LOG_DIR}"
 GPT_REPO="{gpt_repo}"
@@ -37,14 +57,18 @@ DEBIAN_FRONTEND=noninteractive apt-get install -y \\
     curl git nginx certbot \\
     python3-pip python3-venv jq make net-tools \\
     python3-certbot-nginx \\
-    nodejs npm
+    nodejs npm docker.io
 
-# Install Node.js 16 if not available
-if ! command -v node &> /dev/null || [ "$(node -v | cut -d'.' -f1)" != "v16" ]; then
-    echo "Installing Node.js 16..."
-    curl -fsSL https://deb.nodesource.com/setup_16.x | bash -
+# Install Node.js 20 if not available
+if ! command -v node &> /dev/null || [[ "$(node -v)" != v16* ]]; then
+    echo "Installing Node.js 20..."
+    && curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
     apt-get install -y nodejs
 fi
+
+# Start Docker service (for systems with systemd)
+systemctl start docker || true
+systemctl enable docker || true
 
 # ========== REPOSITORY SETUP ==========
 echo "[2/9] Setting up GPT repository..."
@@ -64,71 +88,156 @@ else
     git clone "$GPT_REPO" .
 fi
 
-# Install git-lfs if needed
-if ! command -v git-lfs &> /dev/null; then
-    echo "Installing git-lfs..."
-    apt-get install -y git-lfs
-    git lfs install
-fi
+# ========== GENERATE DOCKERFILE ==========
+echo "[3/9] Creating Dockerfile..."
 
-# ========== FRONTEND SETUP ==========
-echo "[3/9] Setting up frontend..."
-cd "$INSTALL_DIR/frontend" || {{ echo "❌ Frontend directory not found"; exit 1; }}
+cat > "$INSTALL_DIR/Dockerfile" <<EOF
+# Base image
+FROM python:3.10-slim
 
-# Cleanup previous installations
-rm -rf node_modules package-lock.json .cache .parcel-cache dist
+# Install system dependencies,  procps for pkill/pgrep, curl
+RUN apt-get update && apt-get install -y \
+    curl \
+    git \
+    build-essential \
+    libffi-dev \
+    libssl-dev \
+    libjpeg-dev \
+    libxml2-dev \
+    libxslt1-dev \
+    libpq-dev \
+    libmagic-dev \
+    poppler-utils \
+    unzip \
+    procps \
+    curl \
+    gnupg \
+    python3-venv \
+    && rm -rf /var/lib/apt/lists/*
 
-# Install dependencies
-echo "Installing frontend dependencies..."
-npm cache clean --force
-npm install --force
-npm dedupe
+# Set work directory
+WORKDIR /app
 
-# Fix html-webpack-plugin compatibility
-echo "Fixing html-webpack-plugin..."
-npm uninstall html-webpack-plugin
-npm install html-webpack-plugin@5.6.3 --save-dev --legacy-peer-deps
+# Copy all files into container
+COPY . .
 
-# Create loader.js if missing
-if [ ! -f "node_modules/html-webpack-plugin/lib/loader.js" ]; then
-    echo "Creating missing loader.js file..."
-    mkdir -p node_modules/html-webpack-plugin/lib
-    echo "module.exports = require('./lib');" > node_modules/html-webpack-plugin/lib/loader.js
-fi
+# Create backend/.env file
+# Ensure backend and frontend folders exist
+RUN mkdir -p /app/backend /app/frontend
 
-# ========== BACKEND SETUP ==========
-echo "[4/9] Setting up backend..."
-cd "$INSTALL_DIR/backend" || {{ echo "❌ Backend directory not found"; exit 1; }}
+# Create backend/.env
+RUN printf "#Backend Configuration\\n\
+APP_NAME{REACT_APP_APP_NAME}\\n\
+ENVIRONMENT=production\\n\
+# OpenAI API Configuration\\n\
+OPENAI_API_BASE={OPENAI_API_BASE}\\n\
+OPENAI_API_KEY={OPENAI_API_KEY}\\n\
+OPENAI_DEPLOYMENT_NAME={OPENAI_DEPLOYMENT_NAME}\\n\
+OPENAI_API_VERSION={OPENAI_API_VERSION}\\n\
+CORS_ORIGINS=http://localhost:{FRONTEND_PORT}\\n\
+OPENAI_TEMPERATURE=0.7\\n\
+OPENAI_MAX_TOKENS=4000\\n\
+OPENAI_TOP_P=0.95\\n\
+OPENAI_FREQUENCY_PENALTY=0\\n\
+OPENAI_PRESENCE_PENALTY=0\\n\
+# Vector Search Configuration\\n\
+VECTOR_SEARCH_ENABLED={VECTOR_SEARCH_ENABLED}\\n\
+VECTOR_SEARCH_ENDPOINT={VECTOR_SEARCH_ENDPOINT}\\n\
+VECTOR_SEARCH_KEY={VECTOR_SEARCH_KEY}\\n\
+VECTOR_SEARCH_INDEX={VECTOR_SEARCH_INDEX}\\n\
+VECTOR_SEARCH_SEMANTIC_CONFIG={VECTOR_SEARCH_SEMANTIC_CONFIG}\\n\
+VECTOR_SEARCH_EMBEDDING_DEPLOYMENT={VECTOR_SEARCH_EMBEDDING_DEPLOYMENT}\\n\
+VECTOR_SEARCH_EMBEDDING_ENDPOINT={VECTOR_SEARCH_EMBEDDING_ENDPOINT}\\n\
+VECTOR_SEARCH_EMBEDDING_KEY={VECTOR_SEARCH_EMBEDDING_KEY}\\n\
+# Vector Search Storage\\n\
+VECTOR_SEARCH_STORAGE_ENDPOINT={VECTOR_SEARCH_STORAGE_ENDPOINT}\\n\
+VECTOR_SEARCH_STORAGE_ACCESS_KEY={VECTOR_SEARCH_STORAGE_ACCESS_KEY}\\n\
+VECTOR_SEARCH_STORAGE_CONNECTION_STRING={VECTOR_SEARCH_STORAGE_CONNECTION_STRING}\\n\
+# Server Configuration\\n\
+HOST=0.0.0.0\\n\
+PORT={BACKEND_PORT}\\n\
+CORS_ORIGINS=http://localhost:{FRONTEND_PORT},http://localhost:{BACKEND_PORT},https://{DOMAIN_NAME}\\n\
+\\n\
+SYSTEM_PROMPT=\\"You are an AI assistant. You aim to be helpful, honest, and direct in your interactions.\\"\\n" > /app/backend/.env
 
-# Cleanup previous installations
-rm -rf venv
+# Create frontend/.env
+RUN printf "#Frontend Configuration\\n\
+REACT_APP_API_URL=http://localhost:{BACKEND_PORT}\\n\
+REACT_APP_WS_URL=ws://localhost:{BACKEND_PORT}/ws\\n\
+REACT_APP_APP_NAME={REACT_APP_APP_NAME}\\n\
+REACT_APP_APP_LOGO={REACT_APP_APP_LOGO}\\n\
+NODE_ENV=production\\n\
+REACT_APP_PASSWORD={ADMIN_PASSWORD}\\n\
+REACT_APP_GPT_IMAGE_URL={GPT_IMAGE_URL}\\n\
+REACT_APP_GPT_IMAGE_KEY={GPT_IMAGE_KEY}\\n\
+REACT_APP_GPT_IMAGE_VERSION={GPT_IMAGE_VERSION}\\n" > /app/frontend/.env
 
-# Create fresh virtual environment
-echo "Creating virtual environment..."
-python3 -m venv --upgrade-deps venv
-source venv/bin/activate
+# Ensure install.sh is executable
+RUN chmod +x ./docker_install.sh
 
-echo "Upgrading pip and installing dependencies..."
-pip install --upgrade pip
-pip install -r requirements.txt
+# Run install-only mode for dependency install
+RUN ./docker_install.sh install-only
 
-# Ensure uvicorn is installed
-if ! command -v uvicorn &> /dev/null; then
-    echo "Installing uvicorn..."
-    pip install "uvicorn[standard]"
-fi
+# Expose backend port
+EXPOSE 8000 3000
+
+RUN chmod +x ./docker_restart_services.sh
+RUN chmod +x ./docker_refresh_github.sh
+
+# Default run command
+# Use restart_services.sh as the container's default command
+CMD ["./docker_restart_services.sh"]
+
+EOF
+
+echo "[4/9] Building Docker image..."
+docker build -t gpt-app "$INSTALL_DIR"
+
+echo "[5/9] Stopping existing container if any..."
+docker stop gpt-container || true
+docker rm gpt-container || true
+
+echo "[6/9] Starting Docker container..."
+docker run -d --name gpt-container -p {BACKEND_PORT}:{BACKEND_PORT} -p {FRONTEND_PORT}:{FRONTEND_PORT} gpt-app
+
+# Create systemd service to manage the Docker container
+echo "[7/9] Creating systemd service for Docker container..."
+
+cat > /etc/systemd/system/gpt-docker.service <<EOF
+[Unit]
+Description=GPT Docker Container
+After=docker.service
+Requires=docker.service
+
+[Service]
+Restart=always
+ExecStart=/usr/bin/docker start -a gpt-container
+ExecStop=/usr/bin/docker stop -t 10 gpt-container
+
+[Install]
+WantedBy=multi-user.target
+EOF
+
+# Enable and start Docker service
+systemctl daemon-reload
+systemctl enable gpt-docker.service
+systemctl start gpt-docker.service
 
 # ========== LOGS DIRECTORY ==========
-echo "[5/9] Creating logs directory..."
+echo "[8/9] Creating logs directory..."
 mkdir -p "$LOG_DIR"
 
 # ========== NETWORK SECURITY ==========
-echo "[6/9] Configuring firewall..."
-ufw allow 22,80,443,{PORT}/tcp
+echo "[9/9] Configuring firewall..."
+ufw allow 22/tcp 
+ufw allow 80/tcp
+ufw allow 443/tcp
+ufw allow {FRONTEND_PORT}/tcp
+ufw allow {BACKEND_PORT}/tcp
 ufw --force enable
 
 # ========== SSL CERTIFICATE ==========
-echo "[7/9] Setting up SSL certificate..."
+echo "[10/10] Setting up SSL certificate..."
 
 # Download Let's Encrypt configuration files
 mkdir -p /etc/letsencrypt
@@ -138,7 +247,7 @@ curl -s "{ssl_dhparams_url}" > /etc/letsencrypt/ssl-dhparams.pem
 certbot --nginx -d "{DOMAIN_NAME}" --non-interactive --agree-tos --email "{ADMIN_EMAIL}" --redirect
 
 # ========== NGINX CONFIG ==========
-echo "[8/9] Configuring Nginx..."
+echo "[11/11] Configuring Nginx..."
 
 # Remove default Nginx config
 rm -f /etc/nginx/sites-enabled/default
@@ -166,9 +275,8 @@ server {{
     ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
 
     client_max_body_size {MAX_UPLOAD_FILE_SIZE_IN_MB}M;
-        
     location / {{
-        proxy_pass http://localhost:{PORT};
+        proxy_pass http://localhost:{FRONTEND_PORT};
         proxy_set_header Host \$host;
         proxy_set_header X-Real-IP \$remote_addr;
         proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
@@ -185,61 +293,13 @@ EOF
 ln -sf /etc/nginx/sites-available/gpt /etc/nginx/sites-enabled/
 nginx -t && systemctl restart nginx
 
-# ========== SERVICE MANAGEMENT ==========
-echo "[9/9] Setting up system services..."
-
-# Create systemd service for backend
-cat > /etc/systemd/system/gpt-backend.service <<EOF
-[Unit]
-Description=GPT Backend Service
-After=network.target
-
-[Service]
-User=root
-WorkingDirectory={INSTALL_DIR}/backend
-Environment="PATH={INSTALL_DIR}/backend/venv/bin"
-ExecStart={INSTALL_DIR}/backend/venv/bin/uvicorn main:app --host 0.0.0.0 --port {PORT}
-Restart=always
-
-[Install]
-WantedBy=multi-user.target
-EOF
-
-# Create systemd service for frontend
-cat > /etc/systemd/system/gpt-frontend.service <<EOF
-[Unit]
-Description=GPT Frontend Service
-After=network.target
-
-[Service]
-User=root
-WorkingDirectory={INSTALL_DIR}/frontend
-Environment="PATH=/usr/bin:/usr/local/bin"
-ExecStart=/usr/bin/npm start
-Restart=always
-
-[Install]
-WantedBy=multi-user.target
-EOF
-
-# Enable and start services
-systemctl daemon-reload
-systemctl enable gpt-backend gpt-frontend
-systemctl start gpt-backend gpt-frontend
-
 # ========== VERIFICATION ==========
 echo "Verifying setup..."
 
-# Verify services are running
-if ! systemctl is-active --quiet gpt-backend; then
-    echo "ERROR: Backend service is not running!"
-    journalctl -u gpt-backend -b --no-pager
-    exit 1
-fi
-
-if ! systemctl is-active --quiet gpt-frontend; then
-    echo "ERROR: Frontend service is not running!"
-    journalctl -u gpt-frontend -b --no-pager
+# Verify Docker container is running
+if ! docker ps --filter "name=gpt-container" --filter "status=running" | grep -q gpt-container; then
+    echo "ERROR: Docker container gpt-container is not running!"
+    docker logs gpt-container || true
     exit 1
 fi
 
@@ -261,18 +321,16 @@ echo ""
 echo "🔗 Access: https://{DOMAIN_NAME}"
 echo ""
 echo "⚙️ Service Status:"
-echo "   - Backend: systemctl status gpt-backend"
-echo "   - Frontend: systemctl status gpt-frontend"
+echo "   - Docker container: docker ps --filter name=gpt-container"
 echo "   - Nginx: systemctl status nginx"
 echo ""
 echo "📜 Logs:"
-echo "   - Backend: journalctl -u gpt-backend -f"
-echo "   - Frontend: journalctl -u gpt-frontend -f"
+echo "   - Docker container logs: docker logs -f gpt-container"
 echo "   - Nginx: journalctl -u nginx -f"
 echo ""
 echo "⚠️ Important:"
 echo "1. First-time setup may require visiting https://{DOMAIN_NAME} to complete installation"
-echo "2. To update: cd {INSTALL_DIR} && git pull && systemctl restart gpt-backend gpt-frontend"
+echo "2. To update: cd {INSTALL_DIR} && git pull && docker restart gpt-container"
 echo "============================================"
 """
     return script_template

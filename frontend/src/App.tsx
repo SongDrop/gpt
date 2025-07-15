@@ -14,6 +14,9 @@ import {
   Plus,
   Quote,
   Upload,
+  ExternalLink,
+  Square, 
+  CheckSquare
 } from "lucide-react";
 import { marked } from "marked";
 import MarkdownEditor from "./components/MarkdownEditor";
@@ -564,6 +567,7 @@ export default function ChatApp() {
     "promptWindow-selectedPrompt",
     ""
   );
+  const [showRagSearch, setShowRagSearch] = useState(true);
   //File Upload/DragAndDrop
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
   const [showUploadComplete, setShowUploadComplete] = useState(false);
@@ -1200,6 +1204,10 @@ export default function ChatApp() {
     setShowDatabaseWindow((prev) => !prev);
   };
 
+  const toggleRagSearch = () => {
+    setShowRagSearch((prev) => !prev);
+  };
+
   const handleCreateNew = () => {
     // Implement database creation logic
     console.log("Create new database");
@@ -1603,13 +1611,18 @@ export default function ChatApp() {
               className="cursor-pointer transition-transform active:scale-95 bg-gray-100 transition-opacity hover:bg-gray-200 border border-gray-300 rounded-md p-1 flex-shrink-0"
             />
             <h1 className="text-2xl font-bold text-gray-800 whitespace-nowrap mr-4">
-              {" "}
-              {config.APP_NAME}{" "}
+              {process.env.REACT_APP_APP_NAME}{" "}
             </h1>
           </div>
           <div className="flex items-center gap-4 flex-shrink-0">
-            {" "}
             {/* Prevent shrinking */}
+            <button
+              onClick={() => window.open("/", "_blank")}
+              className="flex items-center gap-1 text-sm bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded whitespace-nowrap"
+              title="New window"
+            >
+              <ExternalLink size={16} />{" "}
+            </button>
             <button
               onClick={newConversation}
               className="flex items-center gap-1 text-sm bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded whitespace-nowrap"
@@ -1617,6 +1630,7 @@ export default function ChatApp() {
             >
               <Plus size={16} />
             </button>
+
             <button
               onClick={() => setShowSearchBar(true)}
               className="flex items-center gap-1 text-sm bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded whitespace-nowrap"
@@ -1661,7 +1675,7 @@ export default function ChatApp() {
       )}
       <div
         id="messages"
-        className="flex-1 overflow-y-auto p-4 space-y-4 max-w-[90%] w-full mx-auto lg:max-w-[1200px]"
+          className="flex-1 overflow-y-auto px-4 py-4 space-y-4 w-full max-w-full sm:max-w-[90%] mx-auto lg:max-w-[1200px]"
       >
         {messages
           .slice(-config.MESSAGE_HISTORY_LIMIT)
@@ -1674,13 +1688,15 @@ export default function ChatApp() {
 
             return (
               <div
+                id="msgblock"
                 key={`#msg-${message.id}`}
                 className={`flex ${
                   message.role === "user" ? "justify-end" : "justify-start"
                 }`}
               >
                 <div
-                  className={`max-w-[80%] rounded-lg p-6 mt-0 shadow-lg ${
+                  className={`max-w-[80%] rounded-lg p-6 mt-0 shadow-lg   
+                    ${
                     message.role === "user"
                       ? "bg-white text-black ml-auto"
                       : "bg-white text-black mr-auto"
@@ -1787,8 +1803,7 @@ export default function ChatApp() {
         >
           {/* Left buttons container with constrained width and scrolling */}
           <div className="flex-1 overflow-x-auto scrollbar-hide max-w-[50vw] pr-6">
-            <div className="flex items-center gap-4 w-max h-full py-1">
-              {" "}
+            <div id="flexbar-scroll-left" className="flex items-center gap-4 w-max h-full py-1">
               {/* Added h-full and py-1 */}
               <button
                 onClick={refreshConversation}
@@ -1805,6 +1820,16 @@ export default function ChatApp() {
               >
                 <Quote size={16} />
                 <span>{!showPromptWindow ? "Prompt" : "Chat"}</span>
+              </button>
+              {/* New RagSearch toggle button */}
+              <button
+                onClick={toggleRagSearch}
+                className="flex items-center gap-2 text-gray-600 hover:text-gray-800 whitespace-nowrap"
+                title="Toggle RagSearch"
+               >
+                {/* You can add an icon here if you want */}
+                {!showRagSearch ?  <Square size={16} /> : <CheckSquare size={16} />} 
+                <span>RagSearch</span>
               </button>
             </div>
           </div>

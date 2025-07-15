@@ -471,7 +471,7 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProps>(
     return (
       <div className="not-prose p-0 m-0 !p-0 !m-0">
         <div className="border rounded-lg bg-white shadow-sm !mt-0 !p-0">
-          <div className="flex flex-wrap items-center gap-1 p-2 border-b bg-gray-50">
+          <div id="flexbar-scroll" className="flex items-center gap-1 p-2 border-b bg-gray-50 overflow-x-auto whitespace-nowrap max-h-[50px] scrollbar-hide">            
             <button
               type="button"
               onClick={() => triggerFileInput("main")}

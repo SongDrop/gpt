@@ -1,49 +1,54 @@
-INFO:     Will watch for changes in these directories: ['/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/backend']
+2025-07-15 22:42:56,061 - config - INFO - Starting configutation initialization...
+2025-07-15 22:42:56,062 - config - INFO - .env file found at: /Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/backend/.env
+2025-07-15 22:42:56,062 - config - INFO - Working directory: /Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/backend
+2025-07-15 22:42:56,062 - config - INFO - .env path resolved: /Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/backend/.env
+2025-07-15 22:42:56,062 - config - INFO - .env exists: True
+2025-07-15 22:42:56,069 - config - INFO - Loading settings...
+2025-07-15 22:42:56,078 - config - INFO - Loaded configuration:
+2025-07-15 22:42:56,078 - config - INFO - App Name: AI Chat Assistant
+2025-07-15 22:42:56,078 - config - INFO - Environment: production
+2025-07-15 22:42:56,078 - config - INFO - CORS Origins: ['https://localhost:8000', 'http://localhost:8000', 'http://localhost:3000', 'https://localhost:3000']
+2025-07-15 22:42:56,078 - config - INFO - Vector Search Enabled: True
+2025-07-15 22:42:56,078 - config - INFO - Vector Search Endpoint: https://ragaisearchrtx.search.windows.net/
+2025-07-15 22:42:56,078 - config - INFO - Vector Search Key: ***LRZH
+2025-07-15 22:42:56,078 - config - INFO - Vector Search Index: rag-1752519055977
+2025-07-15 22:42:56,078 - config - INFO - Vector Search Embedding Deployment: text-embedding-ada-002
+2025-07-15 22:42:56,078 - config - INFO - Vector Search Embedding Key: ***Hc9F
+2025-07-15 22:42:56,078 - config - INFO - Vector search is enabled
+2025-07-15 22:42:56,078 - config - INFO - Final vector search configuration check:
+2025-07-15 22:42:56,078 - config - INFO - Vector Search Enabled: True
+2025-07-15 22:42:56,078 - config - INFO - Vector Search Endpoint: https://ragaisearchrtx.search.windows.net/
+2025-07-15 22:42:56,078 - config - INFO - Vector Search Key: ***LRZH
+2025-07-15 22:42:56,078 - config - INFO - Vector Search Index: rag-1752519055977
+2025-07-15 22:42:56,552 - main - INFO - Starting application initialization...
+2025-07-15 22:42:56,572 - main - INFO - Configured CORS origins: ['https://localhost:8000', 'http://localhost:8000', 'http://localhost:3000', 'https://localhost:3000']
+INFO:     Started server process [26090]
+INFO:     Waiting for application startup.
+2025-07-15 22:42:56,581 - main - INFO - Validating OpenAI configuration...
+2025-07-15 22:42:56,581 - main - INFO - API Base: https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2025-01-01-preview
+2025-07-15 22:42:56,581 - main - INFO - API Version: 2023-05-15
+2025-07-15 22:42:56,581 - main - INFO - Deployment Name: gpt-4.1-mini
+2025-07-15 22:42:57,429 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-15 22:42:57,437 - main - INFO - OpenAI configuration validated successfully
+INFO:     Application startup complete.
 INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
-INFO:     Started reloader process [37781] using WatchFiles
-Process SpawnProcess-1:
-Traceback (most recent call last):
-  File "/usr/local/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/lib/python3.13/multiprocessing/process.py", line 313, in _bootstrap
-    self.run()
-    ~~~~~~~~^^
-  File "/usr/local/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/lib/python3.13/multiprocessing/process.py", line 108, in run
-    self._target(*self._args, **self._kwargs)
-    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/backend/venv/lib/python3.13/site-packages/uvicorn/_subprocess.py", line 80, in subprocess_started
-    target(sockets=sockets)
-    ~~~~~~^^^^^^^^^^^^^^^^^
-  File "/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/backend/venv/lib/python3.13/site-packages/uvicorn/server.py", line 67, in run
-    return asyncio.run(self.serve(sockets=sockets))
-           ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "/usr/local/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 195, in run
-    return runner.run(main)
-           ~~~~~~~~~~^^^^^^
-  File "/usr/local/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/lib/python3.13/asyncio/runners.py", line 118, in run
-    return self._loop.run_until_complete(task)
-           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^
-  File "uvloop/loop.pyx", line 1518, in uvloop.loop.Loop.run_until_complete
-  File "/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/backend/venv/lib/python3.13/site-packages/uvicorn/server.py", line 71, in serve
-    await self._serve(sockets)
-  File "/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/backend/venv/lib/python3.13/site-packages/uvicorn/server.py", line 78, in _serve
-    config.load()
-    ~~~~~~~~~~~^^
-  File "/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/backend/venv/lib/python3.13/site-packages/uvicorn/config.py", line 436, in load
-    self.loaded_app = import_from_string(self.app)
-                      ~~~~~~~~~~~~~~~~~~^^^^^^^^^^
-  File "/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/backend/venv/lib/python3.13/site-packages/uvicorn/importer.py", line 22, in import_from_string
-    raise exc from None
-  File "/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/backend/venv/lib/python3.13/site-packages/uvicorn/importer.py", line 19, in import_from_string
-    module = importlib.import_module(module_str)
-  File "/usr/local/Cellar/python@3.13/3.13.5/Frameworks/Python.framework/Versions/3.13/lib/python3.13/importlib/__init__.py", line 88, in import_module
-    return _bootstrap._gcd_import(name[level:], package, level)
-           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "<frozen importlib._bootstrap>", line 1387, in _gcd_import
-  File "<frozen importlib._bootstrap>", line 1360, in _find_and_load
-  File "<frozen importlib._bootstrap>", line 1331, in _find_and_load_unlocked
-  File "<frozen importlib._bootstrap>", line 935, in _load_unlocked
-  File "<frozen importlib._bootstrap_external>", line 1026, in exec_module
-  File "<frozen importlib._bootstrap>", line 488, in _call_with_frames_removed
-  File "/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/backend/main.py", line 6, in <module>
-    from fastapi import WebSocket, WebSocketDisconnect, status
-ModuleNotFoundError: No module named 'fastapi'
-INFO:     Stopping reloader process [37781]
+2025-07-15 22:43:08,340 - main - INFO - WebSocket connection attempt from 127.0.0.1:51271
+INFO:     ('127.0.0.1', 51271) - "WebSocket /ws" [accepted]
+2025-07-15 22:43:08,341 - main - INFO - Client 127.0.0.1:51271 connected. Active connections: 1
+INFO:     connection open
+INFO:     127.0.0.1:51272 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51272 - "GET /health HTTP/1.1" 200 OK
+2025-07-15 22:43:10,606 - main - INFO - Received WebSocket message
+2025-07-15 22:43:10,607 - main - INFO - Vector search enabled with index: rag-1752519055977
+2025-07-15 22:43:11,782 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-15 22:43:11,955 - main - INFO - Client 127.0.0.1:51271 disconnected. Active connections: 0
+2025-07-15 22:43:11,955 - main - INFO - Connection cleaned up for 127.0.0.1:51271
+2025-07-15 22:43:11,956 - main - ERROR - Unexpected error for 127.0.0.1:51271: WebSocket is not connected. Need to call "accept" first.
+2025-07-15 22:43:11,957 - main - INFO - Client 127.0.0.1:51271 disconnected. Active connections: 0
+2025-07-15 22:43:11,957 - main - INFO - Connection cleaned up for 127.0.0.1:51271
+2025-07-15 22:43:11,957 - main - INFO - Client 127.0.0.1:51271 disconnected. Active connections: 0
+INFO:     connection closed
+2025-07-15 22:43:11,959 - main - INFO - WebSocket connection attempt from 127.0.0.1:51277
+INFO:     ('127.0.0.1', 51277) - "WebSocket /ws" [accepted]
+2025-07-15 22:43:11,959 - main - INFO - Client 127.0.0.1:51277 connected. Active connections: 1
+INFO:     connection open

@@ -140,14 +140,70 @@ async def main():
     # Autoinstall script generation
     print_info("Generating installation setup script...")
     # Generate Auto-setup setup script
+    FRONTEND_PORT=3000
+    BACKEND_PORT=8000
+    REACT_APP_APP_NAME='AI Chat Assistant'
+    REACT_APP_APP_LOGO='https://i.postimg.cc/C53CqTfx/chatgpt.png'
+    VECTOR_SEARCH_ENABLED='true'
+    VECTOR_SEARCH_ENDPOINT='https://ragaisearchrtx.search.windows.net'
+    VECTOR_SEARCH_INDEX='rag-1752512002948'
+    VECTOR_SEARCH_KEY='96gVOBvNd67ykoDtaNhQEMeoQzYZ1sXtN31muEIyb0AzSeCPLRZH'
+    VECTOR_SEARCH_SEMANTIC_CONFIG='azureml-default'
+    VECTOR_SEARCH_EMBEDDING_DEPLOYMENT='text-embedding-ada-002'
+    VECTOR_SEARCH_EMBEDDING_ENDPOINT='https://openairtx.openai.azure.com/openai/deployments/text-embedding-ada-002/embeddings?api-version=2023-05-15'
+    VECTOR_SEARCH_EMBEDDING_KEY='7SJ0LLURzUFAfuWTHHTlehvpLtvfPZg3Piv4qgsaysIn9oPv7vA8JQQJ99BEACmepeSXJ3w3AAABACOGAEea'
+    # Storage for file upload\n\
+    VECTOR_SEARCH_STORAGE_ENDPOINT='https://ragstoragertx.blob.core.windows.net/'
+    VECTOR_SEARCH_STORAGE_ACCESS_KEY='s0a0wXkBsRJBA5O5nk9au01J4N37oa4TV2hONcIjNk8tFFPrTTsjM+yiczugIcfu9Z1QWM8ObGNw+AStVwymdg=='
+    VECTOR_SEARCH_STORAGE_CONNECTION_STRING='DefaultEndpointsProtocol=https;AccountName=ragstoragertx;AccountKey=s0a0wXkBsRJBA5O5nk9au01J4N37oa4TV2hONcIjNk8tFFPrTTsjM+yiczugIcfu9Z1QWM8ObGNw+AStVwymdg==;EndpointSuffix=core.windows.net'
+    OPENAI_API_BASE="https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2025-01-01-preview"
+    OPENAI_API_KEY="2uuCuqEe3xwrsCsuOWHrsnrznxN2bZKSHMABGevRmN6KtIZgYfaVJQQJ99BEACfhMk5XJ3w3AAAAACOGHc9F"
+    OPENAI_DEPLOYMENT_NAME="gpt-4.1-mini"
+    OPENAI_API_VERSION="2023-05-15"
+    GPT_IMAGE_URL="https://gabz-mbtgx2um-westus3.cognitiveservices.azure.com/openai/deployments/gpt-image-1/images"
+    GPT_IMAGE_KEY="6UR6v5uTDie85YAr8IM4CZ3FyxYB0RrFcsRVYgehEFmwOmPh41LaJQQJ99BFACMsfrFXJ3w3AAAAACOG7n60"
+    GPT_IMAGE_VERSION="2025-04-01-preview"
+
+
+    # # 1. Create container
+    # container_client = blob_service_client.create_container("ragdata")
+    # # 2. Upload initial file
+    # container_client.upload_blob("initial.txt", b"-----AZURE RAG CREATION TIME-----")
+    # # 3. Create Search index (if not exists)
+    # # 4. Create data source for blob storage (if not exists)
+    # # 5. Create and run indexer to import initial.txt into your index
+
     sh_script = generate_setup.generate_setup(
-        fqdn, admin_email, admin_password, PORT
+        fqdn, 
+        admin_email, 
+        admin_password, 
+        FRONTEND_PORT,
+        BACKEND_PORT,
+        REACT_APP_APP_NAME,
+        REACT_APP_APP_LOGO,
+        VECTOR_SEARCH_ENABLED,
+        VECTOR_SEARCH_ENDPOINT,
+        VECTOR_SEARCH_INDEX,
+        VECTOR_SEARCH_KEY,
+        VECTOR_SEARCH_SEMANTIC_CONFIG,
+        VECTOR_SEARCH_EMBEDDING_DEPLOYMENT,
+        VECTOR_SEARCH_EMBEDDING_ENDPOINT,
+        VECTOR_SEARCH_EMBEDDING_KEY,
+        VECTOR_SEARCH_STORAGE_ENDPOINT,
+        VECTOR_SEARCH_STORAGE_ACCESS_KEY,
+        VECTOR_SEARCH_STORAGE_CONNECTION_STRING,
+        OPENAI_API_BASE,
+        OPENAI_API_KEY,
+        OPENAI_DEPLOYMENT_NAME, 
+        OPENAI_API_VERSION,
+        GPT_IMAGE_URL,
+        GPT_IMAGE_KEY, 
+        GPT_IMAGE_VERSION, 
     )
 
     blob_service_client = BlobServiceClient(account_url=AZURE_STORAGE_URL, credential=credentials)
     container_name = 'vm-startup-scripts'
     blob_name = f'{vm_name}-setup.sh'
-
 
     # Uploading generated script to storage
     blob_url_with_sas = await upload_blob_and_generate_sas(blob_service_client, container_name, blob_name, sh_script, sas_expiry_hours=2)

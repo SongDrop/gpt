@@ -249,3 +249,29 @@
   opacity: 0.5;
   cursor: not-allowed;
 }
+
+.message-content {
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+#flexbar-scroll {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  overflow-x: scroll;
+}
+
+#flexbar-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+#flexbar-scroll-left {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  overflow-x: scroll;
+}
+
+#flexbar-scroll-left::-webkit-scrollbar {
+  display: none;               /* Chrome, Safari, Opera */
+  color: red;
+}

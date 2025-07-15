@@ -1,13 +1,35 @@
+from dotenv import load_dotenv
+from pathlib import Path
+import os
+# Load early before anything else
+env_path = Path(__file__).parent / ".env"
+load_dotenv(dotenv_path=env_path)
+
 from typing import Optional, List, Union, Dict, Any
-from pydantic import BaseModel, Field, HttpUrl, field_validator, ValidationInfo
+from pydantic import BaseModel, Field, HttpUrl, field_validator, model_validator, ValidationInfo
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from urllib.parse import urlparse as URL
-import os
 from functools import lru_cache
 import logging
 
+# Configure logging first
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+)
 logger = logging.getLogger(__name__)
-env_file=".env",
+logger.info("Starting configutation initialization...")
+
+# Make sure logging is configured
+env_path = Path(__file__).parent / ".env"  # .env in same folder as config.py
+env_file = str(env_path.resolve())
+if env_path.is_file():
+    logger.info(f".env file found at: {env_path.resolve()}")
+else:
+    logger.warning(f".env file NOT found at expected location: {env_path.resolve()}")
+logger.info(f"Working directory: {os.getcwd()}")
+logger.info(f".env path resolved: {env_file}")
+logger.info(f".env exists: {Path(env_file).is_file()}")
 
 def parse_cors_origins(v: Union[str, List[str]]) -> List[str]:
     """Parse CORS origins from string or list"""
@@ -39,7 +61,8 @@ class Settings(BaseSettings):
         env_file=env_file,
         env_file_encoding="utf-8",
         extra="ignore",
-        case_sensitive=False
+        case_sensitive=False,
+        env_prefix="",  # no prefix
     )
 
     # Basic configuration
@@ -73,53 +96,51 @@ class Settings(BaseSettings):
     vector_search_index: Optional[str] = None
     vector_search_semantic_config: str = Field(default="azureml-default")
     vector_search_embedding_deployment: str = Field(default="text-embedding-ada-002")
+    vector_search_embedding_key: Optional[str] = None
 
     # System configuration
     system_prompt: str = Field(
         default=os.environ.get('SYSTEM_PROMPT')
     )
 
-    @field_validator('vector_search_enabled', mode='before')
-    def validate_vector_search(cls, v: Any, info: ValidationInfo) -> bool:
-        """Validate vector search configuration if enabled"""
-        # Convert string 'true'/'false' to boolean if necessary
-        if isinstance(v, str):
-            v = v.lower() == 'true'
-        
-        if not v:
-            return False
+    @field_validator('cors_origins')
+    def validate_cors_origins(cls, v):
+        return parse_cors_origins(v)
 
-        data = info.data
-        required_fields = ['vector_search_endpoint', 'vector_search_key', 'vector_search_index']
+    @model_validator(mode='after')
+    def validate_vector_search_config(self) -> 'Settings':
+        """Validate vector search configuration after all fields are loaded"""
+        # Convert string to boolean if needed
+        if isinstance(self.vector_search_enabled, str):
+            self.vector_search_enabled = self.vector_search_enabled.lower() == 'true'
         
-        # Check if required fields are present and not empty
-        missing = []
-        for field in required_fields:
-            field_value = data.get(field)
-            if not field_value or str(field_value).strip() == '':
-                missing.append(field)
+        if not self.vector_search_enabled:
+            return self
+
+        logger.info("Final vector search configuration check:")
+        logger.info(f"Vector Search Enabled: {self.vector_search_enabled}")
+        logger.info(f"Vector Search Endpoint: {self.vector_search_endpoint}")
+        logger.info(f"Vector Search Key: {'***' + self.vector_search_key[-4:] if self.vector_search_key else 'None'}")
+        logger.info(f"Vector Search Index: {self.vector_search_index}")
+        
+        # Check required fields
+        required_fields = {
+            'vector_search_endpoint': self.vector_search_endpoint,
+            'vector_search_key': self.vector_search_key,
+            'vector_search_index': self.vector_search_index
+        }
+        
+        missing = [field for field, value in required_fields.items() 
+                  if value is None or str(value).strip() == '']
         
         if missing:
-            # Instead of raising an error, log a warning and disable vector search
             logger.warning(
                 f"Vector search is enabled but missing required fields: {', '.join(missing)}. "
                 "Disabling vector search functionality."
             )
-            return False
-            
-        # Validate endpoint URL if present
-        if 'vector_search_endpoint' in data and data['vector_search_endpoint']:
-            try:
-                URL(str(data['vector_search_endpoint']))
-            except Exception as e:
-                logger.warning(f"Invalid vector search endpoint URL: {e}. Disabling vector search.")
-                return False
+            self.vector_search_enabled = False
 
-        return True
-
-    @field_validator('cors_origins')
-    def validate_cors_origins(cls, v):
-        return parse_cors_origins(v)
+        return self
 
     def model_post_init(self, _context):
         """Log loaded configuration for debugging"""
@@ -127,11 +148,15 @@ class Settings(BaseSettings):
         logger.info(f"App Name: {self.app_name}")
         logger.info(f"Environment: {self.environment}")
         logger.info(f"CORS Origins: {self.cors_origins}")
-        
+        logger.info(f"Vector Search Enabled: {self.vector_search_enabled}")
+        logger.info(f"Vector Search Endpoint: {self.vector_search_endpoint}")
+        logger.info(f"Vector Search Key: {'***' + self.vector_search_key[-4:] if self.vector_search_key else 'None'}")
+        logger.info(f"Vector Search Index: {self.vector_search_index}")
+        logger.info(f"Vector Search Embedding Deployment: {self.vector_search_embedding_deployment}")
+        logger.info(f"Vector Search Embedding Key: {'***' + self.vector_search_embedding_key[-4:] if self.vector_search_embedding_key else 'None'}")
+
         if self.vector_search_enabled:
             logger.info("Vector search is enabled")
-            logger.info(f"Vector Search Endpoint: {self.vector_search_endpoint}")
-            logger.info(f"Vector Search Index: {self.vector_search_index}")
         else:
             logger.info("Vector search is disabled")
 
