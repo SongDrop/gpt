@@ -5,11 +5,13 @@ One-click deployment of a fully automated AI chat assistant with GPT-4.1-mini an
 [🌐 Deploy Now](https://azure-ai-assistant.netlify.app/)
 
 ---
-
+```
 #Dockerfile
 docker build -t gpt-app .
 docker run -d --name gpt-container -p 3000:3000 -p 8000:8000 gpt-app
+```
 
+```
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
@@ -19,8 +21,6 @@ npm -v
 chmod +x install.sh
 ./install.sh
 
-docker build -t gpt
-
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
@@ -29,6 +29,7 @@ node -v
 npm -v
 chmod +x restart_services.sh
 ./restart_services.sh
+```
 
 ## High-Level Overview
 
