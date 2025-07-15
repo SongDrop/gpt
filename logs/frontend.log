@@ -110,3 +110,228 @@ src/components/UploadCompletePopup.tsx
 
 webpack compiled with 1 warning
 No issues found.
+Compiling...
+Failed to compile.
+
+[eslint] 
+src/App.tsx
+Syntax error: Expression expected (1020:6)
+WARNING in [eslint] 
+src/ChatApp.tsx
+  Line 6:3:  'Navigate' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/CodeTranslator.tsx
+  Line 250:6:  React Hook useEffect has a missing dependency: 'translations'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/DatabaseSelector.tsx
+  Line 56:12:  'fetchError' is assigned a value but never used                                                               @typescript-eslint/no-unused-vars
+  Line 89:8:   React Hook useEffect has a missing dependency: 'databases'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  Line 513:8:  React Hook useEffect has a missing dependency: 'ref'. Either include it or remove the dependency array        react-hooks/exhaustive-deps
+
+src/components/FileUpload.tsx
+  Line 43:10:  'selectedAction' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+src/components/GptImage.tsx
+  Line 5:34:  'ChevronUp' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/MarkdownEditor.tsx
+  Line 455:8:  React Hook useEffect has missing dependencies: 'setLeftDocument' and 'setRightDocument'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/MessageContent.tsx
+  Line 34:10:  'copiedMessage' is assigned a value but never used             @typescript-eslint/no-unused-vars
+  Line 35:10:  'copiedCodeBlocks' is assigned a value but never used          @typescript-eslint/no-unused-vars
+  Line 45:9:   'copyMessageToClipboard' is assigned a value but never used    @typescript-eslint/no-unused-vars
+  Line 52:9:   'copyCodeBlockToClipboard' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+src/components/PromptWindow.tsx
+  Line 222:6:  React Hook useEffect has a missing dependency: 'setSelectedCategory'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/SearchComponent.tsx
+  Line 28:10:  'activeSession' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+src/components/UploadCompletePopup.tsx
+  Line 3:17:  'useState' is defined but never used  @typescript-eslint/no-unused-vars
+
+ERROR in ./src/App.tsx
+Module build failed (from ./node_modules/babel-loader/lib/index.js):
+SyntaxError: /Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/src/App.tsx: Unexpected token (1020:6)
+
+  1018 |         systemPrompt: selectedPrompt,
+  1019 |         vectorSearchEnabled: 
+> 1020 |       };
+       |       ^
+  1021 |
+  1022 |       const manager = WebSocketManager.getInstance({
+  1023 |         url: config.WS_URL,
+    at constructor (/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/node_modules/@babel/parser/lib/index.js:367:19)
+    at TypeScriptParserMixin.raise (/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/node_modules/@babel/parser/lib/index.js:6627:19)
+    at TypeScriptParserMixin.unexpected (/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/node_modules/@babel/parser/lib/index.js:6647:16)
+    at TypeScriptParserMixin.parseExprAtom (/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/node_modules/@babel/parser/lib/index.js:11442:16)
+    at TypeScriptParserMixin.parseExprAtom (/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/node_modules/@babel/parser/lib/index.js:4794:20)
+    at TypeScriptParserMixin.parseExprSubscripts (/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/node_modules/@babel/parser/lib/index.js:11076:23)
+    at TypeScriptParserMixin.parseUpdate (/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/node_modules/@babel/parser/lib/index.js:11061:21)
+    at TypeScriptParserMixin.parseMaybeUnary (/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/node_modules/@babel/parser/lib/index.js:11041:23)
+    at TypeScriptParserMixin.parseMaybeUnary (/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/node_modules/@babel/parser/lib/index.js:9852:18)
+    at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/node_modules/@babel/parser/lib/index.js:10894:61)
+    at TypeScriptParserMixin.parseExprOps (/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/node_modules/@babel/parser/lib/index.js:10899:23)
+    at TypeScriptParserMixin.parseMaybeConditional (/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/node_modules/@babel/parser/lib/index.js:10876:23)
+    at TypeScriptParserMixin.parseMaybeAssign (/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/node_modules/@babel/parser/lib/index.js:10826:21)
+    at TypeScriptParserMixin.parseMaybeAssign (/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/node_modules/@babel/parser/lib/index.js:9801:20)
+    at /Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/node_modules/@babel/parser/lib/index.js:10795:39
+    at TypeScriptParserMixin.allowInAnd (/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/node_modules/@babel/parser/lib/index.js:12427:12)
+    at TypeScriptParserMixin.parseMaybeAssignAllowIn (/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/node_modules/@babel/parser/lib/index.js:10795:17)
+    at TypeScriptParserMixin.parseMaybeAssignAllowInOrVoidPattern (/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/node_modules/@babel/parser/lib/index.js:12494:17)
+    at TypeScriptParserMixin.parseObjectProperty (/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/node_modules/@babel/parser/lib/index.js:11951:83)
+    at TypeScriptParserMixin.parseObjPropValue (/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/node_modules/@babel/parser/lib/index.js:11979:100)
+    at TypeScriptParserMixin.parseObjPropValue (/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/node_modules/@babel/parser/lib/index.js:9759:18)
+    at TypeScriptParserMixin.parsePropertyDefinition (/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/node_modules/@babel/parser/lib/index.js:11916:17)
+    at TypeScriptParserMixin.parseObjectLike (/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/node_modules/@babel/parser/lib/index.js:11831:21)
+    at TypeScriptParserMixin.parseExprAtom (/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/node_modules/@babel/parser/lib/index.js:11334:23)
+    at TypeScriptParserMixin.parseExprAtom (/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/node_modules/@babel/parser/lib/index.js:4794:20)
+    at TypeScriptParserMixin.parseExprSubscripts (/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/node_modules/@babel/parser/lib/index.js:11076:23)
+    at TypeScriptParserMixin.parseUpdate (/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/node_modules/@babel/parser/lib/index.js:11061:21)
+    at TypeScriptParserMixin.parseMaybeUnary (/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/node_modules/@babel/parser/lib/index.js:11041:23)
+    at TypeScriptParserMixin.parseMaybeUnary (/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/node_modules/@babel/parser/lib/index.js:9852:18)
+    at TypeScriptParserMixin.parseMaybeUnaryOrPrivate (/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/node_modules/@babel/parser/lib/index.js:10894:61)
+    at TypeScriptParserMixin.parseExprOps (/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/node_modules/@babel/parser/lib/index.js:10899:23)
+    at TypeScriptParserMixin.parseMaybeConditional (/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/node_modules/@babel/parser/lib/index.js:10876:23)
+    at TypeScriptParserMixin.parseMaybeAssign (/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/node_modules/@babel/parser/lib/index.js:10826:21)
+    at TypeScriptParserMixin.parseMaybeAssign (/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/node_modules/@babel/parser/lib/index.js:9801:20)
+    at /Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/node_modules/@babel/parser/lib/index.js:10795:39
+    at TypeScriptParserMixin.allowInAnd (/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/node_modules/@babel/parser/lib/index.js:12422:16)
+    at TypeScriptParserMixin.parseMaybeAssignAllowIn (/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/node_modules/@babel/parser/lib/index.js:10795:17)
+    at TypeScriptParserMixin.parseVar (/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/node_modules/@babel/parser/lib/index.js:13384:91)
+    at TypeScriptParserMixin.parseVarStatement (/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/node_modules/@babel/parser/lib/index.js:13230:10)
+    at TypeScriptParserMixin.parseVarStatement (/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/node_modules/@babel/parser/lib/index.js:9493:31)
+    at TypeScriptParserMixin.parseStatementContent (/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/node_modules/@babel/parser/lib/index.js:12851:23)
+    at TypeScriptParserMixin.parseStatementContent (/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/node_modules/@babel/parser/lib/index.js:9527:18)
+    at TypeScriptParserMixin.parseStatementLike (/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/node_modules/@babel/parser/lib/index.js:12767:17)
+    at TypeScriptParserMixin.parseStatementListItem (/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/node_modules/@babel/parser/lib/index.js:12747:17)
+    at TypeScriptParserMixin.parseBlockOrModuleBlockBody (/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/node_modules/@babel/parser/lib/index.js:13316:61)
+    at TypeScriptParserMixin.parseBlockBody (/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/node_modules/@babel/parser/lib/index.js:13309:10)
+    at TypeScriptParserMixin.parseBlock (/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/node_modules/@babel/parser/lib/index.js:13297:10)
+    at TypeScriptParserMixin.parseTryStatement (/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/node_modules/@babel/parser/lib/index.js:13205:23)
+    at TypeScriptParserMixin.parseStatementContent (/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/node_modules/@babel/parser/lib/index.js:12804:21)
+    at TypeScriptParserMixin.parseStatementContent (/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/node_modules/@babel/parser/lib/index.js:9527:18)
+
+ERROR in [eslint] 
+src/App.tsx
+  Line 1020:6:  Parsing error: Expression expected
+
+webpack compiled with 2 errors and 1 warning
+Files successfully emitted, waiting for typecheck results...
+Issues checking in progress...
+ERROR in src/App.tsx:1020:7
+TS1109: Expression expected.
+    1018 |         systemPrompt: selectedPrompt,
+    1019 |         vectorSearchEnabled: 
+  > 1020 |       };
+         |       ^
+    1021 |
+    1022 |       const manager = WebSocketManager.getInstance({
+    1023 |         url: config.WS_URL,
+
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/App.tsx
+  Line 32:3:    'saveMessageToDb' is defined but never used                                                                                                                  @typescript-eslint/no-unused-vars
+  Line 36:3:    'StoredMessage' is defined but never used                                                                                                                    @typescript-eslint/no-unused-vars
+  Line 45:3:    'DatabaseType' is defined but never used                                                                                                                     @typescript-eslint/no-unused-vars
+  Line 46:3:    'Contributor' is defined but never used                                                                                                                      @typescript-eslint/no-unused-vars
+  Line 47:3:    'DatabaseFilterOptions' is defined but never used                                                                                                            @typescript-eslint/no-unused-vars
+  Line 524:25:  'setBackgroundUrl' is assigned a value but never used                                                                                                        @typescript-eslint/no-unused-vars
+  Line 561:10:  'selectedDatabases' is assigned a value but never used                                                                                                       @typescript-eslint/no-unused-vars
+  Line 562:21:  'setDatabases' is assigned a value but never used                                                                                                            @typescript-eslint/no-unused-vars
+  Line 766:6:   React Hook useEffect has missing dependencies: 'initialPagination.limit' and 'initialPagination.offset'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+  Line 1282:9:  'handleDatabaseSelect' is assigned a value but never used                                                                                                    @typescript-eslint/no-unused-vars
+
+src/ChatApp.tsx
+  Line 6:3:  'Navigate' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/CodeTranslator.tsx
+  Line 250:6:  React Hook useEffect has a missing dependency: 'translations'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/DatabaseSelector.tsx
+  Line 56:12:  'fetchError' is assigned a value but never used                                                               @typescript-eslint/no-unused-vars
+  Line 89:8:   React Hook useEffect has a missing dependency: 'databases'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  Line 513:8:  React Hook useEffect has a missing dependency: 'ref'. Either include it or remove the dependency array        react-hooks/exhaustive-deps
+
+src/components/FileUpload.tsx
+  Line 43:10:  'selectedAction' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+src/components/GptImage.tsx
+  Line 5:34:  'ChevronUp' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/MarkdownEditor.tsx
+  Line 455:8:  React Hook useEffect has missing dependencies: 'setLeftDocument' and 'setRightDocument'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/MessageContent.tsx
+  Line 34:10:  'copiedMessage' is assigned a value but never used             @typescript-eslint/no-unused-vars
+  Line 35:10:  'copiedCodeBlocks' is assigned a value but never used          @typescript-eslint/no-unused-vars
+  Line 45:9:   'copyMessageToClipboard' is assigned a value but never used    @typescript-eslint/no-unused-vars
+  Line 52:9:   'copyCodeBlockToClipboard' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+src/components/PromptWindow.tsx
+  Line 222:6:  React Hook useEffect has a missing dependency: 'setSelectedCategory'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/SearchComponent.tsx
+  Line 28:10:  'activeSession' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+src/components/UploadCompletePopup.tsx
+  Line 3:17:  'useState' is defined but never used  @typescript-eslint/no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/App.tsx
+  Line 32:3:    'saveMessageToDb' is defined but never used                                                                                                                  @typescript-eslint/no-unused-vars
+  Line 36:3:    'StoredMessage' is defined but never used                                                                                                                    @typescript-eslint/no-unused-vars
+  Line 45:3:    'DatabaseType' is defined but never used                                                                                                                     @typescript-eslint/no-unused-vars
+  Line 46:3:    'Contributor' is defined but never used                                                                                                                      @typescript-eslint/no-unused-vars
+  Line 47:3:    'DatabaseFilterOptions' is defined but never used                                                                                                            @typescript-eslint/no-unused-vars
+  Line 524:25:  'setBackgroundUrl' is assigned a value but never used                                                                                                        @typescript-eslint/no-unused-vars
+  Line 561:10:  'selectedDatabases' is assigned a value but never used                                                                                                       @typescript-eslint/no-unused-vars
+  Line 562:21:  'setDatabases' is assigned a value but never used                                                                                                            @typescript-eslint/no-unused-vars
+  Line 766:6:   React Hook useEffect has missing dependencies: 'initialPagination.limit' and 'initialPagination.offset'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+  Line 1282:9:  'handleDatabaseSelect' is assigned a value but never used                                                                                                    @typescript-eslint/no-unused-vars
+
+src/ChatApp.tsx
+  Line 6:3:  'Navigate' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/CodeTranslator.tsx
+  Line 250:6:  React Hook useEffect has a missing dependency: 'translations'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/DatabaseSelector.tsx
+  Line 56:12:  'fetchError' is assigned a value but never used                                                               @typescript-eslint/no-unused-vars
+  Line 89:8:   React Hook useEffect has a missing dependency: 'databases'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  Line 513:8:  React Hook useEffect has a missing dependency: 'ref'. Either include it or remove the dependency array        react-hooks/exhaustive-deps
+
+src/components/FileUpload.tsx
+  Line 43:10:  'selectedAction' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+src/components/GptImage.tsx
+  Line 5:34:  'ChevronUp' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/MarkdownEditor.tsx
+  Line 455:8:  React Hook useEffect has missing dependencies: 'setLeftDocument' and 'setRightDocument'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/MessageContent.tsx
+  Line 34:10:  'copiedMessage' is assigned a value but never used             @typescript-eslint/no-unused-vars
+  Line 35:10:  'copiedCodeBlocks' is assigned a value but never used          @typescript-eslint/no-unused-vars
+  Line 45:9:   'copyMessageToClipboard' is assigned a value but never used    @typescript-eslint/no-unused-vars
+  Line 52:9:   'copyCodeBlockToClipboard' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+src/components/PromptWindow.tsx
+  Line 222:6:  React Hook useEffect has a missing dependency: 'setSelectedCategory'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/SearchComponent.tsx
+  Line 28:10:  'activeSession' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+src/components/UploadCompletePopup.tsx
+  Line 3:17:  'useState' is defined but never used  @typescript-eslint/no-unused-vars
+
+webpack compiled with 1 warning
+No issues found.

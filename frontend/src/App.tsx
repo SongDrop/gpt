@@ -567,7 +567,7 @@ export default function ChatApp() {
     "promptWindow-selectedPrompt",
     ""
   );
-  const [showRagSearch, setShowRagSearch] = useState(true);
+  const [ragSearchEnabled, setRagSearchEnabled] = useState(true);
   //File Upload/DragAndDrop
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
   const [showUploadComplete, setShowUploadComplete] = useState(false);
@@ -1016,6 +1016,7 @@ export default function ChatApp() {
         temperature: config.DEFAULT_TEMPERATURE,
         continue_last: false,
         systemPrompt: selectedPrompt,
+        vectorSearchEnabled: ragSearchEnabled
       };
 
       const manager = WebSocketManager.getInstance({
@@ -1205,7 +1206,7 @@ export default function ChatApp() {
   };
 
   const toggleRagSearch = () => {
-    setShowRagSearch((prev) => !prev);
+    setRagSearchEnabled((prev) => !prev);
   };
 
   const handleCreateNew = () => {
@@ -1828,7 +1829,7 @@ export default function ChatApp() {
                 title="Toggle RagSearch"
                >
                 {/* You can add an icon here if you want */}
-                {!showRagSearch ?  <Square size={16} /> : <CheckSquare size={16} />} 
+                {!ragSearchEnabled ?  <Square size={16} /> : <CheckSquare size={16} />} 
                 <span>RagSearch</span>
               </button>
             </div>

@@ -56,6 +56,7 @@ class ChatRequest(BaseModel):
     databaseEndpoint: Optional[str] = None
     databaseKey: Optional[str] = None
     databaseIndex: Optional[str] = None
+    vectorSearchEnabled: Optional[bool] = False
 
 class TranslationRequest(BaseModel):
     source: str
@@ -166,7 +167,7 @@ async def monitor_stream(stream):
         logger.info(f"Stream metrics: {metrics.get_metrics()}")
 
 
-async def generate_chat_completion(messages: List[Dict[str, str]], max_tokens: int, temperature: float, stream: bool = False, vector_search_endpoint: str='', vector_search_key: str='', vector_search_index:str=''):
+async def generate_chat_completion(messages: List[Dict[str, str]], max_tokens: int, temperature: float, stream: bool = False, vector_search_endpoint: str='', vector_search_key: str='', vector_search_index:str='', vector_search_enabled: bool = False):
     """
     Generate chat completion with optional vector search and streaming.
 
@@ -198,7 +199,7 @@ async def generate_chat_completion(messages: List[Dict[str, str]], max_tokens: i
             "stream": stream,
         }
         
-        if settings.vector_search_enabled:
+        if vector_search_enabled:
             # Validate required settings
             if not all([
                 search_endpoint,
@@ -323,7 +324,8 @@ async def chat(request: ChatRequest):
     search_endpoint = request.databaseEndpoint or settings.vector_search_endpoint
     search_key = request.databaseKey or settings.vector_search_key
     search_index = request.databaseIndex or settings.vector_search_index
-
+    vector_search_enabled = request.vectorSearchEnabled or settings.vector_search_enabled
+   
     try:
         messages = [
             {"role": "system", "content": system_prompt}
@@ -332,7 +334,7 @@ async def chat(request: ChatRequest):
             for m in request.messages
         ]
         
-        if settings.vector_search_enabled:
+        if vector_search_enabled:
             logger.info("Using vector search for this chat request")
         else:
             logger.info("Not using vector search for this chat request")
@@ -345,6 +347,7 @@ async def chat(request: ChatRequest):
             vector_search_endpoint="", 
             vector_search_key="", 
             vector_search_index=""
+            vector_search_enabled=vector_search_enabled
         )
 
         # --- Step 1: Parse the response and extract citations ---
@@ -442,6 +445,7 @@ async def translate_code(req: TranslationRequest):
             vector_search_endpoint="", 
             vector_search_key="", 
             vector_search_index=""
+            vector_search_enabled=False
         )
         translated_code = completion.choices[0].message.content.strip()
         return TranslationResponse(translatedCode=translated_code)
@@ -720,7 +724,8 @@ async def websocket_endpoint(websocket: WebSocket):
                         stream=True,
                         vector_search_endpoint="", 
                         vector_search_key="", 
-                        vector_search_index=""
+                        vector_search_index="",
+                        vector_search_enabled=False
                     )
                     
                     # Create a task for the stream processing
