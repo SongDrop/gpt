@@ -567,7 +567,10 @@ export default function ChatApp() {
     "promptWindow-selectedPrompt",
     ""
   );
-  const [ragSearchEnabled, setRagSearchEnabled] = useState(true);
+  const [ragSearchEnabled, setRagSearchEnabled] = useLocalStorage<boolean>(
+    "ragsearch-enabled",
+    false
+  );
   //File Upload/DragAndDrop
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
   const [showUploadComplete, setShowUploadComplete] = useState(false);

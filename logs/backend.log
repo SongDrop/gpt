@@ -159,3 +159,66 @@ INFO:     127.0.0.1:52305 - "OPTIONS /chat HTTP/1.1" 200 OK
 2025-07-16 00:38:34,273 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
 2025-07-16 00:38:34,275 - main - INFO - Successfully processed chat request
 INFO:     127.0.0.1:52305 - "POST /chat HTTP/1.1" 200 OK
+2025-07-16 00:39:21,284 - main - INFO - WebSocket disconnected: 127.0.0.1:52299
+2025-07-16 00:39:21,285 - main - INFO - Client 127.0.0.1:52299 disconnected. Active connections: 0
+2025-07-16 00:39:21,285 - main - INFO - Connection cleaned up for 127.0.0.1:52299
+2025-07-16 00:39:21,285 - main - INFO - Client 127.0.0.1:52299 disconnected. Active connections: 0
+INFO:     connection closed
+2025-07-16 00:39:21,624 - main - INFO - WebSocket connection attempt from 127.0.0.1:52312
+INFO:     ('127.0.0.1', 52312) - "WebSocket /ws" [accepted]
+2025-07-16 00:39:21,624 - main - INFO - Client 127.0.0.1:52312 connected. Active connections: 1
+INFO:     connection open
+INFO:     127.0.0.1:52313 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52313 - "GET /health HTTP/1.1" 200 OK
+2025-07-16 00:39:23,291 - main - INFO - WebSocket disconnected: 127.0.0.1:52312
+2025-07-16 00:39:23,291 - main - INFO - Client 127.0.0.1:52312 disconnected. Active connections: 0
+2025-07-16 00:39:23,291 - main - INFO - Connection cleaned up for 127.0.0.1:52312
+2025-07-16 00:39:23,291 - main - INFO - Client 127.0.0.1:52312 disconnected. Active connections: 0
+INFO:     connection closed
+2025-07-16 00:39:23,611 - main - INFO - WebSocket connection attempt from 127.0.0.1:52316
+INFO:     ('127.0.0.1', 52316) - "WebSocket /ws" [accepted]
+2025-07-16 00:39:23,613 - main - INFO - Client 127.0.0.1:52316 connected. Active connections: 1
+INFO:     connection open
+INFO:     127.0.0.1:52313 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52313 - "GET /health HTTP/1.1" 200 OK
+2025-07-16 00:39:53,625 - main - INFO - Received WebSocket message
+2025-07-16 00:39:53,625 - main - INFO - Vector search enabled with index: rag-1752519055977
+2025-07-16 00:39:53,887 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 400 Bad Request"
+2025-07-16 00:39:53,889 - main - ERROR - OpenAI API error: Error code: 400 - {'error': {'requestid': 'b8816604-2291-4f38-a1c6-7c96046e94e1', 'code': 400, 'message': 'Invalid message request body. Learn how to use Completions extension API, please refer to https://learn.microsoft.com/azure/ai-services/openai/reference#completions-extensions'}}
+2025-07-16 00:39:53,889 - main - ERROR - Error code: 400 - {'error': {'requestid': 'b8816604-2291-4f38-a1c6-7c96046e94e1', 'code': 400, 'message': 'Invalid message request body. Learn how to use Completions extension API, please refer to https://learn.microsoft.com/azure/ai-services/openai/reference#completions-extensions'}}
+Traceback (most recent call last):
+  File "/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/backend/main.py", line 750, in websocket_endpoint
+    pass
+  File "/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/backend/main.py", line 729, in process_stream
+    )
+  File "/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/backend/main.py", line 629, in stream_generator
+    async def stream_generator(stream, stop_event: asyncio.Event, min_buffer_length: int = 50):
+  File "/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/backend/main.py", line 246, in stream_generator
+    async def stream_generator():
+  File "/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/backend/venv/lib/python3.8/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/backend/venv/lib/python3.8/site-packages/openai/resources/chat/completions/completions.py", line 1087, in create
+    return self._post(
+  File "/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/backend/venv/lib/python3.8/site-packages/openai/_base_client.py", line 1256, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+  File "/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/backend/venv/lib/python3.8/site-packages/openai/_base_client.py", line 1044, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.BadRequestError: Error code: 400 - {'error': {'requestid': 'b8816604-2291-4f38-a1c6-7c96046e94e1', 'code': 400, 'message': 'Invalid message request body. Learn how to use Completions extension API, please refer to https://learn.microsoft.com/azure/ai-services/openai/reference#completions-extensions'}}
+2025-07-16 00:39:53,932 - main - INFO - Client 127.0.0.1:52316 disconnected. Active connections: 0
+2025-07-16 00:39:53,932 - main - INFO - Connection cleaned up for 127.0.0.1:52316
+2025-07-16 00:39:53,932 - main - ERROR - Unexpected error for 127.0.0.1:52316: WebSocket is not connected. Need to call "accept" first.
+2025-07-16 00:39:53,933 - main - INFO - Client 127.0.0.1:52316 disconnected. Active connections: 0
+2025-07-16 00:39:53,933 - main - INFO - Connection cleaned up for 127.0.0.1:52316
+2025-07-16 00:39:53,933 - main - INFO - Client 127.0.0.1:52316 disconnected. Active connections: 0
+INFO:     connection closed
+2025-07-16 00:39:53,943 - main - INFO - WebSocket connection attempt from 127.0.0.1:52318
+INFO:     ('127.0.0.1', 52318) - "WebSocket /ws" [accepted]
+2025-07-16 00:39:53,944 - main - INFO - Client 127.0.0.1:52318 connected. Active connections: 1
+INFO:     connection open
+2025-07-16 00:39:58,149 - main - INFO - WebSocket connection attempt from 127.0.0.1:52320
+INFO:     ('127.0.0.1', 52320) - "WebSocket /ws" [accepted]
+2025-07-16 00:39:58,149 - main - INFO - Client 127.0.0.1:52320 connected. Active connections: 2
+INFO:     connection open
+Error in stream_generator: Error code: 400 - {'error': {'requestid': 'b8816604-2291-4f38-a1c6-7c96046e94e1', 'code': 400, 'message': 'Invalid message request body. Learn how to use Completions extension API, please refer to https://learn.microsoft.com/azure/ai-services/openai/reference#completions-extensions'}}
+INFO:     127.0.0.1:52321 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52321 - "GET /health HTTP/1.1" 200 OK
