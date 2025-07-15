@@ -2,7 +2,7 @@
 
 One-click deployment of a fully automated AI chat assistant with GPT-4.1-mini and GPT-image-1 image generation capabilities.
 
-[🌐 Deploy Now](https://azure-ai-assistant.netlify.app/)
+[🌐 LEARN MORE](https://azure-ai-assistant.netlify.app/)
 
 ---
 ```
