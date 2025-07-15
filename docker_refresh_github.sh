@@ -9,8 +9,8 @@ export NVM_DIR="$HOME/.nvm"
 export NODE_OPTIONS=--openssl-legacy-provider
 node -v
 npm -v
-chmod +x reinstall.sh
-./reinstall.sh
+chmod +x docker_install.sh
+./docker_install.sh
 
 
 # Backend update
