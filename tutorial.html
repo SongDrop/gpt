@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom ChatGPT with RAG on Azure - Comprehensive Guide</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0078d4;
+            --secondary: #2b579a;
+            --accent: #50e6ff;
+            --light: #f8f9fa;
+            --dark: #212529;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+        }
+        
+        .header {
+            background: linear-gradient(120deg, var(--secondary), var(--primary));
+            color: white;
+            padding: 3rem 0;
+            margin-bottom: 2rem;
+            border-bottom: 5px solid var(--accent);
+        }
+        
+        .card {
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            border: none;
+            margin-bottom: 25px;
+            transition: transform 0.3s ease;
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(0,0,0,0.15);
+        }
+        
+        .card-header {
+            background: linear-gradient(120deg, var(--primary), var(--secondary));
+            color: white;
+            font-weight: 600;
+            padding: 1.2rem 1.5rem;
+        }
+        
+        .code-block {
+            background-color: #1e1e1e;
+            color: #dcdcdc;
+            border-radius: 8px;
+            padding: 1.5rem;
+            font-family: 'Consolas', 'Courier New', monospace;
+            overflow-x: auto;
+            position: relative;
+        }
+        
+        .code-header {
+            background-color: #333;
+            color: #f0f0f0;
+            padding: 8px 15px;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            font-size: 0.9rem;
+            margin-bottom: -10px;
+        }
+        
+        .highlight {
+            background-color: rgba(0, 120, 212, 0.1);
+            padding: 3px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        
+        .checklist li {
+            margin-bottom: 12px;
+            position: relative;
+            padding-left: 30px;
+        }
+        
+        .checklist li:before {
+            content: "\f00c";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            position: absolute;
+            left: 0;
+            top: 2px;
+            color: var(--primary);
+        }
+        
+        .warning {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+            margin: 20px 0;
+        }
+        
+        .step-number {
+            display: inline-block;
+            width: 36px;
+            height: 36px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 36px;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+        
+        .section-icon {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .nav-pills .nav-link {
+            color: var(--dark);
+            font-weight: 500;
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+        
+        .nav-pills .nav-link.active {
+            background: linear-gradient(120deg, var(--primary), var(--secondary));
+            color: white;
+        }
+        
+        .architecture-diagram {
+            background-color: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+        
+        .workflow-step {
+            text-align: center;
+            padding: 20px;
+            border-radius: 12px;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            height: 100%;
+        }
+        
+        .workflow-icon {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+        
+        .issue-card {
+            border-left: 4px solid var(--primary);
+        }
+        
+        .solution-card {
+            border-left: 4px solid #28a745;
+        }
+        
+        .final-checklist {
+            background: linear-gradient(135deg, #e3f2fd, #bbdefb);
+            border-radius: 12px;
+            padding: 25px;
+        }
+        
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header text-center">
+        <div class="container">
+            <h1 class="display-4 fw-bold"><i class="fas fa-robot me-3"></i>Building a Custom ChatGPT Clone with RAG on Azure</h1>
+            <p class="lead">Comprehensive Guide with Implementation Details and Solutions to Common Challenges</p>
+            <div class="mt-4">
+                <span class="badge bg-light text-dark fs-6 fw-normal me-2">Azure OpenAI</span>
+                <span class="badge bg-light text-dark fs-6 fw-normal me-2">RAG Architecture</span>
+                <span class="badge bg-light text-dark fs-6 fw-normal me-2">Vector Search</span>
+                <span class="badge bg-light text-dark fs-6 fw-normal">Python FastAPI</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <!-- Navigation -->
+            <div class="col-lg-3 mb-4">
+                <div class="card sticky-top" style="top: 20px;">
+                    <div class="card-header">
+                        <i class="fas fa-bookmark me-2"></i>Guide Navigation
+                    </div>
+                    <div class="card-body">
+                        <div class="nav flex-column nav-pills">
+                            <a class="nav-link active" href="#overview"><i class="fas fa-layer-group me-2"></i>Overview</a>
+                            <a class="nav-link" href="#architecture"><i class="fas fa-project-diagram me-2"></i>Architecture</a>
+                            <a class="nav-link" href="#setup"><i class="fas fa-cloud me-2"></i>Azure Setup</a>
+                            <a class="nav-link" href="#configuration"><i class="fas fa-cog me-2"></i>Configuration</a>
+                            <a class="nav-link" href="#implementation"><i class="fas fa-code me-2"></i>Implementation</a>
+                            <a class="nav-link" href="#workflow"><i class="fas fa-sitemap me-2"></i>Workflow</a>
+                            <a class="nav-link" href="#issues"><i class="fas fa-bug me-2"></i>Common Issues</a>
+                            <a class="nav-link" href="#checklist"><i class="fas fa-tasks me-2"></i>Final Checklist</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Content -->
+            <div class="col-lg-9">
+                <!-- Overview -->
+                <section id="overview" class="mb-5">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fas fa-layer-group me-2"></i>Overview
+                        </div>
+                        <div class="card-body">
+                            <p class="lead">This guide consolidates lessons learned from building a custom ChatGPT backend with Azure RAG integration. Key challenges included configuration issues, deployment mismatches, and vector search implementation hurdles.</p>
+                            
+                            <div class="row mt-4">
+                                <div class="col-md-6 mb-4">
+                                    <div class="card h-100">
+                                        <div class="card-body text-center">
+                                            <div class="section-icon">
+                                                <i class="fas fa-lightbulb"></i>
+                                            </div>
+                                            <h5>What You'll Learn</h5>
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item">Azure resource setup for RAG</li>
+                                                <li class="list-group-item">Proper configuration patterns</li>
+                                                <li class="list-group-item">Vector search implementation</li>
+                                                <li class="list-group-item">Troubleshooting common issues</li>
+                                                <li class="list-group-item">Production best practices</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6 mb-4">
+                                    <div class="card h-100">
+                                        <div class="card-body text-center">
+                                            <div class="section-icon">
+                                                <i class="fas fa-exclamation-triangle"></i>
+                                            </div>
+                                            <h5>Key Challenges Solved</h5>
+                                            <ul class="list-group list-group-flush">
+                                                <li class="list-group-item">Region matching requirements</li>
+                                                <li class="list-group-item">API version compatibility</li>
+                                                <li class="list-group-item">Document indexing limitations</li>
+                                                <li class="list-group-item">Configuration validation</li>
+                                                <li class="list-group-item">Security considerations</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Architecture -->
+                <section id="architecture" class="mb-5">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fas fa-project-diagram me-2"></i>Core Architecture Components
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3 mb-4">
+                                    <div class="workflow-step">
+                                        <div class="workflow-icon">
+                                            <i class="fab fa-react"></i>
+                                        </div>
+                                        <h5>Frontend</h5>
+                                        <p>React/Next.js chat interface</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-3 mb-4">
+                                    <div class="workflow-step">
+                                        <div class="workflow-icon">
+                                            <i class="fab fa-python"></i>
+                                        </div>
+                                        <h5>Backend</h5>
+                                        <p>FastAPI Python server</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-3 mb-4">
+                                    <div class="workflow-step">
+                                        <div class="workflow-icon">
+                                            <i class="fas fa-brain"></i>
+                                        </div>
+                                        <h5>AI Services</h5>
+                                        <p>Azure OpenAI (gpt-4.1-mini + text-embedding-ada-002)</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-3 mb-4">
+                                    <div class="workflow-step">
+                                        <div class="workflow-icon">
+                                            <i class="fas fa-database"></i>
+                                        </div>
+                                        <h5>Vector DB</h5>
+                                        <p>Azure Cognitive Search</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="architecture-diagram mt-4">
+                                <img src="https://mermaid.ink/svg/pako:eNpVkE1uwyAQha8y8kooWUHs3Ae0q1RqF4aJjQrGwmC6qCLf3qFJ0qad5QPe-4b3ZqVJbQvJj4kO4Ld6bXfJd5HlKbQaQmXQx0sLm4p4BpM1D7Wp9OQq0Wj6dOeZ5VzCjRwGfV2j8YfUw9pUj9KQy1l6fM1H4UjvYcDnYI4TQfz1TvYcDl8Pw1gQZzY4m0rJk6FjFgSXl5eX7d5b9e5y3Pc3kqFpZz8bN8Td3fQY9JgO7HX1c0vHX4d8zQ8kz2mD9vG3bV5y9q7Lv4" class="img-fluid" alt="Architecture Diagram">
+                                <p class="text-center mt-2 fst-italic">RAG Architecture Diagram</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Azure Setup -->
+                <section id="setup" class="mb-5">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fas fa-cloud me-2"></i>Azure Resource Setup
+                        </div>
+                        <div class="card-body">
+                            <div class="alert alert-warning">
+                                <i class="fas fa-exclamation-circle me-2"></i>
+                                <strong>Critical Requirement:</strong> All Azure resources must be in the same region (e.g., swedencentral) to work properly
+                            </div>
+                            
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h4><span class="step-number">1</span> Resource Group</h4>
+                                    <p>Create a resource group to organize all related services:</p>
+                                    <ul>
+                                        <li>Name: <code>openai</code></li>
+                                        <li>Region: <span class="highlight">swedencentral</span></li>
+                                    </ul>
+                                    
+                                    <h4 class="mt-4"><span class="step-number">2</span> Azure OpenAI</h4>
+                                    <p>Deploy required models:</p>
+                                    <ul>
+                                        <li>Chat model: <code>gpt-4.1-mini</code></li>
+                                        <li>Embedding model: <code>text-embedding-ada-002</code></li>
+                                        <li><span class="highlight">Both must be in same region</span></li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <h4><span class="step-number">3</span> Cognitive Search</h4>
+                                    <p>Create search service for vector database:</p>
+                                    <ul>
+                                        <li>Name: <code>ragaisearchrtx</code></li>
+                                        <li>Pricing tier: Basic or Standard</li>
+                                    </ul>
+                                    
+                                    <h4 class="mt-4"><span class="step-number">4</span> Blob Storage</h4>
+                                    <p>Create storage for document uploads:</p>
+                                    <ul>
+                                        <li>Name: <code>ragstoragertx</code></li>
+                                        <li>Container: <code>ragdata</code></li>
+                                        <li>Enable <span class="highlight">Blob anonymous access</span> in Configuration</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Configuration -->
+                <section id="configuration" class="mb-5">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fas fa-cog me-2"></i>Environment & Backend Configuration
+                        </div>
+                        <div class="card-body">
+                            <h4>.env File Configuration</h4>
+                            <div class="mb-4">
+                                <div class="code-header">.env</div>
+                                <div class="code-block">
+# Azure OpenAI<br>
+OPENAI_API_BASE=https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com<br>
+OPENAI_DEPLOYMENT_NAME=gpt-4.1-mini<br>
+<span class="text-warning">OPENAI_API_VERSION=2024-05-01-preview  # Critical version</span><br>
+OPENAI_API_KEY=your_api_key_here<br><br>
+
+# Vector Search<br>
+VECTOR_SEARCH_ENABLED=true<br>
+VECTOR_SEARCH_ENDPOINT=https://ragaisearchrtx.search.windows.net<br>
+VECTOR_SEARCH_KEY=your_search_key<br>
+VECTOR_SEARCH_INDEX=rag-1752519055977<br>
+<span class="text-warning">VECTOR_SEARCH_EMBEDDING_DEPLOYMENT=text-embedding-ada-002  # Must match deployment</span><br><br>
+
+# Blob Storage<br>
+AZURE_STORAGE_CONNECTION_STRING="DefaultEndpointsProtocol=..."<br>
+                                </div>
+                            </div>
+                            
+                            <h4>Backend Configuration (config.py)</h4>
+                            <div class="mb-4">
+                                <div class="code-header">config.py</div>
+                                <div class="code-block">
+<span class="text-info">@model_validator</span>(mode='after')<br>
+def validate_vector_search(self):<br>
+&nbsp;&nbsp;if self.vector_search_enabled:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-info"># Validate required fields</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;required = [<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.vector_search_endpoint, <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.vector_search_key,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.vector_search_index,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.vector_search_embedding_deployment<br>
+&nbsp;&nbsp;&nbsp;&nbsp;]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;if not all(required):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;logger.warning("Vector search disabled - missing configuration")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;self.vector_search_enabled = False<br>
+&nbsp;&nbsp;return self<br>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Implementation -->
+                <section id="implementation" class="mb-5">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fas fa-code me-2"></i>RAG Implementation
+                        </div>
+                        <div class="card-body">
+                            <div class="code-header">main.py - RAG Implementation</div>
+                            <div class="code-block">
+async def generate_chat_completion(messages, max_tokens, temperature, stream=False, <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;vector_search_endpoint='', vector_search_key='', vector_search_index=''):<br>
+<br>
+&nbsp;&nbsp;<span class="text-info"># ... configuration setup ...</span><br><br>
+
+&nbsp;&nbsp;if settings.vector_search_enabled:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-info"># Validate required settings</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;if not all([search_endpoint, search_key, search_index]):<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;logger.error("Vector search enabled but required settings missing")<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;raise ValueError("Incomplete vector search configuration")<br><br>
+
+&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-warning"># Configure vector search</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;completion_kwargs["extra_body"] = {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"data_sources": [{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"type": "azure_search",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"parameters": {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"endpoint": str(search_endpoint),<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"key": search_key,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"index_name": search_index,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"query_type": "vector_simple_hybrid",  <span class="text-info"># camelCase</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"in_scope": True,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"embedding_dependency": {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"type": "deployment_name",<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="text-warning">"deployment_name": settings.vector_search_embedding_deployment</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;}<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;logger.info(f"Vector search enabled with index: {search_index}")<br>
+<br>
+&nbsp;&nbsp;<span class="text-info"># ... rest of implementation ...</span><br>
+                            </div>
+                            
+                            <div class="row mt-4">
+                                <div class="col-md-6">
+                                    <h5>Why This Implementation Works</h5>
+                                    <ul>
+                                        <li>Uses <code>extra_body</code> for RAG configuration</li>
+                                        <li>Proper <code>query_type</code> format (camelCase)</li>
+                                        <li>Explicit embedding deployment reference</li>
+                                        <li>Comprehensive validation checks</li>
+                                        <li>API version 2024-05-01-preview</li>
+                                    </ul>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <h5>Client Initialization</h5>
+                                    <div class="code-block">
+<span class="text-info"># MUST use API version 2024-05-01-preview</span><br>
+client = AzureOpenAI(<br>
+&nbsp;&nbsp;azure_endpoint=str(settings.openai_api_base),<br>
+&nbsp;&nbsp;api_key=settings.openai_api_key,<br>
+&nbsp;&nbsp;<span class="text-warning">api_version="2024-05-01-preview"</span><br>
+)<br>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Workflow -->
+                <section id="workflow" class="mb-5">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fas fa-sitemap me-2"></i>System Workflow
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-4 mb-4">
+                                    <div class="workflow-step">
+                                        <div class="step-number">1</div>
+                                        <div class="workflow-icon">
+                                            <i class="fas fa-upload"></i>
+                                        </div>
+                                        <h5>Document Upload</h5>
+                                        <p>User uploads document to Azure Blob Storage</p>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-4 mb-4">
+                                    <div class="workflow-step">
+                                        <div class="step-number">2</div>
+                                        <div class="workflow-icon">
+                                            <i class="fas fa-cogs"></i>
+                                        </div>
+                                        <h5>Processing Pipeline</h5>
+                                        <p>Backend processes and chunks documents</p>
+                                        <div class="code-block small mt-2">
+async def process_file(file):<br>
+&nbsp;&nbsp;text = extract_text(file)  <span class="text-info"># PDF, DOCX, etc.</span><br>
+&nbsp;&nbsp;chunks = chunk_text(text)   <span class="text-info"># Custom chunking</span><br>
+&nbsp;&nbsp;embeddings = generate_embeddings(chunks)<br>
+&nbsp;&nbsp;upload_to_index(chunks, embeddings)<br>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-4 mb-4">
+                                    <div class="workflow-step">
+                                        <div class="step-number">3</div>
+                                        <div class="workflow-icon">
+                                            <i class="fas fa-comments"></i>
+                                        </div>
+                                        <h5>Chat Query</h5>
+                                        <p>RAG-enabled responses using vector search</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Common Issues -->
+                <section id="issues" class="mb-5">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fas fa-bug me-2"></i>Common Issues & Solutions
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-6 mb-4">
+                                    <div class="card issue-card h-100">
+                                        <div class="card-body">
+                                            <h5><i class="fas fa-exclamation-circle text-danger me-2"></i>Problem: 400 Error "Unrecognized request argument: dataSources"</h5>
+                                            <p class="mb-1"><strong>Cause:</strong> Incorrect API version or parameter structure</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6 mb-4">
+                                    <div class="card solution-card h-100">
+                                        <div class="card-body">
+                                            <h5><i class="fas fa-check-circle text-success me-2"></i>Solution</h5>
+                                            <ul>
+                                                <li>Use API version <code>2024-05-01-preview</code></li>
+                                                <li>Ensure proper camelCase for parameters</li>
+                                                <li>Verify endpoint includes deployment name</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6 mb-4">
+                                    <div class="card issue-card h-100">
+                                        <div class="card-body">
+                                            <h5><i class="fas fa-exclamation-circle text-danger me-2"></i>Problem: Embedding Model Not Found</h5>
+                                            <p class="mb-1"><strong>Cause:</strong> Model deployed in wrong region</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6 mb-4">
+                                    <div class="card solution-card h-100">
+                                        <div class="card-body">
+                                            <h5><i class="fas fa-check-circle text-success me-2"></i>Solution</h5>
+                                            <ul>
+                                                <li>Deploy both models in same Azure region</li>
+                                                <li>Confirm deployment names match exactly</li>
+                                                <li>Check all configuration references</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6 mb-4">
+                                    <div class="card issue-card h-100">
+                                        <div class="card-body">
+                                            <h5><i class="fas fa-exclamation-circle text-danger me-2"></i>Problem: Document Indexing Limitations</h5>
+                                            <p class="mb-1"><strong>Cause:</strong> Azure portal limitations for chunking</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-md-6 mb-4">
+                                    <div class="card solution-card h-100">
+                                        <div class="card-body">
+                                            <h5><i class="fas fa-check-circle text-success me-2"></i>Solution</h5>
+                                            <ul>
+                                                <li>Implement client-side processing</li>
+                                                <li>Add custom chunking strategy</li>
+                                                <li>Use Azure Functions for auto-reindexing</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Final Checklist -->
+                <section id="checklist">
+                    <div class="card">
+                        <div class="card-header">
+                            <i class="fas fa-tasks me-2"></i>Final Implementation Checklist
+                        </div>
+                        <div class="card-body">
+                            <div class="final-checklist">
+                                <ul class="checklist">
+                                    <li>Deploy both models in same Azure region</li>
+                                    <li>Verify API version is <code>2024-05-01-preview</code></li>
+                                    <li>Match embedding deployment names exactly in all configurations</li>
+                                    <li>Enable Blob anonymous access for storage container</li>
+                                    <li>Implement pre-flight configuration validation</li>
+                                    <li>Test with simple text document before complex PDFs</li>
+                                    <li>Implement client-side chunking for custom processing</li>
+                                    <li>Use managed identities instead of keys for production</li>
+                                    <li>Disable public blob access in production</li>
+                                    <li>Add proper error handling and logging</li>
+                                </ul>
+                                
+                                <div class="text-center mt-4">
+                                    <button class="btn btn-primary btn-lg">
+                                        <i class="fas fa-download me-2"></i>Download Complete Code Package
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <h4>Custom ChatGPT with RAG on Azure</h4>
+                    <p>Comprehensive implementation guide based on real-world experience solving common challenges with Azure RAG integration.</p>
+                </div>
+                <div class="col-md-3">
+                    <h5>Resources</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Azure OpenAI Documentation</a></li>
+                        <li><a href="#" class="text-white">Cognitive Search Guide</a></li>
+                        <li><a href="#" class="text-white">FastAPI Documentation</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>About</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white">Implementation Experience</a></li>
+                        <li><a href="#" class="text-white">Source Code</a></li>
+                        <li><a href="#" class="text-white">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr class="mt-4 bg-light">
+            <div class="text-center">
+                <p>© 2023 Custom ChatGPT RAG Implementation Guide | Created with real-world experience</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+                
+                // Update active nav item
+                document.querySelectorAll('.nav-pills .nav-link').forEach(link => {
+                    link.classList.remove('active');
+                });
+                this.classList.add('active');
+            });
+        });
+        
+        // Set first nav item as active on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelector('.nav-pills .nav-link').classList.add('active');
+        });
+    </script>
+</body>
+</html>
