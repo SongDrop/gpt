@@ -52,3 +52,8 @@ INFO:     connection closed
 INFO:     ('127.0.0.1', 51277) - "WebSocket /ws" [accepted]
 2025-07-15 22:43:11,959 - main - INFO - Client 127.0.0.1:51277 connected. Active connections: 1
 INFO:     connection open
+2025-07-15 22:53:38,383 - main - INFO - WebSocket disconnected: 127.0.0.1:51277
+2025-07-15 22:53:38,383 - main - INFO - Client 127.0.0.1:51277 disconnected. Active connections: 0
+2025-07-15 22:53:38,384 - main - INFO - Connection cleaned up for 127.0.0.1:51277
+2025-07-15 22:53:38,384 - main - INFO - Client 127.0.0.1:51277 disconnected. Active connections: 0
+INFO:     connection closed
