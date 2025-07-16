@@ -58,7 +58,7 @@ cd "$BACKEND_DIR" || { echo "❌ Backend directory not found"; exit 1; }
 if [ ! -d "venv" ] || ! ./venv/bin/pip --version > /dev/null 2>&1; then
   echo "Creating virtual environment with pip..."
   rm -rf venv
-  python3 -m venv --upgrade-deps venv
+  python3.10 -m venv --upgrade-deps venv
 fi
 
 source venv/bin/activate
