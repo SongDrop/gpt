@@ -4,25 +4,22 @@ function useLocalStorage<T>(
   key: string,
   initialValue: T
 ): [T, (value: T | ((val: T) => T)) => void] {
-  const [storedValue, setStoredValue] = useState<T>(initialValue);
-  const [isMounted, setIsMounted] = useState(false);
-
-  useEffect(() => {
+  // Initialize state with a function to read localStorage synchronously
+  const [storedValue, setStoredValue] = useState<T>(() => {
+    if (typeof window === "undefined") {
+      // SSR fallback
+      return initialValue;
+    }
     try {
       const item = window.localStorage.getItem(key);
-      if (item !== null) {
-        setStoredValue(JSON.parse(item));
-      }
+      return item ? JSON.parse(item) : initialValue;
     } catch (error) {
       console.error("useLocalStorage initialization error:", error);
-    } finally {
-      setIsMounted(true);
+      return initialValue;
     }
-  }, [key]);
+  });
 
   useEffect(() => {
-    if (!isMounted) return;
-
     try {
       const serialized = JSON.stringify(storedValue);
       window.localStorage.setItem(key, serialized);
@@ -36,7 +33,7 @@ function useLocalStorage<T>(
         console.error("useLocalStorage update error:", error);
       }
     }
-  }, [key, storedValue, isMounted]);
+  }, [key, storedValue]);
 
   return [storedValue, setStoredValue];
 }

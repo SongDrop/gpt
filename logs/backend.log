@@ -612,3 +612,228 @@ INFO:     connection open
 2025-07-16 20:08:06,470 - main - INFO - Connection cleaned up for 127.0.0.1:52103
 2025-07-16 20:08:06,470 - main - INFO - Client 127.0.0.1:52103 disconnected. Active connections: 0
 INFO:     connection closed
+2025-07-16 20:12:46,837 - main - INFO - WebSocket connection attempt from 127.0.0.1:52159
+INFO:     ('127.0.0.1', 52159) - "WebSocket /ws" [accepted]
+2025-07-16 20:12:46,837 - main - INFO - Client 127.0.0.1:52159 connected. Active connections: 1
+INFO:     connection open
+INFO:     127.0.0.1:52160 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52161 - "GET /health HTTP/1.1" 200 OK
+2025-07-16 20:12:48,959 - main - INFO - WebSocket disconnected: 127.0.0.1:52159
+2025-07-16 20:12:48,959 - main - INFO - Client 127.0.0.1:52159 disconnected. Active connections: 0
+2025-07-16 20:12:48,960 - main - INFO - Connection cleaned up for 127.0.0.1:52159
+2025-07-16 20:12:48,960 - main - INFO - Client 127.0.0.1:52159 disconnected. Active connections: 0
+INFO:     connection closed
+2025-07-16 20:12:49,353 - main - INFO - WebSocket connection attempt from 127.0.0.1:52163
+INFO:     ('127.0.0.1', 52163) - "WebSocket /ws" [accepted]
+2025-07-16 20:12:49,354 - main - INFO - Client 127.0.0.1:52163 connected. Active connections: 1
+INFO:     connection open
+INFO:     127.0.0.1:52160 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52161 - "GET /health HTTP/1.1" 200 OK
+2025-07-16 20:12:50,867 - main - INFO - WebSocket disconnected: 127.0.0.1:52163
+2025-07-16 20:12:50,868 - main - INFO - Client 127.0.0.1:52163 disconnected. Active connections: 0
+2025-07-16 20:12:50,868 - main - INFO - Connection cleaned up for 127.0.0.1:52163
+2025-07-16 20:12:50,868 - main - INFO - Client 127.0.0.1:52163 disconnected. Active connections: 0
+INFO:     connection closed
+2025-07-16 20:12:51,195 - main - INFO - WebSocket connection attempt from 127.0.0.1:52165
+INFO:     ('127.0.0.1', 52165) - "WebSocket /ws" [accepted]
+2025-07-16 20:12:51,196 - main - INFO - Client 127.0.0.1:52165 connected. Active connections: 1
+INFO:     connection open
+INFO:     127.0.0.1:52160 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52161 - "GET /health HTTP/1.1" 200 OK
+2025-07-16 20:12:55,169 - main - INFO - WebSocket disconnected: 127.0.0.1:52165
+2025-07-16 20:12:55,169 - main - INFO - Client 127.0.0.1:52165 disconnected. Active connections: 0
+2025-07-16 20:12:55,170 - main - INFO - Connection cleaned up for 127.0.0.1:52165
+2025-07-16 20:12:55,170 - main - INFO - Client 127.0.0.1:52165 disconnected. Active connections: 0
+INFO:     connection closed
+2025-07-16 20:12:55,513 - main - INFO - WebSocket connection attempt from 127.0.0.1:52167
+INFO:     ('127.0.0.1', 52167) - "WebSocket /ws" [accepted]
+2025-07-16 20:12:55,514 - main - INFO - Client 127.0.0.1:52167 connected. Active connections: 1
+INFO:     connection open
+INFO:     127.0.0.1:52160 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52161 - "GET /health HTTP/1.1" 200 OK
+2025-07-16 20:12:59,148 - main - INFO - WebSocket disconnected: 127.0.0.1:52167
+2025-07-16 20:12:59,149 - main - INFO - Client 127.0.0.1:52167 disconnected. Active connections: 0
+2025-07-16 20:12:59,149 - main - INFO - Connection cleaned up for 127.0.0.1:52167
+2025-07-16 20:12:59,149 - main - INFO - Client 127.0.0.1:52167 disconnected. Active connections: 0
+INFO:     connection closed
+2025-07-16 20:12:59,495 - main - INFO - WebSocket connection attempt from 127.0.0.1:52169
+INFO:     ('127.0.0.1', 52169) - "WebSocket /ws" [accepted]
+2025-07-16 20:12:59,496 - main - INFO - Client 127.0.0.1:52169 connected. Active connections: 1
+INFO:     connection open
+INFO:     127.0.0.1:52160 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52161 - "GET /health HTTP/1.1" 200 OK
+2025-07-16 20:13:03,407 - main - INFO - WebSocket disconnected: 127.0.0.1:52169
+2025-07-16 20:13:03,408 - main - INFO - Client 127.0.0.1:52169 disconnected. Active connections: 0
+2025-07-16 20:13:03,408 - main - INFO - Connection cleaned up for 127.0.0.1:52169
+2025-07-16 20:13:03,408 - main - INFO - Client 127.0.0.1:52169 disconnected. Active connections: 0
+INFO:     connection closed
+2025-07-16 20:13:03,670 - main - INFO - WebSocket connection attempt from 127.0.0.1:52171
+INFO:     ('127.0.0.1', 52171) - "WebSocket /ws" [accepted]
+2025-07-16 20:13:03,670 - main - INFO - Client 127.0.0.1:52171 connected. Active connections: 1
+INFO:     connection open
+INFO:     127.0.0.1:52160 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52161 - "GET /health HTTP/1.1" 200 OK
+2025-07-16 20:13:07,118 - main - INFO - WebSocket disconnected: 127.0.0.1:52171
+2025-07-16 20:13:07,118 - main - INFO - Client 127.0.0.1:52171 disconnected. Active connections: 0
+2025-07-16 20:13:07,118 - main - INFO - Connection cleaned up for 127.0.0.1:52171
+2025-07-16 20:13:07,118 - main - INFO - Client 127.0.0.1:52171 disconnected. Active connections: 0
+INFO:     connection closed
+INFO:     127.0.0.1:52160 - "GET /health HTTP/1.1" 200 OK
+2025-07-16 20:13:07,366 - main - INFO - WebSocket connection attempt from 127.0.0.1:52173
+INFO:     ('127.0.0.1', 52173) - "WebSocket /ws" [accepted]
+2025-07-16 20:13:07,367 - main - INFO - Client 127.0.0.1:52173 connected. Active connections: 1
+INFO:     connection open
+INFO:     127.0.0.1:52161 - "GET /health HTTP/1.1" 200 OK
+2025-07-16 20:13:11,076 - main - INFO - WebSocket disconnected: 127.0.0.1:52173
+2025-07-16 20:13:11,077 - main - INFO - Client 127.0.0.1:52173 disconnected. Active connections: 0
+2025-07-16 20:13:11,077 - main - INFO - Connection cleaned up for 127.0.0.1:52173
+2025-07-16 20:13:11,077 - main - INFO - Client 127.0.0.1:52173 disconnected. Active connections: 0
+INFO:     connection closed
+2025-07-16 20:13:11,308 - main - INFO - WebSocket connection attempt from 127.0.0.1:52175
+INFO:     ('127.0.0.1', 52175) - "WebSocket /ws" [accepted]
+2025-07-16 20:13:11,308 - main - INFO - Client 127.0.0.1:52175 connected. Active connections: 1
+INFO:     connection open
+INFO:     127.0.0.1:52160 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52161 - "GET /health HTTP/1.1" 200 OK
+2025-07-16 20:13:14,626 - main - INFO - WebSocket disconnected: 127.0.0.1:52175
+2025-07-16 20:13:14,626 - main - INFO - Client 127.0.0.1:52175 disconnected. Active connections: 0
+2025-07-16 20:13:14,626 - main - INFO - Connection cleaned up for 127.0.0.1:52175
+2025-07-16 20:13:14,626 - main - INFO - Client 127.0.0.1:52175 disconnected. Active connections: 0
+INFO:     connection closed
+2025-07-16 20:13:14,872 - main - INFO - WebSocket connection attempt from 127.0.0.1:52177
+INFO:     ('127.0.0.1', 52177) - "WebSocket /ws" [accepted]
+2025-07-16 20:13:14,873 - main - INFO - Client 127.0.0.1:52177 connected. Active connections: 1
+INFO:     connection open
+INFO:     127.0.0.1:52160 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52161 - "GET /health HTTP/1.1" 200 OK
+2025-07-16 20:13:44,900 - main - INFO - Received WebSocket message
+2025-07-16 20:13:45,241 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-16 20:13:45,383 - main - INFO - Client 127.0.0.1:52177 disconnected. Active connections: 0
+2025-07-16 20:13:45,383 - main - INFO - Connection cleaned up for 127.0.0.1:52177
+2025-07-16 20:13:45,383 - main - ERROR - Unexpected error for 127.0.0.1:52177: WebSocket is not connected. Need to call "accept" first.
+2025-07-16 20:13:45,383 - main - INFO - Client 127.0.0.1:52177 disconnected. Active connections: 0
+2025-07-16 20:13:45,383 - main - INFO - Connection cleaned up for 127.0.0.1:52177
+2025-07-16 20:13:45,383 - main - INFO - Client 127.0.0.1:52177 disconnected. Active connections: 0
+INFO:     connection closed
+2025-07-16 20:13:45,390 - main - INFO - WebSocket connection attempt from 127.0.0.1:52204
+INFO:     ('127.0.0.1', 52204) - "WebSocket /ws" [accepted]
+2025-07-16 20:13:45,390 - main - INFO - Client 127.0.0.1:52204 connected. Active connections: 1
+INFO:     connection open
+INFO:     127.0.0.1:52206 - "OPTIONS /chat HTTP/1.1" 200 OK
+2025-07-16 20:14:21,306 - main - INFO - Received chat request
+2025-07-16 20:14:21,307 - main - INFO - Not using vector search for this chat request
+2025-07-16 20:14:25,315 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-16 20:14:25,317 - main - INFO - Successfully processed chat request
+INFO:     127.0.0.1:52206 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52215 - "OPTIONS /chat HTTP/1.1" 200 OK
+2025-07-16 20:15:28,804 - main - INFO - Received chat request
+2025-07-16 20:15:28,805 - main - INFO - Not using vector search for this chat request
+2025-07-16 20:15:33,307 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-16 20:15:33,309 - main - INFO - Successfully processed chat request
+INFO:     127.0.0.1:52215 - "POST /chat HTTP/1.1" 200 OK
+2025-07-16 20:15:43,999 - main - INFO - WebSocket connection attempt from 127.0.0.1:52224
+INFO:     ('127.0.0.1', 52224) - "WebSocket /ws" [accepted]
+2025-07-16 20:15:44,000 - main - INFO - Client 127.0.0.1:52224 connected. Active connections: 2
+INFO:     connection open
+INFO:     127.0.0.1:52225 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52225 - "GET /health HTTP/1.1" 200 OK
+2025-07-16 20:15:44,321 - main - INFO - WebSocket disconnected: 127.0.0.1:52204
+2025-07-16 20:15:44,321 - main - INFO - Client 127.0.0.1:52204 disconnected. Active connections: 1
+2025-07-16 20:15:44,322 - main - INFO - Connection cleaned up for 127.0.0.1:52204
+2025-07-16 20:15:44,322 - main - INFO - Client 127.0.0.1:52204 disconnected. Active connections: 1
+INFO:     connection closed
+2025-07-16 20:15:44,322 - main - INFO - WebSocket disconnected: 127.0.0.1:52224
+2025-07-16 20:15:44,322 - main - INFO - Client 127.0.0.1:52224 disconnected. Active connections: 0
+2025-07-16 20:15:44,322 - main - INFO - Connection cleaned up for 127.0.0.1:52224
+2025-07-16 20:15:44,322 - main - INFO - Client 127.0.0.1:52224 disconnected. Active connections: 0
+INFO:     connection closed
+2025-07-16 20:15:44,825 - main - INFO - WebSocket connection attempt from 127.0.0.1:52229
+INFO:     ('127.0.0.1', 52229) - "WebSocket /ws" [accepted]
+2025-07-16 20:15:44,825 - main - INFO - Client 127.0.0.1:52229 connected. Active connections: 1
+INFO:     connection open
+INFO:     127.0.0.1:52225 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52226 - "GET /health HTTP/1.1" 200 OK
+2025-07-16 20:15:45,399 - main - INFO - WebSocket disconnected: 127.0.0.1:52229
+2025-07-16 20:15:45,399 - main - INFO - Client 127.0.0.1:52229 disconnected. Active connections: 0
+2025-07-16 20:15:45,399 - main - INFO - Connection cleaned up for 127.0.0.1:52229
+2025-07-16 20:15:45,399 - main - INFO - Client 127.0.0.1:52229 disconnected. Active connections: 0
+INFO:     connection closed
+2025-07-16 20:15:45,838 - main - INFO - WebSocket connection attempt from 127.0.0.1:52231
+INFO:     ('127.0.0.1', 52231) - "WebSocket /ws" [accepted]
+2025-07-16 20:15:45,839 - main - INFO - Client 127.0.0.1:52231 connected. Active connections: 1
+INFO:     connection open
+INFO:     127.0.0.1:52225 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52226 - "GET /health HTTP/1.1" 200 OK
+2025-07-16 20:15:48,371 - main - INFO - WebSocket disconnected: 127.0.0.1:52231
+2025-07-16 20:15:48,371 - main - INFO - Client 127.0.0.1:52231 disconnected. Active connections: 0
+2025-07-16 20:15:48,371 - main - INFO - Connection cleaned up for 127.0.0.1:52231
+2025-07-16 20:15:48,371 - main - INFO - Client 127.0.0.1:52231 disconnected. Active connections: 0
+INFO:     connection closed
+2025-07-16 20:15:48,732 - main - INFO - WebSocket connection attempt from 127.0.0.1:52233
+INFO:     ('127.0.0.1', 52233) - "WebSocket /ws" [accepted]
+2025-07-16 20:15:48,732 - main - INFO - Client 127.0.0.1:52233 connected. Active connections: 1
+INFO:     connection open
+INFO:     127.0.0.1:52225 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52226 - "GET /health HTTP/1.1" 200 OK
+2025-07-16 20:15:49,314 - main - INFO - WebSocket disconnected: 127.0.0.1:52233
+2025-07-16 20:15:49,314 - main - INFO - Client 127.0.0.1:52233 disconnected. Active connections: 0
+2025-07-16 20:15:49,315 - main - INFO - Connection cleaned up for 127.0.0.1:52233
+2025-07-16 20:15:49,315 - main - INFO - Client 127.0.0.1:52233 disconnected. Active connections: 0
+INFO:     connection closed
+2025-07-16 20:15:49,692 - main - INFO - WebSocket connection attempt from 127.0.0.1:52235
+INFO:     ('127.0.0.1', 52235) - "WebSocket /ws" [accepted]
+2025-07-16 20:15:49,693 - main - INFO - Client 127.0.0.1:52235 connected. Active connections: 1
+INFO:     connection open
+INFO:     127.0.0.1:52225 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52226 - "GET /health HTTP/1.1" 200 OK
+2025-07-16 20:15:55,059 - main - INFO - WebSocket disconnected: 127.0.0.1:52235
+2025-07-16 20:15:55,059 - main - INFO - Client 127.0.0.1:52235 disconnected. Active connections: 0
+2025-07-16 20:15:55,059 - main - INFO - Connection cleaned up for 127.0.0.1:52235
+2025-07-16 20:15:55,059 - main - INFO - Client 127.0.0.1:52235 disconnected. Active connections: 0
+INFO:     connection closed
+2025-07-16 20:15:55,478 - main - INFO - WebSocket connection attempt from 127.0.0.1:52238
+INFO:     ('127.0.0.1', 52238) - "WebSocket /ws" [accepted]
+2025-07-16 20:15:55,479 - main - INFO - Client 127.0.0.1:52238 connected. Active connections: 1
+INFO:     connection open
+INFO:     127.0.0.1:52239 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52239 - "GET /health HTTP/1.1" 200 OK
+2025-07-16 20:15:58,346 - main - INFO - WebSocket disconnected: 127.0.0.1:52238
+2025-07-16 20:15:58,346 - main - INFO - Client 127.0.0.1:52238 disconnected. Active connections: 0
+2025-07-16 20:15:58,347 - main - INFO - Connection cleaned up for 127.0.0.1:52238
+2025-07-16 20:15:58,347 - main - INFO - Client 127.0.0.1:52238 disconnected. Active connections: 0
+INFO:     connection closed
+2025-07-16 20:15:58,637 - main - INFO - WebSocket connection attempt from 127.0.0.1:52242
+INFO:     ('127.0.0.1', 52242) - "WebSocket /ws" [accepted]
+2025-07-16 20:15:58,638 - main - INFO - Client 127.0.0.1:52242 connected. Active connections: 1
+INFO:     connection open
+INFO:     127.0.0.1:52239 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52240 - "GET /health HTTP/1.1" 200 OK
+2025-07-16 20:16:00,746 - main - INFO - WebSocket disconnected: 127.0.0.1:52242
+2025-07-16 20:16:00,746 - main - INFO - Client 127.0.0.1:52242 disconnected. Active connections: 0
+2025-07-16 20:16:00,747 - main - INFO - Connection cleaned up for 127.0.0.1:52242
+2025-07-16 20:16:00,747 - main - INFO - Client 127.0.0.1:52242 disconnected. Active connections: 0
+INFO:     connection closed
+2025-07-16 20:16:01,015 - main - INFO - WebSocket connection attempt from 127.0.0.1:52244
+INFO:     ('127.0.0.1', 52244) - "WebSocket /ws" [accepted]
+2025-07-16 20:16:01,016 - main - INFO - Client 127.0.0.1:52244 connected. Active connections: 1
+INFO:     connection open
+INFO:     127.0.0.1:52239 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52240 - "GET /health HTTP/1.1" 200 OK
+2025-07-16 20:16:05,890 - main - INFO - Received WebSocket message
+2025-07-16 20:16:06,447 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-16 20:16:06,633 - main - INFO - Client 127.0.0.1:52244 disconnected. Active connections: 0
+2025-07-16 20:16:06,633 - main - INFO - Connection cleaned up for 127.0.0.1:52244
+2025-07-16 20:16:06,633 - main - ERROR - Unexpected error for 127.0.0.1:52244: WebSocket is not connected. Need to call "accept" first.
+2025-07-16 20:16:06,633 - main - INFO - Client 127.0.0.1:52244 disconnected. Active connections: 0
+2025-07-16 20:16:06,633 - main - INFO - Connection cleaned up for 127.0.0.1:52244
+2025-07-16 20:16:06,633 - main - INFO - Client 127.0.0.1:52244 disconnected. Active connections: 0
+INFO:     connection closed
+2025-07-16 20:16:06,648 - main - INFO - WebSocket connection attempt from 127.0.0.1:52246
+INFO:     ('127.0.0.1', 52246) - "WebSocket /ws" [accepted]
+2025-07-16 20:16:06,649 - main - INFO - Client 127.0.0.1:52246 connected. Active connections: 1
+INFO:     connection open
+2025-07-16 20:16:06,816 - main - INFO - WebSocket disconnected: 127.0.0.1:52246
+2025-07-16 20:16:06,816 - main - INFO - Client 127.0.0.1:52246 disconnected. Active connections: 0
+2025-07-16 20:16:06,816 - main - INFO - Connection cleaned up for 127.0.0.1:52246
+2025-07-16 20:16:06,816 - main - INFO - Client 127.0.0.1:52246 disconnected. Active connections: 0
+INFO:     connection closed

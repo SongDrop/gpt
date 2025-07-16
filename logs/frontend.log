@@ -17358,3 +17358,117 @@ src/components/UploadCompletePopup.tsx
 
 webpack compiled with 1 warning
 No issues found.
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/App.tsx
+  Line 36:3:    'saveMessageToDb' is defined but never used                                                                                                                  @typescript-eslint/no-unused-vars
+  Line 40:3:    'StoredMessage' is defined but never used                                                                                                                    @typescript-eslint/no-unused-vars
+  Line 49:3:    'DatabaseType' is defined but never used                                                                                                                     @typescript-eslint/no-unused-vars
+  Line 50:3:    'Contributor' is defined but never used                                                                                                                      @typescript-eslint/no-unused-vars
+  Line 51:3:    'DatabaseFilterOptions' is defined but never used                                                                                                            @typescript-eslint/no-unused-vars
+  Line 528:25:  'setBackgroundUrl' is assigned a value but never used                                                                                                        @typescript-eslint/no-unused-vars
+  Line 565:10:  'selectedDatabases' is assigned a value but never used                                                                                                       @typescript-eslint/no-unused-vars
+  Line 566:21:  'setDatabases' is assigned a value but never used                                                                                                            @typescript-eslint/no-unused-vars
+  Line 792:6:   React Hook useEffect has missing dependencies: 'initialPagination.limit' and 'initialPagination.offset'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+  Line 1314:9:  'handleDatabaseSelect' is assigned a value but never used                                                                                                    @typescript-eslint/no-unused-vars
+
+src/ChatApp.tsx
+  Line 6:3:  'Navigate' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/CodeTranslator.tsx
+  Line 250:6:  React Hook useEffect has a missing dependency: 'translations'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/DatabaseSelector.tsx
+  Line 55:12:  'fetchError' is assigned a value but never used                                                               @typescript-eslint/no-unused-vars
+  Line 88:8:   React Hook useEffect has a missing dependency: 'databases'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  Line 512:8:  React Hook useEffect has a missing dependency: 'ref'. Either include it or remove the dependency array        react-hooks/exhaustive-deps
+
+src/components/FileUpload.tsx
+  Line 43:10:  'selectedAction' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+src/components/GptImage.tsx
+  Line 5:34:  'ChevronUp' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/MarkdownEditor.tsx
+  Line 457:8:  React Hook useEffect has missing dependencies: 'setLeftDocument' and 'setRightDocument'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/MessageContent.tsx
+  Line 34:10:  'copiedMessage' is assigned a value but never used             @typescript-eslint/no-unused-vars
+  Line 35:10:  'copiedCodeBlocks' is assigned a value but never used          @typescript-eslint/no-unused-vars
+  Line 45:9:   'copyMessageToClipboard' is assigned a value but never used    @typescript-eslint/no-unused-vars
+  Line 52:9:   'copyCodeBlockToClipboard' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+src/components/PromptWindow.tsx
+  Line 222:6:  React Hook useEffect has a missing dependency: 'setSelectedCategory'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/SearchComponent.tsx
+  Line 28:10:  'activeSession' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+src/components/ThemeManager.tsx
+  Line 24:3:  'X' is defined but never used           @typescript-eslint/no-unused-vars
+  Line 27:3:  'DeleteIcon' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/UploadCompletePopup.tsx
+  Line 3:17:  'useState' is defined but never used  @typescript-eslint/no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/App.tsx
+  Line 36:3:    'saveMessageToDb' is defined but never used                                                                                                                  @typescript-eslint/no-unused-vars
+  Line 40:3:    'StoredMessage' is defined but never used                                                                                                                    @typescript-eslint/no-unused-vars
+  Line 49:3:    'DatabaseType' is defined but never used                                                                                                                     @typescript-eslint/no-unused-vars
+  Line 50:3:    'Contributor' is defined but never used                                                                                                                      @typescript-eslint/no-unused-vars
+  Line 51:3:    'DatabaseFilterOptions' is defined but never used                                                                                                            @typescript-eslint/no-unused-vars
+  Line 528:25:  'setBackgroundUrl' is assigned a value but never used                                                                                                        @typescript-eslint/no-unused-vars
+  Line 565:10:  'selectedDatabases' is assigned a value but never used                                                                                                       @typescript-eslint/no-unused-vars
+  Line 566:21:  'setDatabases' is assigned a value but never used                                                                                                            @typescript-eslint/no-unused-vars
+  Line 792:6:   React Hook useEffect has missing dependencies: 'initialPagination.limit' and 'initialPagination.offset'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+  Line 1314:9:  'handleDatabaseSelect' is assigned a value but never used                                                                                                    @typescript-eslint/no-unused-vars
+
+src/ChatApp.tsx
+  Line 6:3:  'Navigate' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/CodeTranslator.tsx
+  Line 250:6:  React Hook useEffect has a missing dependency: 'translations'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/DatabaseSelector.tsx
+  Line 55:12:  'fetchError' is assigned a value but never used                                                               @typescript-eslint/no-unused-vars
+  Line 88:8:   React Hook useEffect has a missing dependency: 'databases'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+  Line 512:8:  React Hook useEffect has a missing dependency: 'ref'. Either include it or remove the dependency array        react-hooks/exhaustive-deps
+
+src/components/FileUpload.tsx
+  Line 43:10:  'selectedAction' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+src/components/GptImage.tsx
+  Line 5:34:  'ChevronUp' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/MarkdownEditor.tsx
+  Line 457:8:  React Hook useEffect has missing dependencies: 'setLeftDocument' and 'setRightDocument'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/MessageContent.tsx
+  Line 34:10:  'copiedMessage' is assigned a value but never used             @typescript-eslint/no-unused-vars
+  Line 35:10:  'copiedCodeBlocks' is assigned a value but never used          @typescript-eslint/no-unused-vars
+  Line 45:9:   'copyMessageToClipboard' is assigned a value but never used    @typescript-eslint/no-unused-vars
+  Line 52:9:   'copyCodeBlockToClipboard' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+src/components/PromptWindow.tsx
+  Line 222:6:  React Hook useEffect has a missing dependency: 'setSelectedCategory'. Either include it or remove the dependency array  react-hooks/exhaustive-deps
+
+src/components/SearchComponent.tsx
+  Line 28:10:  'activeSession' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+src/components/ThemeManager.tsx
+  Line 24:3:  'X' is defined but never used           @typescript-eslint/no-unused-vars
+  Line 27:3:  'DeleteIcon' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/UploadCompletePopup.tsx
+  Line 3:17:  'useState' is defined but never used  @typescript-eslint/no-unused-vars
+
+webpack compiled with 1 warning
+Files successfully emitted, waiting for typecheck results...
+Issues checking in progress...
+No issues found.
