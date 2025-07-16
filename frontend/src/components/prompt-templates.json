@@ -420,8 +420,8 @@
       "prompt": "Create detailed technical documentation for this code/API including:\n- Purpose\n- Usage examples\n- Parameters\n- Return values"
     },
     {
-      "title": "Email Draft",
-      "prompt": "Compose a professional email about [subject] with the following key points:\n1. \n2. \n3."
+      "title": "CV Writing Assistant",
+      "prompt": "Create a professional CV for a [job title] including the following sections:\n1. Summary/Profile\n2. Key Skills\n3. Work Experience\n4. Education\n5. Certifications or Awards\nPlease include specific achievements and tailor the content to highlight relevant experience."
     }
   ],
   "analysis": [

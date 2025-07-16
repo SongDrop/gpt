@@ -146,16 +146,6 @@
   display: none;
 }
 
-#bottom-scroll {
-  /* existing styles ... */
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE and Edge */
-  overflow-x: scroll;
-}
-#bottom-scroll::-webkit-scrollbar {
-  display: none;
-}
-
 .code-block-wrapper pre {
   /* existing styles ... */
   scrollbar-width: none; /* Firefox */
@@ -268,10 +258,19 @@
 #flexbar-scroll-left {
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE and Edge */
-  overflow-x: scroll;
+  overflow-x: auto;
 }
 
 #flexbar-scroll-left::-webkit-scrollbar {
-  display: none;               /* Chrome, Safari, Opera */
-  color: red;
+  display: none; /* Chrome, Safari, Opera */
+}
+
+#flexbar-scroll-theme {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  overflow-x: auto;
+}
+
+#flexbar-scroll-theme::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
 }

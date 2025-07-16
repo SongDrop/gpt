@@ -71,8 +71,7 @@ cd "$FRONTEND_DIR"
 
 echo "Installing frontend dependencies..."
 npm cache clean --force
-npm install --force
-npm dedupe
+npm install --legacy-peer-deps
 
 # Fix html-webpack-plugin compatibility
 echo "Fixing html-webpack-plugin..."

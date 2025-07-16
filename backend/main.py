@@ -2,6 +2,7 @@ import logging
 import contextlib
 import weakref
 from typing import Set, Optional, Dict
+import tiktoken
 import asyncio
 import aiohttp
 import time
@@ -308,7 +309,9 @@ async def chat(request: ChatRequest):
             )
         else:
             full_response = clean_response
-
+     
+        if "The requested information is not available" in clean_response:
+            full_response.append("Disable RagSearch, select another Rag Database, or redefine your question.")
         # logger.info(full_response)
         # logger.info(completion.choices[0])
 
@@ -645,6 +648,26 @@ async def stream_generator(stream, stop_event: asyncio.Event, min_buffer_length:
                 content = chunk.choices[0].delta.content
                 buffer += content
 
+                finish_reason = chunk.choices[0].finish_reason
+
+                # Handle max token reached - cut off response
+                if finish_reason == 'length':
+                    # Message cut off due to max token limit
+                    yield buffer
+                    buffer = ""
+                    logger.info("Max tokens reached during streaming")
+                    # Optionally, you could send a special signal here to indicate truncation
+                    break
+                
+                # Handle normal end of message - yield and break stream
+                elif finish_reason == 'stop':
+                    # Normal end of message
+                    yield buffer
+                    buffer = ""
+                    first_message_buffering = False
+                    logger.info("Normal end of message")
+                    break
+
                 # If first message and chunk has finish_reason 'stop', yield whole buffer once
                 if first_message_buffering and chunk.choices[0].finish_reason == 'stop':
                     yield buffer
@@ -796,6 +819,24 @@ async def websocket_endpoint(websocket: WebSocket):
         logger.exception(e)
     finally:
         await manager.disconnect(websocket)
+
+
+def count_tokens(messages: List[Dict[str, str]], model_name: str) -> int:
+    encoding = tiktoken.encoding_for_model(model_name)
+    total_tokens = 0
+    for message in messages:
+        total_tokens += len(encoding.encode(message["content"])) + 4  # Rough per message overhead
+    return total_tokens
+
+
+def truncate_messages(messages: List[Dict[str, str]], model_name: str):
+    while count_tokens(messages, model_name) + max_completion_tokens > max_model_tokens:
+        # Remove oldest user/assistant messages (e.g., messages[1]) until fits
+        if len(messages) > 1:
+            messages.pop(1)
+        else:
+            break
+    return messages
 
 if __name__ == "__main__":
     uvicorn.run(

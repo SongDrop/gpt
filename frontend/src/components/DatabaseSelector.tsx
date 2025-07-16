@@ -6,7 +6,6 @@ import {
   DatabaseFilterOptions,
 } from "./types";
 import { Database } from "lucide-react";
-
 //
 const GITHUB_RAW_URL =
   "https://raw.githubusercontent.com/ProjectIGIRemakeTeam/prompt-templates/main/gpt-rag-db.json";

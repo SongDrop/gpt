@@ -143,7 +143,7 @@ async def main():
     FRONTEND_PORT=3000
     BACKEND_PORT=8000
     REACT_APP_APP_NAME='AI Chat Assistant'
-    REACT_APP_APP_LOGO='https://i.postimg.cc/C53CqTfx/chatgpt.png'
+    REACT_APP_APP_LOGO='https://i.postimg.cc/WbZm1BK7/gitgpt.png'
     # Vector search
     VECTOR_SEARCH_ENABLED='true'
     VECTOR_SEARCH_ENDPOINT='https://ragaisearchrtx.search.windows.net'

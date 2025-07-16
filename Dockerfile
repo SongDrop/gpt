@@ -72,7 +72,7 @@ SYSTEM_PROMPT=\"You are an AI assistant. You aim to be helpful, honest, and dire
 RUN printf "#Frontend Configuration\n\
 REACT_APP_API_URL=http://localhost:8000\n\
 REACT_APP_WS_URL=ws://localhost:8000/ws\n\
-REACT_APP_LOGO=https://i.postimg.cc/C53CqTfx/chatgpt.png\n\
+REACT_APP_LOGO=https://i.postimg.cc/WbZm1BK7/gitgpt.png\n\
 REACT_APP_APP_NAME=AI Chat Assistant\n\
 NODE_ENV=production\n\
 REACT_APP_GPT_IMAGE_URL=https://gabz-mbtgx2um-westus3.cognitiveservices.azure.com/openai/deployments/gpt-image-1/images\n\

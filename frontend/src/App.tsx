@@ -15,8 +15,9 @@ import {
   Quote,
   Upload,
   ExternalLink,
-  Square, 
-  CheckSquare
+  Square,
+  CheckSquare,
+  PaletteIcon,
 } from "lucide-react";
 import { marked } from "marked";
 import MarkdownEditor from "./components/MarkdownEditor";
@@ -28,6 +29,9 @@ import DragDropArea, { DroppedItem } from "./components/DragDropArea";
 import FileUpload from "./components/FileUpload";
 import UploadCompletePopup from "./components/UploadCompletePopup";
 import GptImage from "./components/GptImage";
+import DatabaseCreate from "./components/DatabaseCreate";
+import ThemeManager from "./components/ThemeManager";
+
 import {
   saveMessageToDb,
   getMessagesBySession,
@@ -584,6 +588,25 @@ export default function ChatApp() {
     string | null
   >(null);
 
+  //Database creation for vector RAG
+  const [showCreateDatabaseModal, setShowCreateDatabaseModal] = useState(false);
+  const openCreateNewDatabaseModal = () => setShowCreateDatabaseModal(true);
+  const closeCreateNewDatabaseModal = () => setShowCreateDatabaseModal(false);
+
+  //Theme Manager
+  const [showThemeManager, setShowThemeManager] = useState(false);
+  const closeThemeManager = () => setShowThemeManager(false);
+
+  const handleCreateDatabase = async (data: {
+    title: string;
+    description?: string;
+    tags?: string[];
+  }) => {
+    // Call your API here via the prop or directly
+    //await onCreateDatabase(data);
+    // Optionally refresh your list or update state here
+  };
+
   // 1. On mount or paramSessionId change, set sessionId or load last session
   useEffect(() => {
     console.groupCollapsed(`[Session Init] Running session init effect`);
@@ -938,7 +961,7 @@ export default function ChatApp() {
         temperature: config.DEFAULT_TEMPERATURE,
         continue_last: true,
         systemPrompt: selectedPrompt,
-        vectorSearchEnabled: ragSearchEnabled
+        vectorSearchEnabled: ragSearchEnabled,
       };
 
       const manager = WebSocketManager.getInstance({
@@ -1020,7 +1043,7 @@ export default function ChatApp() {
         temperature: config.DEFAULT_TEMPERATURE,
         continue_last: false,
         systemPrompt: selectedPrompt,
-        vectorSearchEnabled: ragSearchEnabled
+        vectorSearchEnabled: ragSearchEnabled,
       };
 
       const manager = WebSocketManager.getInstance({
@@ -1213,9 +1236,14 @@ export default function ChatApp() {
     setRagSearchEnabled((prev) => !prev);
   };
 
+  const toggleThemeManager = () => {
+    setShowThemeManager((prev) => !prev);
+  };
+
   const handleCreateNew = () => {
     // Implement database creation logic
     console.log("Create new database");
+    openCreateNewDatabaseModal();
   };
 
   const handleUploadFiles = async (databaseId: string, files: File[]) => {};
@@ -1406,6 +1434,16 @@ export default function ChatApp() {
         background: `url(${backgroundUrl}) center 250px / 200px 60px no-repeat`,
       }}
     >
+      {/* Theme Manager */}
+      <ThemeManager open={showThemeManager} onClose={closeThemeManager} />
+
+      {/* Create New database */}
+      <DatabaseCreate
+        open={showCreateDatabaseModal}
+        onClose={closeCreateNewDatabaseModal}
+        onCreate={handleCreateDatabase}
+      />
+
       {/* Drag and drop area */}
       <DragDropArea onDropItems={handleDropItems} />
 
@@ -1680,7 +1718,7 @@ export default function ChatApp() {
       )}
       <div
         id="messages"
-          className="flex-1 overflow-y-auto px-4 py-4 space-y-4 w-full max-w-full sm:max-w-[90%] mx-auto lg:max-w-[1200px]"
+        className="flex-1 overflow-y-auto px-4 py-4 space-y-4 w-full max-w-full sm:max-w-[90%] mx-auto lg:max-w-[1200px]"
       >
         {messages
           .slice(-config.MESSAGE_HISTORY_LIMIT)
@@ -1702,10 +1740,10 @@ export default function ChatApp() {
                 <div
                   className={`max-w-[80%] rounded-lg p-6 mt-0 shadow-lg   
                     ${
-                    message.role === "user"
-                      ? "bg-white text-black ml-auto"
-                      : "bg-white text-black mr-auto"
-                  } ${isHighlighted ? "highlight-animation" : ""}`}
+                      message.role === "user"
+                        ? "bg-white text-black ml-auto"
+                        : "bg-white text-black mr-auto"
+                    } ${isHighlighted ? "highlight-animation" : ""}`}
                   // Optionally remove highlight after animation ends:
                   onAnimationEnd={() => {
                     if (isHighlighted) setHighlightedMessageId(null);
@@ -1802,13 +1840,13 @@ export default function ChatApp() {
           />
         )}
 
-        <div
-          id="bottom-scroll"
-          className="flex justify-between items-center mt-4 w-full relative"
-        >
+        <div className="flex justify-between items-center mt-4 w-full relative">
           {/* Left buttons container with constrained width and scrolling */}
-          <div className="flex-1 overflow-x-auto scrollbar-hide max-w-[50vw] pr-6">
-            <div id="flexbar-scroll-left" className="flex items-center gap-4 w-max h-full py-1">
+          <div
+            id="flexbar-scroll-left"
+            className="flex-1 overflow-x-auto max-w-[50vw] pr-6"
+          >
+            <div className="flex items-center gap-4 w-max h-full py-1">
               {/* Added h-full and py-1 */}
               <button
                 onClick={refreshConversation}
@@ -1831,10 +1869,22 @@ export default function ChatApp() {
                 onClick={toggleRagSearch}
                 className="flex items-center gap-2 text-gray-600 hover:text-gray-800 whitespace-nowrap"
                 title="Toggle RagSearch"
-               >
+              >
                 {/* You can add an icon here if you want */}
-                {!ragSearchEnabled ?  <Square size={16} /> : <CheckSquare size={16} />} 
+                {!ragSearchEnabled ? (
+                  <Square size={16} />
+                ) : (
+                  <CheckSquare size={16} />
+                )}
                 <span>RagSearch</span>
+              </button>
+              <button
+                onClick={toggleThemeManager}
+                className="flex items-center gap-2 text-gray-600 hover:text-gray-800 whitespace-nowrap"
+                title="Theme"
+              >
+                <PaletteIcon size={16} />
+                <span>Theme</span>
               </button>
             </div>
           </div>

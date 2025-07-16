@@ -71,8 +71,7 @@ cd "$FRONTEND_DIR"
 
 echo "Installing frontend dependencies..."
 npm cache clean --force
-npm install --force
-npm dedupe
+npm install --legacy-peer-deps
 
 # Fix html-webpack-plugin compatibility
 echo "Fixing html-webpack-plugin..."
@@ -98,6 +97,8 @@ python3 -m venv venv
 source venv/bin/activate
 
 echo "Upgrading pip and installing dependencies..."
+python3 -m ensurepip --upgrade
+python3 -m pip install --upgrade pip
 pip install --upgrade pip
 pip install -r requirements.txt
 
