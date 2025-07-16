@@ -5,6 +5,7 @@ One-click deployment of a fully automated AI chat assistant with GPT-4.1-mini an
 [🌐 LEARN MORE](https://azure-ai-assistant.netlify.app/)
 
 ---
+
 ```
 #Dockerfile
 docker build -t gpt-app .
@@ -29,6 +30,17 @@ node -v
 npm -v
 chmod +x restart_services.sh
 ./restart_services.sh
+```
+
+```
+python3 -m venv myenv
+source myenv/bin/activate
+pip install -r requirements.txt
+python3 create_vm.py
+
+python3 -m venv myenv
+source myenv/bin/activate
+python3 delete_vm.py
 ```
 
 ## High-Level Overview

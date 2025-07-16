@@ -274,3 +274,13 @@
 #flexbar-scroll-theme::-webkit-scrollbar {
   display: none; /* Chrome, Safari, Opera */
 }
+
+#top-scroll {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  overflow-x: auto;
+}
+
+#top-scroll::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}

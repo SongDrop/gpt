@@ -5,7 +5,7 @@ def generate_setup(
     FRONTEND_PORT=3000,
     BACKEND_PORT=8000,
     REACT_APP_APP_NAME='AI Chat Assistant',
-    REACT_APP_LOGO='https://i.postimg.cc/C53CqTfx/chatgpt.png',
+    REACT_APP_APP_LOGO='https://vhdvm.blob.core.windows.net/vhdvm/gitgpt.svg',
     VECTOR_SEARCH_ENABLED='true',
     VECTOR_SEARCH_ENDPOINT='https://ragaisearchrtx.search.windows.net',
     VECTOR_SEARCH_INDEX='your-search-index-name',

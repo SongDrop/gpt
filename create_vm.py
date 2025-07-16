@@ -79,8 +79,8 @@ async def main():
 
     username = prompt_input("Enter VM username", "azureuser")
     password = prompt_input("Enter VM password", "azurepassword1234!", secret=True)
-    domain = prompt_input("Enter main domain", "win10dev.xyz")
-    subdomain = prompt_input("Enter subdomain (e.g., 'gpt')", "gpt")
+    domain = prompt_input("Enter main domain", "example.com")
+    subdomain = prompt_input("Enter subdomain or leave empty", "")
     if subdomain:
         subdomain = subdomain.strip().strip('.')
         fqdn = f"{subdomain}.{domain}"
@@ -143,7 +143,7 @@ async def main():
     FRONTEND_PORT=3000
     BACKEND_PORT=8000
     REACT_APP_APP_NAME='AI Chat Assistant'
-    REACT_APP_APP_LOGO='https://i.postimg.cc/WbZm1BK7/gitgpt.png'
+    REACT_APP_APP_LOGO='https://vhdvm.blob.core.windows.net/vhdvm/gitgpt.svg'
     # Vector search
     VECTOR_SEARCH_ENABLED='true'
     VECTOR_SEARCH_ENDPOINT='https://ragaisearchrtx.search.windows.net'
@@ -348,13 +348,8 @@ async def main():
         print_success(f"Created DNS zone '{domain}'.")
 
     # Create DNS A record
-    print_info(f"Creating DNS A record for {subdomain}.{domain} -> {public_ip}")
-    a_record_set = RecordSet(ttl=3600, a_records=[{'ipv4_address': public_ip}])
     record_name = subdomain.rstrip('.') if subdomain else '@' 
-    dns_client.record_sets.create_or_update(resource_group, domain, record_name, 'A', a_record_set)
-    print_success(f"Created DNS A record for {subdomain}.{domain} -> {public_ip}")
-
-    a_records = [subdomain]
+    a_records = [record_name]
     for a_record in a_records:
         print_info(f"Creating DNS A record for {a_record} for DNS Zone {domain} -> {public_ip}")
         a_record_set = RecordSet(ttl=3600, a_records=[{'ipv4_address': public_ip}])
@@ -393,11 +388,10 @@ async def main():
         print_success("Azure Windows VM provisioning completed successfully!")
         print_success("-----------------------------------------------------")
         print_success(f"Access your service at:-----------------------------")
-        print_success(f"https://{subdomain}.{domain}")
+        print_success(f"https://{fqdn}")
         print_success("-----------------------------------------------------")
-
         # Construct the URL
-        url = f"https://{subdomain}.{domain}"
+        url = f"https://{fqdn}"
         # Open the default browser with the URL
         webbrowser.open(url)
     else:

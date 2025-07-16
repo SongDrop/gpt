@@ -1636,14 +1636,11 @@ export default function ChatApp() {
           </button>
         </div>
       </div>
-      <div className="p-4 bg-white shadow-sm overflow-x-auto">
-        {" "}
+      <div id="top-scroll" className="p-4 bg-white shadow-sm overflow-x-auto">
         {/* Added overflow-x-auto */}
         <div className="flex items-center justify-between min-w-[320px]">
-          {" "}
           {/* Added min-width */}
           <div className="flex items-center gap-2 flex-shrink-0">
-            {" "}
             {/* Prevent shrinking */}
             <img
               src="https://i.postimg.cc/595gs7WD/aichat.png"
