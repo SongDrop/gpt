@@ -573,7 +573,7 @@ export default function ChatApp() {
   );
   const [ragSearchEnabled, setRagSearchEnabled] = useLocalStorage<boolean>(
     "ragsearch-enabled",
-    false
+    true
   );
   //File Upload/DragAndDrop
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);

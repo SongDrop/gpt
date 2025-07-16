@@ -312,6 +312,8 @@ async def chat(request: ChatRequest):
      
         if "The requested information is not available" in clean_response:
             full_response.append("Disable RagSearch, select another Rag Database, or redefine your question.")
+        if "The requested information is not found" in clean_response:
+            full_response.append("Disable RagSearch, select another Rag Database, or redefine your question.")
         # logger.info(full_response)
         # logger.info(completion.choices[0])
 

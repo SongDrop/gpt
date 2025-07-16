@@ -1,34 +1,35 @@
-2025-07-16 23:38:10,305 - config - INFO - Starting configutation initialization...
-2025-07-16 23:38:10,306 - config - INFO - .env file found at: /Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/backend/.env
-2025-07-16 23:38:10,306 - config - INFO - Working directory: /Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/backend
-2025-07-16 23:38:10,306 - config - INFO - .env path resolved: /Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/backend/.env
-2025-07-16 23:38:10,307 - config - INFO - .env exists: True
-2025-07-16 23:38:10,331 - config - INFO - Loading settings...
-2025-07-16 23:38:10,354 - config - INFO - Loaded configuration:
-2025-07-16 23:38:10,354 - config - INFO - App Name: AI Chat Assistant
-2025-07-16 23:38:10,354 - config - INFO - Environment: production
-2025-07-16 23:38:10,354 - config - INFO - CORS Origins: ['https://localhost:3000', 'http://localhost:3000', 'http://localhost:8000', 'https://localhost:8000']
-2025-07-16 23:38:10,354 - config - INFO - Vector Search Enabled: True
-2025-07-16 23:38:10,354 - config - INFO - Vector Search Endpoint: https://ragaisearchrtx.search.windows.net/
-2025-07-16 23:38:10,354 - config - INFO - Vector Search Key: ***LRZH
-2025-07-16 23:38:10,354 - config - INFO - Vector Search Index: rag-1752519055977
-2025-07-16 23:38:10,354 - config - INFO - Vector Search Embedding Deployment: text-embedding-ada-002
-2025-07-16 23:38:10,355 - config - INFO - Vector Search Embedding Key: ***Hc9F
-2025-07-16 23:38:10,355 - config - INFO - Vector search is enabled
-2025-07-16 23:38:10,355 - config - INFO - Final vector search configuration check:
-2025-07-16 23:38:10,355 - config - INFO - Vector Search Enabled: True
-2025-07-16 23:38:10,355 - config - INFO - Vector Search Endpoint: https://ragaisearchrtx.search.windows.net/
-2025-07-16 23:38:10,355 - config - INFO - Vector Search Key: ***LRZH
-2025-07-16 23:38:10,355 - config - INFO - Vector Search Index: rag-1752519055977
-2025-07-16 23:38:12,650 - main - INFO - Starting application initialization...
-2025-07-16 23:38:12,695 - main - INFO - Configured CORS origins: ['https://localhost:3000', 'http://localhost:3000', 'http://localhost:8000', 'https://localhost:8000']
-INFO:     Started server process [4756]
+2025-07-16 23:41:41,673 - config - INFO - Starting configutation initialization...
+2025-07-16 23:41:41,673 - config - INFO - .env file found at: /Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/backend/.env
+2025-07-16 23:41:41,674 - config - INFO - Working directory: /Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/backend
+2025-07-16 23:41:41,674 - config - INFO - .env path resolved: /Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/backend/.env
+2025-07-16 23:41:41,674 - config - INFO - .env exists: True
+2025-07-16 23:41:41,693 - config - INFO - Loading settings...
+2025-07-16 23:41:41,722 - config - INFO - Loaded configuration:
+2025-07-16 23:41:41,722 - config - INFO - App Name: AI Chat Assistant
+2025-07-16 23:41:41,722 - config - INFO - Environment: production
+2025-07-16 23:41:41,722 - config - INFO - CORS Origins: ['http://localhost:3000', 'https://localhost:8000', 'http://localhost:8000', 'https://localhost:3000']
+2025-07-16 23:41:41,722 - config - INFO - Vector Search Enabled: True
+2025-07-16 23:41:41,722 - config - INFO - Vector Search Endpoint: https://ragaisearchrtx.search.windows.net/
+2025-07-16 23:41:41,722 - config - INFO - Vector Search Key: ***LRZH
+2025-07-16 23:41:41,722 - config - INFO - Vector Search Index: rag-1752519055977
+2025-07-16 23:41:41,723 - config - INFO - Vector Search Embedding Deployment: text-embedding-ada-002
+2025-07-16 23:41:41,723 - config - INFO - Vector Search Embedding Key: ***Hc9F
+2025-07-16 23:41:41,723 - config - INFO - Vector search is enabled
+2025-07-16 23:41:41,723 - config - INFO - Final vector search configuration check:
+2025-07-16 23:41:41,723 - config - INFO - Vector Search Enabled: True
+2025-07-16 23:41:41,723 - config - INFO - Vector Search Endpoint: https://ragaisearchrtx.search.windows.net/
+2025-07-16 23:41:41,723 - config - INFO - Vector Search Key: ***LRZH
+2025-07-16 23:41:41,723 - config - INFO - Vector Search Index: rag-1752519055977
+2025-07-16 23:41:43,837 - main - INFO - Starting application initialization...
+2025-07-16 23:41:43,945 - main - INFO - Configured CORS origins: ['http://localhost:3000', 'https://localhost:8000', 'http://localhost:8000', 'https://localhost:3000']
+INFO:     Started server process [7818]
 INFO:     Waiting for application startup.
-2025-07-16 23:38:12,727 - main - INFO - Validating OpenAI configuration...
-2025-07-16 23:38:12,727 - main - INFO - API Base: https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2025-01-01-preview
-2025-07-16 23:38:12,727 - main - INFO - API Version: 2023-05-15
-2025-07-16 23:38:12,727 - main - INFO - Deployment Name: gpt-4.1-mini
-2025-07-16 23:38:14,676 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
-2025-07-16 23:38:14,690 - main - INFO - OpenAI configuration validated successfully
+2025-07-16 23:41:43,994 - main - INFO - Validating OpenAI configuration...
+2025-07-16 23:41:43,994 - main - INFO - API Base: https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2025-01-01-preview
+2025-07-16 23:41:43,994 - main - INFO - API Version: 2023-05-15
+2025-07-16 23:41:43,994 - main - INFO - Deployment Name: gpt-4.1-mini
+2025-07-16 23:41:45,435 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-16 23:41:45,450 - main - INFO - OpenAI configuration validated successfully
 INFO:     Application startup complete.
 INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:57220 - "GET /health HTTP/1.1" 200 OK

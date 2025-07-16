@@ -2,8 +2,90 @@
 > ai-chat-assistant@0.1.0 start
 > react-scripts start --host 0.0.0.0
 
-(node:4815) [DEP_WEBPACK_DEV_SERVER_ON_AFTER_SETUP_MIDDLEWARE] DeprecationWarning: 'onAfterSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+(node:7927) [DEP_WEBPACK_DEV_SERVER_ON_AFTER_SETUP_MIDDLEWARE] DeprecationWarning: 'onAfterSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
 (Use `node --trace-deprecation ...` to show where the warning was created)
-(node:4815) [DEP_WEBPACK_DEV_SERVER_ON_BEFORE_SETUP_MIDDLEWARE] DeprecationWarning: 'onBeforeSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+(node:7927) [DEP_WEBPACK_DEV_SERVER_ON_BEFORE_SETUP_MIDDLEWARE] DeprecationWarning: 'onBeforeSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
 Starting the development server...
 
+Compiled successfully!
+
+You can now view ai-chat-assistant in the browser.
+
+  Local:            http://localhost:3000
+  On Your Network:  http://192.168.0.21:3000
+
+Note that the development build is not optimized.
+To create a production build, use npm run build.
+
+webpack compiled successfully
+Files successfully emitted, waiting for typecheck results...
+Issues checking in progress...
+No issues found.
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/App.tsx
+  Line 36:3:    'saveMessageToDb' is defined but never used                                                                                                                  @typescript-eslint/no-unused-vars
+  Line 40:3:    'StoredMessage' is defined but never used                                                                                                                    @typescript-eslint/no-unused-vars
+  Line 49:3:    'DatabaseType' is defined but never used                                                                                                                     @typescript-eslint/no-unused-vars
+  Line 50:3:    'Contributor' is defined but never used                                                                                                                      @typescript-eslint/no-unused-vars
+  Line 51:3:    'DatabaseFilterOptions' is defined but never used                                                                                                            @typescript-eslint/no-unused-vars
+  Line 528:25:  'setBackgroundUrl' is assigned a value but never used                                                                                                        @typescript-eslint/no-unused-vars
+  Line 565:10:  'selectedDatabases' is assigned a value but never used                                                                                                       @typescript-eslint/no-unused-vars
+  Line 566:21:  'setDatabases' is assigned a value but never used                                                                                                            @typescript-eslint/no-unused-vars
+  Line 792:6:   React Hook useEffect has missing dependencies: 'initialPagination.limit' and 'initialPagination.offset'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+  Line 1314:9:  'handleDatabaseSelect' is assigned a value but never used                                                                                                    @typescript-eslint/no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/App.tsx
+  Line 36:3:    'saveMessageToDb' is defined but never used                                                                                                                  @typescript-eslint/no-unused-vars
+  Line 40:3:    'StoredMessage' is defined but never used                                                                                                                    @typescript-eslint/no-unused-vars
+  Line 49:3:    'DatabaseType' is defined but never used                                                                                                                     @typescript-eslint/no-unused-vars
+  Line 50:3:    'Contributor' is defined but never used                                                                                                                      @typescript-eslint/no-unused-vars
+  Line 51:3:    'DatabaseFilterOptions' is defined but never used                                                                                                            @typescript-eslint/no-unused-vars
+  Line 528:25:  'setBackgroundUrl' is assigned a value but never used                                                                                                        @typescript-eslint/no-unused-vars
+  Line 565:10:  'selectedDatabases' is assigned a value but never used                                                                                                       @typescript-eslint/no-unused-vars
+  Line 566:21:  'setDatabases' is assigned a value but never used                                                                                                            @typescript-eslint/no-unused-vars
+  Line 792:6:   React Hook useEffect has missing dependencies: 'initialPagination.limit' and 'initialPagination.offset'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+  Line 1314:9:  'handleDatabaseSelect' is assigned a value but never used                                                                                                    @typescript-eslint/no-unused-vars
+
+webpack compiled with 1 warning
+Compiling...
+No issues found.
+Compiled with warnings.
+
+[eslint] 
+src/App.tsx
+  Line 36:3:    'saveMessageToDb' is defined but never used                                                                                                                  @typescript-eslint/no-unused-vars
+  Line 40:3:    'StoredMessage' is defined but never used                                                                                                                    @typescript-eslint/no-unused-vars
+  Line 49:3:    'DatabaseType' is defined but never used                                                                                                                     @typescript-eslint/no-unused-vars
+  Line 50:3:    'Contributor' is defined but never used                                                                                                                      @typescript-eslint/no-unused-vars
+  Line 51:3:    'DatabaseFilterOptions' is defined but never used                                                                                                            @typescript-eslint/no-unused-vars
+  Line 528:25:  'setBackgroundUrl' is assigned a value but never used                                                                                                        @typescript-eslint/no-unused-vars
+  Line 565:10:  'selectedDatabases' is assigned a value but never used                                                                                                       @typescript-eslint/no-unused-vars
+  Line 566:21:  'setDatabases' is assigned a value but never used                                                                                                            @typescript-eslint/no-unused-vars
+  Line 792:6:   React Hook useEffect has missing dependencies: 'initialPagination.limit' and 'initialPagination.offset'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+  Line 1314:9:  'handleDatabaseSelect' is assigned a value but never used                                                                                                    @typescript-eslint/no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/App.tsx
+  Line 36:3:    'saveMessageToDb' is defined but never used                                                                                                                  @typescript-eslint/no-unused-vars
+  Line 40:3:    'StoredMessage' is defined but never used                                                                                                                    @typescript-eslint/no-unused-vars
+  Line 49:3:    'DatabaseType' is defined but never used                                                                                                                     @typescript-eslint/no-unused-vars
+  Line 50:3:    'Contributor' is defined but never used                                                                                                                      @typescript-eslint/no-unused-vars
+  Line 51:3:    'DatabaseFilterOptions' is defined but never used                                                                                                            @typescript-eslint/no-unused-vars
+  Line 528:25:  'setBackgroundUrl' is assigned a value but never used                                                                                                        @typescript-eslint/no-unused-vars
+  Line 565:10:  'selectedDatabases' is assigned a value but never used                                                                                                       @typescript-eslint/no-unused-vars
+  Line 566:21:  'setDatabases' is assigned a value but never used                                                                                                            @typescript-eslint/no-unused-vars
+  Line 792:6:   React Hook useEffect has missing dependencies: 'initialPagination.limit' and 'initialPagination.offset'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+  Line 1314:9:  'handleDatabaseSelect' is assigned a value but never used                                                                                                    @typescript-eslint/no-unused-vars
+
+webpack compiled with 1 warning
+No issues found.
