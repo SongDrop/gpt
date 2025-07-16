@@ -127,6 +127,7 @@ if __name__ == "__main__":
     domain = prompt_input("Enter the DNS zone domain name (e.g., example.com)","gitgpt.chat")
     a_records_input = vm_name  # single record name string, so split works
     a_records = [r.strip() for r in a_records_input.split(",")]
+    a_records.append("@")
 
     subscription_id = os.environ.get("AZURE_SUBSCRIPTION_ID")
     if not subscription_id:
