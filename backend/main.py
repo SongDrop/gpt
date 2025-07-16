@@ -167,6 +167,205 @@ async def monitor_stream(stream):
         logger.info(f"Stream metrics: {metrics.get_metrics()}")
 
 
+async def validate_openai_config():
+    """Validate OpenAI configuration by making a test request"""
+    try:
+        logger.info(f"Validating OpenAI configuration...")
+        logger.info(f"API Base: {settings.openai_api_base}")
+        logger.info(f"API Version: {settings.openai_api_version}")
+        logger.info(f"Deployment Name: {settings.openai_deployment_name}")
+        
+        test_completion = client.chat.completions.create(
+            model=settings.openai_deployment_name,
+            messages=[{"role": "user", "content": "test"}],
+            max_tokens=10,
+            temperature=0,
+            stream=False
+        )
+        logger.info("OpenAI configuration validated successfully")
+        return True
+    except Exception as e:
+        logger.error(f"OpenAI configuration validation failed: {str(e)}")
+        logger.exception(e)
+        return False
+
+@app.on_event("startup")
+async def startup_event():
+    """Validate configuration on startup"""
+    if not await validate_openai_config():
+        logger.error("Failed to validate OpenAI configuration")
+        # You might want to exit here or handle the error differently
+
+@app.get("/")
+async def root():
+    """Root endpoint for debugging"""
+    return {
+        "message": "API is running",
+        "version": "1.0",
+        "endpoints": [
+            "/health",
+            "/chat",
+            "/ws"
+        ]
+    }
+
+@app.get("/health")
+async def health():
+    """Health check endpoint that returns configuration status"""
+    return {
+        "status": "healthy",
+        "app_name": settings.app_name,
+        "environment": settings.environment,
+        "vector_search_enabled": settings.vector_search_enabled,
+        "timestamp": datetime.now().isoformat()
+    }
+
+@app.post("/chat")
+async def chat(request: ChatRequest):
+    """HTTP endpoint for chat functionality"""
+    logger.info("Received chat request")
+    logger.debug(f"Request body: {request}")
+    
+    system_prompt = request.systemPrompt or settings.system_prompt
+    search_endpoint = request.databaseEndpoint or settings.vector_search_endpoint
+    search_key = request.databaseKey or settings.vector_search_key
+    search_index = request.databaseIndex or settings.vector_search_index
+    vector_search_enabled = (
+        request.vectorSearchEnabled 
+        if request.vectorSearchEnabled is not None 
+        else settings.vector_search_enabled
+    )
+
+    try:
+        messages = [
+            {"role": "system", "content": system_prompt}
+        ] + [
+            {"role": m.role, "content": m.content} 
+            for m in request.messages
+        ]
+        
+        if vector_search_enabled:
+            logger.info("Using vector search for this chat request")
+        else:
+            logger.info("Not using vector search for this chat request")
+
+        completion = await generate_chat_completion(
+            messages=messages,
+            max_tokens=request.max_tokens,
+            temperature=request.temperature,
+            stream=False,
+            vector_search_endpoint="", 
+            vector_search_key="", 
+            vector_search_index="",
+            vector_search_enabled=vector_search_enabled
+        )
+
+        # --- Step 1: Parse the response and extract citations ---
+        retrieved_docs = []
+
+        if isinstance(completion, dict):
+            choices = completion.get("choices", [])
+            if choices:
+                message = choices[0].get("message", {})
+                context = message.get("context", {})
+                retrieved_docs = context.get("citations", [])
+        elif hasattr(completion.choices[0].message, "context"):
+            context = completion.choices[0].message.context
+            retrieved_docs = context.get("citations", [])
+
+        # --- Step 2: Sanitize [docX] markers from the content ---
+        raw_response = completion.choices[0].message.content
+        clean_response = re.sub(r'\[doc\d+\]', '', raw_response).strip()
+        if "The requested information is not available" in clean_response:
+            retrieved_docs = []
+
+        def auto_link(text):
+            url_pattern = re.compile(r'(https?://[^\s]+|www\.[^\s]+)')
+            return url_pattern.sub(lambda m: f'<a href="{m.group(0)}" target="_blank" rel="noopener noreferrer">{m.group(0)}</a>', text)
+
+        # --- Step 3: Append actual citation info ---
+        if retrieved_docs:
+            citation_lines = []
+            for i, doc in enumerate(retrieved_docs):
+                title = doc.get("title", "Untitled Document")
+                full_snippet = doc.get("content", "").strip().replace('\n', ' ')
+                teaser = full_snippet[:100]
+                full_snippet = auto_link(full_snippet)
+
+                citation_lines.append(
+                    f'<p style="background-color:#f3f4f6; padding:8px; border-radius:4px; margin:0px;">'
+                    f'<strong>[{i+1}]{title}</strong> – {teaser}... <details><summary style="cursor:pointer; color:#555; margin:0px; margin-top:2px;">Read more</summary>{full_snippet}</details>'
+                    f'</p>'
+                )
+
+            citation_section = "\n".join(citation_lines)
+            full_response = (
+                clean_response +
+                "\n\n<div style='margin-top:10px;'>"
+                "<h3>Sources:</h3>" +
+                citation_section +
+                "</div>"
+            )
+        else:
+            full_response = clean_response
+
+        # logger.info(full_response)
+        # logger.info(completion.choices[0])
+
+        # --- Step 4: Return the final payload ---
+        response_data = {
+            "response": full_response,
+            "timestamp": datetime.now().isoformat(),
+            "retrieved_docs": retrieved_docs
+        }
+        # response_data = {
+        #     "response": completion.choices[0].message.content,
+        #     "timestamp": datetime.now().isoformat(),
+        # }
+
+        logger.info("Successfully processed chat request")
+        return response_data
+        
+    except Exception as e:
+        logger.error(f"Error in chat endpoint: {str(e)}")
+        logger.exception(e)
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=str(e)
+        )
+
+@app.post("/translate", response_model=TranslationResponse)
+async def translate_code(req: TranslationRequest):
+    # Compose a prompt for your chat model that instructs translation
+    prompt = (
+        f"Translate the following code from {req.sourceLang} to {req.targetLang}:\n\n"
+        f"{req.source}\n\n"
+        f"Provide only the translated code without any explanations."
+    )
+    
+    messages = [
+        {"role": "system", "content": settings.system_prompt},
+        {"role": "user", "content": prompt},
+    ]
+    
+    try:
+        completion = await generate_chat_completion(
+            messages=messages,
+            max_tokens=1000,
+            temperature=0,
+            stream=False,
+            vector_search_endpoint="", 
+            vector_search_key="", 
+            vector_search_index="",
+            vector_search_enabled=False
+        )
+        translated_code = completion.choices[0].message.content.strip()
+        return TranslationResponse(translatedCode=translated_code)
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+
 async def generate_chat_completion(messages: List[Dict[str, str]], max_tokens: int, temperature: float, stream: bool = False, vector_search_endpoint: str='', vector_search_key: str='', vector_search_index:str='', vector_search_enabled: bool = False):
     """
     Generate chat completion with optional vector search and streaming.
@@ -261,197 +460,6 @@ async def generate_chat_completion(messages: List[Dict[str, str]], max_tokens: i
             detail=f"OpenAI API error: {str(e)}"
         )
 
-async def validate_openai_config():
-    """Validate OpenAI configuration by making a test request"""
-    try:
-        logger.info(f"Validating OpenAI configuration...")
-        logger.info(f"API Base: {settings.openai_api_base}")
-        logger.info(f"API Version: {settings.openai_api_version}")
-        logger.info(f"Deployment Name: {settings.openai_deployment_name}")
-        
-        test_completion = client.chat.completions.create(
-            model=settings.openai_deployment_name,
-            messages=[{"role": "user", "content": "test"}],
-            max_tokens=10,
-            temperature=0,
-            stream=False
-        )
-        logger.info("OpenAI configuration validated successfully")
-        return True
-    except Exception as e:
-        logger.error(f"OpenAI configuration validation failed: {str(e)}")
-        logger.exception(e)
-        return False
-
-@app.on_event("startup")
-async def startup_event():
-    """Validate configuration on startup"""
-    if not await validate_openai_config():
-        logger.error("Failed to validate OpenAI configuration")
-        # You might want to exit here or handle the error differently
-
-@app.get("/")
-async def root():
-    """Root endpoint for debugging"""
-    return {
-        "message": "API is running",
-        "version": "1.0",
-        "endpoints": [
-            "/health",
-            "/chat",
-            "/ws"
-        ]
-    }
-
-@app.get("/health")
-async def health():
-    """Health check endpoint that returns configuration status"""
-    return {
-        "status": "healthy",
-        "app_name": settings.app_name,
-        "environment": settings.environment,
-        "vector_search_enabled": settings.vector_search_enabled,
-        "timestamp": datetime.now().isoformat()
-    }
-
-@app.post("/chat")
-async def chat(request: ChatRequest):
-    """HTTP endpoint for chat functionality"""
-    logger.info("Received chat request")
-    logger.debug(f"Request body: {request}")
-    
-    system_prompt = request.systemPrompt or settings.system_prompt
-    search_endpoint = request.databaseEndpoint or settings.vector_search_endpoint
-    search_key = request.databaseKey or settings.vector_search_key
-    search_index = request.databaseIndex or settings.vector_search_index
-    vector_search_enabled = request.vectorSearchEnabled or settings.vector_search_enabled
-   
-    try:
-        messages = [
-            {"role": "system", "content": system_prompt}
-        ] + [
-            {"role": m.role, "content": m.content} 
-            for m in request.messages
-        ]
-        
-        if vector_search_enabled:
-            logger.info("Using vector search for this chat request")
-        else:
-            logger.info("Not using vector search for this chat request")
-
-        completion = await generate_chat_completion(
-            messages=messages,
-            max_tokens=request.max_tokens,
-            temperature=request.temperature,
-            stream=False,
-            vector_search_endpoint="", 
-            vector_search_key="", 
-            vector_search_index=""
-            vector_search_enabled=vector_search_enabled
-        )
-
-        # --- Step 1: Parse the response and extract citations ---
-        retrieved_docs = []
-
-        if isinstance(completion, dict):
-            choices = completion.get("choices", [])
-            if choices:
-                message = choices[0].get("message", {})
-                context = message.get("context", {})
-                retrieved_docs = context.get("citations", [])
-        elif hasattr(completion.choices[0].message, "context"):
-            context = completion.choices[0].message.context
-            retrieved_docs = context.get("citations", [])
-
-        # --- Step 2: Sanitize [docX] markers from the content ---
-        raw_response = completion.choices[0].message.content
-        clean_response = re.sub(r'\[doc\d+\]', '', raw_response).strip()
-
-        def auto_link(text):
-            url_pattern = re.compile(r'(https?://[^\s]+|www\.[^\s]+)')
-            return url_pattern.sub(lambda m: f'<a href="{m.group(0)}" target="_blank" rel="noopener noreferrer">{m.group(0)}</a>', text)
-
-        # --- Step 3: Append actual citation info ---
-        if retrieved_docs:
-            citation_lines = []
-            for i, doc in enumerate(retrieved_docs):
-                title = doc.get("title", "Untitled Document")
-                full_snippet = doc.get("content", "").strip().replace('\n', ' ')
-                teaser = full_snippet[:100]
-                full_snippet = auto_link(full_snippet)
-
-                citation_lines.append(
-                    f'<p style="background-color:#f3f4f6; padding:8px; border-radius:4px; margin:0px;">'
-                    f'<strong>[{i+1}]{title}</strong> – {teaser}... <details><summary style="cursor:pointer; color:#555; margin:0px; margin-top:2px;">Read more</summary>{full_snippet}</details>'
-                    f'</p>'
-                )
-
-            citation_section = "\n".join(citation_lines)
-            full_response = (
-                clean_response +
-                "\n\n<div style='margin-top:10px;'>"
-                "<h3>Sources:</h3>" +
-                citation_section +
-                "</div>"
-            )
-        else:
-            full_response = clean_response
-
-        # logger.info(full_response)
-        # logger.info(completion.choices[0])
-
-        # --- Step 4: Return the final payload ---
-        response_data = {
-            "response": full_response,
-            "timestamp": datetime.now().isoformat(),
-            "retrieved_docs": retrieved_docs
-        }
-        # response_data = {
-        #     "response": completion.choices[0].message.content,
-        #     "timestamp": datetime.now().isoformat(),
-        # }
-
-        logger.info("Successfully processed chat request")
-        return response_data
-        
-    except Exception as e:
-        logger.error(f"Error in chat endpoint: {str(e)}")
-        logger.exception(e)
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=str(e)
-        )
-
-@app.post("/translate", response_model=TranslationResponse)
-async def translate_code(req: TranslationRequest):
-    # Compose a prompt for your chat model that instructs translation
-    prompt = (
-        f"Translate the following code from {req.sourceLang} to {req.targetLang}:\n\n"
-        f"{req.source}\n\n"
-        f"Provide only the translated code without any explanations."
-    )
-    
-    messages = [
-        {"role": "system", "content": settings.system_prompt},
-        {"role": "user", "content": prompt},
-    ]
-    
-    try:
-        completion = await generate_chat_completion(
-            messages=messages,
-            max_tokens=1000,
-            temperature=0,
-            stream=False,
-            vector_search_endpoint="", 
-            vector_search_key="", 
-            vector_search_index=""
-            vector_search_enabled=False
-        )
-        translated_code = completion.choices[0].message.content.strip()
-        return TranslationResponse(translatedCode=translated_code)
-    except Exception as e:
-        raise HTTPException(status_code=500, detail=str(e))
-    
 class ConnectionManager:
     def __init__(self, max_connections: int = 100, timeout: int = 600):
         self.active_connections: Dict[str, WebSocket] = {}  # Change to dict for better tracking

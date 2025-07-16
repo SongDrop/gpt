@@ -938,6 +938,7 @@ export default function ChatApp() {
         temperature: config.DEFAULT_TEMPERATURE,
         continue_last: true,
         systemPrompt: selectedPrompt,
+        vectorSearchEnabled: ragSearchEnabled
       };
 
       const manager = WebSocketManager.getInstance({

@@ -199,6 +199,8 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProps>(
     const prevShowDiffTool = useRef<boolean>(false);
     //
     const [showLanguages, setShowLanguages] = useState(false);
+    const [dropdownPos, setDropdownPos] = useState<{ top: number; left: number }>({ top: 0, left: 0 });
+    const langBtnRef = useRef<HTMLButtonElement | null>(null);
     const [showDiffTool, setShowDiffTool] = useState(false);
     const [leftDocument, setLeftDocument] = useLocalStorage<string>(
       "leftDocument-1",
@@ -468,9 +470,55 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProps>(
       return onTranslate(source, sourceLang, targetLang);
     };
 
+    const toggleDropdown = () => {
+      if (!showLanguages) {
+        if (langBtnRef.current) {
+          const rect = langBtnRef.current.getBoundingClientRect();
+          setDropdownPos({
+            top: rect.bottom + window.scrollY,
+            left: rect.left + window.scrollX,
+          });
+        }
+      }
+      setShowLanguages(!showLanguages);
+    };
+
     return (
       <div className="not-prose p-0 m-0 !p-0 !m-0">
         <div className="border rounded-lg bg-white shadow-sm !mt-0 !p-0">
+          {showLanguages && (
+            <div className="mt-1 p-2 bg-white rounded-lg shadow-lg border z-10 max-w-[150px]" 
+                style={{
+                position: "absolute",
+                top: dropdownPos.top,
+                left: dropdownPos.left,
+              }}>
+              <div className="flex justify-between items-center mb-2 pb-2 border-b">
+                <span className="text-sm font-medium text-gray-700">
+                  Select Language
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setShowLanguages(false)}
+                  className="text-gray-400 hover:text-gray-600"
+                >
+                  <X className="w-4 h-4" />
+                </button>
+              </div>
+              <div className="max-h-[200px] overflow-y-auto">
+                {SUPPORTED_LANGUAGES.map((lang, index) => (
+                  <button
+                    key={`${lang}-${index}`}
+                    type="button"
+                    onClick={() => insertCodeBlock(lang)}
+                    className="w-full text-left px-2 py-1 text-sm text-gray-700 hover:bg-gray-100 rounded"
+                  >
+                    {lang}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
           <div id="flexbar-scroll" className="flex items-center gap-1 p-2 border-b bg-gray-50 overflow-x-auto whitespace-nowrap max-h-[50px] scrollbar-hide">            
             <button
               type="button"
@@ -515,41 +563,14 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProps>(
             <div className="relative">
               <button
                 type="button"
-                onClick={() => setShowLanguages((prev) => !prev)}
+                ref={langBtnRef}
+                onClick={() => toggleDropdown()}
                 className="flex items-center gap-1 p-2 rounded hover:bg-gray-200 transition-colors"
                 title="Insert Code Block"
               >
                 <FolderDown className="w-4 h-4" />
                 <ChevronDown className="w-3 h-3" />
               </button>
-              {showLanguages && (
-                <div className="absolute top-full left-0 mt-1 p-2 bg-white rounded-lg shadow-lg border z-10 min-w-[150px]">
-                  <div className="flex justify-between items-center mb-2 pb-2 border-b">
-                    <span className="text-sm font-medium text-gray-700">
-                      Select Language
-                    </span>
-                    <button
-                      type="button"
-                      onClick={() => setShowLanguages(false)}
-                      className="text-gray-400 hover:text-gray-600"
-                    >
-                      <X className="w-4 h-4" />
-                    </button>
-                  </div>
-                  <div className="max-h-[200px] overflow-y-auto">
-                    {SUPPORTED_LANGUAGES.map((lang, index) => (
-                      <button
-                        key={`${lang}-${index}`}
-                        type="button"
-                        onClick={() => insertCodeBlock(lang)}
-                        className="w-full text-left px-2 py-1 text-sm text-gray-700 hover:bg-gray-100 rounded"
-                      >
-                        {lang}
-                      </button>
-                    ))}
-                  </div>
-                </div>
-              )}
             </div>
             <button
               type="button"
