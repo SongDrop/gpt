@@ -79,7 +79,7 @@ async def main():
 
     username = prompt_input("Enter VM username", "azureuser")
     password = prompt_input("Enter VM password", "azurepassword1234!", secret=True)
-    domain = prompt_input("Enter main domain", "example.com")
+    domain = prompt_input("Enter main domain", "gitgpt.chat")
     subdomain = prompt_input("Enter subdomain or leave empty", "")
     if subdomain:
         subdomain = subdomain.strip().strip('.')
@@ -87,8 +87,8 @@ async def main():
     else:
         fqdn = domain
     print_info(f"Full domain to configure: {fqdn}")
-    resource_group = prompt_input("Enter resource group name", "win10dev")
-    pc_name = 'gpt'#''.join(random.choices(string.ascii_lowercase, k=6))
+    resource_group = prompt_input("Enter resource group name", "gitgptchat")
+    pc_name = 'gitgptchat'#''.join(random.choices(string.ascii_lowercase, k=6))
     vm_name = prompt_input("Enter VM name", pc_name)
     location = prompt_input("Enter Azure region", "uksouth")
     vm_size = prompt_input("Enter VM size", "Standard_B2s")
@@ -97,8 +97,8 @@ async def main():
     admin_email =  prompt_input("Enter admin email", f"admin@{domain}")
     random_admin_password = 'gptpass123!'#''.join(random.choices(string.ascii_lowercase, k=6))
     admin_password = prompt_input("Enter admin password", random_admin_password)
-    OS_DISK_SSD_GB = prompt_input("Enter disk size in GB", '1024')
-    PORT = 3000
+    OS_DISK_SSD_GB = prompt_input("Enter disk size in GB", '64')
+  
 
     try:
         credentials = ClientSecretCredential(

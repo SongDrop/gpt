@@ -119,12 +119,12 @@ async def delete_vm_and_resources(subscription_id, resource_group, vm_name, doma
     print_success("Deletion process completed.")
 
 if __name__ == "__main__":
-    vm_name = prompt_input("Enter the VM name to delete","gpt")
+    vm_name = prompt_input("Enter the VM name to delete","gitgptchat")
     if not vm_name.strip():
         print_error("VM name cannot be empty. Exiting.")
         sys.exit(1)
-    resource_group = prompt_input("Enter the resource group name","win10dev")
-    domain = prompt_input("Enter the DNS zone domain name (e.g., example.com)","win10dev.xyz")
+    resource_group = prompt_input("Enter the resource group name","gitgptchat")
+    domain = prompt_input("Enter the DNS zone domain name (e.g., example.com)","gitgpt.chat")
     a_records_input = vm_name  # single record name string, so split works
     a_records = [r.strip() for r in a_records_input.split(",")]
 

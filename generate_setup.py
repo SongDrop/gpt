@@ -60,9 +60,9 @@ DEBIAN_FRONTEND=noninteractive apt-get install -y \\
     nodejs npm docker.io
 
 # Install Node.js 20 if not available
-if ! command -v node &> /dev/null || [[ "$(node -v)" != v16* ]]; then
+if ! command -v node &> /dev/null || [[ "$(node -v)" != v20* ]]; then
     echo "Installing Node.js 20..."
-    && curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
+    curl -fsSL https://deb.nodesource.com/setup_20.x | bash -
     apt-get install -y nodejs
 fi
 
@@ -110,9 +110,10 @@ RUN apt-get update && apt-get install -y \
     poppler-utils \
     unzip \
     procps \
-    curl \
     gnupg \
     python3-venv \
+    && curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs \
     && rm -rf /var/lib/apt/lists/*
 
 # Set work directory

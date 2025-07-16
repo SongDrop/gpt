@@ -199,7 +199,10 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProps>(
     const prevShowDiffTool = useRef<boolean>(false);
     //
     const [showLanguages, setShowLanguages] = useState(false);
-    const [dropdownPos, setDropdownPos] = useState<{ top: number; left: number }>({ top: 0, left: 0 });
+    const [dropdownPos, setDropdownPos] = useState<{
+      top: number;
+      left: number;
+    }>({ top: 0, left: 0 });
     const langBtnRef = useRef<HTMLButtonElement | null>(null);
     const [showDiffTool, setShowDiffTool] = useState(false);
     const [leftDocument, setLeftDocument] = useLocalStorage<string>(
@@ -487,12 +490,14 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProps>(
       <div className="not-prose p-0 m-0 !p-0 !m-0">
         <div className="border rounded-lg bg-white shadow-sm !mt-0 !p-0">
           {showLanguages && (
-            <div className="mt-1 p-2 bg-white rounded-lg shadow-lg border z-10 max-w-[150px]" 
-                style={{
+            <div
+              className="mt-1 p-2 bg-white rounded-lg shadow-lg border z-10 max-w-[150px]"
+              style={{
                 position: "absolute",
                 top: dropdownPos.top,
                 left: dropdownPos.left,
-              }}>
+              }}
+            >
               <div className="flex justify-between items-center mb-2 pb-2 border-b">
                 <span className="text-sm font-medium text-gray-700">
                   Select Language
@@ -519,7 +524,10 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProps>(
               </div>
             </div>
           )}
-          <div id="flexbar-scroll" className="flex items-center gap-1 p-2 border-b bg-gray-50 overflow-x-auto whitespace-nowrap max-h-[50px] scrollbar-hide">            
+          <div
+            id="flexbar-scroll"
+            className="flex items-center gap-1 p-2 border-b bg-gray-50 overflow-x-auto whitespace-nowrap max-h-[50px] scrollbar-hide"
+          >
             <button
               type="button"
               onClick={() => triggerFileInput("main")}
@@ -618,7 +626,7 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProps>(
               <a
                 id="g-support"
                 className="g-support"
-                href="https://github.com/songdrop"
+                href="https://github.com/songdrop/gpt"
                 target="_blank"
                 rel="noreferrer"
                 title="GitHub"
