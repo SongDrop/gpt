@@ -7,7 +7,7 @@ One-click deployment of a fully automated AI chat assistant with GPT-4.1-mini an
 ## Contributors
 
 This project exists thanks to all the people who contribute.  
-<a href="https://opencollective.com/songdropnet/contributors">
+<a href="https://opencollective.com/songdropnet">
 <img src="https://opencollective.com/songdropnet/contributors.svg?width=890&button=false" alt="Contributors" />
 </a>
 
