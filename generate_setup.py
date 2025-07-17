@@ -20,7 +20,7 @@ def generate_setup(
     OPENAI_API_BASE="https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2025-01-01-preview",
     OPENAI_API_KEY="2uuCuqEe3xwrsCsuOWHrsnrznxN2bZKSHMABGevRmN6KtIZgYfaVJQQJ99BEACfhMk5XJ3w3AAAAACOGHc9F",
     OPENAI_DEPLOYMENT_NAME="gpt-4.1-mini",
-    OPENAI_API_VERSION="2023-05-15",
+    OPENAI_API_VERSION="2025-01-01-preview",
     GPT_IMAGE_URL="https://gabz-mbtgx2um-westus3.cognitiveservices.azure.com/openai/deployments/gpt-image-1/images",
     GPT_IMAGE_KEY="6UR6v5uTDie85YAr8IM4CZ3FyxYB0RrFcsRVYgehEFmwOmPh41LaJQQJ99BFACMsfrFXJ3w3AAAAACOG7n60",
     GPT_IMAGE_VERSION="2025-04-01-preview"

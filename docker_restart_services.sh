@@ -79,7 +79,7 @@ echo "Starting frontend..."
 cd "$FRONTEND_DIR" || { echo "❌ Frontend directory not found"; exit 1; }
 
 #nohup npm start > "$LOG_DIR/frontend.log" 2>&1 &
-nohup HOST=0.0.0.0 npm start > "$LOG_DIR/frontend.log" 2>&1 &
+nohup env HOST=0.0.0.0 npm start > "$LOG_DIR/frontend.log" 2>&1 &
 
 FRONTEND_PID=$!
 sleep 2

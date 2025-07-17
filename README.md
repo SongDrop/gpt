@@ -219,6 +219,8 @@ Azure AI Chat Assistant Deployment Template | © 2025 Gabriel Majorsky
 - [Azure Portal](https://portal.azure.com)
 - [Azure OpenAI Documentation](https://learn.microsoft.com/en-us/azure/cognitive-services/openai/)
 
+- [Display GitHub contributors](https://remarkablemark.org/blog/2019/10/17/github-contributors-readme/)
+
 ---
 
 _For questions or support, please open an issue or contact the maintainer._
