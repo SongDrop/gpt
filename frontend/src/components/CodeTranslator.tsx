@@ -344,17 +344,34 @@ const CodeTranslator: React.FC<CodeTranslatorProps> = ({
   };
 
   return (
-    <div className="code-translator-container m-2">
-      <div className="translator-controls mb-4 p-4 bg-gray-50 rounded-lg">
+    <div
+      className="code-translator-container m-2"
+      style={{ color: "var(--color-foreground)" }}
+    >
+      <div
+        className="translator-controls mb-4 p-4 rounded-lg"
+        style={{
+          backgroundColor: "var(--color-background)",
+          border: "1px solid var(--color-border)",
+        }}
+      >
         <div className="flex flex-wrap items-center gap-4">
           <div className="language-selector">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label
+              className="block text-sm font-medium mb-1"
+              style={{ color: "var(--color-foreground)" }}
+            >
               Source Language
             </label>
             <select
               value={sourceLanguage}
               onChange={(e) => setSourceLanguage(e.target.value as Language)}
-              className="p-2 border rounded"
+              className="p-2 rounded"
+              style={{
+                border: "1px solid var(--color-border)",
+                backgroundColor: "var(--color-background)",
+                color: "var(--color-foreground)",
+              }}
             >
               {SUPPORTED_LANGUAGES.map((lang, index) => (
                 <option key={`source-${lang}-${index}`} value={lang}>
@@ -365,19 +382,40 @@ const CodeTranslator: React.FC<CodeTranslatorProps> = ({
           </div>
 
           <div className="target-languages">
-            <label className="block text-sm font-medium text-gray-700 mb-1">
+            <label
+              className="block text-sm font-medium mb-1"
+              style={{ color: "var(--color-foreground)" }}
+            >
               Target Languages
             </label>
             <div className="flex flex-wrap gap-2">
               {targetLanguages.map((lang, index) => (
                 <div
                   key={`target-${lang}-${index}`}
-                  className="flex items-center bg-blue-100 rounded px-3 py-1"
+                  style={{
+                    backgroundColor: "var(--color-success-bg)",
+                    borderRadius: "0.375rem",
+                    padding: "0.25rem 0.75rem",
+                    display: "flex",
+                    alignItems: "center",
+                    color: "var(--color-success)",
+                  }}
                 >
                   <span>{lang}</span>
                   <button
                     onClick={() => removeTargetLanguage(lang)}
-                    className="ml-2 text-gray-500 hover:text-gray-700"
+                    style={{
+                      marginLeft: "0.5rem",
+                      color: "var(--color-border)",
+                    }}
+                    onMouseEnter={(e) =>
+                      (e.currentTarget.style.color =
+                        "var(--color-success-hover)")
+                    }
+                    onMouseLeave={(e) =>
+                      (e.currentTarget.style.color = "var(--color-border)")
+                    }
+                    aria-label={`Remove target language ${lang}`}
                   >
                     <X className="w-4 h-4" />
                   </button>
@@ -391,7 +429,12 @@ const CodeTranslator: React.FC<CodeTranslatorProps> = ({
                     e.target.value = "";
                   }
                 }}
-                className="p-2 border rounded"
+                className="p-2 rounded"
+                style={{
+                  border: "1px solid var(--color-border)",
+                  backgroundColor: "var(--color-background)",
+                  color: "var(--color-foreground)",
+                }}
               >
                 <option value="">Add Language...</option>
                 {SUPPORTED_LANGUAGES.filter(
@@ -408,7 +451,28 @@ const CodeTranslator: React.FC<CodeTranslatorProps> = ({
           <button
             onClick={handleTranslateAll}
             disabled={isTranslating || !sourceCode.trim()}
-            className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50 ml-auto"
+            style={{
+              padding: "0.5rem 1rem",
+              backgroundColor: "var(--color-primary)",
+              color: "white",
+              borderRadius: "0.375rem",
+              marginLeft: "auto",
+              cursor:
+                isTranslating || !sourceCode.trim() ? "not-allowed" : "pointer",
+              opacity: isTranslating || !sourceCode.trim() ? 0.5 : 1,
+              transition: "background-color 0.2s",
+            }}
+            onMouseEnter={(e) =>
+              !isTranslating &&
+              sourceCode.trim() &&
+              (e.currentTarget.style.backgroundColor =
+                "var(--color-primary-hover)")
+            }
+            onMouseLeave={(e) =>
+              !isTranslating &&
+              sourceCode.trim() &&
+              (e.currentTarget.style.backgroundColor = "var(--color-primary)")
+            }
           >
             {isTranslating ? "Translating..." : "Translate All"}
           </button>
@@ -417,9 +481,24 @@ const CodeTranslator: React.FC<CodeTranslatorProps> = ({
 
       <div className="translator-grid grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Source Code Editor */}
-        <div className="source-editor border rounded-lg overflow-hidden">
-          <div className="editor-header bg-gray-100 p-3 border-b flex justify-between items-center">
-            <div className="flex items-center">
+        <div
+          className="source-editor border rounded-lg overflow-hidden"
+          style={{
+            borderColor: "var(--color-border)",
+            backgroundColor: "var(--color-background)",
+          }}
+        >
+          <div
+            className="editor-header p-3 border-b flex justify-between items-center"
+            style={{
+              borderColor: "var(--color-border)",
+              backgroundColor: "var(--color-secondary)",
+            }}
+          >
+            <div
+              className="flex items-center"
+              style={{ color: "var(--color-foreground)" }}
+            >
               <Code className="w-5 h-5 mr-2" />
               <span className="font-medium">{sourceLanguage}</span>
             </div>
@@ -428,7 +507,13 @@ const CodeTranslator: React.FC<CodeTranslatorProps> = ({
                 <>
                   <button
                     onClick={() => sourceFileInputRef.current?.click()}
-                    className="p-1 text-gray-500 hover:text-gray-700"
+                    style={{ color: "var(--color-border)" }}
+                    onMouseEnter={(e) =>
+                      (e.currentTarget.style.color = "var(--color-foreground)")
+                    }
+                    onMouseLeave={(e) =>
+                      (e.currentTarget.style.color = "var(--color-border)")
+                    }
                     title="Load from file"
                   >
                     <FileInput className="w-5 h-5" />
@@ -444,11 +529,20 @@ const CodeTranslator: React.FC<CodeTranslatorProps> = ({
               {showCopyButtons && (
                 <button
                   onClick={() => copyToClipboard(sourceCode, "source")}
-                  className="p-1 text-gray-500 hover:text-gray-700"
+                  style={{ color: "var(--color-border)" }}
+                  onMouseEnter={(e) =>
+                    (e.currentTarget.style.color = "var(--color-foreground)")
+                  }
+                  onMouseLeave={(e) =>
+                    (e.currentTarget.style.color = "var(--color-border)")
+                  }
                   title="Copy code"
                 >
                   {copied["source"] ? (
-                    <Check className="w-5 h-5 text-green-500" />
+                    <Check
+                      className="w-5 h-5"
+                      style={{ color: "var(--color-success)" }}
+                    />
                   ) : (
                     <Copy className="w-5 h-5" />
                   )}
@@ -461,18 +555,36 @@ const CodeTranslator: React.FC<CodeTranslatorProps> = ({
             onChange={(e) => setSourceCode(e.target.value)}
             className="w-full p-4 h-64 font-mono text-sm focus:outline-none resize-none"
             placeholder={`Enter ${sourceLanguage} code here...`}
+            style={{
+              backgroundColor: "var(--color-background)",
+              color: "var(--color-foreground)",
+              border: "none",
+            }}
           />
         </div>
 
-        {/* Target Editors - will create multiple columns based on screen size */}
+        {/* Target Editors */}
         <div className="target-editors grid grid-cols-1 md:grid-cols-2 gap-6">
           {targetLanguages.map((lang, index) => (
             <div
               key={`${lang}-${index}`}
               className="target-editor border rounded-lg overflow-hidden"
+              style={{
+                borderColor: "var(--color-border)",
+                backgroundColor: "var(--color-background)",
+              }}
             >
-              <div className="editor-header bg-gray-100 p-3 border-b flex justify-between items-center">
-                <div className="flex items-center">
+              <div
+                className="editor-header p-3 border-b flex justify-between items-center"
+                style={{
+                  borderColor: "var(--color-border)",
+                  backgroundColor: "var(--color-secondary)",
+                }}
+              >
+                <div
+                  className="flex items-center"
+                  style={{ color: "var(--color-foreground)" }}
+                >
                   <Languages className="w-5 h-5 mr-2" />
                   <span className="font-medium">{lang}</span>
                 </div>
@@ -496,7 +608,14 @@ const CodeTranslator: React.FC<CodeTranslatorProps> = ({
                           [sourceLanguage]: sourceCode,
                         }));
                       }}
-                      className="p-1 text-gray-500 hover:text-gray-700"
+                      style={{ color: "var(--color-border)" }}
+                      onMouseEnter={(e) =>
+                        (e.currentTarget.style.color =
+                          "var(--color-foreground)")
+                      }
+                      onMouseLeave={(e) =>
+                        (e.currentTarget.style.color = "var(--color-border)")
+                      }
                       title="Swap with source"
                     >
                       <ArrowLeftRight className="w-5 h-5" />
@@ -508,7 +627,14 @@ const CodeTranslator: React.FC<CodeTranslatorProps> = ({
                         onClick={() =>
                           targetFileInputRefs.current[lang]?.click()
                         }
-                        className="p-1 text-gray-500 hover:text-gray-700"
+                        style={{ color: "var(--color-border)" }}
+                        onMouseEnter={(e) =>
+                          (e.currentTarget.style.color =
+                            "var(--color-foreground)")
+                        }
+                        onMouseLeave={(e) =>
+                          (e.currentTarget.style.color = "var(--color-border)")
+                        }
                         title="Load from file"
                       >
                         <FileInput className="w-5 h-5" />
@@ -531,7 +657,14 @@ const CodeTranslator: React.FC<CodeTranslatorProps> = ({
                   <button
                     onClick={() => handleTranslate(lang)}
                     disabled={isTranslating || !sourceCode.trim()}
-                    className="p-1 text-blue-500 hover:text-blue-700 disabled:opacity-50"
+                    style={{
+                      color: "var(--color-primary)",
+                      cursor:
+                        isTranslating || !sourceCode.trim()
+                          ? "not-allowed"
+                          : "pointer",
+                      opacity: isTranslating || !sourceCode.trim() ? 0.5 : 1,
+                    }}
                     title="Translate"
                   >
                     {isTranslating ? "..." : "↻"}
@@ -544,11 +677,21 @@ const CodeTranslator: React.FC<CodeTranslatorProps> = ({
                           `target-${lang}`
                         )
                       }
-                      className="p-1 text-gray-500 hover:text-gray-700"
+                      style={{ color: "var(--color-border)" }}
+                      onMouseEnter={(e) =>
+                        (e.currentTarget.style.color =
+                          "var(--color-foreground)")
+                      }
+                      onMouseLeave={(e) =>
+                        (e.currentTarget.style.color = "var(--color-border)")
+                      }
                       title="Copy code"
                     >
                       {copied[`target-${lang}`] ? (
-                        <Check className="w-5 h-5 text-green-500" />
+                        <Check
+                          className="w-5 h-5"
+                          style={{ color: "var(--color-success)" }}
+                        />
                       ) : (
                         <Copy className="w-5 h-5" />
                       )}
@@ -556,7 +699,13 @@ const CodeTranslator: React.FC<CodeTranslatorProps> = ({
                   )}
                   <button
                     onClick={() => exportToFile(translations[lang] || "", lang)}
-                    className="p-1 text-gray-500 hover:text-gray-700"
+                    style={{ color: "var(--color-border)" }}
+                    onMouseEnter={(e) =>
+                      (e.currentTarget.style.color = "var(--color-foreground)")
+                    }
+                    onMouseLeave={(e) =>
+                      (e.currentTarget.style.color = "var(--color-border)")
+                    }
                     title="Export to file"
                   >
                     <FileUp className="w-5 h-5" />
@@ -565,34 +714,74 @@ const CodeTranslator: React.FC<CodeTranslatorProps> = ({
               </div>
               <textarea
                 value={translations[lang] || ""}
-                onChange={(e) => {
+                onChange={(e) =>
                   setTranslations((prev) => ({
                     ...prev,
                     [lang]: e.target.value,
-                  }));
-                }}
+                  }))
+                }
                 className="w-full p-4 h-64 font-mono text-sm focus:outline-none resize-none"
                 placeholder={`${lang} translation will appear here...`}
-                readOnly={!onTranslate} // Make read-only if no translate function provided
+                readOnly={!onTranslate}
+                style={{
+                  backgroundColor: "var(--color-background)",
+                  color: "var(--color-foreground)",
+                  border: "none",
+                }}
               />
             </div>
           ))}
         </div>
-      </div>
-      <div className="flex gap-2 flex-wrap p-4">
-        <button
-          onClick={handleTranslateAll}
-          disabled={isTranslating || !sourceCode.trim()}
-          className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50"
-        >
-          {isTranslating ? "Translating..." : "Translate All"}
-        </button>
-        <button
-          onClick={() => onClose()}
-          className="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 transition-colors"
-        >
-          Close
-        </button>
+
+        <div className="flex gap-2 flex-wrap p-4">
+          <button
+            onClick={handleTranslateAll}
+            disabled={isTranslating || !sourceCode.trim()}
+            style={{
+              padding: "0.5rem 1rem",
+              backgroundColor: "var(--color-primary)",
+              color: "white",
+              borderRadius: "0.375rem",
+              cursor:
+                isTranslating || !sourceCode.trim() ? "not-allowed" : "pointer",
+              opacity: isTranslating || !sourceCode.trim() ? 0.5 : 1,
+              transition: "background-color 0.2s",
+            }}
+            onMouseEnter={(e) =>
+              !isTranslating &&
+              sourceCode.trim() &&
+              (e.currentTarget.style.backgroundColor =
+                "var(--color-primary-hover)")
+            }
+            onMouseLeave={(e) =>
+              !isTranslating &&
+              sourceCode.trim() &&
+              (e.currentTarget.style.backgroundColor = "var(--color-primary)")
+            }
+          >
+            {isTranslating ? "Translating..." : "Translate All"}
+          </button>
+          <button
+            onClick={() => onClose()}
+            style={{
+              padding: "0.5rem 1rem",
+              backgroundColor: "var(--color-error)",
+              color: "white",
+              borderRadius: "0.375rem",
+              transition: "background-color 0.2s",
+              cursor: "pointer",
+            }}
+            onMouseEnter={(e) =>
+              (e.currentTarget.style.backgroundColor =
+                "var(--color-error-hover)")
+            }
+            onMouseLeave={(e) =>
+              (e.currentTarget.style.backgroundColor = "var(--color-error)")
+            }
+          >
+            Close
+          </button>
+        </div>
       </div>
     </div>
   );

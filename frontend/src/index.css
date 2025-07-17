@@ -6,7 +6,15 @@
   overflow: hidden;
   overflow-y: auto;
 }
-
+.icon {
+  -webkit-mask-size: cover;
+  mask-size: cover;
+  -webkit-mask-image: url(https://url.of.svg/....svg);
+  mask-image: url(https://url.of.svg/....svg);
+  background-color: blue; /* Or any color of your choice. */
+  width: 20px;
+  height: 20px;
+}
 /* Message truncation styling */
 .message-truncated {
   position: relative;
@@ -121,7 +129,9 @@
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE and Edge */
   overflow-y: scroll;
+  z-index: 10;
 }
+
 #messages::-webkit-scrollbar {
   display: none;
 }
@@ -142,6 +152,7 @@
   -ms-overflow-style: none; /* IE and Edge */
   overflow-x: scroll;
 }
+
 #top-scroll::-webkit-scrollbar {
   display: none;
 }
@@ -168,7 +179,6 @@
   overflow: hidden;
   z-index: 10000;
   background-color: transparent;
-  background-image: url("https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20coffee&emoji=%E2%98%95&slug=gabzlabs&button_colour=000000&font_colour=000000&font_family=Arial&outline_colour=000000&coffee_colour=ffffff");
   background-size: cover;
   background-position: right;
 }
@@ -185,7 +195,7 @@
   overflow: hidden;
   z-index: 10000;
   background-color: transparent;
-  background-image: url("https://i.postimg.cc/L4G4h8yn/github.png");
+  /* background-image: url("https://i.postimg.cc/L4G4h8yn/github.png"); */
   background-size: cover;
   background-position: center;
 }

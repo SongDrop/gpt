@@ -19,14 +19,15 @@
  */
 
 import React, { useEffect, useState, useCallback } from "react";
+import useLocalStorage from "./useLocalStorage";
 import {
   ChevronLeft,
-  X,
   FileInput,
   FileDown,
-  DeleteIcon,
   Plus,
   Trash,
+  CheckCircle,
+  RotateCcw,
 } from "lucide-react";
 
 type ThemeColors = {
@@ -50,17 +51,21 @@ const DEFAULT_THEMES: ThemeJson[] = [
     colors: {
       background: "#ffffff",
       foreground: "#333333",
-      primary: "#007acc",
-      primaryHover: "#005a9e",
-      secondary: "#e7e7e7",
+      primary: "#2563EB",
+      primaryHover: "#1D4ED8",
+      secondary: "#f9fafb",
+      secondaryHover: "#edeeefff",
       accent: "#ff4081",
       error: "#d32f2f",
+      errorHover: "#b71c1c",
       warning: "#ffa000",
       success: "#388e3c",
+      successHover: "#2e7031", // darker green for hover
       info: "#1976d2",
       codeBackground: "#f5f5f5",
       codeForeground: "#333333",
-      border: "#cccccc",
+      border: "#D1D5DB",
+      borderHover: "#9CA3AF",
       link: "#0066cc",
       linkHover: "#004999",
     },
@@ -73,14 +78,18 @@ const DEFAULT_THEMES: ThemeJson[] = [
       primary: "#569cd6",
       primaryHover: "#3a6ea5",
       secondary: "#2d2d2d",
+      secondaryHover: "#222222ff",
       accent: "#ff4081",
       error: "#f44336",
+      errorHover: "#ea3d31ff",
       warning: "#ffb300",
       success: "#4caf50",
+      successHover: "#3a8a3a", // slightly darker green
       info: "#2196f3",
       codeBackground: "#252526",
       codeForeground: "#d4d4d4",
       border: "#3c3c3c",
+      borderHover: "#343333ff",
       link: "#3794ff",
       linkHover: "#1a73e8",
     },
@@ -93,14 +102,18 @@ const DEFAULT_THEMES: ThemeJson[] = [
       primary: "#268bd2",
       primaryHover: "#2aa198",
       secondary: "#eee8d5",
+      secondaryHover: "#f0e7caff",
       accent: "#b58900",
       error: "#dc322f",
+      errorHover: "#b22222",
       warning: "#cb4b16",
       success: "#859900",
+      successHover: "#6e7a00", // darker olive green
       info: "#268bd2",
       codeBackground: "#eee8d5",
       codeForeground: "#657b83",
-      border: "#93a1a1",
+      border: "#93a1a16e",
+      borderHover: "#87969683",
       link: "#268bd2",
       linkHover: "#2aa198",
     },
@@ -113,14 +126,18 @@ const DEFAULT_THEMES: ThemeJson[] = [
       primary: "#f92672",
       primaryHover: "#d5005b",
       secondary: "#383830",
+      secondaryHover: "#31312aff",
       accent: "#66d9ef",
       error: "#f92672",
+      errorHover: "#d5005b",
       warning: "#fd971f",
       success: "#a6e22e",
+      successHover: "#89b522", // slightly darker lime green
       info: "#66d9ef",
       codeBackground: "#272822",
       codeForeground: "#f8f8f2",
       border: "#49483e",
+      borderHover: "#414037ff",
       link: "#f92672",
       linkHover: "#d5005b",
     },
@@ -133,25 +150,29 @@ const DEFAULT_THEMES: ThemeJson[] = [
       primary: "#6272a4",
       primaryHover: "#44475a",
       secondary: "#44475a",
+      secondaryHover: "#383a4bff",
       accent: "#ff79c6",
       error: "#ff5555",
+      errorHover: "#ff4444",
       warning: "#f1fa8c",
       success: "#50fa7b",
+      successHover: "#3ed661", // slightly darker bright green
       info: "#8be9fd",
       codeBackground: "#44475a",
       codeForeground: "#f8f8f2",
-      border: "#6272a4",
+      border: "#6273a4ac",
+      borderHover: "#5e6d9b97",
       link: "#bd93f9",
       linkHover: "#ff79c6",
     },
   },
 ];
 
-// Utility to apply CSS variables to document root
-function applyThemeColors(colors: ThemeColors) {
+// Utility to apply CSS variables to document root with optional suffix
+function applyThemeColors(colors: ThemeColors, suffix = "") {
   const root = document.documentElement;
   Object.entries(colors).forEach(([key, value]) => {
-    root.style.setProperty(`--color-${toKebabCase(key)}`, value);
+    root.style.setProperty(`--color-${toKebabCase(key)}${suffix}`, value);
   });
 }
 
@@ -167,22 +188,35 @@ interface ThemeManagerProps {
 
 const ThemeManager: React.FC<ThemeManagerProps> = ({ open, onClose }) => {
   // Load themes from localStorage or use defaults
-  const [themes, setThemes] = useState<ThemeJson[]>(() => {
-    try {
-      const stored = localStorage.getItem("themes");
-      if (stored) return JSON.parse(stored);
-    } catch {}
-    return DEFAULT_THEMES;
-  });
+  const [themes, setThemes] = useLocalStorage<ThemeJson[]>(
+    "themes",
+    DEFAULT_THEMES
+  );
 
-  // Active theme index with fallback to 0
-  const [activeThemeIndex, setActiveThemeIndex] = useState<number>(() => {
-    try {
-      const stored = localStorage.getItem("activeThemeIndex");
-      if (stored) return parseInt(stored, 10);
-    } catch {}
-    return 0;
-  });
+  // Active theme index with fallback to 0 (selected/edited in UI)
+  const [activeThemeIndex, setActiveThemeIndex] = useLocalStorage<number>(
+    "activeThemeIndex",
+    0
+  );
+
+  // Applied theme index (actually applied colors)
+  const [appliedThemeIndex, setAppliedThemeIndex] = useLocalStorage<number>(
+    "appliedThemeIndex",
+    0
+  );
+
+  const resetThemes = () => {
+    setThemes(DEFAULT_THEMES);
+    setActiveThemeIndex(0);
+    setAppliedThemeIndex(0);
+    setThemeEditorJson("");
+    setJsonError(null);
+
+    // Clear localStorage or reset keys to defaults
+    setThemes(DEFAULT_THEMES);
+    setActiveThemeIndex(0);
+    setAppliedThemeIndex(0);
+  };
 
   // JSON editor content for editing theme
   const [themeEditorJson, setThemeEditorJson] = useState<string>("");
@@ -190,21 +224,57 @@ const ThemeManager: React.FC<ThemeManagerProps> = ({ open, onClose }) => {
   // JSON parse error message
   const [jsonError, setJsonError] = useState<string | null>(null);
 
-  // Apply theme colors whenever active theme or themes change
+  // Apply theme colors only when appliedThemeIndex or themes change (applied globally)
+  useEffect(() => {
+    // resetThemes();
+    const theme = themes[appliedThemeIndex];
+    if (theme) {
+      applyThemeColors(theme.colors); // no suffix = applied colors
+      setActiveThemeIndex(appliedThemeIndex);
+    }
+  }, [appliedThemeIndex, themes]);
+
+  // Add a new blank theme
+  const addNewTheme = () => {
+    const blankTheme: ThemeJson = {
+      name: "New Theme",
+      colors: {
+        background: "#ffffff",
+        foreground: "#333333",
+        primary: "#2563EB",
+        primaryHover: "#1D4ED8",
+        secondary: "#f9fafb",
+        secondaryHover: "#edeeefff",
+        accent: "#ff4081",
+        error: "#d32f2f",
+        errorHover: "#b71c1c",
+        warning: "#ffa000",
+        success: "#388e3c",
+        info: "#1976d2",
+        codeBackground: "#f5f5f5",
+        codeForeground: "#333333",
+        border: "#D1D5DB",
+        borderHover: "#9CA3AF",
+        link: "#0066cc",
+        linkHover: "#004999",
+      },
+    };
+    setThemes((prev) => [...prev, blankTheme]);
+    setActiveThemeIndex(themes.length);
+  };
+
+  // Update editor JSON when activeThemeIndex or themes change (for editing)
+  // AND apply preview colors immediately
   useEffect(() => {
     const theme = themes[activeThemeIndex];
     if (theme) {
-      applyThemeColors(theme.colors);
-      localStorage.setItem("activeThemeIndex", activeThemeIndex.toString());
       setThemeEditorJson(JSON.stringify(theme, null, 2));
       setJsonError(null);
+      setActiveThemeIndex(activeThemeIndex);
+      // Apply preview colors immediately
+      applyThemeColors(theme.colors, "--preview");
     }
   }, [activeThemeIndex, themes]);
-
-  // Persist themes on change
-  useEffect(() => {
-    localStorage.setItem("themes", JSON.stringify(themes));
-  }, [themes]);
 
   useEffect(() => {
     if (!open) return;
@@ -220,10 +290,6 @@ const ThemeManager: React.FC<ThemeManagerProps> = ({ open, onClose }) => {
       window.removeEventListener("keydown", handleKeyDown);
     };
   }, [open, onClose]);
-
-  useEffect(() => {
-    // localStorage.removeItem("themes");
-  }, [themes]);
 
   // Handle JSON editor changes with validation
   const onThemeEditorChange = useCallback(
@@ -245,38 +311,15 @@ const ThemeManager: React.FC<ThemeManagerProps> = ({ open, onClose }) => {
           return updated;
         });
         setJsonError(null);
+
+        // Update preview colors live as user edits
+        applyThemeColors(parsed.colors, "--preview");
       } catch (error) {
         setJsonError("Invalid JSON: " + (error as Error).message);
       }
     },
     [activeThemeIndex]
   );
-
-  // Add a new blank theme
-  const addNewTheme = () => {
-    const blankTheme: ThemeJson = {
-      name: "New Theme",
-      colors: {
-        background: "#ffffff",
-        foreground: "#333333",
-        primary: "#007acc",
-        primaryHover: "#005a9e",
-        secondary: "#e7e7e7",
-        accent: "#ff4081",
-        error: "#d32f2f",
-        warning: "#ffa000",
-        success: "#388e3c",
-        info: "#1976d2",
-        codeBackground: "#f5f5f5",
-        codeForeground: "#333333",
-        border: "#cccccc",
-        link: "#0066cc",
-        linkHover: "#004999",
-      },
-    };
-    setThemes((prev) => [...prev, blankTheme]);
-    setActiveThemeIndex(themes.length);
-  };
 
   // Remove a theme safely (not default)
   const removeTheme = (index: number) => {
@@ -287,6 +330,8 @@ const ThemeManager: React.FC<ThemeManagerProps> = ({ open, onClose }) => {
     setThemes((prev) => prev.filter((_, i) => i !== index));
     if (activeThemeIndex === index) setActiveThemeIndex(0);
     else if (activeThemeIndex > index) setActiveThemeIndex((idx) => idx - 1);
+    if (appliedThemeIndex === index) setAppliedThemeIndex(0);
+    else if (appliedThemeIndex > index) setAppliedThemeIndex((idx) => idx - 1);
   };
 
   // Export current theme as JSON file
@@ -328,6 +373,14 @@ const ThemeManager: React.FC<ThemeManagerProps> = ({ open, onClose }) => {
     e.target.value = "";
   };
 
+  // Apply current selected theme colors globally
+  const selectTheme = () => {
+    const theme = themes[activeThemeIndex];
+    if (!theme) return;
+    applyThemeColors(theme.colors); // apply globally
+    setAppliedThemeIndex(activeThemeIndex);
+  };
+
   if (!open) return null;
 
   return (
@@ -342,7 +395,7 @@ const ThemeManager: React.FC<ThemeManagerProps> = ({ open, onClose }) => {
       >
         <button
           onClick={onClose}
-          className="px-3 py-1 rounded bg-[var(--color-primary-hover)] text-white border border-gray-300 hover:bg-gray-100 flex items-center justify-center group"
+          className="px-3 py-1 rounded bg-[var(--color-primary-hover--preview)] text-white border border-gray-300 hover:bg-gray-100 flex items-center justify-center group"
           title="Close Theme Manager"
         >
           <ChevronLeft className="w-4 h-4 text-white group-hover:text-gray-800 transition-colors" />
@@ -353,12 +406,17 @@ const ThemeManager: React.FC<ThemeManagerProps> = ({ open, onClose }) => {
             onClick={() => setActiveThemeIndex(i)}
             className={`px-3 py-1 rounded ${
               i === activeThemeIndex
-                ? "font-bold underline bg-[var(--color-primary-hover)] text-white"
+                ? "font-bold underline bg-[var(--color-primary-hover--preview)] text-white"
                 : "opacity-70 hover:opacity-100"
             }`}
             title={`Select theme: ${t.name}`}
           >
             {t.name}
+            {i === appliedThemeIndex && (
+              <span className="inline-flex items-center gap-1 ml-2 text-xs">
+                <CheckCircle className="w-3 h-3" />
+              </span>
+            )}
           </button>
         ))}
         {activeThemeIndex >= DEFAULT_THEMES.length && (
@@ -398,10 +456,27 @@ const ThemeManager: React.FC<ThemeManagerProps> = ({ open, onClose }) => {
             className="hidden"
           />
         </label>
+        <button
+          onClick={() => {
+            if (window.confirm("Are you sure you want to reset all themes?")) {
+              resetThemes();
+            }
+          }}
+          className="px-3 py-1 rounded bg-red-600 hover:bg-red-700 text-white flex items-center justify-center"
+          title="Reset all themes"
+        >
+          <RotateCcw className="w-4 h-4" />
+        </button>
       </div>
 
-      {/* Theme JSON editor */}
-      <div className="flex-1 p-4 overflow-auto bg-[var(--code-background)] text-[var(--code-foreground)] font-mono text-sm">
+      {/* Theme JSON editor (preview uses --preview CSS variables) */}
+      <div
+        className="flex-1 p-4 overflow-auto font-mono text-sm relative"
+        style={{
+          backgroundColor: "var(--color-code-background--preview)",
+          color: "var(--color-code-foreground--preview)",
+        }}
+      >
         <textarea
           aria-label="Theme JSON editor"
           spellCheck={false}
@@ -412,6 +487,13 @@ const ThemeManager: React.FC<ThemeManagerProps> = ({ open, onClose }) => {
         {jsonError && (
           <div className="mt-2 text-red-500 font-semibold">{jsonError}</div>
         )}
+        <button
+          onClick={selectTheme}
+          className="px-3 py-1 rounded font-bold bg-[var(--color-primary-hover--preview)] text-white absolute bottom-4 right-4 flex items-center gap-2"
+          title="Apply Theme"
+        >
+          Apply Theme
+        </button>
       </div>
     </div>
   );

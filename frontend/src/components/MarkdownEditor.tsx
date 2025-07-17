@@ -25,6 +25,7 @@ import {
   Database,
   Code,
 } from "lucide-react";
+import { relative } from "path";
 
 interface MarkdownEditorProps {
   value: string;
@@ -435,12 +436,23 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProps>(
       }
     };
 
-    const exportToFile = (content: string, fileName: string) => {
+    const exportToFile = (
+      content: string,
+      defaultFileName = "document.txt"
+    ) => {
+      const fileName = prompt("Enter filename for download:", defaultFileName);
+
+      if (fileName === null) {
+        // User cancelled the prompt
+        console.log("Download cancelled by user");
+        return;
+      }
+
       const blob = new Blob([content], { type: "text/plain" });
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a");
       a.href = url;
-      a.download = fileName || "document.txt";
+      a.download = fileName;
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
@@ -487,25 +499,28 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProps>(
     };
 
     return (
-      <div className="not-prose p-0 m-0 !p-0 !m-0">
-        <div className="border rounded-lg bg-white shadow-sm !mt-0 !p-0">
+      <div className="not-prose p-0 m-0 !p-0 !m-0 z-40">
+        <div
+          className="bg-[var(--color-background)] border border-[var(--color-border)] rounded-lg shadow-sm !mt-0 !p-0 text-[var(--color-foreground)] overflow-hidden"
+          style={{ zIndex: 500 }}
+        >
           {showLanguages && (
             <div
-              className="mt-1 p-2 bg-white rounded-lg shadow-lg border z-10 max-w-[150px]"
+              className="bg-[var(--color-background)] mt-1 p-2 rounded-lg shadow-lg border border-[var(--color-border)] z-10 max-w-[150px]"
               style={{
                 position: "absolute",
                 top: dropdownPos.top,
                 left: dropdownPos.left,
               }}
             >
-              <div className="flex justify-between items-center mb-2 pb-2 border-b">
-                <span className="text-sm font-medium text-gray-700">
+              <div className="flex justify-between items-center mb-2 pb-2 border-b border-[var(--color-border)]">
+                <span className="text-[var(--color-foreground)] text-sm font-medium">
                   Select Language
                 </span>
                 <button
                   type="button"
                   onClick={() => setShowLanguages(false)}
-                  className="text-gray-400 hover:text-gray-600"
+                  className="text-[var(--color-border)] hover:text-[var(--color-foreground)]"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -516,7 +531,7 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProps>(
                     key={`${lang}-${index}`}
                     type="button"
                     onClick={() => insertCodeBlock(lang)}
-                    className="w-full text-left px-2 py-1 text-sm text-gray-700 hover:bg-gray-100 rounded"
+                    className="text-[var(--color-foreground)] hover:bg-[var(--color-secondary)] w-full text-left px-2 py-1 text-sm rounded transition-colors"
                   >
                     {lang}
                   </button>
@@ -526,93 +541,93 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProps>(
           )}
           <div
             id="flexbar-scroll"
-            className="flex items-center gap-1 p-2 border-b bg-gray-50 overflow-x-auto whitespace-nowrap max-h-[50px] scrollbar-hide"
+            className="bg-[var(--color-secondary)] flex items-center gap-1 p-2 border-b border-[var(--color-border)] overflow-x-auto whitespace-nowrap max-h-[50px] scrollbar-hide"
           >
             <button
               type="button"
               onClick={() => triggerFileInput("main")}
-              className="p-2 rounded hover:bg-gray-200 transition-colors"
+              className="hover:bg-[var(--color-secondary-hover)] p-2 rounded transition-colors"
               title="Load from file"
             >
-              <FileInput className="w-4 h-4" />
+              <FileInput className="w-4 h-4 text-[var(--color-foreground)]" />
             </button>
             <button
               type="button"
               onClick={onDownload}
-              className="p-2 rounded hover:bg-gray-200 transition-colors"
+              className="hover:bg-[var(--color-secondary-hover)] p-2 rounded transition-colors"
               title="Save to file"
             >
-              <FileDown className="w-4 h-4" />
+              <FileDown className="w-4 h-4 text-[var(--color-foreground)]" />
             </button>
             <button
               type="button"
               onClick={() => formatText("bold")}
-              className="p-2 rounded hover:bg-gray-200 transition-colors"
+              className="hover:bg-[var(--color-secondary-hover)] p-2 rounded transition-colors"
               title="Bold"
             >
-              <Bold className="w-4 h-4" />
+              <Bold className="w-4 h-4 text-[var(--color-foreground)]" />
             </button>
             <button
               type="button"
               onClick={() => formatText("italic")}
-              className="p-2 rounded hover:bg-gray-200 transition-colors"
+              className="hover:bg-[var(--color-secondary-hover)] p-2 rounded transition-colors"
               title="Italic"
             >
-              <Italic className="w-4 h-4" />
+              <Italic className="w-4 h-4 text-[var(--color-foreground)]" />
             </button>
             <button
               type="button"
               onClick={() => formatText("inline-code")}
-              className="p-2 rounded hover:bg-gray-200 transition-colors"
+              className="hover:bg-[var(--color-secondary-hover)] p-2 rounded transition-colors"
               title="Inline Code"
             >
-              <Terminal className="w-4 h-4" />
+              <Terminal className="w-4 h-4 text-[var(--color-foreground)]" />
             </button>
             <div className="relative">
               <button
                 type="button"
                 ref={langBtnRef}
                 onClick={() => toggleDropdown()}
-                className="flex items-center gap-1 p-2 rounded hover:bg-gray-200 transition-colors"
+                className="hover:bg-[var(--color-secondary-hover)] flex items-center gap-1 p-2 rounded transition-colors"
                 title="Insert Code Block"
               >
-                <FolderDown className="w-4 h-4" />
-                <ChevronDown className="w-3 h-3" />
+                <FolderDown className="w-4 h-4 text-[var(--color-foreground)]" />
+                <ChevronDown className="w-3 h-3 text-[var(--color-foreground)]" />
               </button>
             </div>
             <button
               type="button"
               onClick={() => setShowDiffTool((prev) => !prev)}
-              className="p-2 rounded hover:bg-gray-200 transition-colors"
+              className="hover:bg-[var(--color-secondary-hover)] p-2 rounded transition-colors"
               title="Compare Documents"
             >
-              <FileDiff className="w-4 h-4" />
+              <FileDiff className="w-4 h-4 text-[var(--color-foreground)]" />
             </button>
             <button
               type="button"
               onClick={() => setShowTranslatorTool((prev) => !prev)}
-              className="p-2 rounded hover:bg-gray-200 transition-colors"
+              className="hover:bg-[var(--color-secondary-hover)] p-2 rounded transition-colors"
               title="Code Translator"
             >
-              <Code className="w-4 h-4" />
+              <Code className="w-4 h-4 text-[var(--color-foreground)]" />
             </button>
             <button
               type="button"
               onClick={() => onImage()}
-              className="p-2 rounded hover:bg-gray-200 transition-colors"
+              className="hover:bg-[var(--color-secondary-hover)] p-2 rounded transition-colors"
               title="Gpt-Image-1"
             >
-              <Image className="w-4 h-4" />
+              <Image className="w-4 h-4 text-[var(--color-foreground)]" />
             </button>
             <button
               type="button"
               onClick={() => onDatabase()}
-              className="p-2 rounded hover:bg-gray-200 transition-colors"
+              className="hover:bg-[var(--color-secondary-hover)] p-2 rounded transition-colors"
               title="Rag Database"
             >
-              <Database className="w-4 h-4" />
+              <Database className="w-4 h-4 text-[var(--color-foreground)]" />
             </button>
-            <div className="p-2 rounded hover:bg-gray-200 transition-colors">
+            <div className="hover:bg-[var(--color-secondary-hover)] p-2 rounded transition-colors">
               <a
                 id="w-support"
                 className="w-support"
@@ -620,9 +635,16 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProps>(
                 target="_blank"
                 rel="noreferrer"
                 title="Thanks for using"
+                style={{
+                  backgroundImage: `url("https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20coffee&emoji=%E2%98%95&slug=gabzlabs&button_colour=${encodeURIComponent(
+                    getComputedStyle(document.documentElement)
+                      .getPropertyValue("--color-foreground")
+                      .trim()
+                  )}&font_colour=000000&font_family=Arial&outline_colour=000000&coffee_colour=ffffff")`,
+                }}
               ></a>
             </div>
-            <div className="p-2 rounded hover:bg-gray-200 transition-colors">
+            <div className="hover:bg-[var(--color-secondary-hover)] p-2 rounded transition-colors">
               <a
                 id="g-support"
                 className="g-support"
@@ -630,7 +652,21 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProps>(
                 target="_blank"
                 rel="noreferrer"
                 title="GitHub"
-              ></a>
+              >
+                <div
+                  style={{
+                    width: 16,
+                    height: 16,
+                    WebkitMaskSize: "cover",
+                    maskSize: "cover",
+                    WebkitMaskImage:
+                      'url("https://upload.wikimedia.org/wikipedia/commons/c/c2/GitHub_Invertocat_Logo.svg")',
+                    maskImage:
+                      'url("https://upload.wikimedia.org/wikipedia/commons/c/c2/GitHub_Invertocat_Logo.svg")',
+                    backgroundColor: "var(--color-foreground)",
+                  }}
+                />
+              </a>
             </div>
           </div>
 
@@ -651,9 +687,9 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProps>(
             />
           )}
           {showDiffTool && (
-            <div className="p-4 border-b bg-gray-50">
+            <div className="bg-[var(--color-background)] p-4 border-b border-[var(--color-border)]">
               <div className="flex justify-between items-center mb-4">
-                <h3 className="text-lg font-medium text-gray-800">
+                <h3 className="text-[var(--color-foreground)] text-lg font-medium">
                   Document Comparison
                 </h3>
                 <div className="flex gap-2">
@@ -663,15 +699,15 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProps>(
                         viewMode === "side-by-side" ? "inline" : "side-by-side"
                       )
                     }
-                    className="flex items-center gap-1 px-3 py-1 text-sm bg-gray-200 hover:bg-gray-300 rounded transition-colors"
+                    className="bg-[var(--color-secondary)] hover:bg-[var(--color-secondary-hover)] flex items-center gap-1 px-3 py-1 text-sm rounded transition-colors"
                     title="Toggle view mode"
                   >
-                    <ArrowLeftRight className="w-4 h-4" />
+                    <ArrowLeftRight className="w-4 h-4 text-[var(--color-foreground)]" />
                     {viewMode === "side-by-side" ? "Inline" : "Side-by-side"}
                   </button>
                   <button
                     onClick={swapDocuments}
-                    className="px-3 py-1 text-sm bg-gray-200 hover:bg-gray-300 rounded transition-colors"
+                    className="bg-[var(--color-secondary)] hover:bg-[var(--color-secondary-hover)] px-3 py-1 text-sm rounded transition-colors"
                     title="Swap documents"
                   >
                     Swap
@@ -698,13 +734,13 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProps>(
                 <div className="grid grid-cols-2 gap-4 mb-4">
                   <div>
                     <div className="flex justify-between items-center mb-1">
-                      <label className="block text-sm font-medium text-gray-700">
+                      <label className="text-[var(--color-foreground)] block text-sm font-medium">
                         Original Document
                       </label>
                       <div className="flex gap-1">
                         <button
                           onClick={() => triggerFileInput("left")}
-                          className="p-1 text-gray-500 hover:text-gray-700"
+                          className="text-[var(--color-border)] hover:text-[var(--color-foreground)] p-1"
                           title="Load from file"
                         >
                           <FileInput className="w-4 h-4" />
@@ -716,7 +752,7 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProps>(
                               leftFileName || "original.txt"
                             )
                           }
-                          className="p-1 text-gray-500 hover:text-gray-700"
+                          className="text-[var(--color-border)] hover:text-[var(--color-foreground)] p-1"
                           title="Save to file"
                         >
                           <FileDown className="w-4 h-4" />
@@ -724,26 +760,26 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProps>(
                       </div>
                     </div>
                     {leftFileName && (
-                      <div className="text-xs text-gray-500 mb-1 truncate">
+                      <div className="text-[var(--color-border)] text-xs mb-1 truncate">
                         File: {leftFileName}
                       </div>
                     )}
                     <textarea
                       value={leftDocument}
                       onChange={(e) => setLeftDocument(e.target.value)}
-                      className="w-full p-2 border rounded focus:outline-none min-h-[200px] font-mono text-sm"
+                      className="w-full p-2 border border-[var(--color-border)] rounded focus:outline-none min-h-[200px] font-mono text-sm bg-[var(--color-background)] text-[var(--color-foreground)]"
                       placeholder="Paste the original document here or load from file"
                     />
                   </div>
                   <div>
                     <div className="flex justify-between items-center mb-1">
-                      <label className="block text-sm font-medium text-gray-700">
+                      <label className="text-[var(--color-foreground)] block text-sm font-medium">
                         Modified Document
                       </label>
                       <div className="flex gap-1">
                         <button
                           onClick={() => triggerFileInput("right")}
-                          className="p-1 text-gray-500 hover:text-gray-700"
+                          className="text-[var(--color-border)] hover:text-[var(--color-foreground)] p-1"
                           title="Load from file"
                         >
                           <FileInput className="w-4 h-4" />
@@ -755,7 +791,7 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProps>(
                               rightFileName || "modified.txt"
                             )
                           }
-                          className="p-1 text-gray-500 hover:text-gray-700"
+                          className="text-[var(--color-border)] hover:text-[var(--color-foreground)] p-1"
                           title="Save to file"
                         >
                           <FileDown className="w-4 h-4" />
@@ -763,14 +799,14 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProps>(
                       </div>
                     </div>
                     {rightFileName && (
-                      <div className="text-xs text-gray-500 mb-1 truncate">
+                      <div className="text-[var(--color-border)] text-xs mb-1 truncate">
                         File: {rightFileName}
                       </div>
                     )}
                     <textarea
                       value={rightDocument}
                       onChange={(e) => setRightDocument(e.target.value)}
-                      className="w-full p-2 border rounded focus:outline-none min-h-[200px] font-mono text-sm"
+                      className="w-full p-2 border border-[var(--color-border)] rounded focus:outline-none min-h-[200px] font-mono text-sm bg-[var(--color-background)] text-[var(--color-foreground)]"
                       placeholder="Paste the modified document here or load from file"
                     />
                   </div>
@@ -779,13 +815,13 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProps>(
                 <div className="mb-4">
                   <div className="grid grid-cols-2 gap-4 mb-2">
                     <div className="flex justify-between items-center">
-                      <label className="block text-sm font-medium text-gray-700">
+                      <label className="text-[var(--color-foreground)] block text-sm font-medium">
                         Original Document
                       </label>
                       <div className="flex gap-1">
                         <button
                           onClick={() => triggerFileInput("left")}
-                          className="p-1 text-gray-500 hover:text-gray-700"
+                          className="text-[var(--color-border)] hover:text-[var(--color-foreground)] p-1"
                           title="Load from file"
                         >
                           <FileInput className="w-4 h-4" />
@@ -797,7 +833,7 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProps>(
                               leftFileName || "original.txt"
                             )
                           }
-                          className="p-1 text-gray-500 hover:text-gray-700"
+                          className="text-[var(--color-border)] hover:text-[var(--color-foreground)] p-1"
                           title="Save to file"
                         >
                           <FileDown className="w-4 h-4" />
@@ -805,13 +841,13 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProps>(
                       </div>
                     </div>
                     <div className="flex justify-between items-center">
-                      <label className="block text-sm font-medium text-gray-700">
+                      <label className="text-[var(--color-foreground)] block text-sm font-medium">
                         Modified Document
                       </label>
                       <div className="flex gap-1">
                         <button
                           onClick={() => triggerFileInput("right")}
-                          className="p-1 text-gray-500 hover:text-gray-700"
+                          className="text-[var(--color-border)] hover:text-[var(--color-foreground)] p-1"
                           title="Load from file"
                         >
                           <FileInput className="w-4 h-4" />
@@ -823,7 +859,7 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProps>(
                               rightFileName || "modified.txt"
                             )
                           }
-                          className="p-1 text-gray-500 hover:text-gray-700"
+                          className="text-[var(--color-border)] hover:text-[var(--color-foreground)] p-1"
                           title="Save to file"
                         >
                           <FileDown className="w-4 h-4" />
@@ -834,38 +870,37 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProps>(
                   <div className="flex gap-4">
                     <div className="w-full">
                       {leftFileName && (
-                        <div className="text-xs text-gray-500 mb-1 truncate">
+                        <div className="text-[var(--color-border)] text-xs mb-1 truncate">
                           File: {leftFileName}
                         </div>
                       )}
                       <textarea
                         value={leftDocument}
                         onChange={(e) => setLeftDocument(e.target.value)}
-                        className="w-full p-2 border rounded focus:outline-none min-h-[200px] font-mono text-sm"
+                        className="w-full p-2 border border-[var(--color-border)] rounded focus:outline-none min-h-[200px] font-mono text-sm bg-[var(--color-background)] text-[var(--color-foreground)]"
                         placeholder="Paste the original document here or load from file"
                       />
                     </div>
                     <div className="w-full">
                       {rightFileName && (
-                        <div className="text-xs text-gray-500 mb-1 truncate">
+                        <div className="text-[var(--color-border)] text-xs mb-1 truncate">
                           File: {rightFileName}
                         </div>
                       )}
                       <textarea
                         value={rightDocument}
                         onChange={(e) => setRightDocument(e.target.value)}
-                        className="w-full p-2 border rounded focus:outline-none min-h-[200px] font-mono text-sm"
+                        className="w-full p-2 border border-[var(--color-border)] rounded focus:outline-none min-h-[200px] font-mono text-sm bg-[var(--color-background)] text-[var(--color-foreground)]"
                         placeholder="Paste the modified document here or load from file"
                       />
                     </div>
                   </div>
                 </div>
               )}
-
               <div className="flex gap-2 flex-wrap mb-4">
                 <button
                   onClick={compareDocuments}
-                  className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition-colors"
+                  className="bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] text-white flex items-center gap-2 px-4 py-2 rounded transition-colors"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -887,13 +922,13 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProps>(
                   <>
                     <button
                       onClick={applyDiffToEditor}
-                      className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition-colors"
+                      className="bg-[var(--color-success)] hover:bg-[var(--color-success-hover)] text-white px-4 py-2 rounded transition-colors"
                     >
                       Apply Diff to Editor
                     </button>
                     <button
                       onClick={copyDiffToClipboard}
-                      className="flex items-center gap-1 px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition-colors"
+                      className="bg-[var(--color-indigo)] hover:bg-[var(--color-indigo-hover)] text-[var(--color-primary)] flex items-center gap-1 px-4 py-2 rounded transition-colors"
                     >
                       {copied ? (
                         <Check className="w-4 h-4" />
@@ -917,7 +952,7 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProps>(
                           "diff_result.diff"
                         )
                       }
-                      className="flex items-center gap-1 px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700 transition-colors"
+                      className="bg-[var(--color-purple)] hover:bg-[var(--color-purple-hover)] text-[var(--color-primary)] flex items-center gap-1 px-4 py-2 rounded transition-colors"
                     >
                       <FileUp className="w-4 h-4" />
                       Export Diff
@@ -926,19 +961,19 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProps>(
                 )}
                 <button
                   onClick={() => setShowDiffTool(false)}
-                  className="px-4 py-2 bg-gray-600 text-white rounded hover:bg-gray-700 transition-colors"
+                  className="bg-[var(--color-error)] hover:bg-[var(--color-error-hover)] text-white px-4 py-2 rounded transition-colors"
                 >
                   Close
                 </button>
               </div>
 
               {diffLines.length > 0 && (
-                <div className="mt-4 border rounded overflow-hidden">
-                  <div className="bg-gray-100 p-2 border-b flex justify-between items-center">
-                    <span className="text-sm font-medium text-gray-700">
+                <div className="mt-4 border border-[var(--color-border)] rounded overflow-hidden">
+                  <div className="bg-[var(--color-secondary)] p-2 border-b border-[var(--color-border)] flex justify-between items-center">
+                    <span className="text-[var(--color-foreground)] text-sm font-medium">
                       Comparison Results
                     </span>
-                    <span className="text-xs text-gray-500">
+                    <span className="text-xs text-[var(--color-border)]">
                       {
                         diffLines.filter(
                           (l) => l.type === "added" || l.type === "removed"
@@ -956,21 +991,21 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProps>(
                               key={index}
                               className={
                                 line.type === "added"
-                                  ? "bg-green-50"
+                                  ? "bg-[var(--color-success-bg)]"
                                   : line.type === "removed"
-                                  ? "bg-red-50"
+                                  ? "bg-[var(--color-error-bg)]"
                                   : ""
                               }
                             >
                               <td
-                                className={`p-1 border-r ${
+                                className={`p-1 border-r border-[var(--color-border)] ${
                                   line.type === "removed"
-                                    ? "text-red-600"
-                                    : "text-gray-600"
+                                    ? "text-[var(--color-error)]"
+                                    : "text-[var(--color-foreground)]"
                                 }`}
                               >
                                 <div className="flex">
-                                  <span className="w-8 text-right pr-2 text-gray-400">
+                                  <span className="text-[var(--color-border)] w-8 text-right pr-2">
                                     {line.type !== "added"
                                       ? line.lineNumber
                                       : ""}
@@ -989,12 +1024,12 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProps>(
                               <td
                                 className={`p-1 ${
                                   line.type === "added"
-                                    ? "text-green-600"
-                                    : "text-gray-600"
+                                    ? "text-[var(--color-success)]"
+                                    : "text-[var(--color-foreground)]"
                                 }`}
                               >
                                 <div className="flex">
-                                  <span className="w-8 text-right pr-2 text-gray-400">
+                                  <span className="text-[var(--color-border)] w-8 text-right pr-2">
                                     {line.type !== "removed"
                                       ? line.lineNumber
                                       : ""}
@@ -1013,13 +1048,13 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProps>(
                             key={index}
                             className={`flex ${
                               line.type === "added"
-                                ? "bg-green-50 text-green-600"
+                                ? "bg-[var(--color-success-bg)] text-[var(--color-success)]"
                                 : line.type === "removed"
-                                ? "bg-red-50 text-red-600 line-through"
+                                ? "bg-[var(--color-error-bg)] text-[var(--color-error)] line-through"
                                 : ""
                             }`}
                           >
-                            <span className="w-8 text-right pr-2 text-gray-400">
+                            <span className="text-[var(--color-border)] w-8 text-right pr-2">
                               {line.lineNumber}
                             </span>
                             <span className="whitespace-pre-wrap">
@@ -1042,7 +1077,7 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProps>(
             <div
               onDoubleClick={onDoubleClickMouseDown}
               onMouseDown={onDragHandleMouseDown}
-              className="w-12 h-2 rounded cursor-row-resize bg-gray-300 hover:bg-gray-400 my-1"
+              className="w-12 h-2 rounded cursor-row-resize my-1 bg-[var(--color-border)] hover:bg-[var(--color-border-hover)] transition-colors"
               title="Drag to resize textarea"
             />
           </div>
@@ -1059,7 +1094,7 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProps>(
             }}
             placeholder={placeholder}
             disabled={disabled}
-            className="w-full p-3 focus:outline-none resize-none font-mono"
+            className="w-full p-3 focus:outline-none resize-none font-mono bg-[var(--color-background)] text-[var(--color-foreground)]"
             style={{ height: textareaHeight }}
             rows={4}
           />

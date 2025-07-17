@@ -265,9 +265,9 @@ const PromptWindow = ({
   };
 
   return (
-    <div className="not-prose p-0 m-0 !p-0 !m-0">
-      <div className="border rounded-lg bg-white shadow-sm !mt-0 !p-0 overflow-hidden">
-        <div className="flex flex-wrap items-center gap-1 p-2 border-b bg-gray-50">
+    <div className="not-prose p-0 m-0 !p-0 !m-0 ">
+      <div className="border rounded-lg bg-[var(--color-background)] text-[var(--color-foreground)] shadow-sm !mt-0 !p-0 overflow-hidden">
+        <div className="flex flex-wrap items-center gap-1 p-2 border-b bg-[var(--color-secondary)]">
           <button
             type="button"
             onClick={() => setShowTemplates((prev) => !prev)}
@@ -474,13 +474,13 @@ const PromptWindow = ({
                                   className="cursor-pointer"
                                   onClick={() => applyTemplate(template.prompt)}
                                 >
-                                  <h4 className="font-medium text-gray-800 mb-1">
+                                  <h4 className="font-medium text-[var(--color-foreground)] mb-1">
                                     {highlightMatch(
                                       template.title,
                                       searchQuery
                                     )}
                                   </h4>
-                                  <p className="text-sm text-gray-600 whitespace-pre-line">
+                                  <p className="text-sm text-[var(--color-foreground)] whitespace-pre-line">
                                     {highlightMatch(
                                       template.prompt,
                                       searchQuery
@@ -504,7 +504,7 @@ const PromptWindow = ({
                                           );
                                         }
                                       }}
-                                      className="p-1 text-red-500 hover:text-red-700"
+                                      className="p-1 text-[var(--color-error)] hover:text-[var(--color-error)]"
                                       title="Delete prompt"
                                     >
                                       <Trash2 className="w-4 h-4" />
@@ -522,7 +522,7 @@ const PromptWindow = ({
                     ([category, templates]) =>
                       category !== selectedCategory && (
                         <div key={category} className="mb-6">
-                          <h4 className="font-medium text-gray-800 mb-3">
+                          <h4 className="font-medium text-[var(--color-foreground)] mb-3">
                             {highlightMatch(
                               category.charAt(0).toUpperCase() +
                                 category.slice(1),
@@ -612,15 +612,15 @@ const PromptWindow = ({
           onKeyDown={handleKeyDown}
           placeholder={placeholder || "Enter your prompt here..."}
           disabled={disabled}
-          className="w-full p-4 focus:outline-none resize-none min-h-[150px]"
+          className="w-full p-4 focus:outline-none resize-none min-h-[150px] bg-[var(--color-background)] "
           rows={5}
         />
 
-        <div className="flex items-center justify-end gap-4 p-3 border-t bg-gray-50">
+        <div className="flex items-center justify-end gap-4 p-3 border-t bg-[var(--color-secondary)]">
           <button
             onClick={handleSubmit}
             disabled={isLoading || disabled || !selectedPrompt.trim()}
-            className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 
+            className="bg-[var(--color-primary)] text-white px-6 py-2 rounded-lg hover:bg-[var(--color-primary-hover)]
              focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 
              flex items-center gap-2"
             aria-label="Send Prompt"

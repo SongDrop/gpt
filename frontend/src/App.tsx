@@ -31,7 +31,6 @@ import UploadCompletePopup from "./components/UploadCompletePopup";
 import GptImage from "./components/GptImage";
 import DatabaseCreate from "./components/DatabaseCreate";
 import ThemeManager from "./components/ThemeManager";
-
 import {
   saveMessageToDb,
   getMessagesBySession,
@@ -502,7 +501,7 @@ const MessageActions: React.FC<{
     <div className="flex items-center gap-2 mt-2">
       <button
         onClick={handleCopy}
-        className="text-xs flex items-center gap-1 bg-gray-100 hover:bg-gray-200 px-2 py-1 rounded"
+        className="text-xs flex items-center gap-1 bg-[var(--color-secondary)] hover:bg-[var(--color-secondary-hover)] px-2 py-1 rounded"
         title="Copy to clipboard"
       >
         <Copy size={14} />
@@ -511,7 +510,7 @@ const MessageActions: React.FC<{
       {isAssistant && onContinue && (
         <button
           onClick={onContinue}
-          className="text-xs flex items-center gap-1 bg-gray-100 hover:bg-gray-200 px-2 py-1 rounded"
+          className="text-xs flex items-center gap-1 bg-[var(--color-secondary)] hover:bg-[var(--color-secondary-hover)] px-2 py-1 rounded"
           title="Continue generating"
         >
           <ChevronRight size={14} />
@@ -1426,497 +1425,480 @@ export default function ChatApp() {
 
   //VIEW
   return (
-    <div
-      id="chat"
-      ref={chatRef}
-      className="flex flex-col h-screen bg-gray-100"
-      style={{
-        background: `url(${backgroundUrl}) center 250px / 200px 60px no-repeat`,
-      }}
-    >
-      {/* Theme Manager */}
-      <ThemeManager open={showThemeManager} onClose={closeThemeManager} />
-
-      {/* Create New database */}
-      <DatabaseCreate
-        open={showCreateDatabaseModal}
-        onClose={closeCreateNewDatabaseModal}
-        onCreate={handleCreateDatabase}
-      />
-
-      {/* Drag and drop area */}
-      <DragDropArea onDropItems={handleDropItems} />
-
-      {/* File upload modal */}
-      <FileUpload
-        files={uploadedFiles}
-        onUploadComplete={handleUploadComplete}
-        onClearFiles={() => setUploadedFiles([])} // clear files on close/cancel
-      />
-      {/* Upload Indicator modal */}
-      {showUploadComplete && (
-        <UploadCompletePopup
-          show={showUploadComplete}
-          onClose={() => setShowUploadComplete(false)}
-        />
-      )}
-
-      {/* Search modal */}
-      {showSearchBar && (
-        <SearchComponent
-          onClose={() => setShowSearchBar(false)}
-          onSelectResult={handleSelectedSearchResult}
-        />
-      )}
-
-      {/* Sidebar */}
+    <div>
+      {/* Background image layer */}
       <div
-        className={`fixed inset-y-0 left-0 bg-white shadow-lg z-30 transform transition-transform duration-300 ease-in-out 
-          ${showSidebar ? "translate-x-0" : "-translate-x-full"}
-          w-72 flex flex-col`}
+        className="h-screen w-screen bg-[var(--color-background)]"
+        style={{
+          position: "absolute",
+          zIndex: 0,
+        }}
       >
-        <div className="flex items-center justify-between p-4 border-b  ">
-          <h2 className="text-lg font-bold">Message History</h2>
-          <button
-            onClick={toggleSidebar}
-            className="text-gray-600 hover:text-gray-800"
-            aria-label="Close sidebar"
-          >
-            ✕
-          </button>
+        <div className="h-screen w-screen" style={{ position: "relative" }}>
+          <div
+            style={{
+              position: "absolute",
+              top: "35%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              width: 250,
+              height: 64,
+              WebkitMaskSize: "cover",
+              maskSize: "cover",
+              WebkitMaskImage: 'url("./gitgpt.svg")',
+              maskImage: 'url("./gitgpt.svg")',
+              backgroundColor: "var(--color-secondary-hover)",
+            }}
+          />
         </div>
-        <div
-          className="flex-1 overflow-y-auto p-4 space-y-2 overflow-hidden overflow-y-auto"
-          style={{ marginBottom: "108px" }}
-        >
-          {sessions.length === 0 ? (
-            <p className="text-gray-500 text-sm">No messages yet.</p>
-          ) : (
-            sessions
-              .slice() // create a shallow copy to avoid mutating original array
-              .sort(
-                (a, b) =>
-                  new Date(b.lastUpdated).getTime() -
-                  new Date(a.lastUpdated).getTime()
-              )
-              .map((session) => (
-                <div
-                  key={session.id}
-                  className={`p-2 rounded cursor-pointer flex justify-between items-center ${
-                    session.id === sessionId
-                      ? "bg-blue-200 text-blue-900 font-semibold"
-                      : "bg-gray-200 text-gray-800"
-                  }`}
-                  onClick={() => {
-                    handleSessionClick(session.id);
-                    setShowSidebar(false);
-                    // TODO: load messages for this session
-                  }}
-                >
-                  {/* Left side: export button + session info */}
-                  <div className="flex items-center space-x-2  min-w-0">
-                    {/* Export button */}
-                    <button
-                      aria-label={`Upload session ${session.name} as markdown`}
-                      className="p-1 hover:text-green-600"
-                      title="Upload as .md"
-                      type="button"
-                      onClick={() => addSessionMdFileToUploads(session.id)}
-                    >
-                      {/* Simple upload icon SVG */}
-                      <svg
-                        width="24"
-                        height="24"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          d="M12 16V6"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                        <path
-                          d="M6 12L12 6L18 12"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                        <rect
-                          x="6"
-                          y="16"
-                          width="12"
-                          height="2"
-                          fill="currentColor"
-                        />
-                      </svg>
-                    </button>
+      </div>
+      <div
+        id="chat"
+        ref={chatRef}
+        className="flex flex-col h-screen w-screen bg-transparent text-[var(--color-foreground)]"
+        style={{ position: "absolute", zIndex: 1 }}
+      >
+        {/* Theme Manager */}
+        <ThemeManager open={showThemeManager} onClose={closeThemeManager} />
 
-                    {/* Session name and last updated */}
-                    <div className="overflow-hidden">
-                      <div className="text-sm ">{truncate(session.name)}</div>
-                      <div className="text-xs text-gray-600 overflow-hidden">
-                        Last updated:{" "}
-                        {new Date(session.lastUpdated).toLocaleString()}
+        {/* Create New database */}
+        <DatabaseCreate
+          open={showCreateDatabaseModal}
+          onClose={closeCreateNewDatabaseModal}
+          onCreate={handleCreateDatabase}
+        />
+
+        {/* Drag and drop area */}
+        <DragDropArea onDropItems={handleDropItems} />
+
+        {/* File upload modal */}
+        <FileUpload
+          files={uploadedFiles}
+          onUploadComplete={handleUploadComplete}
+          onClearFiles={() => setUploadedFiles([])}
+        />
+
+        {/* Upload Indicator modal */}
+        {showUploadComplete && (
+          <UploadCompletePopup
+            show={showUploadComplete}
+            onClose={() => setShowUploadComplete(false)}
+          />
+        )}
+
+        {/* Search modal */}
+        {showSearchBar && (
+          <SearchComponent
+            onClose={() => setShowSearchBar(false)}
+            onSelectResult={handleSelectedSearchResult}
+          />
+        )}
+
+        {/* Sidebar */}
+        <div
+          className={`fixed inset-y-0 left-0 bg-[var(--color-background)] shadow-lg z-30 transform transition-transform duration-300 ease-in-out 
+        ${showSidebar ? "translate-x-0" : "-translate-x-full"}
+        w-72 flex flex-col`}
+        >
+          <div className="flex items-center justify-between p-4 border-b border-[var(--color-border)]">
+            <h2 className="text-lg font-bold text-[var(--color-foreground)]">
+              Message History
+            </h2>
+            <button
+              onClick={toggleSidebar}
+              className="text-[var(--color-foreground)] hover:text-[var(--color-primary)]"
+              aria-label="Close sidebar"
+            >
+              ✕
+            </button>
+          </div>
+          <div
+            className="flex-1 overflow-y-auto p-4 space-y-2"
+            style={{ marginBottom: "108px" }}
+          >
+            {sessions.length === 0 ? (
+              <p className="text-[var(--color-foreground)] text-sm opacity-70">
+                No messages yet.
+              </p>
+            ) : (
+              sessions
+                .slice()
+                .sort(
+                  (a, b) =>
+                    new Date(b.lastUpdated).getTime() -
+                    new Date(a.lastUpdated).getTime()
+                )
+                .map((session) => (
+                  <div
+                    key={session.id}
+                    className={`p-2 rounded cursor-pointer flex justify-between items-center ${
+                      session.id === sessionId
+                        ? "bg-[var(--color-primary)] text-white font-semibold"
+                        : "bg-[var(--color-secondary)] text-[var(--color-foreground)]"
+                    }`}
+                    onClick={() => {
+                      handleSessionClick(session.id);
+                      setShowSidebar(false);
+                    }}
+                  >
+                    <div className="flex items-center space-x-2 min-w-0">
+                      <button
+                        aria-label={`Upload session ${session.name} as markdown`}
+                        className="p-1 hover:text-[var(--color-success)]"
+                        title="Upload as .md"
+                        type="button"
+                        onClick={() => addSessionMdFileToUploads(session.id)}
+                      >
+                        {/* SVG Icon */}
+                      </button>
+
+                      <div className="overflow-hidden">
+                        <div className="text-sm truncate">
+                          {truncate(session.name)}
+                        </div>
+                        <div
+                          className={`text-xs text-[var(--color-foreground)] opacity-70 overflow-hidden ${
+                            session.id === sessionId
+                              ? "bg-[var(--color-primary)] text-white font-semibold"
+                              : "bg-[var(--color-secondary)] text-[var(--color-foreground)]"
+                          }`}
+                        >
+                          Last updated:{" "}
+                          {new Date(session.lastUpdated).toLocaleString()}
+                        </div>
                       </div>
                     </div>
-                  </div>
 
-                  {/* Right side: trash icon button */}
-                  <button
-                    onClick={(e) => {
-                      e.stopPropagation(); // Prevent triggering onClick of parent div
-                      handleSessionDelete(session.id);
-                    }}
-                    aria-label={`Delete session ${session.name}`}
-                    className="p-1 hover:text-red-600"
-                    type="button"
-                  >
-                    {/* Simple trash icon SVG */}
-                    <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      className="h-5 w-5"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke="currentColor"
-                      strokeWidth={2}
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleSessionDelete(session.id);
+                      }}
+                      aria-label={`Delete session ${session.name}`}
+                      className="p-1 hover:text-[var(--color-error)]"
+                      type="button"
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5-4h4m-4 0a1 1 0 00-1 1v1h6V4a1 1 0 00-1-1m-4 0h4"
-                      />
-                    </svg>
-                  </button>
-                </div>
-              ))
-          )}
-        </div>
-        {/* Delete button positioned absolute inside sidebar */}
-        <div className="absolute bottom-0 left-0 w-full px-4">
-          {/* Export button */}
-          <p
-            style={{
-              textAlign: "center",
-              fontSize: "10px",
-              padding: "8px",
-              color: "darkgray",
-            }}
-          >
-            Clearing site data will delete your messages too.
-          </p>{" "}
-          <button
-            onClick={() => {
-              if (
-                window.confirm("Are you sure you want to upload all messages?")
-              ) {
-                uploadAllSessions(sessions.map((session) => session.id));
-              }
-            }}
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-lg transition-colors flex items-center justify-center gap-2 shadow-md"
-          >
-            <Upload className="w-5 h-5" />
-            <span>Upload Messages</span>
-          </button>
-          <button
-            onClick={() => {
-              if (
-                window.confirm("Are you sure you want to delete all messages?")
-              ) {
-                handleDeleteAllMessages();
-              }
-            }}
-            className="w-full text-red-400 hover:text-red-800 py-2 rounded transition-colors flex items-center justify-center gap-2"
-          >
-            <Trash2 className="w-5 h-5" />
-            <span>Delete Messages</span>
-          </button>
-        </div>
-      </div>
-      <div id="top-scroll" className="p-4 bg-white shadow-sm overflow-x-auto">
-        {/* Added overflow-x-auto */}
-        <div className="flex items-center justify-between min-w-[320px]">
-          {/* Added min-width */}
-          <div className="flex items-center gap-2 flex-shrink-0">
-            {/* Prevent shrinking */}
-            <img
-              src="https://i.postimg.cc/595gs7WD/aichat.png"
-              alt="Logo"
-              width={40}
-              height={40}
-              onClick={toggleSidebar}
-              className="cursor-pointer transition-transform active:scale-95 bg-gray-100 transition-opacity hover:bg-gray-200 border border-gray-300 rounded-md p-1 flex-shrink-0"
-            />
-            <h1 className="text-2xl font-bold text-gray-800 whitespace-nowrap mr-4">
-              {process.env.REACT_APP_APP_NAME}{" "}
-            </h1>
+                      {/* SVG Icon */}
+                    </button>
+                  </div>
+                ))
+            )}
           </div>
-          <div className="flex items-center gap-4 flex-shrink-0">
-            {/* Prevent shrinking */}
-            <button
-              onClick={() => window.open(`/${uuidv4()}`, "_blank")}
-              className="flex items-center gap-1 text-sm bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded whitespace-nowrap"
-              title="New window"
-            >
-              <ExternalLink size={16} />{" "}
-            </button>
-            <button
-              onClick={newConversation}
-              className="flex items-center gap-1 text-sm bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded whitespace-nowrap"
-              title="New conversation"
-            >
-              <Plus size={16} />
-            </button>
 
+          <div className="absolute bottom-0 left-0 w-full px-4 bg-[var(--color-background)] border-t border-[var(--color-border)]">
+            <p className="text-center text-xs py-2 text-[var(--color-foreground)] opacity-60">
+              Clearing site data will delete your messages too.
+            </p>
             <button
-              onClick={() => setShowSearchBar(true)}
-              className="flex items-center gap-1 text-sm bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded whitespace-nowrap"
-              title="Refresh conversation"
+              onClick={() => {
+                if (
+                  window.confirm(
+                    "Are you sure you want to upload all messages?"
+                  )
+                ) {
+                  uploadAllSessions(sessions.map((s) => s.id));
+                }
+              }}
+              className="bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] text-white w-full py-2 rounded-lg flex items-center justify-center gap-2 shadow-md"
             >
-              <Search size={16} />
+              <Upload className="w-5 h-5" />
+              <span>Upload Messages</span>
             </button>
-            <div className="flex-shrink-0">
-              {" "}
-              {/* Prevent shrinking */}
-              <ConnectionStatus
-                wsConnected={wsConnected}
-                useHttpFallback={useHttpFallback}
-                reconnectCount={reconnectCount}
-              />
-            </div>
             <button
-              onClick={refreshConversation}
-              className="flex items-center gap-1 text-sm bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded whitespace-nowrap"
-              title="Refresh conversation"
+              onClick={() => {
+                if (
+                  window.confirm(
+                    "Are you sure you want to delete all messages?"
+                  )
+                ) {
+                  handleDeleteAllMessages();
+                }
+              }}
+              className="text-[var(--color-error)] hover:text-[var(--color-error-hover)] w-full py-2 rounded flex items-center justify-center gap-2"
             >
-              <RefreshCw size={16} />
-              <span>Clear</span>
+              <Trash2 className="w-5 h-5" />
+              <span>Delete Messages</span>
             </button>
           </div>
         </div>
-      </div>
-      {connectionError && (
-        <div className="p-3 bg-yellow-100 text-yellow-800 rounded-lg flex items-center gap-2">
-          <AlertTriangle size={18} />
-          <span>{connectionError}</span>
-          <button
-            onClick={() => {
-              setConnectionError(null);
-              setUseHttpFallback(false);
-            }}
-            className="ml-auto text-sm underline"
-          >
-            Retry WebSocket
-          </button>
-        </div>
-      )}
-      <div
-        id="messages"
-        className="flex-1 overflow-y-auto px-4 py-4 space-y-4 w-full max-w-full sm:max-w-[90%] mx-auto lg:max-w-[1200px]"
-      >
-        {messages
-          .slice(-config.MESSAGE_HISTORY_LIMIT)
-          .sort(
-            (a, b) =>
-              new Date(a.timestamp).getTime() - new Date(b.timestamp).getTime()
-          )
-          .map((message, index) => {
-            const isHighlighted = message.id === highlightedMessageId;
 
-            return (
+        {/* Top bar */}
+        <div className="bg-[var(--color-background)] p-4 shadow-sm overflow-x-auto border-b border-[var(--color-border)]">
+          <div className="flex items-center justify-between min-w-[320px]">
+            <div className="flex items-center gap-2 flex-shrink-0">
               <div
-                id="msgblock"
-                key={`#msg-${message.id}`}
-                className={`flex ${
-                  message.role === "user" ? "justify-end" : "justify-start"
-                }`}
+                onClick={toggleSidebar}
+                style={{ width: 40, height: 40, position: "relative" }}
+                className="bg-[var(--color-secondary)] hover:bg-[var(--color-secondary-hover)] cursor-pointer transition-transform active:scale-95 border border-[var(--color-border)] rounded-md p-1 flex-shrink-0"
               >
                 <div
-                  className={`max-w-[80%] rounded-lg p-6 mt-0 shadow-lg   
-                    ${
-                      message.role === "user"
-                        ? "bg-white text-black ml-auto"
-                        : "bg-white text-black mr-auto"
-                    } ${isHighlighted ? "highlight-animation" : ""}`}
-                  // Optionally remove highlight after animation ends:
-                  onAnimationEnd={() => {
-                    if (isHighlighted) setHighlightedMessageId(null);
+                  style={{
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    width: 32, // 40 - 2*4 padding (p-1 = 4px)
+                    height: 32,
+                    transform: "translate(-50%, -50%)",
+                    WebkitMaskSize: "cover",
+                    maskSize: "cover",
+                    WebkitMaskImage: 'url("./gitgptlogo.svg")',
+                    maskImage: 'url("./gitgptlogo.svg")',
+                    backgroundColor: "var(--color-foreground)",
                   }}
-                >
-                  <MessageContent
-                    content={message.content}
-                    role={message.role}
-                    isTruncated={false}
-                  />
-                  <div className="flex justify-between items-center mt-2">
-                    <div
-                      className={`text-xs ${
-                        message.role === "user"
-                          ? "text-gray-500"
-                          : "text-gray-500"
-                      }`}
-                    >
-                      {new Date(message.timestamp).toLocaleTimeString()}
-                    </div>
-                    <MessageActions
-                      content={message.content}
-                      onContinue={
-                        message.role === "assistant" &&
-                        index === messages.length - 1
-                          ? () => continueGeneration(message.id)
-                          : undefined
-                      }
-                      isAssistant={message.role === "assistant"}
-                    />
-                  </div>
-                </div>
-                <button
-                  type="button"
-                  onClick={scrollToBottom}
-                  className="relative right--4 z-50000 p-2 m-0 rounded hover:bg-gray-200 transition-colors bg-white/80 shadow "
-                  title="Scroll to bottom"
-                >
-                  <ChevronDown className="w-5 h-5" />
-                </button>
+                />
               </div>
-            );
-          })}
-
-        {(isLoading || typing) && (
-          <div className="flex justify-start">
-            <div className="bg-white rounded-lg p-4 shadow-sm flex items-center gap-2">
-              <Loader className="w-6 h-6 animate-spin" />
-              <span className="text-gray-600 italic">
-                Assistant is typing...
-              </span>
+              <h1 className="text-2xl font-bold text-[var(--color-foreground)] whitespace-nowrap mr-4">
+                {process.env.REACT_APP_APP_NAME}
+              </h1>
             </div>
-          </div>
-        )}
 
-        <div ref={messagesEndRef} />
-      </div>
-      <div className="pl-4 pr-4 pt-1 pb-4 bg-white shadow-lg">
-        {error && (
-          <div className="mb-4 p-3 bg-red-100 text-red-700 rounded-lg flex items-center gap-2">
-            <AlertTriangle size={18} />
-            <span>{error}</span>
-          </div>
-        )}
-        {showGptImageWindow && (
-          <GptImage onClose={() => setShowGptImageWindow(false)} />
-        )}
-
-        {showDatabaseWindow && (
-          <DatabaseSelector
-            ref={chatRef}
-            databases={databases}
-            currentUser={currentUser}
-            onSelectionChange={setSelectedDatabases}
-            onClose={() => setShowDatabaseWindow(false)}
-            onCreateNew={handleCreateNew}
-            onUploadFiles={handleUploadFiles}
-          />
-        )}
-        {showPromptWindow && <PromptWindow onSubmit={handleChangePrompt} />}
-
-        {!showPromptWindow && (
-          <MarkdownEditor
-            ref={inputRef}
-            value={input}
-            onChange={setInput}
-            onSubmit={sendMessage}
-            onDatabase={handleDatabase}
-            onDownload={handleDownloadSession}
-            onTranslate={onTranslate}
-            onImage={() => setShowGptImageWindow(true)}
-            placeholder="Type your message... (Shift + Enter for new line)"
-            disabled={isLoading || typing}
-          />
-        )}
-
-        <div className="flex justify-between items-center mt-4 w-full relative">
-          {/* Left buttons container with constrained width and scrolling */}
-          <div
-            id="flexbar-scroll-left"
-            className="flex-1 overflow-x-auto max-w-[50vw] pr-6"
-          >
-            <div className="flex items-center gap-4 w-max h-full py-1">
-              {/* Added h-full and py-1 */}
+            <div className="flex items-center gap-4 flex-shrink-0">
+              <button
+                onClick={() => window.open(`/${uuidv4()}`, "_blank")}
+                className="bg-[var(--color-secondary)] hover:bg-[var(--color-secondary-hover)] text-[var(--color-foreground)] text-sm flex items-center gap-1 px-3 py-1 rounded whitespace-nowrap"
+                title="New window"
+              >
+                <ExternalLink size={16} />
+              </button>
+              {/* Other buttons similarly themed */}
+              <button
+                onClick={newConversation}
+                className="bg-[var(--color-secondary)] hover:bg-[var(--color-secondary-hover)] text-[var(--color-foreground)] text-sm flex items-center gap-1 px-3 py-1 rounded whitespace-nowrap"
+                title="New conversation"
+              >
+                <Plus size={16} />
+              </button>
+              <button
+                onClick={() => setShowSearchBar(true)}
+                className="bg-[var(--color-secondary)] hover:bg-[var(--color-secondary-hover)] text-sm  flex items-center gap-1 px-3 py-1 rounded whitespace-nowrap"
+                title="Refresh conversation"
+              >
+                <Search size={16} />
+              </button>
+              <div className="flex-shrink-0">
+                {/* Prevent shrinking */}
+                <ConnectionStatus
+                  wsConnected={wsConnected}
+                  useHttpFallback={useHttpFallback}
+                  reconnectCount={reconnectCount}
+                />
+              </div>
               <button
                 onClick={refreshConversation}
-                className="flex items-center gap-2 text-gray-600 hover:text-gray-800 whitespace-nowrap"
-                title="Clear conversation"
+                className="bg-[var(--color-secondary)] hover:bg-[var(--color-secondary-hover)] flex items-center gap-1 text-sm px-3 py-1 rounded whitespace-nowrap"
+                title="Refresh conversation"
               >
                 <RefreshCw size={16} />
-                <span>Clear Chat</span>
-              </button>
-              <button
-                onClick={togglePromptWindow}
-                className="flex items-center gap-2 text-gray-600 hover:text-gray-800 whitespace-nowrap"
-                title="Prompt Window"
-              >
-                <Quote size={16} />
-                <span>{!showPromptWindow ? "Prompt" : "Chat"}</span>
-              </button>
-              {/* New RagSearch toggle button */}
-              <button
-                onClick={toggleRagSearch}
-                className="flex items-center gap-2 text-gray-600 hover:text-gray-800 whitespace-nowrap"
-                title="Toggle RagSearch"
-              >
-                {/* You can add an icon here if you want */}
-                {!ragSearchEnabled ? (
-                  <Square size={16} />
-                ) : (
-                  <CheckSquare size={16} />
-                )}
-                <span>RagSearch</span>
-              </button>
-              <button
-                onClick={toggleThemeManager}
-                className="flex items-center gap-2 text-gray-600 hover:text-gray-800 whitespace-nowrap"
-                title="Theme"
-              >
-                <PaletteIcon size={16} />
-                <span>Theme</span>
+                <span>Clear</span>
               </button>
             </div>
           </div>
+        </div>
 
-          {/* Right buttons - fixed size */}
-          <div className="flex items-center gap-4 flex-shrink-0">
-            {typing && (
-              <button
-                type="button"
-                onClick={handleStop}
-                className="p-2 rounded hover:bg-gray-200 transition-colors bg-white shadow"
-                title="Stop assistant"
-              >
-                <svg
-                  width="20"
-                  height="20"
-                  viewBox="0 0 20 20"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
+        {/* Messages section */}
+        <div
+          id="messages"
+          className="flex-1 overflow-y-auto px-4 py-4 space-y-4 w-full max-w-full sm:max-w-[90%] mx-auto lg:max-w-[1200px]"
+        >
+          {/* Message items */}
+          {messages
+            .slice(-config.MESSAGE_HISTORY_LIMIT)
+            .sort(
+              (a, b) =>
+                new Date(a.timestamp).getTime() -
+                new Date(b.timestamp).getTime()
+            )
+            .map((message, index) => {
+              const isHighlighted = message.id === highlightedMessageId;
+              return (
+                <div
+                  id="msgblock"
+                  key={`#msg-${message.id}`}
+                  className={`flex ${
+                    message.role === "user" ? "justify-end" : "justify-start"
+                  }`}
                 >
-                  <rect width="20" height="20" fill="#1D4ED8" rx="3" ry="3" />
-                </svg>
-              </button>
-            )}
-            <button
-              onClick={sendMessage}
-              disabled={isLoading || typing || !input.trim()}
-              className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 
-      focus:outline-none focus:ring-2 focus:ring-blue-500 disabled:opacity-50 
-      flex items-center gap-2 whitespace-nowrap"
-              aria-label="Send Message"
+                  <div
+                    style={{
+                      boxShadow: `0 10px 15px -3px var(--color-border-hover)`,
+                    }}
+                    className={`max-w-[80%] rounded-lg p-6 mt-0 shadow-lg ${
+                      message.role === "user"
+                        ? "bg-[var(--color-background)] text-[var(--color-foreground)] ml-auto"
+                        : "bg-[var(--color-background)] text-[var(--color-foreground)] mr-auto"
+                    } ${isHighlighted ? "highlight-animation" : ""}`}
+                    onAnimationEnd={() => {
+                      if (isHighlighted) setHighlightedMessageId(null);
+                    }}
+                  >
+                    <MessageContent
+                      content={message.content}
+                      role={message.role}
+                      isTruncated={false}
+                    />
+                    <div className="flex justify-between items-center mt-2">
+                      <div className="text-xs text-[var(--color-foreground)] opacity-70 mt-2">
+                        {new Date(message.timestamp).toLocaleTimeString()}
+                      </div>
+                      <MessageActions
+                        content={message.content}
+                        onContinue={
+                          message.role === "assistant" &&
+                          index === messages.length - 1
+                            ? () => continueGeneration(message.id)
+                            : undefined
+                        }
+                        isAssistant={message.role === "assistant"}
+                      />
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={scrollToBottom}
+                    className="bg-[var(--color-secondary)] hover:bg-[var(--color-secondary-hover)] relative right--4 z-50000 p-2 m-0 rounded transition-colors shadow"
+                    title="Scroll to bottom"
+                  >
+                    <ChevronDown className="w-5 h-5" />
+                  </button>
+                </div>
+              );
+            })}
+
+          {(isLoading || typing) && (
+            <div className="flex justify-start">
+              <div className="bg-[var(--color-secondary)] rounded-lg p-4 shadow-sm flex items-center gap-2">
+                <Loader className="w-6 h-6 animate-spin" />
+                <span className="text-[var(--color-foreground)] italic">
+                  Assistant is typing...
+                </span>
+              </div>
+            </div>
+          )}
+
+          <div ref={messagesEndRef} />
+        </div>
+
+        <div className="bg-[var(--color-background)] pl-4 pr-4 pt-1 pb-4 shadow-lg">
+          {error && (
+            <div className="bg-[var(--color-error)] bg-opacity-20 text-[var(--color-error)] mb-4 p-3 rounded-lg flex items-center gap-2">
+              <AlertTriangle size={18} />
+              <span>{error}</span>
+            </div>
+          )}
+
+          {showGptImageWindow && (
+            <GptImage onClose={() => setShowGptImageWindow(false)} />
+          )}
+
+          {showDatabaseWindow && (
+            <DatabaseSelector
+              ref={chatRef}
+              databases={databases}
+              currentUser={currentUser}
+              onSelectionChange={setSelectedDatabases}
+              onClose={() => setShowDatabaseWindow(false)}
+              onCreateNew={handleCreateNew}
+              onUploadFiles={handleUploadFiles}
+            />
+          )}
+
+          {showPromptWindow && <PromptWindow onSubmit={handleChangePrompt} />}
+
+          {!showPromptWindow && (
+            <MarkdownEditor
+              ref={inputRef}
+              value={input}
+              onChange={setInput}
+              onSubmit={sendMessage}
+              onDatabase={handleDatabase}
+              onDownload={handleDownloadSession}
+              onTranslate={onTranslate}
+              onImage={() => setShowGptImageWindow(true)}
+              placeholder="Type your message... (Shift + Enter for new line)"
+              disabled={isLoading || typing}
+            />
+          )}
+
+          <div className="flex justify-between items-center mt-4 w-full relative">
+            <div
+              id="flexbar-scroll-left"
+              className="flex-1 overflow-x-auto max-w-[50vw] pr-6"
             >
-              <span>Send</span>
-              <Send className="w-4 h-4" />
-            </button>
+              <div className="flex items-center gap-4 w-max h-full py-1">
+                <button
+                  onClick={refreshConversation}
+                  className="text-[var(--color-foreground)] hover:text-[var(--color-primary)] flex items-center gap-2 whitespace-nowrap"
+                  title="Clear conversation"
+                >
+                  <RefreshCw size={16} />
+                  <span>Clear Chat</span>
+                </button>
+                <button
+                  onClick={togglePromptWindow}
+                  className="text-[var(--color-foreground)] hover:text-[var(--color-primary)] flex items-center gap-2 whitespace-nowrap"
+                  title="Prompt Window"
+                >
+                  <Quote size={16} />
+                  <span>{!showPromptWindow ? "Prompt" : "Chat"}</span>
+                </button>
+                <button
+                  onClick={toggleRagSearch}
+                  className="text-[var(--color-foreground)] hover:text-[var(--color-primary)] flex items-center gap-2 whitespace-nowrap"
+                  title="Toggle RagSearch"
+                >
+                  {!ragSearchEnabled ? (
+                    <Square size={16} />
+                  ) : (
+                    <CheckSquare size={16} />
+                  )}
+                  <span>RagSearch</span>
+                </button>
+                <button
+                  onClick={toggleThemeManager}
+                  className="text-[var(--color-foreground)] hover:text-[var(--color-primary)] flex items-center gap-2 whitespace-nowrap"
+                  title="Theme"
+                >
+                  <PaletteIcon size={16} />
+                  <span>Theme</span>
+                </button>
+              </div>
+            </div>
+
+            <div className="flex items-center gap-4 flex-shrink-0">
+              {typing && (
+                <button
+                  type="button"
+                  onClick={handleStop}
+                  className="bg-[var(--color-secondary)] hover:bg-[var(--color-secondary-hover)] p-2 rounded transition-colors shadow"
+                  title="Stop assistant"
+                >
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <rect
+                      width="20"
+                      height="20"
+                      fill="var(--color-primary)"
+                      rx="3.5 "
+                      ry="3.5"
+                    />
+                  </svg>
+                </button>
+              )}
+              <button
+                onClick={sendMessage}
+                disabled={isLoading || typing || !input.trim()}
+                className="bg-[var(--color-primary)] hover:bg-[var(--color-primary-hover)] text-white px-6 py-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-[var(--color-primary)] disabled:opacity-50 flex items-center gap-2 whitespace-nowrap"
+                aria-label="Send Message"
+              >
+                <span>Send</span>
+                <Send className="w-4 h-4" />
+              </button>
+            </div>
           </div>
         </div>
       </div>

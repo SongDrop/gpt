@@ -90,7 +90,7 @@ const MessageContent: React.FC<MessageContentProps> = ({
     <div class="absolute right-2 top-2 flex gap-2">
       <button 
         type="button" 
-        class="copy-code-button bg-gray-700 text-gray-300 px-2 py-1 text-xs rounded select-none"
+        class="copy-code-button bg-[var(--color-secondary)] text-[var(--color-foreground)] px-2 py-1 text-xs rounded select-none"
         aria-label="Copy code"
         data-copy-code="true"
       >
@@ -98,7 +98,7 @@ const MessageContent: React.FC<MessageContentProps> = ({
       </button>
       ${
         language
-          ? `<div class="code-language text-xs px-2 py-1 rounded bg-gray-700 text-gray-300 select-none">${language}</div>`
+          ? `<div class="code-language text-xs px-2 py-1 rounded bg-[var(--color-secondary)] text-[var(--color-foreground)] select-none">${language}</div>`
           : ""
       }
     </div>
@@ -106,7 +106,7 @@ const MessageContent: React.FC<MessageContentProps> = ({
       <div class="absolute right-2 bottom-2 flex gap-2">
       <button 
         type="button" 
-        class="copy-code-button bg-gray-700 text-gray-300 px-2 py-1 text-xs rounded select-none"
+        class="copy-code-button bg-[var(--color-secondary)] text-[var(--color-foreground)] px-2 py-1 text-xs rounded select-none"
         aria-label="Copy code"
         data-copy-code="true"
       >
@@ -114,7 +114,7 @@ const MessageContent: React.FC<MessageContentProps> = ({
       </button>
       ${
         language
-          ? `<div class="code-language text-xs px-2 py-1 rounded bg-gray-700 text-gray-300 select-none">${language}</div>`
+          ? `<div class="code-language text-xs px-2 py-1 rounded bg-[var(--color-secondary)] text-[var(--color-foreground)] select-none">${language}</div>`
           : ""
       }
     </div>
@@ -305,8 +305,8 @@ const MessageContent: React.FC<MessageContentProps> = ({
         ref={containerRef}
         className={`prose max-w-none relative ${
           role === "user"
-            ? "prose-p:text-gray-900 prose-headings:text-gray-900 prose-strong:text-gray-900 prose-code:text-gray-900"
-            : "prose-p:text-gray-900 prose-headings:text-gray-900 prose-strong:text-gray-900 prose-code:text-gray-900"
+            ? "prose-p:text-[var(--color-foreground)] prose-headings:text-[var(--color-foreground)] prose-strong:text-[var(--color-foreground)] prose-code:text-[var(--color-foreground)]"
+            : "prose-p:text-[var(--color-foreground)] prose-headings:text-[var(--color-foreground)] prose-strong:text-[var(--color-foreground)] prose-code:text-[var(--color-foreground)]"
         }`}
         dangerouslySetInnerHTML={{ __html: htmlContent }}
       />
