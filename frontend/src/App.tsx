@@ -1657,7 +1657,7 @@ export default function ChatApp() {
           <div className="flex items-center gap-4 flex-shrink-0">
             {/* Prevent shrinking */}
             <button
-              onClick={() => window.open("/", "_blank")}
+              onClick={() => window.open(`/${uuidv4()}`, "_blank")}
               className="flex items-center gap-1 text-sm bg-gray-100 hover:bg-gray-200 px-3 py-1 rounded whitespace-nowrap"
               title="New window"
             >
