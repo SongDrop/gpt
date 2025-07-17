@@ -266,12 +266,12 @@ const PromptWindow = ({
 
   return (
     <div className="not-prose p-0 m-0 !p-0 !m-0 ">
-      <div className="border rounded-lg bg-[var(--color-background)] text-[var(--color-foreground)] shadow-sm !mt-0 !p-0 overflow-hidden">
-        <div className="flex flex-wrap items-center gap-1 p-2 border-b bg-[var(--color-secondary)]">
+      <div className="border border-[var(--color-border)] rounded-lg bg-[var(--color-background)] shadow-sm !mt-0 !p-0 overflow-hidden">
+        <div className="flex flex-wrap items-center gap-1 p-2 border-b  border-b-[var(--color-border)] bg-[var(--color-secondary)]">
           <button
             type="button"
             onClick={() => setShowTemplates((prev) => !prev)}
-            className="flex items-center gap-1 p-2 rounded hover:bg-gray-200 transition-colors"
+            className="flex items-center gap-1 p-2 rounded hover:bg-[var(--color-primary)] transition-colors"
             title="Prompt Templates"
           >
             <Sparkles className="w-4 h-4" />
@@ -286,7 +286,7 @@ const PromptWindow = ({
             <input
               type="text"
               placeholder="Search prompts or categories..."
-              className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+              className="block w-full pl-10 pr-3 py-2 border border-[var(--color-border)] rounded-md leading-5 bg-[var(--color-background)] placeholder-gray-500 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
               value={searchQuery}
               onChange={(e) => handleSearchQuery(e.target.value)}
             />
@@ -296,7 +296,7 @@ const PromptWindow = ({
             type="button"
             onClick={() => setShowSavePromptModal(true)}
             disabled={!selectedPrompt.trim()}
-            className="flex items-center gap-1 p-2 rounded hover:bg-gray-200 transition-colors disabled:opacity-50"
+            className="flex items-center gap-1 p-2 rounded hover:bg-[var(--color-primary)] transition-colors disabled:opacity-50"
             title="Save Prompt"
           >
             <Save className="w-4 h-4" />
@@ -305,11 +305,11 @@ const PromptWindow = ({
           <button
             type="button"
             onClick={copyToClipboard}
-            className="flex items-center gap-1 p-2 rounded hover:bg-gray-200 transition-colors ml-auto"
+            className="flex items-center gap-1 p-2 rounded hover:bg-[var(--color-primary)] transition-colors ml-auto"
             title="Copy Prompt"
           >
             {copied ? (
-              <Check className="w-4 h-4 text-green-600" />
+              <Check className="w-4 h-4 text-[var(--color-success)]" />
             ) : (
               <Copy className="w-4 h-4" />
             )}
@@ -318,7 +318,7 @@ const PromptWindow = ({
         </div>
 
         {fetchError && (
-          <div className="text-red-600 p-2 text-sm">
+          <div className="text-[var(--color-error)] p-2 text-sm">
             Error loading remote prompts: {fetchError}
           </div>
         )}
@@ -326,12 +326,12 @@ const PromptWindow = ({
         {/* Save Prompt Modal */}
         {showSavePromptModal && (
           <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
-            <div className="bg-white rounded-lg p-6 max-w-md w-full">
+            <div className="bg-[var(--color-background)] rounded-lg p-6 max-w-md w-full">
               <div className="flex justify-between items-center mb-4">
                 <h3 className="text-lg font-medium">Save Prompt</h3>
                 <button
                   onClick={() => setShowSavePromptModal(false)}
-                  className="text-gray-400 hover:text-gray-600"
+                  className="text-[var(--color-secondary)] hover:text-[var(--color-secondary)]"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -339,20 +339,19 @@ const PromptWindow = ({
 
               <div className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-[var(--color-foreground)] mb-1">
                     Prompt Title
                   </label>
                   <input
                     type="text"
                     value={newPromptTitle}
                     onChange={(e) => setNewPromptTitle(e.target.value)}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                    className="w-full px-3 py-2 border border-[var(--color-border)] bg-[var(--color-secondary)] rounded-md"
                     placeholder="Enter a title for your prompt"
                   />
                 </div>
-
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="block text-sm font-medium text-[var(--color-foreground)] mb-1">
                     Category
                   </label>
                   <select
@@ -360,7 +359,7 @@ const PromptWindow = ({
                     onChange={(e) =>
                       setNewPromptCategory(e.target.value as TemplateCategory)
                     }
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md"
+                    className="w-full px-3 py-2 border border-[var(--color-border)] text-[var(--color-foreground)] bg-[var(--color-secondary)] rounded-md"
                   >
                     {Object.keys(allPrompts).map((category) => (
                       <option key={category} value={category}>
@@ -373,14 +372,14 @@ const PromptWindow = ({
                 <div className="flex justify-end space-x-2 pt-2">
                   <button
                     onClick={() => setShowSavePromptModal(false)}
-                    className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200"
+                    className="px-4 py-2 text-sm font-medium text-[var(--color-foreground)] bg-[var(--color-secondary)] rounded-md hover:bg-[var(--color-secondary)]"
                   >
                     Cancel
                   </button>
                   <button
                     onClick={handleSavePrompt}
                     disabled={!newPromptTitle.trim()}
-                    className="px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-md hover:bg-blue-700 disabled:opacity-50"
+                    className="px-4 py-2 text-sm font-medium text-[var(--color-foreground)] bg-blue-600 rounded-md hover:bg-[var(--color-primary)] disabled:opacity-50"
                   >
                     Save Prompt
                   </button>
@@ -391,9 +390,9 @@ const PromptWindow = ({
         )}
 
         {showTemplates && (
-          <div className="p-4 pt-0 border-b bg-gray-50 max-h-[800px] overflow-hidden">
-            <div className="flex justify-between items-center sticky top-0 bg-gray-50 z-10 pt-2">
-              <h3 className="text-lg font-medium text-gray-800">
+          <div className="p-4 pt-0 border-b border-[var(--color-border)] bg-[var(--color-background)] max-h-[800px] overflow-hidden">
+            <div className="flex justify-between items-center sticky top-0 bg-[var(--color-background)] z-10 pt-2">
+              <h3 className="text-lg font-medium text-[var(--color-foreground)]">
                 Prompt Templates
               </h3>
               <button
@@ -402,7 +401,7 @@ const PromptWindow = ({
                   setShowTemplates(false);
                   setSearchQuery("");
                 }}
-                className="text-gray-400 hover:text-gray-600"
+                className="text-[var(--color-foreground)] hover:[var(--color-secondary)]"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -410,7 +409,7 @@ const PromptWindow = ({
 
             <div
               id="prompt_categories"
-              className="flex gap-2 mb-2 m-0 overflow-x-auto py-2 bg-gray-50 z-10"
+              className="flex gap-2 rounded mb-2 m-0 p-2 mt-1 overflow-x-auto py-2 bg-[var(--color-secondary)] z-10"
             >
               {filteredCategories.map((category) => (
                 <button
@@ -419,8 +418,8 @@ const PromptWindow = ({
                   onClick={() => setSelectedCategory(category)}
                   className={`px-3 py-1 text-sm rounded transition-colors whitespace-nowrap ${
                     selectedCategory === category
-                      ? "bg-blue-600 text-white"
-                      : "bg-gray-200 hover:bg-gray-300"
+                      ? "bg-[var(--color-primary)] text-white"
+                      : "bg-[var(--color-secndary)] hover:bg-[var(--color-primary)] hover:text-white"
                   }`}
                 >
                   {highlightMatch(
@@ -436,7 +435,7 @@ const PromptWindow = ({
                   {filteredTemplates[selectedCategory]?.length > 0 && (
                     <div className="mb-6">
                       <div className="flex justify-between items-center">
-                        <h4 className="font-medium text-gray-800 mb-3">
+                        <h4 className="font-medium text-[var(--color-foreground)] mb-3">
                           {highlightMatch(
                             selectedCategory.charAt(0).toUpperCase() +
                               selectedCategory.slice(1),
@@ -446,7 +445,7 @@ const PromptWindow = ({
                         {Object.keys(userPrompts).length > 0 && (
                           <button
                             onClick={exportPrompts}
-                            className="flex items-center gap-1 text-sm text-blue-600 hover:text-blue-800 mb-3"
+                            className="flex items-center gap-1 text-sm text-[var(--color-primary)] hover:text-[var(--color-primary)] mb-3"
                             title="Export all prompts"
                           >
                             <Download className="w-4 h-4" />
@@ -464,10 +463,10 @@ const PromptWindow = ({
                             return (
                               <div
                                 key={index}
-                                className={`border rounded p-3 hover:bg-gray-50 transition-all ${
+                                className={`border rounded p-3 hover:bg-[var(--color-secondary)] transition-all ${
                                   matchingTemplate?.prompt === template.prompt
-                                    ? "border-blue-500 border-2 shadow-sm"
-                                    : "border-gray-200"
+                                    ? "border-[var(--color-success)] border-2 shadow-sm"
+                                    : "border-[var(--color-border)]"
                                 }`}
                               >
                                 <div
@@ -480,7 +479,7 @@ const PromptWindow = ({
                                       searchQuery
                                     )}
                                   </h4>
-                                  <p className="text-sm text-[var(--color-foreground)] whitespace-pre-line">
+                                  <p className="text-sm text-[var(--color-foreground)] whitespace-pre-line opacity-80">
                                     {highlightMatch(
                                       template.prompt,
                                       searchQuery
@@ -538,10 +537,10 @@ const PromptWindow = ({
                               return (
                                 <div
                                   key={index}
-                                  className={`border rounded p-3 hover:bg-gray-50 transition-all ${
+                                  className={`border rounded p-3 hover:bg-[var(--color-secondary)] transition-all ${
                                     matchingTemplate?.prompt === template.prompt
-                                      ? "border-blue-500 border-2 shadow-sm"
-                                      : "border-gray-200"
+                                      ? "border-[var(--color-success)] border-2 shadow-sm"
+                                      : "border-[var(--color-border)]"
                                   }`}
                                 >
                                   <div
@@ -550,13 +549,13 @@ const PromptWindow = ({
                                       applyTemplate(template.prompt)
                                     }
                                   >
-                                    <h4 className="font-medium text-gray-800 mb-1">
+                                    <h4 className="font-medium text-[var(--color-foreground)] mb-1">
                                       {highlightMatch(
                                         template.title,
                                         searchQuery
                                       )}
                                     </h4>
-                                    <p className="text-sm text-gray-600 whitespace-pre-line">
+                                    <p className="text-sm text-[var(--color-foreground)] whitespace-pre-line opacity-80">
                                       {highlightMatch(
                                         template.prompt,
                                         searchQuery
@@ -580,7 +579,7 @@ const PromptWindow = ({
                                             );
                                           }
                                         }}
-                                        className="p-1 text-red-500 hover:text-red-700"
+                                        className="p-1 text-[var(--color-error)] hover:text-[var(--color-error)]"
                                         title="Delete prompt"
                                       >
                                         <Trash2 className="w-4 h-4" />
@@ -596,7 +595,7 @@ const PromptWindow = ({
                   )}
                 </>
               ) : (
-                <div className="text-center py-8 text-gray-500">
+                <div className="text-center py-8 text-[var(--color-foreground)]">
                   No prompts found matching your search.
                 </div>
               )}
@@ -616,7 +615,7 @@ const PromptWindow = ({
           rows={5}
         />
 
-        <div className="flex items-center justify-end gap-4 p-3 border-t bg-[var(--color-secondary)]">
+        <div className="flex items-center justify-end gap-4 p-3 border-t border-t-[var(--color-border)] bg-[var(--color-secondary)]">
           <button
             onClick={handleSubmit}
             disabled={isLoading || disabled || !selectedPrompt.trim()}

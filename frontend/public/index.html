@@ -35,6 +35,30 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:site" content="@gitgpt">
   <meta name="twitter:url" content="https://gitgpt.chat">
+  <script>
+    (function () {
+      try {
+        const activeThemeIndex = JSON.parse(localStorage.getItem('activeThemeIndex'));
+        const themes = JSON.parse(localStorage.getItem('themes'));
+        const DEFAULT_THEMES = [ /* your default themes here */];
+
+        const theme = (themes && themes[activeThemeIndex]) || DEFAULT_THEMES[0];
+
+        if (theme && theme.colors) {
+          const root = document.documentElement;
+          Object.entries(theme.colors).forEach(([key, value]) => {
+            root.style.setProperty(
+              `--color-${key.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase()}`,
+              value
+            );
+          });
+          // Now that theme is applied, show the page
+          document.body.classList.add('theme-ready');
+        }
+
+      } catch { }
+    })();
+  </script>
 </head>
 
 <body>
