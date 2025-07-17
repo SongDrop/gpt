@@ -56,13 +56,7 @@ echo -e "\n=== Performing cleanup ==="
 # Frontend cleanup
 echo "Cleaning frontend,removing frontend/node_modules..."
 cd "$FRONTEND_DIR" || { echo "❌ Frontend directory not found"; exit 1; }
-echo "Force deleting node_modules and related frontend files..."
-rm -rfv node_modules package-lock.json .cache .parcel-cache dist 2>/dev/null || {
-  echo "⚠️  Standard rm failed, using find to force remove node_modules..."
-  find node_modules -type f -exec rm -f {} \;
-  find node_modules -type d -depth -exec rmdir {} \; 2>/dev/null
-  rm -rfv node_modules
-}
+rm -rf node_modules package-lock.json .cache .parcel-cache dist
 
 # Backend cleanup
 echo "Cleaning backend,removing backend/venv..."

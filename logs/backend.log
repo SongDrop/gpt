@@ -1,33 +1,54 @@
 INFO:     Will watch for changes in these directories: ['/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/backend']
 INFO:     Uvicorn running on http://0.0.0.0:8000 (Press CTRL+C to quit)
-INFO:     Started reloader process [35415] using WatchFiles
-2025-07-17 00:55:49,202 - config - INFO - Starting configutation initialization...
-2025-07-17 00:55:49,203 - config - INFO - .env file found at: /Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/backend/.env
-2025-07-17 00:55:49,203 - config - INFO - Working directory: /Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/backend
-2025-07-17 00:55:49,203 - config - INFO - .env path resolved: /Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/backend/.env
-2025-07-17 00:55:49,203 - config - INFO - .env exists: True
-2025-07-17 00:55:49,213 - config - INFO - Loading settings...
-2025-07-17 00:55:49,221 - config - INFO - Loaded configuration:
-2025-07-17 00:55:49,221 - config - INFO - App Name: AI Chat Assistant
-2025-07-17 00:55:49,221 - config - INFO - Environment: production
-2025-07-17 00:55:49,221 - config - INFO - CORS Origins: ['https://localhost:8000', 'https://localhost:3000', 'http://localhost:8000', 'http://localhost:3000']
-2025-07-17 00:55:49,221 - config - INFO - Vector Search Enabled: True
-2025-07-17 00:55:49,221 - config - INFO - Vector Search Endpoint: https://ragaisearchrtx.search.windows.net/
-2025-07-17 00:55:49,221 - config - INFO - Vector Search Key: ***LRZH
-2025-07-17 00:55:49,221 - config - INFO - Vector Search Index: rag-1752519055977
-2025-07-17 00:55:49,222 - config - INFO - Vector Search Embedding Deployment: text-embedding-ada-002
-2025-07-17 00:55:49,222 - config - INFO - Vector Search Embedding Key: ***Hc9F
-2025-07-17 00:55:49,222 - config - INFO - Vector search is enabled
-2025-07-17 00:55:49,222 - config - INFO - Final vector search configuration check:
-2025-07-17 00:55:49,222 - config - INFO - Vector Search Enabled: True
-2025-07-17 00:55:49,222 - config - INFO - Vector Search Endpoint: https://ragaisearchrtx.search.windows.net/
-2025-07-17 00:55:49,222 - config - INFO - Vector Search Key: ***LRZH
-2025-07-17 00:55:49,222 - config - INFO - Vector Search Index: rag-1752519055977
-2025-07-17 00:55:50,466 - main - INFO - Starting application initialization...
-2025-07-17 00:55:50,491 - main - INFO - Configured CORS origins: ['https://localhost:8000', 'https://localhost:3000', 'http://localhost:8000', 'http://localhost:3000']
-INFO:     Started server process [35422]
+INFO:     Started reloader process [40895] using WatchFiles
+2025-07-17 01:04:15,924 - config - INFO - Starting configutation initialization...
+2025-07-17 01:04:15,924 - config - INFO - .env file found at: /Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/backend/.env
+2025-07-17 01:04:15,925 - config - INFO - Working directory: /Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/backend
+2025-07-17 01:04:15,925 - config - INFO - .env path resolved: /Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/backend/.env
+2025-07-17 01:04:15,925 - config - INFO - .env exists: True
+2025-07-17 01:04:15,937 - config - INFO - Loading settings...
+2025-07-17 01:04:15,949 - config - INFO - Loaded configuration:
+2025-07-17 01:04:15,949 - config - INFO - App Name: AI Chat Assistant
+2025-07-17 01:04:15,949 - config - INFO - Environment: production
+2025-07-17 01:04:15,949 - config - INFO - CORS Origins: ['https://localhost:8000', 'https://localhost:3000', 'http://localhost:8000', 'http://localhost:3000']
+2025-07-17 01:04:15,949 - config - INFO - Vector Search Enabled: True
+2025-07-17 01:04:15,949 - config - INFO - Vector Search Endpoint: https://ragaisearchrtx.search.windows.net/
+2025-07-17 01:04:15,949 - config - INFO - Vector Search Key: ***LRZH
+2025-07-17 01:04:15,949 - config - INFO - Vector Search Index: rag-1752519055977
+2025-07-17 01:04:15,949 - config - INFO - Vector Search Embedding Deployment: text-embedding-ada-002
+2025-07-17 01:04:15,949 - config - INFO - Vector Search Embedding Key: ***Hc9F
+2025-07-17 01:04:15,949 - config - INFO - Vector search is enabled
+2025-07-17 01:04:15,949 - config - INFO - Final vector search configuration check:
+2025-07-17 01:04:15,949 - config - INFO - Vector Search Enabled: True
+2025-07-17 01:04:15,950 - config - INFO - Vector Search Endpoint: https://ragaisearchrtx.search.windows.net/
+2025-07-17 01:04:15,950 - config - INFO - Vector Search Key: ***LRZH
+2025-07-17 01:04:15,950 - config - INFO - Vector Search Index: rag-1752519055977
+2025-07-17 01:04:17,386 - main - INFO - Starting application initialization...
+2025-07-17 01:04:17,416 - main - INFO - Configured CORS origins: ['https://localhost:8000', 'https://localhost:3000', 'http://localhost:8000', 'http://localhost:3000']
+INFO:     Started server process [40906]
 INFO:     Waiting for application startup.
-2025-07-17 00:55:50,499 - main - INFO - Validating OpenAI configuration...
-2025-07-17 00:55:50,499 - main - INFO - API Base: https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2025-01-01-preview
-2025-07-17 00:55:50,499 - main - INFO - API Version: 2023-05-15
-2025-07-17 00:55:50,499 - main - INFO - Deployment Name: gpt-4.1-mini
+2025-07-17 01:04:17,425 - main - INFO - Validating OpenAI configuration...
+2025-07-17 01:04:17,425 - main - INFO - API Base: https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2025-01-01-preview
+2025-07-17 01:04:17,425 - main - INFO - API Version: 2023-05-15
+2025-07-17 01:04:17,425 - main - INFO - Deployment Name: gpt-4.1-mini
+2025-07-17 01:04:55,587 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 500 Internal Server Error"
+2025-07-17 01:04:55,588 - openai._base_client - INFO - Retrying request to /chat/completions in 0.428130 seconds
+2025-07-17 01:06:16,272 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 500 Internal Server Error"
+2025-07-17 01:06:16,273 - openai._base_client - INFO - Retrying request to /chat/completions in 0.979381 seconds
+2025-07-17 01:07:07,478 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 500 Internal Server Error"
+2025-07-17 01:07:07,480 - main - ERROR - OpenAI configuration validation failed: Error code: 500 - {'statusCode': 500, 'message': 'Internal server error', 'activityId': 'c88295f0-eb6d-4abf-859b-3ea8d9b0cfe7'}
+2025-07-17 01:07:07,481 - main - ERROR - Error code: 500 - {'statusCode': 500, 'message': 'Internal server error', 'activityId': 'c88295f0-eb6d-4abf-859b-3ea8d9b0cfe7'}
+Traceback (most recent call last):
+  File "/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/backend/main.py", line 179, in validate_openai_config
+    test_completion = client.chat.completions.create(
+  File "/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/backend/venv/lib/python3.10/site-packages/openai/_utils/_utils.py", line 287, in wrapper
+    return func(*args, **kwargs)
+  File "/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/backend/venv/lib/python3.10/site-packages/openai/resources/chat/completions/completions.py", line 1087, in create
+    return self._post(
+  File "/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/backend/venv/lib/python3.10/site-packages/openai/_base_client.py", line 1256, in post
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+  File "/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/backend/venv/lib/python3.10/site-packages/openai/_base_client.py", line 1044, in request
+    raise self._make_status_error_from_response(err.response) from None
+openai.InternalServerError: Error code: 500 - {'statusCode': 500, 'message': 'Internal server error', 'activityId': 'c88295f0-eb6d-4abf-859b-3ea8d9b0cfe7'}
+2025-07-17 01:07:07,486 - main - ERROR - Failed to validate OpenAI configuration
+INFO:     Application startup complete.

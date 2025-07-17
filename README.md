@@ -4,6 +4,17 @@ One-click deployment of a fully automated AI chat assistant with GPT-4.1-mini an
 
 [🌐 LEARN MORE](https://azure-ai-assistant.netlify.app/)
 
+## Contributors
+
+This project exists thanks to all the people who contribute.
+<a href="https://opencollective.com/songdropnet/projects/gitgptchat/contributors"><img src="https://opencollective.com/songdropnet/projects/gitgptchat/contributors.svg?width=890&button=false" /></a>
+
+## Backers
+
+Thank you to all our backers! 🙏 [[Become a backer](https://opencollective.com/songdropnet/projects/gitgptchat#backer)]
+
+<a href="https://opencollective.com/songdropnet/projects/gitgptchat#backers" target="_blank"><img src="https://opencollective.com/songdropnet/projects/gitgptchat/backers.svg?width=890"></a>
+
 ---
 
 ```
