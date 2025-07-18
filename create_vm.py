@@ -16,7 +16,7 @@ import dns.resolver
 from azure.core.exceptions import ClientAuthenticationError
 from azure.identity import ClientSecretCredential
 from azure.storage.blob import BlobServiceClient, generate_blob_sas, BlobSasPermissions
-
+from azure.core.exceptions import ResourceNotFoundError, HttpResponseError
 from azure.mgmt.resource import ResourceManagementClient
 from azure.mgmt.network import NetworkManagementClient
 from azure.mgmt.network.models import NetworkSecurityGroup, SecurityRule, NetworkInterface
@@ -344,13 +344,21 @@ async def main():
     try:
         dns_zone = dns_client.zones.get(resource_group, domain)
         print_info(f"Found DNS zone '{domain}'.")
-    except Exception:
+    except ResourceNotFoundError:
+        print_info(f"DNS zone '{domain}' not found. Creating it now...")
         dns_zone = dns_client.zones.create_or_update(resource_group, domain, {'location': 'global'})
         print_success(f"Created DNS zone '{domain}'.")
+    except HttpResponseError as e:
+        print_error(f"HTTP error while accessing DNS zone: {e.message}")
+        return False
+    except Exception as e:
+        print_error(f"Unexpected error: {e}")
+        return False
     
     # Wait for DNS Zone to be ready before extension
     print_info("Waiting 5 seconds for DNS Zone to initialize...")
     time.sleep(5)
+    record_name = subdomain.rstrip('.') if subdomain else '@' 
     if not check_ns_delegation_with_retries(dns_client, resource_group, domain):
         print_error("Stopping provisioning due to incorrect NS delegation.")
         await cleanup_resources_on_failure(
