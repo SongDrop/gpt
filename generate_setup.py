@@ -173,6 +173,14 @@ REACT_APP_GPT_IMAGE_URL={GPT_IMAGE_URL}\\n\
 REACT_APP_GPT_IMAGE_KEY={GPT_IMAGE_KEY}\\n\
 REACT_APP_GPT_IMAGE_VERSION={GPT_IMAGE_VERSION}\\n" > /app/frontend/.env
 
+######IF YOU RUN IT ON LOCALHOST#####################
+#REACT_APP_API_URL=http://localhost:{BACKEND_PORT}\\n\
+#REACT_APP_WS_URL=ws://localhost:{BACKEND_PORT}/ws\\n\
+######IF YOU RUN IT ON DOMAIN ws->wss
+#REACT_APP_API_URL=https://{DOMAIN_NAME}\\n\
+#REACT_APP_WS_URL=wss://{DOMAIN_NAME}/ws\\n\
+######################################################
+
 # Ensure install.sh is executable
 RUN chmod +x ./docker_install.sh
 
@@ -287,15 +295,6 @@ server {{
         proxy_http_version 1.1;
         proxy_buffering off;
         proxy_request_buffering off;
-    }}
-
-    location /ws/ {{
-        proxy_pass http://localhost:{BACKEND_PORT}/ws/;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection $connection_upgrade;
-        proxy_set_header Host $host;
-        proxy_cache_bypass $http_upgrade;
     }}
 }}
 EOF
