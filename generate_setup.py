@@ -285,19 +285,33 @@ server {{
     ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
 
     location /ws {{
-        proxy_pass http://localhost:{FRONTEND_PORT}/ws;
-        proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection $connection_upgrade;
-        proxy_set_header Host $host;
-        proxy_set_header X-Real-IP $remote_addr;
-        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_pass http://localhost:{BACKEND_PORT}/ws/;
+        proxy_set_header Host \$host;
+        proxy_set_header Upgrade \$http_upgrade;
+        proxy_set_header Connection \$connection_upgrade;
+        proxy_set_header X-Real-IP \$remote_addr;
+        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto \$scheme;
         proxy_buffering off;
         proxy_request_buffering off;
+        proxy_http_version 1.1;
     }}
     
+     location /api {{
+        proxy_pass http://localhost:{BACKEND_PORT}/api/;
+        proxy_set_header Host \$host;
+        proxy_set_header Upgrade \$http_upgrade;
+        proxy_set_header Connection \$connection_upgrade;
+        proxy_set_header X-Real-IP \$remote_addr;
+        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto \$scheme;
+        proxy_buffering off;
+        proxy_request_buffering off;
+        proxy_http_version 1.1;
+    }}
+
     client_max_body_size {MAX_UPLOAD_FILE_SIZE_IN_MB}M;
+
     location / {{
         proxy_pass http://localhost:{FRONTEND_PORT};
         proxy_set_header Host \$host;
