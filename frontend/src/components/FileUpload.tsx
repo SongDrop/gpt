@@ -311,7 +311,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
 
   return (
     <div
-      className="fixed inset-0 z-50 pointer-events-none"
+      className="fixed inset-0 z-50 pointer-events-none "
       style={{ zIndex: 1000 }}
     >
       {isLoading && (
@@ -463,7 +463,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
             initial={{ y: 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 100, opacity: 0 }}
-            className="pointer-events-auto fixed bottom-4 right-4 z-50 bg-[var(--color-secondary)] rounded-lg border shadow-lg p-4 w-72"
+            className="pointer-events-auto fixed bottom-4 right-4 z-50 bg-[var(--color-secondary)] rounded-lg border  border-[var(--color-border)] shadow-lg p-4 w-72"
           >
             <div className="flex justify-between items-center mb-2">
               <h4 className="font-medium flex items-center gap-2">
@@ -474,7 +474,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
                 <button
                   onClick={() => setIsMainModalOpen(true)}
                   aria-label="Expand upload modal"
-                  className="p-1 rounded hover:bg-[var(--color-secondary)]"
+                  className="p-1 rounded hover:text-[var(--color-primary)]"
                 >
                   <ChevronUp className="w-5 h-5" />
                 </button>
@@ -497,10 +497,11 @@ const FileUpload: React.FC<FileUploadProps> = ({
                       onClearFiles();
                     }
                   }}
+                  title="Cancel all uploads"
                   aria-label="Cancel all uploads"
-                  className="p-1 rounded hover:bg-[var(--color-secondary)]"
+                  className="p-1 rounded text-[var(--color-error)] hover:text-[var(--color-error)]"
                 >
-                  <XCircle className="w-5 h-5 text-[var(--color-error)]" />
+                  <XCircle className="w-5 h-5 " />
                 </button>
               </div>
             </div>

@@ -372,14 +372,14 @@ const PromptWindow = ({
                 <div className="flex justify-end space-x-2 pt-2">
                   <button
                     onClick={() => setShowSavePromptModal(false)}
-                    className="px-4 py-2 text-sm font-medium text-[var(--color-foreground)] bg-[var(--color-secondary)] rounded-md hover:bg-[var(--color-secondary)]"
+                    className="px-4 py-2 text-sm font-medium text-[var(--color-foreground)] bg-[var(--color-secondary)] hover:bg-[var(--color-secondary)] rounded-md"
                   >
                     Cancel
                   </button>
                   <button
                     onClick={handleSavePrompt}
                     disabled={!newPromptTitle.trim()}
-                    className="px-4 py-2 text-sm font-medium text-[var(--color-foreground)] bg-blue-600 rounded-md hover:bg-[var(--color-primary)] disabled:opacity-50"
+                    className="px-4 py-2 text-sm font-medium text-white bg-[var(--color-primary)] hover:bg-[var(--color-primary)] rounded-md disabled:opacity-50"
                   >
                     Save Prompt
                   </button>

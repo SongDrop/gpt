@@ -209,6 +209,7 @@ Click the button below to start the deployment:
 
 ## License & Credits
 
+MIT License
 Azure AI Chat Assistant Deployment Template | © 2025 Gabriel Majorsky
 
 ---

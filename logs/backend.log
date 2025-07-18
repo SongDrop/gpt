@@ -23298,3 +23298,23 @@ INFO:     connection open
 2025-07-18 10:44:06,310 - main - INFO - Connection cleaned up for 127.0.0.1:53265
 2025-07-18 10:44:06,310 - main - INFO - Client 127.0.0.1:53265 disconnected. Active connections: 0
 INFO:     connection closed
+INFO:     127.0.0.1:53408 - "OPTIONS /chat HTTP/1.1" 200 OK
+2025-07-18 11:02:25,071 - main - INFO - Received chat request
+2025-07-18 11:02:25,071 - main - INFO - Not using vector search for this chat request
+2025-07-18 11:02:25,673 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-18 11:02:25,677 - main - INFO - Successfully processed chat request
+INFO:     127.0.0.1:53408 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53830 - "OPTIONS /chat HTTP/1.1" 200 OK
+2025-07-18 11:15:20,176 - main - INFO - Received chat request
+2025-07-18 11:15:20,176 - main - INFO - Using vector search for this chat request
+2025-07-18 11:15:20,177 - main - INFO - Vector search enabled with index: rag-1752519055977
+2025-07-18 11:15:24,910 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-18 11:15:24,913 - main - INFO - Successfully processed chat request
+INFO:     127.0.0.1:53830 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53973 - "OPTIONS /chat HTTP/1.1" 200 OK
+2025-07-18 11:19:37,956 - main - INFO - Received chat request
+2025-07-18 11:19:37,957 - main - INFO - Using vector search for this chat request
+2025-07-18 11:19:37,957 - main - INFO - Vector search enabled with index: rag-1752519055977
+2025-07-18 11:19:41,338 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-18 11:19:41,341 - main - INFO - Successfully processed chat request
+INFO:     127.0.0.1:53973 - "POST /chat HTTP/1.1" 200 OK
