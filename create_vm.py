@@ -140,8 +140,7 @@ async def main():
     # Autoinstall script generation
     print_info("Generating installation setup script...")
     # Generate Auto-setup setup script
-    FRONTEND_PORT=3000
-    BACKEND_PORT=8000
+
     REACT_APP_APP_NAME='AI Chat Assistant'
     REACT_APP_APP_LOGO='https://vhdvm.blob.core.windows.net/vhdvm/gitgpt.svg'
     # Vector search
@@ -166,7 +165,9 @@ async def main():
     GPT_IMAGE_URL="https://gabz-mbtgx2um-westus3.cognitiveservices.azure.com/openai/deployments/gpt-image-1/images"
     GPT_IMAGE_KEY="6UR6v5uTDie85YAr8IM4CZ3FyxYB0RrFcsRVYgehEFmwOmPh41LaJQQJ99BFACMsfrFXJ3w3AAAAACOG7n60"
     GPT_IMAGE_VERSION="2025-04-01-preview"
-
+    #PORTS
+    FRONTEND_PORT=3000
+    BACKEND_PORT=8000
     # # 1. Create container
     # container_client = blob_service_client.create_container("ragdata")
     # # 2. Upload initial file
