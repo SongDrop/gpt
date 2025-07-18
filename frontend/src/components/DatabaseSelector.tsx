@@ -252,8 +252,10 @@ const DatabaseSelector = React.forwardRef<
     const renderDatabaseItem = (database: RagDatabase) => (
       <div
         key={database.id}
-        className={`p-4 border border-gray-200 rounded-lg mb-3 hover:shadow-md transition-shadow ${
-          database.isSelected ? "bg-blue-50 border-blue-200" : "bg-white"
+        className={`p-4 border border-[var(--color-border)] rounded-lg mb-3 hover:shadow-md transition-shadow ${
+          database.isSelected
+            ? "bg-[var(--color-background)] border-[var(--color-primary)]"
+            : "bg-[var(--color-secondary)]"
         }`}
       >
         <div className="flex items-start">
@@ -262,13 +264,13 @@ const DatabaseSelector = React.forwardRef<
             checked={database.isSelected}
             onChange={() => toggleDatabaseSelection(database.id)}
             onClick={(e) => e.stopPropagation()}
-            className="h-4 w-4 text-blue-600 rounded focus:ring-blue-500 mr-3 mt-1"
+            className="h-4 w-4 text-[var(--color-primary)] bg-[var(--color-background)] rounded focus:ring-blue-500 mr-3 mt-1 cursor-pointer"
           />
           <div className="flex-grow min-w-0">
             <div className="flex justify-between items-start">
               <div>
                 <div className="flex items-center">
-                  <h3 className="text-lg font-semibold text-gray-900">
+                  <h3 className="text-lg font-semibold text-[var(--color-foreground)] ">
                     {database.name}
                   </h3>
                   {database.isPublic && (
@@ -282,14 +284,18 @@ const DatabaseSelector = React.forwardRef<
                     </span>
                   )}
                 </div>
-                <p className="text-sm text-gray-600 mt-1">
+                <p className="text-sm text-[var(--color-foreground)] mt-1">
                   {database.description}
                 </p>
                 <div className="flex flex-wrap gap-1 mt-2">
                   {database.tags.map((tag) => (
                     <span
                       key={tag}
-                      className="px-2 py-0.5 text-xs bg-gray-100 text-gray-800 rounded-full"
+                      className={`px-2 py-0.5 text-xs text-[var(--color-foreground)] rounded-full ${
+                        database.isSelected
+                          ? "bg-[var(--color-secondary)]"
+                          : "bg-[var(--color-background)]"
+                      }`}
                     >
                       {tag}
                     </span>
@@ -297,14 +303,14 @@ const DatabaseSelector = React.forwardRef<
                 </div>
               </div>
               <div className="flex items-center space-x-2">
-                <span className="text-sm text-gray-500">
+                <span className="text-sm text-[var(--color-foreground)]">
                   {database.documentCount.toLocaleString()} docs
                 </span>
                 <div className="flex -space-x-2">
                   {database.contributors.slice(0, 3).map((contributor) => (
                     <div
                       key={contributor.id}
-                      className="w-8 h-8 rounded-full bg-gray-300 border-2 border-white flex items-center justify-center text-sm font-medium text-gray-700"
+                      className="w-8 h-8 rounded-full bg-[var(--color-background)] border-2 border-[var(--color-border)] flex items-center justify-center text-sm font-medium text-[var(--color-foreground)]"
                       title={contributor.name}
                     >
                       {contributor.avatar ? (
@@ -319,7 +325,7 @@ const DatabaseSelector = React.forwardRef<
                     </div>
                   ))}
                   {database.contributors.length > 3 && (
-                    <div className="w-8 h-8 rounded-full bg-gray-200 border-2 border-white flex items-center justify-center text-xs font-medium text-gray-600">
+                    <div className="w-8 h-8 rounded-full bg-[var(--color-background)] border-2 border-white flex items-center justify-center text-xs font-medium text-[var(--color-foreground)]">
                       +{database.contributors.length - 3}
                     </div>
                   )}
@@ -327,19 +333,19 @@ const DatabaseSelector = React.forwardRef<
               </div>
             </div>
 
-            <div className="flex justify-between items-center mt-3 pt-3 border-t border-gray-200">
+            <div className="flex justify-between items-center mt-3 pt-3 border-t border-[var(--color-border)]">
               <div className="flex items-center space-x-4">
                 <div className="flex items-center">
                   {getTypeIcon(database.type)}
-                  <span className="ml-1 text-sm text-gray-500">
+                  <span className="ml-1 text-sm text-[var(--color-foreground)]">
                     {database.type}
                   </span>
                 </div>
-                <span className="text-sm text-gray-500">
+                <span className="text-sm text-[var(--color-foreground)]">
                   Updated {new Date(database.lastUpdated).toLocaleDateString()}
                 </span>
                 {database.usageCount > 0 && (
-                  <span className="text-sm text-gray-500">
+                  <span className="text-sm text-[var(--color-foreground)]">
                     {database.usageCount.toLocaleString()} uses
                   </span>
                 )}
@@ -352,7 +358,7 @@ const DatabaseSelector = React.forwardRef<
                     >
                       <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
                     </svg>
-                    <span className="ml-1 text-sm text-gray-600">
+                    <span className="ml-1 text-sm text-[var(--color-foreground)]">
                       {database.rating.toFixed(1)}
                     </span>
                   </div>
@@ -364,7 +370,7 @@ const DatabaseSelector = React.forwardRef<
                   e.stopPropagation();
                   setSelectedDatabaseForUpload(database.id);
                 }}
-                className="px-3 py-1 bg-blue-600 text-white text-sm rounded-md hover:bg-blue-700"
+                className="px-3 py-1 bg-[var(--color-primary)] hover:bg-[var(--color-primary)] text-white text-sm rounded-md "
               >
                 Add Files
               </button>
@@ -373,7 +379,9 @@ const DatabaseSelector = React.forwardRef<
             {selectedDatabaseForUpload === database.id && (
               <div
                 className={`mt-3 p-4 border-2 border-dashed rounded-lg ${
-                  dragActive ? "border-blue-500 bg-blue-50" : "border-gray-300"
+                  dragActive
+                    ? "border-[var(--color-primary)] bg-[var(--color-primary)]"
+                    : "border-[var(--color-border)]"
                 }`}
                 onDragEnter={handleDrag}
                 onDragOver={handleDrag}
@@ -382,7 +390,7 @@ const DatabaseSelector = React.forwardRef<
               >
                 <div className="text-center">
                   <svg
-                    className="mx-auto h-12 w-12 text-gray-400"
+                    className="mx-auto h-12 w-12 text-bg-[var(--color-foreground)]"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -394,17 +402,17 @@ const DatabaseSelector = React.forwardRef<
                       d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
                     />
                   </svg>
-                  <div className="mt-1 flex text-sm text-gray-600">
+                  <div className="mt-1 flex text-sm text-[var(--color-foreground)]">
                     <label
                       htmlFor={`file-upload-${database.id}`}
-                      className="relative cursor-pointer bg-white rounded-md font-medium text-blue-600 hover:text-blue-500 focus-within:outline-none"
+                      className="relative cursor-pointer bg-white pl-1 pr-1 rounded-md font-medium text-[var(--color-primary)] hover:text-[var(--color-primary)] focus-within:outline-none"
                     >
                       <span>Upload files</span>
                       <input
                         id={`file-upload-${database.id}`}
                         name="file-upload"
                         type="file"
-                        className="sr-only"
+                        className="sr-only bg-[var(--color-background)]"
                         multiple
                         onChange={(e) => {
                           if (e.target.files && e.target.files.length > 0) {
@@ -416,9 +424,11 @@ const DatabaseSelector = React.forwardRef<
                         }}
                       />
                     </label>
-                    <p className="pl-1">or drag and drop</p>
+                    <p className="pl-1 text-[var(--color-secondary)">
+                      or drag and drop
+                    </p>
                   </div>
-                  <p className="text-xs text-gray-500">
+                  <p className="text-xs text-[var(--color-secondary)">
                     PDF, DOCX, TXT up to 10MB
                   </p>
                 </div>
@@ -428,7 +438,7 @@ const DatabaseSelector = React.forwardRef<
                     {Object.entries(uploadProgress).map(
                       ([filename, progress]) => (
                         <div key={filename} className="mb-1">
-                          <div className="flex justify-between text-xs text-gray-500 mb-1">
+                          <div className="flex justify-between text-xs text-[var(--color-secondary)] mb-1">
                             <span>{filename}</span>
                             <span>{progress}%</span>
                           </div>
@@ -447,19 +457,19 @@ const DatabaseSelector = React.forwardRef<
             )}
 
             {database.files && database.files.length > 0 && (
-              <div className="mt-3 pt-3 border-t border-gray-200">
-                <h4 className="text-sm font-medium text-gray-700 mb-2">
+              <div className="mt-3 pt-3 border-t border-[var(--color-border)]">
+                <h4 className="text-sm font-medium text-[var(--color-foreground)] mb-2">
                   Files
                 </h4>
                 <div className="space-y-2">
                   {database.files.map((file) => (
                     <div
                       key={file.name}
-                      className="flex justify-between items-center text-sm"
+                      className="flex justify-between items-center text-sm text-[var(--color-foreground)]"
                     >
-                      <div className="flex items-center truncate">
+                      <div className="flex items-center truncate text-[var(--color-foreground)]">
                         <svg
-                          className="flex-shrink-0 h-4 w-4 text-gray-400 mr-2"
+                          className="flex-shrink-0 h-4 w-4  mr-2"
                           fill="none"
                           stroke="currentColor"
                           viewBox="0 0 24 24"
@@ -473,7 +483,7 @@ const DatabaseSelector = React.forwardRef<
                         </svg>
                         <span className="truncate">{file.name}</span>
                       </div>
-                      <span className="text-gray-500">
+                      <span className="text-[var(--color-foreground)]">
                         {(file.size / 1024 / 1024).toFixed(2)} MB
                       </span>
                     </div>
@@ -515,9 +525,9 @@ const DatabaseSelector = React.forwardRef<
       <div className={`relative ${className}`}>
         <button
           onClick={() => handleOpen(!isOpen)}
-          className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 mb-1 text-left flex items-center justify-between focus:outline-none focus:ring-2 focus:ring-blue-500 hover:border-gray-400 transition-colors"
+          className="w-full bg-[var(--color-background)] border border-[var(--color-border)] rounded-lg px-4 py-3 mb-1 text-left flex items-center justify-between focus:outline-none focus:ring-2 focus:ring-blue-500 hover:bg-[var(--color-secondary)] transition-colors"
         >
-          <span className="inline-flex items-center space-x-1 truncate max-w-full">
+          <span className="inline-flex items-center space-x-1 truncate max-w-full ">
             <Database className="w-4 h-4 flex-shrink-0" />
             <span className="truncate">
               {databases.filter((db) => db.isSelected).length > 0
@@ -529,7 +539,7 @@ const DatabaseSelector = React.forwardRef<
             </span>
           </span>
           <svg
-            className={`w-5 h-5 text-gray-500 transition-transform duration-200 ${
+            className={`w-5 h-5 text-[var(--color-foreground)] transition-transform duration-200 ${
               isOpen ? "rotate-180" : ""
             }`}
             fill="none"
@@ -546,20 +556,20 @@ const DatabaseSelector = React.forwardRef<
         </button>
 
         {isOpen && (
-          <div className="absolute z-50 mt-1 w-full bg-white border border-gray-300 rounded-lg shadow-lg overflow-hidden">
-            <div className="p-4 border-b border-gray-200">
-              <div className="relative mb-4">
+          <div className="absolute z-50 w-full bg-[var(--color-secondary)] border border-[var(--color-border)] rounded-lg shadow-lg overflow-hidden">
+            <div className="p-4 border-b border-[var(--color-border)]">
+              <div className="relative mb-4 text-[var(--color-foreground)]">
                 <input
                   type="text"
                   placeholder="Search databases..."
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="w-full pl-10 pr-4 py-2 border border-[var(--color-border)] bg-[var(--color-background)]  hover:bg-[var(--color-secondary)] rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                   value={filters.searchQuery}
                   onChange={(e) =>
                     setFilters({ ...filters, searchQuery: e.target.value })
                   }
                 />
                 <svg
-                  className="absolute left-3 top-2.5 h-5 w-5 text-gray-400"
+                  className="absolute left-3 top-2.5 h-5 w-5 text-[var(--color-foreground)]"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -575,7 +585,7 @@ const DatabaseSelector = React.forwardRef<
 
               <div className="flex flex-wrap gap-2 mb-4">
                 <select
-                  className="px-3 py-1 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="px-3 py-1 border border-[var(--color-border)]  bg-[var(--color-background)] hover:bg-[var(--color-secondary)] cursor-pointer rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                   value={filters.typeFilter}
                   onChange={(e) =>
                     setFilters({
@@ -594,7 +604,7 @@ const DatabaseSelector = React.forwardRef<
                 </select>
 
                 <select
-                  className="px-3 py-1 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="px-3 py-1 border border-[var(--color-border)] bg-[var(--color-background)] hover:bg-[var(--color-secondary)] cursor-pointer rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                   value={filters.ownershipFilter}
                   onChange={(e) =>
                     setFilters({
@@ -612,7 +622,7 @@ const DatabaseSelector = React.forwardRef<
                 </select>
 
                 <select
-                  className="px-3 py-1 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  className="px-3 py-1 border border-[var(--color-border)] bg-[var(--color-background)] hover:bg-[var(--color-secondary)] cursor-pointer rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                   value={filters.sortBy}
                   onChange={(e) =>
                     setFilters({
@@ -639,7 +649,7 @@ const DatabaseSelector = React.forwardRef<
                         filters.sortDirection === "asc" ? "desc" : "asc",
                     })
                   }
-                  className="px-3 py-1 border border-gray-300 rounded-md text-sm flex items-center"
+                  className="px-3 py-1 border border-[var(--color-border)] bg-[var(--color-background)] hover:bg-[var(--color-secondary)] rounded-md text-sm flex items-center"
                 >
                   {filters.sortDirection === "asc" ? (
                     <>
@@ -680,7 +690,7 @@ const DatabaseSelector = React.forwardRef<
 
                 <button
                   onClick={onCreateNew}
-                  className="ml-auto px-3 py-1 bg-green-600 text-white text-sm rounded-md hover:bg-green-700 flex items-center"
+                  className="ml-auto px-3 py-1 bg-[var(--color-success)] hover:bg-[var(--color-success)] text-white text-sm rounded-md  flex items-center"
                 >
                   <svg
                     className="w-4 h-4 mr-1"
@@ -706,7 +716,7 @@ const DatabaseSelector = React.forwardRef<
               ) : (
                 <div className="text-center py-8">
                   <svg
-                    className="mx-auto h-12 w-12 text-gray-400"
+                    className="mx-auto h-12 w-12 text-[var(--color-foreground)]"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -718,10 +728,10 @@ const DatabaseSelector = React.forwardRef<
                       d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
                     />
                   </svg>
-                  <h3 className="mt-2 text-sm font-medium text-gray-900">
+                  <h3 className="mt-2 text-sm font-medium text-[var(--color-foreground)] opacity-80">
                     No databases found
                   </h3>
-                  <p className="mt-1 text-sm text-gray-500">
+                  <p className="mt-1 text-sm text-[var(--color-foreground)] opacity-80">
                     {filters.searchQuery
                       ? "Try adjusting your search or filters"
                       : "Create a new database to get started"}
@@ -729,7 +739,7 @@ const DatabaseSelector = React.forwardRef<
                   <div className="mt-6">
                     <button
                       onClick={onCreateNew}
-                      className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700"
+                      className="px-4 py-2 bg-[var(--color-primary)] text-white text-sm font-medium rounded-md hover:bg-[var(--color-primary)]"
                     >
                       Create New Database
                     </button>
@@ -738,7 +748,7 @@ const DatabaseSelector = React.forwardRef<
               )}
             </div>
 
-            <div className="p-4 border-t border-gray-200 bg-gray-50 flex justify-between items-center">
+            <div className="p-4 border-t border-[var(--color-border)]  bg-[var(--color-secondary)] flex justify-between items-center">
               <span className="text-sm text-gray-500">
                 {databases.filter((db) => db.isSelected).length} selected •{" "}
                 {filteredDatabases.length} shown
@@ -753,13 +763,13 @@ const DatabaseSelector = React.forwardRef<
                     setDatabases(updatedDatabases);
                     onSelectionChange([]);
                   }}
-                  className="px-4 py-2 text-sm text-gray-700 hover:text-gray-900"
+                  className="px-4 py-2 text-sm text-[var(--color-primary)] hover:text-[var(--color-primary)]"
                 >
                   Clear All
                 </button>
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700"
+                  className="px-4 py-2 bg-[var(--color-primary)] text-white text-sm font-medium rounded-md hover:-[var(--color-primary)]"
                 >
                   Confirm Selection
                 </button>

@@ -191,7 +191,7 @@ export default function DragDropArea({
     switch (previewType) {
       case "file":
         return (
-          <div className={`${baseClasses} text-blue-500`}>
+          <div className={`${baseClasses} text-[var(--color-primary)]`}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -227,7 +227,7 @@ export default function DragDropArea({
         );
       case "link":
         return (
-          <div className={`${baseClasses} text-green-500`}>
+          <div className={`${baseClasses} text-[var(--color-success)]`}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -245,7 +245,9 @@ export default function DragDropArea({
         );
       default:
         return (
-          <div className={`${baseClasses} text-gray-500 animate-pulse`}>
+          <div
+            className={`${baseClasses} text-[var(--color-secondary)] animate-pulse`}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -282,19 +284,19 @@ export default function DragDropArea({
   return (
     <div
       ref={dropAreaRef}
-      className={`fixed inset-0 z-50 flex flex-col items-center justify-center bg-white bg-opacity-90 backdrop-blur-sm transition-all duration-300 ${
+      className={`fixed inset-0 z-50 flex flex-col items-center justify-center bg-[var(--color-background)] bg-opacity-80 backdrop-blur-sm transition-all duration-300 ${
         isDragging ? "opacity-100" : "opacity-0 pointer-events-none"
       }`}
       aria-label="Drag and drop area"
     >
-      <div className="relative bg-white border-2 border-dashed border-gray-300 rounded-xl p-12 shadow-2xl max-w-md w-full text-center transition-all duration-300 hover:border-blue-400 hover:shadow-blue-100 hover:bg-blue-50">
+      <div className="relative bg-[var(--color-background)] border-2 border-dashed border-[var(--color-border)] rounded-xl p-12 shadow-2xl max-w-md w-full text-center transition-all duration-300 hover:[var(--color-primary)] hover:shadow-blue-100">
         {renderPreviewIcon()}
 
-        <h3 className="text-2xl font-bold text-gray-800 mb-2">
+        <h3 className="text-2xl font-bold text-[var(--color-foreground)] mb-2">
           {getTypeLabel()}
         </h3>
 
-        <p className="text-gray-600 mb-6">
+        <p className="text-[var(--color-foreground)] mb-6">
           {previewType === "default"
             ? "Drop anywhere on this screen"
             : `Drop to ${
@@ -303,7 +305,7 @@ export default function DragDropArea({
         </p>
 
         <div
-          className="absolute -inset-4 border-4 border-blue-400 rounded-xl pointer-events-none opacity-0 transition-opacity duration-300"
+          className="absolute -inset-4 border-4 border-[var(--color-primary)] rounded-xl pointer-events-none opacity-0 transition-opacity duration-300"
           style={{ opacity: isDragging ? 1 : 0 }}
         />
 
@@ -311,7 +313,7 @@ export default function DragDropArea({
           onClick={() => {
             setIsVisible(false);
           }}
-          className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors duration-200"
+          className="absolute top-4 right-4 text-[var(--color-secondary)] hover:text-[var(--color-secondary)] transition-colors duration-200"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -330,7 +332,7 @@ export default function DragDropArea({
         </button>
       </div>
 
-      <div className="mt-8 text-sm text-gray-500">
+      <div className="mt-8 text-sm text-[var(--color-foreground)]">
         <p>Supports files, folders, and web links</p>
       </div>
     </div>

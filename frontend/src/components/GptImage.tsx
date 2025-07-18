@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import useLocalStorage from "./useLocalStorage";
 import axios from "axios";
 import GptImageGridItem from "./GptImageGridItem";
-import { ArrowLeft, ChevronDown, ChevronUp } from "lucide-react";
+import { ArrowLeft, ChevronDown, ChevronUp, Sparkles } from "lucide-react";
 import {
   saveImageToDb,
   getAllImagesFromDb,
@@ -228,15 +228,51 @@ const GptImage: React.FC<GptImageProps> = ({ onClose }) => {
     setImages((prev) => prev.filter((img) => img.id !== id));
   };
 
+  const exportImageToFile = async (
+    imageUrl: string,
+    defaultFileName: string,
+    mimeType: string
+  ) => {
+    // Ask user for filename
+    const fileName = window.prompt(
+      "Enter filename for download:",
+      defaultFileName
+    );
+
+    if (!fileName) {
+      console.log("Download cancelled by user");
+      return;
+    }
+
+    try {
+      // Fetch the image as blob
+      const response = await fetch(imageUrl);
+      const blob = await response.blob();
+
+      // Create a downloadable link
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = fileName;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error("Failed to download image:", error);
+    }
+  };
+
   return (
     <>
       {/* FULL VIEW */}
       {isMainViewOpen && (
-        <div className="image-generator-container">
-          <div className="image-generator-card">
+        <div className="image-generator-container ">
+          <div className="image-generator-card bg-[var(--color-secondary)] shadow-lg">
             <header className="image-generator-header">
               <div className="flex items-center justify-between">
                 <button
+                  className="bg-[var(--color-background)] text-[var(--color-foreground)] hover:bg-[var(--color-secondary)] border border-[var(--color-border)] rounded"
                   onClick={onClose}
                   id="back-button-gpt-1"
                   aria-label="Back to console"
@@ -244,10 +280,13 @@ const GptImage: React.FC<GptImageProps> = ({ onClose }) => {
                   <ArrowLeft className="w-4 h-4" />
                 </button>
 
-                <h1 className="image-generator-title">gpt-image-1</h1>
+                <h1 className="image-generator-title text-[var(--color-primary)]">
+                  gpt-image-1
+                </h1>
 
                 {/* Minimize button */}
                 <button
+                  className="bg-[var(--color-background)] text-[var(--color-foreground)] hover:bg-[var(--color-secondary)] border border-[var(--color-border)] rounded"
                   onClick={() => setIsMainViewOpen(false)}
                   id="minimize-button-gpt-1"
                   title="Minimize"
@@ -256,7 +295,7 @@ const GptImage: React.FC<GptImageProps> = ({ onClose }) => {
                 </button>
               </div>
 
-              <p className="image-generator-subtitle">
+              <p className="image-generator-subtitle text-[var(--color-foreground)] opacity-80">
                 Transform your ideas into stunning visuals
               </p>
             </header>
@@ -270,18 +309,20 @@ const GptImage: React.FC<GptImageProps> = ({ onClose }) => {
                 value={prompt}
                 onChange={(e) => setPrompt(e.target.value)}
                 placeholder="A majestic lion in the savannah at sunset..."
-                className="form-textarea"
+                className="form-textarea bg-[var(--color-background)] border rounded border-[var(--color-border)]"
                 rows={3}
                 required
               />
 
               <div className="grid-2-col">
                 <div>
-                  <label className="form-label">Image Style</label>
+                  <label className="form-label text-[var(--color-foreground)] m-1">
+                    Image Style
+                  </label>
                   <select
                     value={imageStyle}
                     onChange={(e) => setImageStyle(e.target.value)}
-                    className="form-select"
+                    className="form-select text-[var(--color-foreground)  bg-[var(--color-background)] hover:bg-[var(--color-secondary)] rounded border border-[var(--color-border)]"
                   >
                     <option value="photorealistic">Photorealistic</option>
                     <option value="digital-art">Digital Art</option>
@@ -292,11 +333,13 @@ const GptImage: React.FC<GptImageProps> = ({ onClose }) => {
                 </div>
 
                 <div>
-                  <label className="form-label">Aspect Ratio</label>
+                  <label className="form-label text-[var(--color-foreground)] m-1">
+                    Aspect Ratio
+                  </label>
                   <select
                     value={aspectRatio}
                     onChange={(e) => setAspectRatio(e.target.value)}
-                    className="form-select"
+                    className="form-select bg-[var(--color-background)] hover:bg-[var(--color-secondary)] rounded border border-[var(--color-border)]"
                   >
                     <option value="square">Square (1:1)</option>
                     <option value="portrait">Portrait (4:5)</option>
@@ -306,11 +349,13 @@ const GptImage: React.FC<GptImageProps> = ({ onClose }) => {
               </div>
 
               <div>
-                <label className="form-label">Output Format</label>
+                <label className="form-label text-[var(--color-foreground)] m-1 ">
+                  Output Format
+                </label>
                 <select
                   value={outputFormat}
                   onChange={(e) => setOutputFormat(e.target.value)}
-                  className="form-select"
+                  className="form-select bg-[var(--color-background)] hover:bg-[var(--color-secondary)] rounded border border-[var(--color-border)]"
                 >
                   <option value="png">PNG</option>
                   <option value="tga">TGA</option>
@@ -319,14 +364,16 @@ const GptImage: React.FC<GptImageProps> = ({ onClose }) => {
               </div>
 
               <div>
-                <label className="form-label">Reference Image (optional)</label>
-                <div className="file-upload-container">
+                <label className="form-label text-[var(--color-foreground)] m-1">
+                  Reference Image (optional)
+                </label>
+                <div className="file-upload-container bg-[var(--color-background)] hover:bg-[var(--color-secondary)] rounded border border-[var(--color-border)]">
                   <input
                     type="file"
                     ref={fileInputRef}
                     accept="image/*"
                     onChange={handleFileChange}
-                    className="file-upload-input"
+                    className="file-upload-input "
                     id="file-upload"
                   />
                   <label htmlFor="file-upload" className="file-upload-label">
@@ -350,7 +397,7 @@ const GptImage: React.FC<GptImageProps> = ({ onClose }) => {
                 </div>
                 <p className="file-hint">Max 5MB (JPEG, PNG)</p>
                 {imagePreview && (
-                  <div className="image-preview-container">
+                  <div className="image-preview-container bg-[var(--color-background)]">
                     <p className="preview-label">Preview:</p>
                     <img
                       src={imagePreview}
@@ -367,7 +414,7 @@ const GptImage: React.FC<GptImageProps> = ({ onClose }) => {
                 <button
                   type="submit"
                   disabled={loading || !prompt.trim()}
-                  className="generate-btn"
+                  className="generate-btn bg-[var(--color-primary)] text-white hover:bg-[var(--color-primary)]"
                 >
                   {loading ? (
                     <>
@@ -398,7 +445,11 @@ const GptImage: React.FC<GptImageProps> = ({ onClose }) => {
                   )}
                 </button>
 
-                <button type="button" onClick={clearAll} className="clear-btn">
+                <button
+                  type="button"
+                  onClick={clearAll}
+                  className="clear-btn text-[var(--color-foreground)] bg-[var(--color-background)] hover:bg-[var(--color-secondary)] rounded border border-[var(--color-border)]"
+                >
                   Clear
                 </button>
               </div>
@@ -407,20 +458,27 @@ const GptImage: React.FC<GptImageProps> = ({ onClose }) => {
             {imageUrl && (
               <section className="result-container">
                 <header className="result-header">
-                  <h2 className="result-title">Your Generated Image</h2>
-                  <a
-                    href={imageUrl}
-                    download={`generated-image-${new Date()
-                      .toISOString()
-                      .slice(0, 10)}.${outputFormat}`}
-                    className="download-btn"
-                    type={`image/${outputFormat}`}
+                  <h2 className="result-title text-[var(--color-foreground)]">
+                    Your Generated Image
+                  </h2>
+                  <button
+                    type="button"
+                    className="download-btn bg-[var(--color-secondary)] text-[var(--color-foreground)] hover:bg-[var(--color-primary)] hover:text-white rounded px-4 py-2 cursor-pointer"
                     aria-label="Download generated image"
+                    onClick={() =>
+                      exportImageToFile(
+                        imageUrl,
+                        `generated-image-${new Date()
+                          .toISOString()
+                          .slice(0, 10)}.${outputFormat}`,
+                        `image/${outputFormat}`
+                      )
+                    }
                   >
                     ⬇️ Download
-                  </a>
+                  </button>
                   {elapsedTime && (
-                    <span className="time-elapsed">
+                    <span className="time-elapsed text-[var(--color-foreground)]">
                       ⏱️ Generated in {elapsedTime}s
                     </span>
                   )}
@@ -434,7 +492,7 @@ const GptImage: React.FC<GptImageProps> = ({ onClose }) => {
                     onError={() => setError("Failed to load generated image")}
                   />
                 </div>
-                <div className="prompt-display">
+                <div className="prompt-display bg-[var(--color-background)] rounded">
                   <p>
                     <strong>Prompt:</strong> {prompt}
                   </p>
@@ -454,7 +512,7 @@ const GptImage: React.FC<GptImageProps> = ({ onClose }) => {
                     <strong>Generated Images History</strong>
                   </h2>
                   <button
-                    className="delete-all-images"
+                    className="delete-all-images text-[var(--color-error)] hover:text-[var(--color-error)]"
                     onClick={() => {
                       if (
                         window.confirm(
@@ -468,7 +526,7 @@ const GptImage: React.FC<GptImageProps> = ({ onClose }) => {
                     Clear Images
                   </button>
                 </div>
-                <div className="image-grid">
+                <div className="image-grid bg-[var(--color-background)]">
                   {images.map((entry) => (
                     <GptImageGridItem
                       key={entry.id}
@@ -487,13 +545,45 @@ const GptImage: React.FC<GptImageProps> = ({ onClose }) => {
       {!isMainViewOpen && (
         <div
           onClick={() => setIsMainViewOpen(true)}
-          className="fixed bottom-20 right-4 z-50 w-32 h-32 bg-white rounded-lg shadow-lg cursor-pointer flex flex-col items-center justify-center p-2"
+          className="fixed bottom-20 right-4 z-50 w-32 h-32 bg-[var(--color-secondary)] border border-[var(--color-border)] rounded-lg shadow-lg cursor-pointer flex flex-col items-center justify-center p-2"
           aria-label="Expand image generator"
           title="Click to expand"
         >
           {loading ? (
             <div className="shimmer-effect">
-              <p className="mt-2 text-center text-sm text-gray-600">
+              {/* Sparkles container */}
+              <div className="absolute inset-0 pointer-events-none">
+                {/* Position 1 - top left */}
+                <Sparkles
+                  className="w-4 h-4 absolute top-2 left-2 opacity-5 opacity-pulse"
+                  style={{ animationDelay: "0s" }}
+                />
+
+                {/* Position 2 - top right */}
+                <Sparkles
+                  className="w-4 h-4 absolute top-2 right-2 opacity-15 opacity-pulse"
+                  style={{ animationDelay: "0.5s" }}
+                />
+
+                {/* Position 3 - bottom left */}
+                <Sparkles
+                  className="w-4 h-4 absolute bottom-2 left-2 opacity-10 opacity-pulse"
+                  style={{ animationDelay: "1s" }}
+                />
+
+                {/* Position 4 - bottom right */}
+                <Sparkles
+                  className="w-4 h-4 absolute bottom-2 right-2 opacity-20 opacity-pulse"
+                  style={{ animationDelay: "1.5s" }}
+                />
+
+                {/* Center sparkle */}
+                <Sparkles
+                  className="w-20 h-20 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 opacity-20 opacity-pulse"
+                  style={{ animationDelay: "2s" }}
+                />
+              </div>
+              <p className="mt-2 text-center text-sm text-[var(--color-foreground)] ">
                 Generating... ({liveTime}s)
               </p>
             </div>
@@ -503,13 +593,13 @@ const GptImage: React.FC<GptImageProps> = ({ onClose }) => {
                 <img
                   src={imageUrl}
                   alt="Generated preview"
-                  className="max-w-full max-h-full rounded-md shadow-md"
+                  className="max-w-full max-h-full rounded-md shadow-md bg-[var(--color-secondary)]"
                 />
               )}
               {!imageUrl && (
                 <img
                   src="https://i.postimg.cc/Ss7S7MfN/generated-image-2025-06-17.png"
-                  className="max-w-full max-h-full rounded-md shadow-md"
+                  className="max-w-full max-h-full rounded-md shadow-md bg-[var(--color-secondary)]"
                   alt=""
                 />
               )}

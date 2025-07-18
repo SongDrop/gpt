@@ -23196,3 +23196,105 @@ INFO:     connection closed
 2025-07-17 19:11:04,875 - main - INFO - Connection cleaned up for 127.0.0.1:54000
 2025-07-17 19:11:04,875 - main - INFO - Client 127.0.0.1:54000 disconnected. Active connections: 0
 INFO:     connection closed
+INFO:     127.0.0.1:54574 - "OPTIONS /translate HTTP/1.1" 200 OK
+2025-07-17 19:14:44,772 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+INFO:     127.0.0.1:54574 - "POST /translate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54581 - "OPTIONS /translate HTTP/1.1" 200 OK
+2025-07-17 19:14:59,527 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+INFO:     127.0.0.1:54581 - "POST /translate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54581 - "OPTIONS /translate HTTP/1.1" 200 OK
+2025-07-17 19:15:06,546 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+INFO:     127.0.0.1:54581 - "POST /translate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54581 - "OPTIONS /translate HTTP/1.1" 200 OK
+2025-07-17 19:15:12,609 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+INFO:     127.0.0.1:54581 - "POST /translate HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54614 - "OPTIONS /chat HTTP/1.1" 200 OK
+2025-07-17 19:15:48,025 - main - INFO - Received chat request
+2025-07-17 19:15:48,026 - main - INFO - Not using vector search for this chat request
+2025-07-17 19:15:57,544 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-17 19:15:57,545 - main - INFO - Successfully processed chat request
+INFO:     127.0.0.1:54614 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54968 - "OPTIONS /chat HTTP/1.1" 200 OK
+2025-07-17 19:23:44,305 - main - INFO - Received chat request
+2025-07-17 19:23:44,305 - main - INFO - Not using vector search for this chat request
+2025-07-17 19:23:48,225 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-17 19:23:48,228 - main - INFO - Successfully processed chat request
+INFO:     127.0.0.1:54968 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56261 - "OPTIONS /chat HTTP/1.1" 200 OK
+2025-07-17 19:55:35,763 - main - INFO - Received chat request
+2025-07-17 19:55:35,763 - main - INFO - Not using vector search for this chat request
+2025-07-17 19:55:39,571 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-17 19:55:39,572 - main - INFO - Successfully processed chat request
+INFO:     127.0.0.1:56261 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61672 - "OPTIONS /chat HTTP/1.1" 200 OK
+2025-07-17 22:30:10,671 - main - INFO - Received chat request
+2025-07-17 22:30:10,672 - main - INFO - Not using vector search for this chat request
+2025-07-17 22:30:16,013 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-17 22:30:16,016 - main - INFO - Successfully processed chat request
+INFO:     127.0.0.1:61672 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61770 - "OPTIONS /chat HTTP/1.1" 200 OK
+2025-07-17 22:32:56,460 - main - INFO - Received chat request
+2025-07-17 22:32:56,461 - main - INFO - Not using vector search for this chat request
+2025-07-17 22:33:01,076 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-17 22:33:01,077 - main - INFO - Successfully processed chat request
+INFO:     127.0.0.1:61770 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62003 - "OPTIONS /chat HTTP/1.1" 200 OK
+2025-07-17 22:39:26,042 - main - INFO - Received chat request
+2025-07-17 22:39:26,043 - main - INFO - Not using vector search for this chat request
+2025-07-17 22:39:30,303 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-17 22:39:30,304 - main - INFO - Successfully processed chat request
+INFO:     127.0.0.1:62003 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62012 - "OPTIONS /chat HTTP/1.1" 200 OK
+2025-07-17 22:39:40,160 - main - INFO - Received chat request
+2025-07-17 22:39:40,161 - main - INFO - Not using vector search for this chat request
+2025-07-17 22:39:43,615 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-17 22:39:43,616 - main - INFO - Successfully processed chat request
+INFO:     127.0.0.1:62012 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62085 - "OPTIONS /chat HTTP/1.1" 200 OK
+2025-07-17 22:41:33,777 - main - INFO - Received chat request
+2025-07-17 22:41:33,778 - main - INFO - Not using vector search for this chat request
+2025-07-17 22:41:42,400 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-17 22:41:42,401 - main - INFO - Successfully processed chat request
+INFO:     127.0.0.1:62085 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62154 - "OPTIONS /chat HTTP/1.1" 200 OK
+2025-07-17 22:43:31,878 - main - INFO - Received chat request
+2025-07-17 22:43:31,878 - main - INFO - Not using vector search for this chat request
+2025-07-17 22:43:38,210 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-17 22:43:38,211 - main - INFO - Successfully processed chat request
+INFO:     127.0.0.1:62154 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62276 - "OPTIONS /chat HTTP/1.1" 200 OK
+2025-07-17 22:47:04,682 - main - INFO - Received chat request
+2025-07-17 22:47:04,682 - main - INFO - Not using vector search for this chat request
+2025-07-17 22:47:08,858 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-17 22:47:08,859 - main - INFO - Successfully processed chat request
+INFO:     127.0.0.1:62276 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63913 - "OPTIONS /chat HTTP/1.1" 200 OK
+2025-07-17 23:31:48,656 - main - INFO - Received chat request
+2025-07-17 23:31:48,657 - main - INFO - Not using vector search for this chat request
+2025-07-17 23:31:52,435 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-17 23:31:52,436 - main - INFO - Successfully processed chat request
+INFO:     127.0.0.1:63913 - "POST /chat HTTP/1.1" 200 OK
+2025-07-18 10:33:30,628 - main - INFO - WebSocket connection attempt from 127.0.0.1:53230
+INFO:     ('127.0.0.1', 53230) - "WebSocket /ws" [accepted]
+2025-07-18 10:33:30,632 - main - INFO - Client 127.0.0.1:53230 connected. Active connections: 1
+INFO:     connection open
+INFO:     127.0.0.1:53231 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53232 - "GET /health HTTP/1.1" 200 OK
+2025-07-18 10:34:00,667 - main - INFO - Received WebSocket message
+2025-07-18 10:34:01,266 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-18 10:34:01,447 - main - INFO - Client 127.0.0.1:53230 disconnected. Active connections: 0
+2025-07-18 10:34:01,447 - main - INFO - Connection cleaned up for 127.0.0.1:53230
+2025-07-18 10:34:01,448 - main - ERROR - Unexpected error for 127.0.0.1:53230: WebSocket is not connected. Need to call "accept" first.
+2025-07-18 10:34:01,448 - main - INFO - Client 127.0.0.1:53230 disconnected. Active connections: 0
+2025-07-18 10:34:01,448 - main - INFO - Connection cleaned up for 127.0.0.1:53230
+2025-07-18 10:34:01,448 - main - INFO - Client 127.0.0.1:53230 disconnected. Active connections: 0
+INFO:     connection closed
+2025-07-18 10:34:01,451 - main - INFO - WebSocket connection attempt from 127.0.0.1:53265
+INFO:     ('127.0.0.1', 53265) - "WebSocket /ws" [accepted]
+2025-07-18 10:34:01,452 - main - INFO - Client 127.0.0.1:53265 connected. Active connections: 1
+INFO:     connection open
+2025-07-18 10:44:06,310 - main - INFO - WebSocket disconnected: 127.0.0.1:53265
+2025-07-18 10:44:06,310 - main - INFO - Client 127.0.0.1:53265 disconnected. Active connections: 0
+2025-07-18 10:44:06,310 - main - INFO - Connection cleaned up for 127.0.0.1:53265
+2025-07-18 10:44:06,310 - main - INFO - Client 127.0.0.1:53265 disconnected. Active connections: 0
+INFO:     connection closed

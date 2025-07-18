@@ -105,7 +105,7 @@ const DEFAULT_THEMES: ThemeJson[] = [
       secondaryHover: "#f0e7caff",
       accent: "#b58900",
       error: "#dc322f",
-      errorHover: "#b22222",
+      errorHover: "#a01f1fff",
       warning: "#cb4b16",
       success: "#859900",
       successHover: "#6e7a00", // darker olive green
@@ -386,7 +386,7 @@ const ThemeManager: React.FC<ThemeManagerProps> = ({ open, onClose }) => {
   return (
     <div
       className="fixed top-0 bottom-0 left-5 right-5 flex flex-col max-h-[80vh] max-w-4xl mx-auto my-auto bg-[var(--color-background)] text-[var(--color-foreground)] transition-colors duration-300 rounded-lg shadow-lg border overflow-hidden"
-      style={{ zIndex: 1000 }}
+      style={{ zIndex: 3000 }}
     >
       {/* Theme selection bar */}
       <div

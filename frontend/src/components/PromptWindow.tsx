@@ -271,7 +271,7 @@ const PromptWindow = ({
           <button
             type="button"
             onClick={() => setShowTemplates((prev) => !prev)}
-            className="flex items-center gap-1 p-2 rounded hover:bg-[var(--color-primary)] transition-colors"
+            className="flex items-center gap-1 p-2 rounded hover:bg-[var(--color-primary)] hover:text-white transition-colors"
             title="Prompt Templates"
           >
             <Sparkles className="w-4 h-4" />
@@ -296,7 +296,7 @@ const PromptWindow = ({
             type="button"
             onClick={() => setShowSavePromptModal(true)}
             disabled={!selectedPrompt.trim()}
-            className="flex items-center gap-1 p-2 rounded hover:bg-[var(--color-primary)] transition-colors disabled:opacity-50"
+            className="flex items-center gap-1 p-2 rounded hover:bg-[var(--color-primary)] hover:text-white transition-colors disabled:opacity-50"
             title="Save Prompt"
           >
             <Save className="w-4 h-4" />
@@ -305,7 +305,7 @@ const PromptWindow = ({
           <button
             type="button"
             onClick={copyToClipboard}
-            className="flex items-center gap-1 p-2 rounded hover:bg-[var(--color-primary)] transition-colors ml-auto"
+            className="flex items-center gap-1 p-2 rounded hover:bg-[var(--color-primary)] hover:text-white transition-colors ml-auto"
             title="Copy Prompt"
           >
             {copied ? (

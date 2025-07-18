@@ -25,9 +25,9 @@ const UploadCompletePopup: React.FC<{ show: boolean; onClose: () => void }> = ({
           transition={{ duration: 0.3 }}
           className="fixed inset-0 flex items-center justify-center z-50 pointer-events-none"
         >
-          <div className="pointer-events-auto bg-white border border-green-300 rounded-lg shadow-lg p-6 flex flex-col items-center gap-3">
-            <CheckCircle className="w-12 h-12 text-green-600 animate-pulse" />
-            <p className="text-green-500 font-semibold text-lg">
+          <div className="pointer-events-auto bg-[var(--color-background)] border border-[var(--color-success)] rounded-lg shadow-lg p-6 flex flex-col items-center gap-3">
+            <CheckCircle className="w-12 h-12 text-[var(--color-success)] animate-pulse" />
+            <p className="text-[var(--color-success)] font-semibold text-lg">
               Files uploaded successfully!
             </p>
           </div>

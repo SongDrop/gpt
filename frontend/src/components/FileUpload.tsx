@@ -315,9 +315,11 @@ const FileUpload: React.FC<FileUploadProps> = ({
       style={{ zIndex: 1000 }}
     >
       {isLoading && (
-        <div className="pointer-events-auto flex flex-col items-center justify-center p-6 bg-white rounded-lg shadow-lg w-80 m-auto mt-24">
-          <Loader className="w-10 h-10 animate-spin text-blue-600" />
-          <p className="mt-4 text-gray-700 font-semibold">Preparing files...</p>
+        <div className="pointer-events-auto flex flex-col items-center justify-center p-6 bg-[var(--color-background)] rounded-lg shadow-lg w-80 m-auto mt-24">
+          <Loader className="w-10 h-10 animate-spin text-[var(--color-primary)]" />
+          <p className="mt-4 text-[var(--color-foreground)] font-semibold">
+            Preparing files...
+          </p>
         </div>
       )}
 
@@ -326,16 +328,16 @@ const FileUpload: React.FC<FileUploadProps> = ({
           initial={{ scale: 0.9, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           exit={{ scale: 0.9, opacity: 0 }}
-          className="pointer-events-auto bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] overflow-hidden m-auto mt-12"
+          className="pointer-events-auto bg-[var(--color-background)] rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] overflow-hidden m-auto mt-12"
         >
-          <div className="flex justify-between items-center p-4 border-b">
+          <div className="flex justify-between items-center p-4 border-b border-[var(--color-border)] bg-[var(--color-secondary)]">
             <h3 className="text-lg font-semibold">Process Uploaded Files</h3>
             <button
               onClick={() => {
                 setIsMainModalOpen(false);
                 onClearFiles();
               }}
-              className="text-gray-500 hover:text-gray-700"
+              className="text-[var(--color-foreground)] hover:text-[var(--color-primary)]"
               aria-label="Close upload modal"
             >
               <X className="w-5 h-5" />
@@ -354,9 +356,9 @@ const FileUpload: React.FC<FileUploadProps> = ({
                     <span
                       className={`text-xs px-2 py-1 rounded-full ${
                         job.status === "completed"
-                          ? "bg-green-100 text-green-800"
+                          ? "bg-green-100 text-[var(--color-success)]"
                           : job.status === "error"
-                          ? "bg-red-100 text-red-800"
+                          ? "bg-red-100 text-[var(--color-error)]"
                           : job.status === "cancelled"
                           ? "bg-gray-200 text-gray-800"
                           : "bg-blue-100 text-blue-800"
@@ -370,7 +372,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
                 <div className="pl-8">
                   {job.status === "pending" ? (
                     <div className="space-y-3">
-                      <p className="text-sm text-gray-600">
+                      <p className="text-sm text-[var(--color-foreground)]">
                         What would you like to do with these files?
                       </p>
                       <div className="flex flex-wrap gap-2">
@@ -380,14 +382,14 @@ const FileUpload: React.FC<FileUploadProps> = ({
                             onClick={() =>
                               handleActionSelect(job.id, option.id)
                             }
-                            className="px-3 py-1.5 text-sm bg-blue-50 hover:bg-blue-100 text-blue-700 rounded-full transition-colors"
+                            className="px-3 py-1.5 text-sm bg-[var(--color-primary)] hover:bg-[var(--color-primary)] text-white rounded-full transition-colors"
                           >
                             {option.label}
                           </button>
                         ))}
                       </div>
                       {expandedJobs[job.id] && (
-                        <ul className="max-h-40 overflow-y-auto border border-gray-200 rounded p-2 mt-1 text-xs text-gray-700">
+                        <ul className="max-h-40 overflow-y-auto border border-[var(--color-border)] rounded p-2 mt-1 text-xs text-[var(--color-foreground)]">
                           {job.files.map((file) => (
                             <li
                               key={`${file.name}-${Math.random()
@@ -404,10 +406,12 @@ const FileUpload: React.FC<FileUploadProps> = ({
                     </div>
                   ) : (
                     <div className="space-y-2">
-                      <p className="text-sm text-gray-600">{job.message}</p>
-                      <div className="w-full bg-gray-200 rounded-full h-2.5">
+                      <p className="text-sm text-[var(--color-foreground)]">
+                        {job.message}
+                      </p>
+                      <div className="w-full bg-[var(--color-secondary)] rounded-full h-2.5">
                         <div
-                          className="bg-blue-600 h-2.5 rounded-full"
+                          className="bg-[var(--color-primary)] h-2.5 rounded-full"
                           style={{ width: `${job.progress}%` }}
                         />
                       </div>
@@ -416,7 +420,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
                         job.status !== "cancelled" && (
                           <button
                             onClick={() => cancelJob(job.id)}
-                            className="mt-2 px-3 py-1 text-sm bg-red-100 text-red-700 rounded-md hover:bg-red-200"
+                            className="mt-2 px-3 py-1 text-sm bg-[var(--color-error)] hover:bg-[var(--color-error)] text-white rounded-md"
                           >
                             Cancel Upload
                           </button>
@@ -428,8 +432,9 @@ const FileUpload: React.FC<FileUploadProps> = ({
             ))}
           </div>
 
-          <div className="p-4 border-t bg-gray-50 flex justify-end gap-2">
+          <div className="p-4 border-t border-[var(--color-border)] bg-[var(--color-secondary)] flex justify-end gap-2">
             <button
+              title=""
               onClick={() => {
                 if (allUploadsComplete) {
                   onClearFiles();
@@ -439,8 +444,8 @@ const FileUpload: React.FC<FileUploadProps> = ({
               }}
               className={`px-4 py-2 rounded-md ${
                 allUploadsComplete
-                  ? "bg-blue-600 hover:bg-blue-700 text-white"
-                  : "bg-gray-300 text-gray-500"
+                  ? "bg-[var(--color-success)] hover:bg-[var(--color-success)] text-white"
+                  : "bg-[var(--color-background)] hover:bg-[var(--color-primary)] text-[var(--color-foreground)] hover:text-white"
               }`}
             >
               {allUploadsComplete ? "Done" : "Minimize"}
@@ -458,7 +463,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
             initial={{ y: 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 100, opacity: 0 }}
-            className="pointer-events-auto fixed bottom-4 right-4 z-50 bg-white rounded-lg shadow-lg p-4 w-72"
+            className="pointer-events-auto fixed bottom-4 right-4 z-50 bg-[var(--color-secondary)] rounded-lg border shadow-lg p-4 w-72"
           >
             <div className="flex justify-between items-center mb-2">
               <h4 className="font-medium flex items-center gap-2">
@@ -469,7 +474,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
                 <button
                   onClick={() => setIsMainModalOpen(true)}
                   aria-label="Expand upload modal"
-                  className="p-1 rounded hover:bg-gray-100"
+                  className="p-1 rounded hover:bg-[var(--color-secondary)]"
                 >
                   <ChevronUp className="w-5 h-5" />
                 </button>
@@ -493,9 +498,9 @@ const FileUpload: React.FC<FileUploadProps> = ({
                     }
                   }}
                   aria-label="Cancel all uploads"
-                  className="p-1 rounded hover:bg-gray-100"
+                  className="p-1 rounded hover:bg-[var(--color-secondary)]"
                 >
-                  <XCircle className="w-5 h-5 text-red-600" />
+                  <XCircle className="w-5 h-5 text-[var(--color-error)]" />
                 </button>
               </div>
             </div>
@@ -506,14 +511,14 @@ const FileUpload: React.FC<FileUploadProps> = ({
                   job.status !== "completed" && job.status !== "cancelled"
               )
               .map((job) => (
-                <div key={job.id} className="mb-2 last:mb-0">
-                  <div className="flex justify-between text-xs mb-1">
+                <div key={job.id} className="mb-2 last:mb-0 ">
+                  <div className="flex justify-between text-xs mb-1 ">
                     <span className="capitalize truncate max-w-[140px]">
                       {job.type} ({job.files.length})
                     </span>
                     <span>{Math.round(job.progress)}%</span>
                   </div>
-                  <div className="w-full bg-gray-200 rounded-full h-1.5">
+                  <div className="w-full bg-[var(--color-background)] rounded-full h-1.5">
                     <div
                       className="bg-blue-600 h-1.5 rounded-full"
                       style={{ width: `${job.progress}%` }}
@@ -522,7 +527,7 @@ const FileUpload: React.FC<FileUploadProps> = ({
                 </div>
               ))}
 
-            <div className="text-xs text-gray-500">
+            <div className="text-xs text-[var(--color-foreground)]">
               {uploadJobs.filter((j) => j.status === "completed").length}/
               {uploadJobs.length} uploads completed
             </div>
