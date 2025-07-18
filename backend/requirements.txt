@@ -10,7 +10,7 @@ httptools==0.6.1
 pydantic==2.5.2
 pydantic-settings==2.1.0
 python-jose==3.3.0
-tiktoken
+tiktoken==0.4.0
                 
 # HTTP and async dependencies
 aiohttp==3.9.0
