@@ -300,11 +300,11 @@ server {{
 
     location /ws/ {{
         proxy_pass http://localhost:{BACKEND_PORT}/ws/;
+        proxy_set_header Host \$host;
+        proxy_set_header Upgrade \$http_upgrade;
+        proxy_set_header Connection \$connection_upgrade;
+        proxy_cache_bypass \$http_upgrade;
         proxy_http_version 1.1;
-        proxy_set_header Upgrade $http_upgrade;
-        proxy_set_header Connection $connection_upgrade;
-        proxy_set_header Host $host;
-        proxy_cache_bypass $http_upgrade;
     }}
 }}
 EOF
