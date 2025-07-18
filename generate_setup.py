@@ -288,6 +288,14 @@ server {{
         proxy_buffering off;
         proxy_request_buffering off;
     }}
+    location /ws/ {{
+        proxy_pass http://localhost:{BACKEND_PORT}/ws/;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection $connection_upgrade;
+        proxy_set_header Host $host;
+        proxy_cache_bypass $http_upgrade;
+    }}
 }}
 EOF
 

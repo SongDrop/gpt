@@ -346,6 +346,31 @@ async def main():
     except Exception:
         dns_zone = dns_client.zones.create_or_update(resource_group, domain, {'location': 'global'})
         print_success(f"Created DNS zone '{domain}'.")
+    
+    # Wait for DNS Zone to be ready before extension
+    print_info("Waiting 5 seconds for DNS Zone to initialize...")
+    time.sleep(5)
+    if not check_ns_delegation_with_retries(dns_client, resource_group, domain):
+        print_error("Stopping provisioning due to incorrect NS delegation.")
+        await cleanup_resources_on_failure(
+            network_client,
+            compute_client,
+            storage_client,
+            blob_service_client,
+            container_name,
+            blob_name,
+            dns_client,
+            resource_group,
+            domain,
+            a_records,
+            vm_name=vm_name,
+            storage_account_name=storage_account_name
+        )
+
+        print_warn("-----------------------------------------------------")
+        print_warn("Azure Windows VM provisioning failed with error")
+        print_warn("-----------------------------------------------------")
+        sys.exit(1)
 
     # Create DNS A record
     record_name = subdomain.rstrip('.') if subdomain else '@' 
@@ -354,7 +379,7 @@ async def main():
         print_info(f"Creating DNS A record for {a_record} for DNS Zone {domain} -> {public_ip}")
         a_record_set = RecordSet(ttl=3600, a_records=[{'ipv4_address': public_ip}])
         dns_client.record_sets.create_or_update(resource_group, domain, a_record, 'A', a_record_set)
-        print_success(f"Created DNS  A record for {a_record} for DNS Zone {domain} -> {public_ip}")
+        print_success(f"Created DNS A record for {a_record} for DNS Zone {domain} -> {public_ip}")
         
     # Deploy Custom Script Extension to run PowerShell setup script
     print_info(f"Deploying Custom Script Extension to install script on VM.")
@@ -629,5 +654,69 @@ async def cleanup_temp_storage_on_success(resource_group, storage_client, storag
 
     print_success("Temp storage cleanup completed.")
 
+
+def check_ns_delegation_with_retries(dns_client, resource_group, domain, retries=5, delay=10):
+    for attempt in range(1, retries + 1):
+        if check_ns_delegation(dns_client, resource_group, domain):
+            return True
+        print_warn(f"\n⚠️ Retrying NS delegation check in {delay} seconds... (Attempt {attempt}/{retries})")
+        time.sleep(delay)
+    return False
+
+
+def check_ns_delegation(dns_client, resource_group, domain):
+    print_warn(
+        "\nIMPORTANT: You must update your domain registrar's nameserver (NS) records "
+        "to exactly match the Azure DNS nameservers. Without this delegation, "
+        "your domain will NOT resolve correctly, and your application will NOT work as expected.\n"
+        "Please log into your domain registrar (e.g., Namecheap, GoDaddy) and set the NS records "
+        "for your domain to the above nameservers.\n"
+        "DNS changes may take up to 24–48 hours to propagate globally.\n"
+    )
+
+    try:
+        print_info("\n----------------------------")
+        print_info("🔍 Checking Azure DNS zone for NS servers...")
+        dns_zone = dns_client.zones.get(resource_group, domain)
+        azure_ns = sorted(ns.lower().rstrip('.') for ns in dns_zone.name_servers)
+        print_info(f"✅ Azure DNS zone NS servers for '{domain}':")
+        for ns in azure_ns:
+            print(f"  - {ns}")
+    except Exception as e:
+        print_error(f"\n❌ Failed to get Azure DNS zone NS servers: {e}")
+        return False
+
+    try:
+        print_info("\n🌐 Querying public DNS to verify delegation...")
+        resolver = dns.resolver.Resolver()
+        resolver.nameservers = ['8.8.8.8', '8.8.4.4']  # Google DNS
+        answers = resolver.resolve(domain, 'NS')
+        public_ns = sorted(str(rdata.target).lower().rstrip('.') for rdata in answers)
+        print_info(f"🌍 Publicly visible NS servers for '{domain}':")
+        for ns in public_ns:
+            print(f"  - {ns}")
+    except Exception as e:
+        print_error(f"\n❌ Failed to resolve public NS records for domain '{domain}': {e}")
+        return False
+
+    if set(azure_ns).issubset(set(public_ns)):
+        print_success("\n✅✅✅ NS delegation is correctly configured ✅✅✅")
+        return True
+    else:
+        print_error("\n❌ NS delegation mismatch detected!")
+        print_error("\nAzure DNS NS servers:")
+        for ns in azure_ns:
+            print_error(f"  - {ns}")
+        print_error("\nPublicly visible NS servers:")
+        for ns in public_ns:
+            print_error(f"  - {ns}")
+
+        print_warn(
+            "\nACTION REQUIRED: Update your domain registrar's NS records to match the Azure DNS NS servers.\n"
+            "Provisioning will stop until this is fixed.\n"
+        )
+        return False
+
+    
 if __name__ == "__main__":
     asyncio.run(main())

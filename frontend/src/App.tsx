@@ -199,6 +199,7 @@ class WebSocketManager {
   private lastPongTime = 0;
 
   private constructor(options: WebSocketManagerOptions) {
+    console.log("WebSocketManagerOptions", options);
     this.options = options;
   }
 
