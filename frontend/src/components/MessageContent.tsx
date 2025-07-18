@@ -311,7 +311,7 @@ const MessageContent: React.FC<MessageContentProps> = ({
         dangerouslySetInnerHTML={{ __html: htmlContent }}
       />
       {isTruncated && (
-        <div className="absolute bottom-0 left-0 right-0 text-center py-1 text-xs text-gray-500">
+        <div className="absolute bottom-0 left-0 right-0 text-center py-1 text-xs text-[var(--color-foreground)]">
           Message truncated - click "Continue" to see more
         </div>
       )}

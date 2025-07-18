@@ -2,23 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-body {
-  background: black;
-}
-
 #chat {
   overflow: hidden;
   overflow-y: auto;
 }
-.icon {
-  -webkit-mask-size: cover;
-  mask-size: cover;
-  -webkit-mask-image: url(https://url.of.svg/....svg);
-  mask-image: url(https://url.of.svg/....svg);
-  background-color: blue; /* Or any color of your choice. */
-  width: 20px;
-  height: 20px;
-}
+
 /* Message truncation styling */
 .message-truncated {
   position: relative;
@@ -32,11 +20,6 @@ body {
   left: 0;
   right: 0;
   height: 2rem;
-  background: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0.1),
-    rgba(255, 255, 255, 1)
-  );
   pointer-events: none;
 }
 
@@ -51,7 +34,6 @@ body {
 .code-block-wrapper pre {
   margin: 0 !important;
   padding: 1rem !important;
-  background-color: #1e1e1e !important;
   overflow-x: auto;
   max-height: 600px;
 }
@@ -60,16 +42,6 @@ body {
   background-color: transparent !important;
   padding: 0 !important;
   font-size: 0.875em !important;
-  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    "Liberation Mono", "Courier New", monospace !important;
-}
-
-/* Improved inline code styling */
-.prose code:not([class*="language-"]) {
-  color: white !important;
-  background-color: rgba(75, 85, 99, 0.8) !important;
-  padding: 0.2em 0.4em !important;
-  border-radius: 0.25rem !important;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     "Liberation Mono", "Courier New", monospace !important;
 }
@@ -102,10 +74,6 @@ body {
   margin-top: 2rem !important;
 }
 
-.copy-message-button {
-  /* Style copied button */
-}
-
 .code-block-wrapper {
   position: relative;
   overflow: auto;
@@ -116,10 +84,6 @@ body {
   top: 0;
   z-index: 10;
   float: right;
-}
-
-.copy-code-button:hover {
-  background-color: #4b5563; /* slightly lighter gray for hover effect */
 }
 
 .copy-code-button.copied {
@@ -146,6 +110,7 @@ body {
   -ms-overflow-style: none; /* IE and Edge */
   overflow-x: scroll;
 }
+
 #prompt_categories::-webkit-scrollbar {
   display: none;
 }
@@ -166,6 +131,7 @@ body {
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE and Edge */
 }
+
 .code-block-wrapper pre::-webkit-scrollbar {
   display: none;
 }
@@ -186,6 +152,7 @@ body {
   background-size: cover;
   background-position: right;
 }
+
 .g-support {
   display: flex;
   align-items: center;
@@ -199,7 +166,6 @@ body {
   overflow: hidden;
   z-index: 10000;
   background-color: transparent;
-  /* background-image: url("https://i.postimg.cc/L4G4h8yn/github.png"); */
   background-size: cover;
   background-position: center;
 }
@@ -227,26 +193,9 @@ body {
   overflow-x: auto;
 }
 
-.code-translator-container .translator-controls {
-  background-color: #f9fafb;
-  border: 1px solid #e5e7eb;
-}
-
-.code-translator-container .editor-header {
-  background-color: #f3f4f6;
-}
-
 .code-translator-container textarea {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     "Liberation Mono", "Courier New", monospace;
-  background-color: white;
-  color: #111827;
-}
-
-.code-translator-container select {
-  background-color: white;
-  border: 1px solid #d1d5db;
-  border-radius: 0.375rem;
 }
 
 .code-translator-container button:disabled {

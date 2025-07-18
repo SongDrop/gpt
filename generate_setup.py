@@ -157,7 +157,7 @@ VECTOR_SEARCH_STORAGE_CONNECTION_STRING={VECTOR_SEARCH_STORAGE_CONNECTION_STRING
 # Server Configuration\\n\
 HOST=0.0.0.0\\n\
 PORT={BACKEND_PORT}\\n\
-CORS_ORIGINS=http://localhost:{FRONTEND_PORT},http://localhost:{BACKEND_PORT},https://{DOMAIN_NAME}\\n\
+CORS_ORIGINS=http://localhost:{FRONTEND_PORT},http://localhost:{BACKEND_PORT},https://{DOMAIN_NAME}, wss://{DOMAIN_NAME}/ws\\n\
 \\n\
 SYSTEM_PROMPT=\\"You are an AI assistant. You aim to be helpful, honest, and direct in your interactions.\\"\\n" > /app/backend/.env
 
@@ -296,15 +296,6 @@ server {{
         proxy_http_version 1.1;
         proxy_buffering off;
         proxy_request_buffering off;
-    }}
-
-    location /ws/ {{
-        proxy_pass http://localhost:{BACKEND_PORT}/ws/;
-        proxy_set_header Host \$host;
-        proxy_set_header Upgrade \$http_upgrade;
-        proxy_set_header Connection \$connection_upgrade;
-        proxy_cache_bypass \$http_upgrade;
-        proxy_http_version 1.1;
     }}
 }}
 EOF

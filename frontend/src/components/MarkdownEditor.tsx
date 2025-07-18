@@ -922,13 +922,13 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProps>(
                   <>
                     <button
                       onClick={applyDiffToEditor}
-                      className="bg-[var(--color-success)] hover:bg-[var(--color-success-hover)] text-white px-4 py-2 rounded transition-colors"
+                      className="bg-[var(--color-success)] hover:bg-[var(--color-success)] text-white px-4 py-2 rounded transition-colors"
                     >
                       Apply Diff to Editor
                     </button>
                     <button
                       onClick={copyDiffToClipboard}
-                      className="bg-[var(--color-indigo)] hover:bg-[var(--color-indigo-hover)] text-[var(--color-primary)] flex items-center gap-1 px-4 py-2 rounded transition-colors"
+                      className="text-[var(--color-primary)] hover:text-[var(--color-primary)] flex items-center gap-1 px-4 py-2 rounded transition-colors"
                     >
                       {copied ? (
                         <Check className="w-4 h-4" />
@@ -952,7 +952,7 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProps>(
                           "diff_result.diff"
                         )
                       }
-                      className="bg-[var(--color-purple)] hover:bg-[var(--color-purple-hover)] text-[var(--color-primary)] flex items-center gap-1 px-4 py-2 rounded transition-colors"
+                      className="text-[var(--color-primary)] hover:text-[var(--color-primary)] flex items-center gap-1 px-4 py-2 rounded transition-colors"
                     >
                       <FileUp className="w-4 h-4" />
                       Export Diff
@@ -961,7 +961,7 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProps>(
                 )}
                 <button
                   onClick={() => setShowDiffTool(false)}
-                  className="bg-[var(--color-error)] hover:bg-[var(--color-error-hover)] text-white px-4 py-2 rounded transition-colors"
+                  className="bg-[var(--color-error)] hover:bg-[var(--color-error)] text-white px-4 py-2 rounded transition-colors"
                 >
                   Close
                 </button>
