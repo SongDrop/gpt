@@ -366,12 +366,7 @@ const CodeTranslator: React.FC<CodeTranslatorProps> = ({
             <select
               value={sourceLanguage}
               onChange={(e) => setSourceLanguage(e.target.value as Language)}
-              className="p-2 rounded"
-              style={{
-                border: "1px solid var(--color-border)",
-                backgroundColor: "var(--color-background)",
-                color: "var(--color-foreground)",
-              }}
+              className="p-2 rounded hover:bg-[var(--color-secondary)] bg-[var(--color-background)] cursor-pointer border rounded border-[var(--color-border)]"
             >
               {SUPPORTED_LANGUAGES.map((lang, index) => (
                 <option key={`source-${lang}-${index}`} value={lang}>
@@ -382,10 +377,7 @@ const CodeTranslator: React.FC<CodeTranslatorProps> = ({
           </div>
 
           <div className="target-languages">
-            <label
-              className="block text-sm font-medium mb-1"
-              style={{ color: "var(--color-foreground)" }}
-            >
+            <label className="block text-sm font-medium mb-1 text-var(--color-foreground)">
               Target Languages
             </label>
             <div className="flex flex-wrap gap-2">
@@ -429,12 +421,7 @@ const CodeTranslator: React.FC<CodeTranslatorProps> = ({
                     e.target.value = "";
                   }
                 }}
-                className="p-2 rounded"
-                style={{
-                  border: "1px solid var(--color-border)",
-                  backgroundColor: "var(--color-background)",
-                  color: "var(--color-foreground)",
-                }}
+                className="p-2 rounded hover:bg-[var(--color-secondary)] bg-[var(--color-background)] cursor-pointer border rounded border-[var(--color-border)]"
               >
                 <option value="">Add Language...</option>
                 {SUPPORTED_LANGUAGES.filter(
@@ -553,7 +540,7 @@ const CodeTranslator: React.FC<CodeTranslatorProps> = ({
           <textarea
             value={sourceCode}
             onChange={(e) => setSourceCode(e.target.value)}
-            className="w-full p-4 h-64 font-mono text-sm focus:outline-none resize-none"
+            className="w-full h-full p-4 h-64 font-mono text-sm focus:outline-none resize-none"
             placeholder={`Enter ${sourceLanguage} code here...`}
             style={{
               backgroundColor: "var(--color-background)",

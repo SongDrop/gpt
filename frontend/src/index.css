@@ -46,6 +46,16 @@
     "Liberation Mono", "Courier New", monospace !important;
 }
 
+/* Improved inline code styling */
+.prose code:not([class*="language-"]) {
+  color: white !important;
+  background-color: rgba(75, 85, 99, 0.8) !important;
+  padding: 0.2em 0.4em !important;
+  border-radius: 0.25rem !important;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace !important;
+}
+
 /* Scrollbars for code blocks */
 .code-block-wrapper pre::-webkit-scrollbar {
   height: 8px;
@@ -74,6 +84,10 @@
   margin-top: 2rem !important;
 }
 
+.copy-message-button {
+  /* Style copied button */
+}
+
 .code-block-wrapper {
   position: relative;
   overflow: auto;
@@ -84,6 +98,10 @@
   top: 0;
   z-index: 10;
   float: right;
+}
+
+.copy-code-button:hover {
+  background-color: #4b5563; /* slightly lighter gray for hover effect */
 }
 
 .copy-code-button.copied {
@@ -110,7 +128,6 @@
   -ms-overflow-style: none; /* IE and Edge */
   overflow-x: scroll;
 }
-
 #prompt_categories::-webkit-scrollbar {
   display: none;
 }
@@ -131,7 +148,6 @@
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE and Edge */
 }
-
 .code-block-wrapper pre::-webkit-scrollbar {
   display: none;
 }
@@ -152,7 +168,6 @@
   background-size: cover;
   background-position: right;
 }
-
 .g-support {
   display: flex;
   align-items: center;
@@ -166,6 +181,7 @@
   overflow: hidden;
   z-index: 10000;
   background-color: transparent;
+  /* background-image: url("https://i.postimg.cc/L4G4h8yn/github.png"); */
   background-size: cover;
   background-position: center;
 }
@@ -193,9 +209,26 @@
   overflow-x: auto;
 }
 
+.code-translator-container .translator-controls {
+  background-color: #f9fafb;
+  border: 1px solid #e5e7eb;
+}
+
+.code-translator-container .editor-header {
+  background-color: #f3f4f6;
+}
+
 .code-translator-container textarea {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     "Liberation Mono", "Courier New", monospace;
+  background-color: white;
+  color: #111827;
+}
+
+.code-translator-container select {
+  background-color: white;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
 }
 
 .code-translator-container button:disabled {
