@@ -1779,9 +1779,9 @@ export default function ChatApp() {
           <div ref={messagesEndRef} />
         </div>
 
-        <div className="bg-[var(--color-background)] pl-4 pr-4 pt-1 pb-4 shadow-lg">
+        <div className="pl-4 pr-4 pt-1 pb-4 shadow-lg">
           {error && (
-            <div className="bg-[var(--color-error)] bg-opacity-20 text-[var(--color-error)] mb-4 p-3 rounded-lg flex items-center gap-2">
+            <div className="bg-[var(--color-secondary)] bg-opacity-20 text-[var(--color-error)] mb-4 p-3 rounded-lg flex items-center gap-2">
               <AlertTriangle size={18} />
               <span>{error}</span>
             </div>
