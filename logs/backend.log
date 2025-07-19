@@ -116,3 +116,25 @@ INFO:     connection closed
 INFO:     ('127.0.0.1', 49617) - "WebSocket /ws" [accepted]
 2025-07-19 13:10:45,617 - main - INFO - Client 127.0.0.1:49617 connected. Active connections: 1
 INFO:     connection open
+2025-07-19 13:11:15,622 - main - INFO - Received WebSocket message
+2025-07-19 13:11:15,923 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-19 13:11:16,014 - main - INFO - Client 127.0.0.1:49617 disconnected. Active connections: 0
+2025-07-19 13:11:16,014 - main - INFO - Connection cleaned up for 127.0.0.1:49617
+2025-07-19 13:11:16,015 - main - ERROR - Unexpected error for 127.0.0.1:49617: WebSocket is not connected. Need to call "accept" first.
+2025-07-19 13:11:16,015 - main - INFO - Client 127.0.0.1:49617 disconnected. Active connections: 0
+2025-07-19 13:11:16,015 - main - INFO - Connection cleaned up for 127.0.0.1:49617
+2025-07-19 13:11:16,015 - main - INFO - Client 127.0.0.1:49617 disconnected. Active connections: 0
+INFO:     connection closed
+2025-07-19 13:11:18,170 - main - INFO - WebSocket connection attempt from 127.0.0.1:49620
+INFO:     ('127.0.0.1', 49620) - "WebSocket /ws" [accepted]
+2025-07-19 13:11:18,170 - main - INFO - Client 127.0.0.1:49620 connected. Active connections: 1
+INFO:     connection open
+2025-07-19 13:11:48,180 - main - INFO - Received WebSocket message
+2025-07-19 13:11:48,444 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-19 13:11:48,547 - main - INFO - Client 127.0.0.1:49620 disconnected. Active connections: 0
+2025-07-19 13:11:48,547 - main - INFO - Connection cleaned up for 127.0.0.1:49620
+2025-07-19 13:11:48,547 - main - ERROR - Unexpected error for 127.0.0.1:49620: WebSocket is not connected. Need to call "accept" first.
+2025-07-19 13:11:48,548 - main - INFO - Client 127.0.0.1:49620 disconnected. Active connections: 0
+2025-07-19 13:11:48,548 - main - INFO - Connection cleaned up for 127.0.0.1:49620
+2025-07-19 13:11:48,548 - main - INFO - Client 127.0.0.1:49620 disconnected. Active connections: 0
+INFO:     connection closed

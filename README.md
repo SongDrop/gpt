@@ -48,14 +48,14 @@ chmod +x restart_services.sh
 ```
 
 ```
-python3 -m venv myenv
+python3.10 -m venv myenv
 source myenv/bin/activate
 pip install -r requirements.txt
-python3 create_vm.py
+python3.10 create_vm.py
 
-python3 -m venv myenv
+python3.10 -m venv myenv
 source myenv/bin/activate
-python3 delete_vm.py
+python3.10 delete_vm.py
 ```
 
 ## High-Level Overview
