@@ -18,13 +18,13 @@ export const config: Config = {
   API_URL: getEnvVar(
     "REACT_APP_API_URL",
     window.location.protocol === "https:"
-      ? `${window.location.protocol}//${window.location.hostname}:8000`
+      ? `${window.location.protocol}//${window.location.hostname}` // default port 443 implied
       : `${window.location.protocol}//${window.location.hostname}:8000`
   ),
   WS_URL: getEnvVar(
     "REACT_APP_WS_URL",
     window.location.protocol === "https:"
-      ? `wss://${window.location.hostname}:8000/ws`
+      ? `wss://${window.location.hostname}/ws` // NO :8000 here
       : `ws://${window.location.hostname}:8000/ws`
   ),
 
