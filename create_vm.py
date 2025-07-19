@@ -681,7 +681,13 @@ def check_ns_delegation(dns_client, resource_group, domain):
         "your domain will NOT resolve correctly, and your application will NOT work as expected.\n"
         "Please log into your domain registrar (e.g., Namecheap, GoDaddy) and set the NS records "
         "for your domain to the above nameservers.\n"
-        "DNS changes may take up to 24–48 hours to propagate globally.\n"
+        "DNS changes may take up to 24–48 hours to propagate globally.\n\n"
+        "NOTE: If your DNS zone already exists in Azure and has been previously added, "
+        "sometimes the initial run may generate a set of nameservers that do NOT match your existing zone. "
+        "In such cases, you may need to rerun this setup code multiple times until it generates the correct "
+        "nameservers that align with your Azure DNS zone.\n"
+        "For example, an initial run might generate 'n1-04' nameservers, which could mismatch the actual "
+        "'n1-09' nameservers your domain uses. Running the code again can update this to the correct values.\n"
     )
 
     try:
