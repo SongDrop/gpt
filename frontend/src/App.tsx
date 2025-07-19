@@ -1403,19 +1403,19 @@ export default function ChatApp() {
     }
   };
 
-  //ERROR
+  //CONNECTION ERROR
   if (initError) {
     return (
-      <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
+      <div className="flex flex-col items-center justify-center min-h-screen bg-[var(--color-secondary)] p-4">
         <div className="bg-white rounded-lg shadow-lg p-6 max-w-md w-full">
-          <div className="flex items-center gap-2 text-red-600 mb-4">
+          <div className="flex items-center gap-2 text-[var(--color-error)] mb-4">
             <AlertTriangle className="w-6 h-6" />
             <h2 className="text-xl font-semibold">Connection Error</h2>
           </div>
           <p className="text-gray-600 mb-4">{initError}</p>
           <button
             onClick={() => window.location.reload()}
-            className="w-full bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors"
+            className="w-full bg-[var(--color-primary)] hover:bg-[var(--color-primary)] text-white px-4 py-2 rounded  transition-colors"
           >
             Try Again
           </button>
@@ -1424,7 +1424,7 @@ export default function ChatApp() {
     );
   }
 
-  //VIEW
+  //CHAT
   return (
     <div>
       {/* Background image layer */}
@@ -1781,7 +1781,7 @@ export default function ChatApp() {
 
         <div className="pl-4 pr-4 pt-1 pb-4 shadow-lg">
           {error && (
-            <div className="bg-[var(--color-secondary)] bg-opacity-20 text-[var(--color-error)] mb-4 p-3 rounded-lg flex items-center gap-2">
+            <div className="bg-[var(--color-secondary)] bg-opacity-20 text-[var(--color-error)] mb-4 p-3 rounded-lg border border-[var(--color-border)] flex items-center gap-2">
               <AlertTriangle size={18} />
               <span>{error}</span>
             </div>

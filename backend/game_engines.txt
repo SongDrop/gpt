@@ -1,0 +1,174 @@
+{"unreal_engine" = [
+    # Core Unreal Engine formats
+    "*.u", "*.uc", "*.upk", "*.umap", "*.uasset", "*.uexp", "*.ubulk",
+    "*.uplugin", "*.uproject", "*.utx", "*.uax", "*.ukx", "*.usx", "*.unr",
+    "*.udk", "*.umx", "*.fxa", "*.fxp", "*.gtl", "*.gma",
+    
+    # Texture and image formats
+    "*.ico", "*.png", "*.psd", "*.tga", "*.bmp", "*.dds", "*.jpg", "*.jpeg",
+    "*.tiff", "*.tif", "*.exr", "*.hdr", "*.pfm", "*.raw", "*.xcf", "*.sbsar",
+    "*.sbs", "*.sppr", "*.tx", "*.mat", "*.cg", "*.cgfx",
+    
+    # 3D model and animation formats
+    "*.fbx", "*.psk", "*.psa", "*.obj", "*.stl", "*.abc", "*.ply", "*.gltf",
+    "*.glb", "*.iges", "*.igs", "*.step", "*.stp", "*.x3d", "*.vrm", "*.vox",
+    "*.blend", "*.3ds", "*.max", "*.ma", "*.mb", "*.ztl", "*.ztb", "*.tbx",
+    "*.mtl", "*.bgeo", "*.bsp", "*.bvh", "*.c3d", "*.anim", "*.skel", "*.rig",
+    "*.mc", "*.mcx", "*.phy",
+    
+    # Audio formats
+    "*.wav", "*.mp3", "*.ogg", "*.flac", "*.m4a", "*.aac", "*.ac3", "*.umx",
+    
+    # Video formats
+    "*.mp4", "*.bik", "*.mov", "*.avi", "*.wmv", "*.flv", "*.mkv", "*.m4v",
+    "*.mxf", "*.r3d",
+    
+    # Archive and package formats
+    "*.pak", "*.pakchunk*", "*.pak.info", "*.zip", "*.rar", "*.7z", "*.tar",
+    "*.gz", "*.lz4", "*.lzma", "*.xz", "*.cab", "*.msi", "*.iso", "*.bin",
+    
+    # Development and source files
+    "*.sln", "*.vcproj", "*.vcxproj", "*.vcxproj.user", "*.vsconfig", "*.props",
+    "*.targets", "*.filters", "*.ncb", "*.sdf", "*.vssettings", "*.cmake",
+    "*.mak", "*.hlsl", "*.glsl", "*.fx", "*.fxc",
+    
+    # Scripts and text-based files
+    "*.bat", "*.sh", "*.cmd", "*.patch", "*.diff", "*.log", "*.chtml", "*.t3d",
+    
+    # Other binary formats
+    "*.dll", "*.lib", "*.pdb", "*.exe", "*.swf", "*.sma", "*.smi", "*.ptx",
+    "*.ies", "*.abs", "*.psa"
+],
+
+source_engine = [
+    # Core Formats
+    "*.vmf", "*.vmt", "*.vtf", "*.vtx", "*.mdl", "*.phy", "*.vcd", "*.pcf", 
+    "*.bsp", "*.ain", "*.gam", "*.fgd", "*.qc",
+
+    # Map Geometry & Assets
+    "*.smd", "*.dmx", "*.vvd", "*.dx90.vtx", "*.dx80.vtx", "*.sw.vtx",  # Model formats
+    "*.rad",  # Lighting
+    "*.res",  # Resources
+    "*.nav",  # AI Navigation
+
+    # Textures & Materials
+    "*.tga", "*.psd",  # Source textures (compiled to VTF)
+    "*.txt"  # Texture configuration
+
+    # Audio
+    "*.wav", "*.mp3", "*.ogg",
+
+    # Scripts & Configuration
+    "*.cfg", "*.rc", "*.sh", "*.bat",
+    "*.nut",  # Squirrel scripts
+    "*.lua",  # Lua scripts (GMod)
+
+    # Packaging & Archives
+    "*.vpk",  # Valve Pak
+    "*.gcf",  # Steam cache
+
+    # Development Tools
+    "*.fgd",  # Entity definitions
+    "*.log",  # Compiler logs
+],
+lithtech = [
+    # Core Formats
+    "*.dtx",  # Texture format (similar to DDS) :cite[5]
+    "*.abc",  # Alembic animations
+    "*.lta", "*.ltc",  # World/object data
+
+    # Models & Assets
+    "*.mod",  # 3D models
+    "*.ani",  # Animations
+    "*.spr",  # Sprites
+
+    # Configuration
+    "*.ltb",  # Binary assets
+    "*.lto",  # Object templates
+
+    # Audio
+    "*.wav", "*.mp3", "*.ogg",
+
+    # Legacy Formats (1998–2000s)
+    "*.dat",  # Generic data
+],
+cryengine = [
+    # Geometry & Assets
+    "*.cgf",  # Static geometry :cite[8]
+    "*.chr",  # Character models :cite[8]
+    "*.skin",  # Skinned meshes :cite[8]
+    "*.cga",  # Rigid-body animations :cite[2]
+    "*.cdf",  # Character definitions :cite[8]
+
+    # Textures & Materials
+    "*.mtl",  # Material definitions :cite[8]
+    "*.tif",  # Source textures (with CryTIF plugin) :cite[8]
+    "*.dds",  # Compiled textures :cite[8]
+    "*.ddn",  # Normal maps
+
+    # Animation
+    "*.i_caf", "*.caf",  # Character animations :cite[8]
+    "*.anm",  # Rigid animations :cite[2]
+    "*.bspace",  # Blend spaces :cite[8]
+    "*.chrparams",  # Character parameters :cite[8]
+
+    # Audio
+    "*.fdp", "*.fev", "*.fsb",  # FMOD projects :cite[8]
+    "*.ogg", "*.wav",
+
+    # UI & Scripts
+    "*.lua",  # Scripts
+    "*.swf", "*.gfx",  # Scaleform UI :cite[8]
+    "*.xml",  # Configuration
+],
+idtech3 = [
+    # Core Formats
+    "*.pk3",  # Asset archive (ZIP) :cite[3]
+    "*.bsp",  # Compiled maps
+    "*.map",  # Source maps (Valve220 variant) :cite[6]
+    "*.shader",  # Material scripts
+
+    # Models & Assets
+    "*.md3",  # Models (e.g., characters)
+    "*.md2",  # Legacy models
+    "*.ase", "*.obj",  # Exported geometry
+
+    # Textures
+    "*.tga", "*.jpg", "*.wal",  # Quake II/III textures
+    "*.dds",  # Compressed textures
+
+    # Audio
+    "*.wav", "*.mp3", "*.ogg",
+
+    # Configuration
+    "*.cfg", "*.script",  # Game/UI scripts
+    "*.bot",  # Bot data
+],
+idtech4 = [
+    # Core Formats
+    "*.pk4",  # Asset archive (ZIP) :cite[10]
+    "*.map",  # Source maps (Brush primitives) :cite[6]
+    "*.mtr",  # Material definitions
+    "*.def",  # Entity definitions
+
+    # Models & Animation
+    "*.md5mesh", "*.md5anim",  # Skeletal models :cite[7]
+    "*.lwo",  # LightWave objects
+    "*.ma", "*.mb",  # Maya assets
+
+    # Textures
+    "*.dds", "*.tga", "*.bmp", 
+    "*.dds",  # Compressed
+
+    # Audio
+    "*.wav", "*.ogg", "*.mp3",
+
+    # Scripts & UI
+    "*.script",  # Game logic
+    "*.gui",  # UI layouts
+    "*.lang",  # Localization
+
+    # Shaders & Effects
+    "*.glsl",  # OpenGL shaders
+]
+}

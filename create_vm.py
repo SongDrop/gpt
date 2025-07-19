@@ -358,7 +358,8 @@ async def main():
     # Wait for DNS Zone to be ready before extension
     print_info("Waiting 5 seconds for DNS Zone to initialize...")
     time.sleep(5)
-    record_name = subdomain.rstrip('.') if subdomain else '@' 
+    record_name = subdomain.rstrip('.') if subdomain else '@'
+    a_records = [record_name]
     if not check_ns_delegation_with_retries(dns_client, resource_group, domain):
         print_error("Stopping provisioning due to incorrect NS delegation.")
         await cleanup_resources_on_failure(

@@ -93,7 +93,7 @@ cd "$BACKEND_DIR"
 
 # Create fresh virtual environment
 echo "Creating virtual environment..."
-python3 -m venv venv
+python3.10 -m venv venv
 source venv/bin/activate
 
 echo "Upgrading pip and installing dependencies..."
