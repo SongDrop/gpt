@@ -857,7 +857,12 @@ export default function ChatApp() {
 
   // WebSocket connection management
   useEffect(() => {
+    console.log("Config WS_URL:", config.WS_URL);
     if (!useHttpFallback && sessionId) {
+      console.log(
+        "!useHttpFallback && sessionId | Config WS_URL:",
+        config.WS_URL
+      );
       const manager = WebSocketManager.getInstance({
         url: config.WS_URL,
         maxReconnectAttempts: config.MAX_RECONNECT_ATTEMPTS,
