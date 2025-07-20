@@ -199,7 +199,6 @@ class WebSocketManager {
   private lastPongTime = 0;
 
   private constructor(options: WebSocketManagerOptions) {
-    console.log("WebSocketManagerOptions", options);
     this.options = options;
   }
 
@@ -535,7 +534,18 @@ export default function ChatApp() {
     []
   );
   const [messages, setMessages] = useState<Message[]>([]);
+  const PAGE_SIZE = 50; // or suitable chunk size
 
+  const [messagePageOffset, setMessagePageOffset] = useState(0);
+  const [hasMoreMessages, setHasMoreMessages] = useState(true);
+  const [loadingMessages, setLoadingMessages] = useState(false);
+  //
+  const [isSearching, setIsSearching] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState<Message[]>([]);
+  const [searchOffset, setSearchOffset] = useState(0);
+  const [searchHasMore, setSearchHasMore] = useState(false);
+  const [searchLoading, setSearchLoading] = useState(false);
   //
   const [input, setInput] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -598,6 +608,14 @@ export default function ChatApp() {
   const closeThemeManager = () => setShowThemeManager(false);
 
   const messageRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+
+  const clearSearch = () => {
+    setIsSearching(false);
+    setSearchQuery("");
+    setSearchResults([]);
+    setSearchOffset(0);
+    setSearchHasMore(false);
+  };
 
   const handleCreateDatabase = async (data: {
     title: string;
@@ -747,6 +765,7 @@ export default function ChatApp() {
       try {
         console.log(`Fetching messages from DB...`);
         // Reset pagination when session changes
+        ///PAGE_SIZE; should be aded
         const storedMessages = await getMessagesBySession(
           sessionId,
           initialPagination.limit,
@@ -758,6 +777,12 @@ export default function ChatApp() {
           console.log(`Component unmounted, aborting update`);
           console.groupEnd();
           return;
+        }
+
+        if (storedMessages.length < PAGE_SIZE) {
+          setHasMoreMessages(false);
+        } else {
+          setHasMoreMessages(true);
         }
 
         if (storedMessages.length > 0) {
@@ -1723,6 +1748,22 @@ export default function ChatApp() {
           id="messages"
           className="flex-1 overflow-y-auto px-4 py-4 space-y-4 w-full max-w-full sm:max-w-[90%] mx-auto lg:max-w-[1200px]"
         >
+          {hasMoreMessages && !loadingMessages && (
+            <button
+              onClick={() =>
+                setMessagePageOffset((offset) => offset + PAGE_SIZE)
+              }
+              className="text-sm text-[var(--color-primary)] hover:underline mb-2"
+            >
+              Load Older Messages
+            </button>
+          )}
+
+          {loadingMessages && (
+            <div className="text-sm italic text-[var(--color-secondary)] mb-2">
+              Loading messages...
+            </div>
+          )}
           {/* Message items */}
           {messages
             .slice(-config.MESSAGE_HISTORY_LIMIT)

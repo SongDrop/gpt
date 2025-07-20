@@ -164,7 +164,9 @@ SYSTEM_PROMPT=\\"You are an AI assistant. You aim to be helpful, honest, and dir
 # Create frontend/.env
 RUN printf "#Frontend Configuration\\n\
 REACT_APP_API_URL=https://{DOMAIN_NAME}\\n\
-REACT_APP_WS_URL=wss://{DOMAIN_NAME}:{BACKEND_PORT}/ws\\n\
+REACT_APP_WS_URL=wss://{DOMAIN_NAME}/ws\\n\
+WDS_SOCKET_PORT={BACKEND_PORT}
+WDS_SOCKET_HOST={DOMAIN_NAME}
 REACT_APP_APP_NAME={REACT_APP_APP_NAME}\\n\
 REACT_APP_APP_LOGO={REACT_APP_APP_LOGO}\\n\
 NODE_ENV=production\\n\
@@ -300,6 +302,45 @@ server {{
         proxy_http_version 1.1;
         proxy_buffering off;
         proxy_request_buffering off;
+    }}
+
+     location /ws {{
+        proxy_pass http://localhost:{BACKEND_PORT}/ws;
+        proxy_set_header Host \$host;
+        proxy_set_header Upgrade \$http_upgrade;
+        proxy_set_header Connection \$connection_upgrade;
+        proxy_set_header X-Real-IP \$remote_addr;
+        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto \$scheme;
+        proxy_buffering off;
+        proxy_request_buffering off;
+        proxy_http_version 1.1;
+    }}
+
+    location /chat {{
+        proxy_pass http://localhost:{BACKEND_PORT}/chat;
+        proxy_set_header Host \$host;
+        proxy_set_header Upgrade \$http_upgrade;
+        proxy_set_header Connection \$connection_upgrade;
+        proxy_set_header X-Real-IP \$remote_addr;
+        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto \$scheme;
+        proxy_buffering off;
+        proxy_request_buffering off;
+        proxy_http_version 1.1;
+    }}
+    
+     location /api {{
+        proxy_pass http://localhost:{BACKEND_PORT}/api;
+        proxy_set_header Host \$host;
+        proxy_set_header Upgrade \$http_upgrade;
+        proxy_set_header Connection \$connection_upgrade;
+        proxy_set_header X-Real-IP \$remote_addr;
+        proxy_set_header X-Forwarded-For \$proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto \$scheme;
+        proxy_buffering off;
+        proxy_request_buffering off;
+        proxy_http_version 1.1;
     }}
 }}
 EOF
