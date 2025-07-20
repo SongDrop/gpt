@@ -1526,7 +1526,7 @@ export default function ChatApp() {
           </div>
           <div
             className="flex-1 overflow-y-auto p-4 space-y-2"
-            style={{ marginBottom: "108px" }}
+            style={{ marginBottom: "122px" }}
           >
             {sessions.length === 0 ? (
               <p className="text-[var(--color-foreground)] text-sm opacity-70">
@@ -1556,12 +1556,16 @@ export default function ChatApp() {
                     <div className="flex items-center space-x-2 min-w-0">
                       <button
                         aria-label={`Upload session ${session.name} as markdown`}
-                        className="p-1 hover:text-[var(--color-success)]"
+                        className={`p-1  ${
+                          session.id === sessionId
+                            ? "text-white"
+                            : "text-[var(--color-primary)] hover:text-[var(--color-primary)]"
+                        }`}
                         title="Upload as .md"
                         type="button"
                         onClick={() => addSessionMdFileToUploads(session.id)}
                       >
-                        {/* SVG Icon */}
+                        <Upload className="w-5 h-5" />
                       </button>
 
                       <div className="overflow-hidden">
@@ -1569,7 +1573,7 @@ export default function ChatApp() {
                           {truncate(session.name)}
                         </div>
                         <div
-                          className={`text-xs text-[var(--color-foreground)] opacity-70 overflow-hidden ${
+                          className={`text-xs opacity-70 overflow-hidden ${
                             session.id === sessionId
                               ? "bg-[var(--color-primary)] text-white font-semibold"
                               : "bg-[var(--color-secondary)] text-[var(--color-foreground)]"
@@ -1587,10 +1591,14 @@ export default function ChatApp() {
                         handleSessionDelete(session.id);
                       }}
                       aria-label={`Delete session ${session.name}`}
-                      className="p-1 hover:text-[var(--color-error)]"
+                      className={`p-1  ${
+                        session.id === sessionId
+                          ? "text-white"
+                          : "text-[var(--color-error)] hover:text-[var(--color-error)]"
+                      }`}
                       type="button"
                     >
-                      {/* SVG Icon */}
+                      <Trash2 className="w-5 h-5" />
                     </button>
                   </div>
                 ))
