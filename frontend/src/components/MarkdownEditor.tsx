@@ -196,7 +196,7 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProps>(
     };
     //
     const [showTranslatorTool, setShowTranslatorTool] = useState(false);
-
+    const [showBmcWidget, setShowBmcWidget] = React.useState(false);
     const prevShowDiffTool = useRef<boolean>(false);
     //
     const [showLanguages, setShowLanguages] = useState(false);
@@ -627,23 +627,67 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProps>(
             >
               <Database className="w-4 h-4 text-[var(--color-foreground)]" />
             </button>
+            {showBmcWidget && (
+              <div className="fixed right-4 bottom-20 z-50 bg-white p-4 rounded shadow-lg">
+                <script
+                  data-name="BMC-Widget"
+                  data-cfasync="false"
+                  src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js"
+                  data-id="gabzlabs"
+                  data-description="Support me on Buy me a coffee!"
+                  data-message=""
+                  data-color="#5F7FFF"
+                  data-position="Right"
+                  data-x_margin="18"
+                  data-y_margin="18"
+                ></script>
+                <a
+                  id="w-support"
+                  className="w-support"
+                  href="https://www.buymeacoffee.com/gabzlabs"
+                  target="_blank"
+                  rel="noreferrer"
+                  title="Thanks for using"
+                  style={{
+                    backgroundImage: `url("https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20coffee&emoji=%E2%98%95&slug=gabzlabs&button_colour=${encodeURIComponent(
+                      getComputedStyle(document.documentElement)
+                        .getPropertyValue("--color-foreground")
+                        .trim()
+                        .replace(/^#/, "")
+                    )}&font_colour=000000&font_family=Arial&outline_colour=000000&coffee_colour=ffffff")`,
+                  }}
+                ></a>
+              </div>
+            )}
             <div className="hover:bg-[var(--color-secondary-hover)] p-2 rounded transition-colors">
-              <a
+              <script
+                data-name="BMC-Widget"
+                data-cfasync="false"
+                src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js"
+                data-id="gabzlabs"
+                data-description="Support me on Buy me a coffee!"
+                data-message=""
+                data-color="#5F7FFF"
+                data-position="Right"
+                data-x_margin="18"
+                data-y_margin="18"
+              ></script>
+              <button
+                onClick={() => setShowBmcWidget((prev) => !prev)}
                 id="w-support"
                 className="w-support"
-                href="https://www.buymeacoffee.com/gabzlabs"
-                target="_blank"
-                rel="noreferrer"
+                // href="https://www.buymeacoffee.com/gabzlabs"
+                // target="_blank"
+                // rel="noreferrer"
                 title="Thanks for using"
                 style={{
                   backgroundImage: `url("https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20coffee&emoji=%E2%98%95&slug=gabzlabs&button_colour=${encodeURIComponent(
                     getComputedStyle(document.documentElement)
-                      .getPropertyValue("--color-primary")
+                      .getPropertyValue("--color-foreground")
                       .trim()
-                      .replace(/^#/, "")
                   )}&font_colour=000000&font_family=Arial&outline_colour=000000&coffee_colour=ffffff")`,
                 }}
-              ></a>
+              ></button>
             </div>
             <div className="hover:bg-[var(--color-secondary-hover)] p-2 rounded transition-colors">
               <a
