@@ -314,7 +314,7 @@ server {{
         proxy_http_version 1.1;
     }}
     
-     location /api {{
+    location /api {{
         proxy_pass http://localhost:{BACKEND_PORT}/api;
         proxy_set_header Host \$host;
         proxy_set_header Upgrade \$http_upgrade;
