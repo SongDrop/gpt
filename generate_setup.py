@@ -164,7 +164,7 @@ SYSTEM_PROMPT=\\"You are an AI assistant. You aim to be helpful, honest, and dir
 # Create frontend/.env
 RUN printf "#Frontend Configuration\\n\
 REACT_APP_API_URL=https://{DOMAIN_NAME}\\n\
-REACT_APP_WS_URL=wss://{DOMAIN_NAME}/ws\\n\
+REACT_APP_WS_URL=wss://{DOMAIN_NAME}:{BACKEND_PORT}/ws\\n\
 REACT_APP_APP_NAME={REACT_APP_APP_NAME}\\n\
 REACT_APP_APP_LOGO={REACT_APP_APP_LOGO}\\n\
 NODE_ENV=production\\n\

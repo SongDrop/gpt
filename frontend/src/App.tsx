@@ -933,7 +933,7 @@ export default function ChatApp() {
         el.scrollIntoView({ behavior: "smooth", block: "start" });
       }
     }
-  }, [messages, highlightedMessageId]);
+  }, [messages, highlightedMessageId, typing]);
 
   // Auto-scroll on window load, only if no highlighted message
   useEffect(() => {
