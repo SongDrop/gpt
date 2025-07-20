@@ -597,6 +597,8 @@ export default function ChatApp() {
   const [showThemeManager, setShowThemeManager] = useState(false);
   const closeThemeManager = () => setShowThemeManager(false);
 
+  const messageRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+
   const handleCreateDatabase = async (data: {
     title: string;
     description?: string;
@@ -924,10 +926,14 @@ export default function ChatApp() {
   const location = useLocation();
   // Auto-scroll when messages or typing state changes, only if no highlighted message
   useEffect(() => {
-    if (!highlightedMessageId) {
-      messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (!highlightedMessageId && messages.length > 0) {
+      const lastMessage = messages[messages.length - 1];
+      const el = messageRefs.current[lastMessage.id];
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
     }
-  }, [messages, typing, highlightedMessageId]);
+  }, [messages, highlightedMessageId]);
 
   // Auto-scroll on window load, only if no highlighted message
   useEffect(() => {
@@ -1723,6 +1729,9 @@ export default function ChatApp() {
                 <div
                   id="msgblock"
                   key={`#msg-${message.id}`}
+                  ref={(el) => {
+                    messageRefs.current[message.id] = el;
+                  }}
                   className={`flex ${
                     message.role === "user" ? "justify-end" : "justify-start"
                   }`}

@@ -7008,3 +7008,101 @@ INFO:     127.0.0.1:64879 - "OPTIONS /chat HTTP/1.1" 200 OK
 2025-07-20 16:36:09,094 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
 2025-07-20 16:36:09,096 - main - INFO - Successfully processed chat request
 INFO:     127.0.0.1:64879 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64916 - "OPTIONS /chat HTTP/1.1" 200 OK
+2025-07-20 16:39:33,722 - main - INFO - Received chat request
+2025-07-20 16:39:33,723 - main - INFO - Not using vector search for this chat request
+2025-07-20 16:39:40,963 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-20 16:39:40,964 - main - INFO - Successfully processed chat request
+INFO:     127.0.0.1:64916 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64921 - "OPTIONS /chat HTTP/1.1" 200 OK
+2025-07-20 16:40:09,942 - main - INFO - Received chat request
+2025-07-20 16:40:09,945 - main - INFO - Not using vector search for this chat request
+2025-07-20 16:40:18,342 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-20 16:40:18,344 - main - INFO - Successfully processed chat request
+INFO:     127.0.0.1:64921 - "POST /chat HTTP/1.1" 200 OK
+2025-07-20 16:41:09,098 - main - INFO - WebSocket connection attempt from 127.0.0.1:64925
+INFO:     ('127.0.0.1', 64925) - "WebSocket /ws" [accepted]
+2025-07-20 16:41:09,099 - main - INFO - Client 127.0.0.1:64925 connected. Active connections: 1
+INFO:     connection open
+INFO:     127.0.0.1:64926 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64926 - "GET /health HTTP/1.1" 200 OK
+2025-07-20 16:41:41,231 - main - INFO - Received WebSocket message
+2025-07-20 16:41:41,518 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-20 16:41:41,748 - main - INFO - Client 127.0.0.1:64925 disconnected. Active connections: 0
+2025-07-20 16:41:41,748 - main - INFO - Connection cleaned up for 127.0.0.1:64925
+2025-07-20 16:41:41,748 - main - ERROR - Unexpected error for 127.0.0.1:64925: WebSocket is not connected. Need to call "accept" first.
+2025-07-20 16:41:41,748 - main - INFO - Client 127.0.0.1:64925 disconnected. Active connections: 0
+2025-07-20 16:41:41,748 - main - INFO - Connection cleaned up for 127.0.0.1:64925
+2025-07-20 16:41:41,748 - main - INFO - Client 127.0.0.1:64925 disconnected. Active connections: 0
+INFO:     connection closed
+2025-07-20 16:41:41,780 - main - INFO - WebSocket connection attempt from 127.0.0.1:64929
+INFO:     ('127.0.0.1', 64929) - "WebSocket /ws" [accepted]
+2025-07-20 16:41:41,781 - main - INFO - Client 127.0.0.1:64929 connected. Active connections: 1
+INFO:     connection open
+2025-07-20 16:41:42,053 - main - INFO - WebSocket disconnected: 127.0.0.1:64929
+2025-07-20 16:41:42,053 - main - INFO - Client 127.0.0.1:64929 disconnected. Active connections: 0
+2025-07-20 16:41:42,053 - main - INFO - Connection cleaned up for 127.0.0.1:64929
+2025-07-20 16:41:42,053 - main - INFO - Client 127.0.0.1:64929 disconnected. Active connections: 0
+INFO:     connection closed
+INFO:     127.0.0.1:64931 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64935 - "GET /health HTTP/1.1" 200 OK
+2025-07-20 16:43:24,193 - main - INFO - WebSocket connection attempt from 127.0.0.1:64936
+INFO:     ('127.0.0.1', 64936) - "WebSocket /ws" [accepted]
+2025-07-20 16:43:24,193 - main - INFO - Client 127.0.0.1:64936 connected. Active connections: 1
+INFO:     connection open
+INFO:     127.0.0.1:64937 - "OPTIONS /chat HTTP/1.1" 200 OK
+2025-07-20 16:43:24,200 - main - INFO - Received chat request
+2025-07-20 16:43:24,202 - main - INFO - Not using vector search for this chat request
+2025-07-20 16:43:26,504 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-20 16:43:26,505 - main - INFO - Successfully processed chat request
+INFO:     127.0.0.1:64937 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64942 - "OPTIONS /chat HTTP/1.1" 200 OK
+2025-07-20 16:43:39,829 - main - INFO - Received chat request
+2025-07-20 16:43:39,831 - main - INFO - Not using vector search for this chat request
+2025-07-20 16:43:48,101 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-20 16:43:48,102 - main - INFO - Successfully processed chat request
+INFO:     127.0.0.1:64942 - "POST /chat HTTP/1.1" 200 OK
+2025-07-20 16:43:54,433 - main - INFO - Received WebSocket message
+2025-07-20 16:43:54,747 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-20 16:43:54,855 - main - INFO - Client 127.0.0.1:64936 disconnected. Active connections: 0
+2025-07-20 16:43:54,855 - main - INFO - Connection cleaned up for 127.0.0.1:64936
+2025-07-20 16:43:54,855 - main - ERROR - Unexpected error for 127.0.0.1:64936: WebSocket is not connected. Need to call "accept" first.
+2025-07-20 16:43:54,856 - main - INFO - Client 127.0.0.1:64936 disconnected. Active connections: 0
+2025-07-20 16:43:54,856 - main - INFO - Connection cleaned up for 127.0.0.1:64936
+2025-07-20 16:43:54,856 - main - INFO - Client 127.0.0.1:64936 disconnected. Active connections: 0
+INFO:     connection closed
+2025-07-20 16:43:55,861 - main - INFO - WebSocket connection attempt from 127.0.0.1:64945
+INFO:     ('127.0.0.1', 64945) - "WebSocket /ws" [accepted]
+2025-07-20 16:43:55,861 - main - INFO - Client 127.0.0.1:64945 connected. Active connections: 1
+INFO:     connection open
+INFO:     127.0.0.1:64946 - "OPTIONS /chat HTTP/1.1" 200 OK
+2025-07-20 16:43:58,868 - main - INFO - Received chat request
+2025-07-20 16:43:58,870 - main - INFO - Not using vector search for this chat request
+2025-07-20 16:43:59,606 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-20 16:43:59,607 - main - INFO - Successfully processed chat request
+INFO:     127.0.0.1:64946 - "POST /chat HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64951 - "OPTIONS /chat HTTP/1.1" 200 OK
+2025-07-20 16:44:09,870 - main - INFO - Received chat request
+2025-07-20 16:44:09,872 - main - INFO - Not using vector search for this chat request
+2025-07-20 16:44:14,695 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-20 16:44:14,696 - main - INFO - Successfully processed chat request
+INFO:     127.0.0.1:64951 - "POST /chat HTTP/1.1" 200 OK
+2025-07-20 16:44:25,868 - main - INFO - Received WebSocket message
+2025-07-20 16:44:26,124 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-20 16:44:26,220 - main - INFO - Client 127.0.0.1:64945 disconnected. Active connections: 0
+2025-07-20 16:44:26,220 - main - INFO - Connection cleaned up for 127.0.0.1:64945
+2025-07-20 16:44:26,220 - main - ERROR - Unexpected error for 127.0.0.1:64945: WebSocket is not connected. Need to call "accept" first.
+2025-07-20 16:44:26,220 - main - INFO - Client 127.0.0.1:64945 disconnected. Active connections: 0
+2025-07-20 16:44:26,220 - main - INFO - Connection cleaned up for 127.0.0.1:64945
+2025-07-20 16:44:26,220 - main - INFO - Client 127.0.0.1:64945 disconnected. Active connections: 0
+INFO:     connection closed
+INFO:     127.0.0.1:64954 - "OPTIONS /chat HTTP/1.1" 200 OK
+2025-07-20 16:44:26,480 - main - INFO - Received chat request
+2025-07-20 16:44:26,484 - main - INFO - Not using vector search for this chat request
+2025-07-20 16:44:27,278 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
+2025-07-20 16:44:27,279 - main - INFO - Successfully processed chat request
+2025-07-20 16:44:27,281 - main - INFO - WebSocket connection attempt from 127.0.0.1:64955
+INFO:     ('127.0.0.1', 64955) - "WebSocket /ws" [accepted]
+2025-07-20 16:44:27,281 - main - INFO - Client 127.0.0.1:64955 connected. Active connections: 1
+INFO:     127.0.0.1:64954 - "POST /chat HTTP/1.1" 200 OK
+INFO:     connection open
