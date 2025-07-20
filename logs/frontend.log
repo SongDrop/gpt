@@ -10600,3 +10600,306 @@ src/components/MarkdownEditor.tsx
 
 webpack compiled with 1 warning
 No issues found.
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/App.tsx
+  Line 35:3:    'saveMessageToDb' is defined but never used                                                                                                                  @typescript-eslint/no-unused-vars
+  Line 39:3:    'StoredMessage' is defined but never used                                                                                                                    @typescript-eslint/no-unused-vars
+  Line 48:3:    'DatabaseType' is defined but never used                                                                                                                     @typescript-eslint/no-unused-vars
+  Line 49:3:    'Contributor' is defined but never used                                                                                                                      @typescript-eslint/no-unused-vars
+  Line 50:3:    'DatabaseFilterOptions' is defined but never used                                                                                                            @typescript-eslint/no-unused-vars
+  Line 528:10:  'backgroundUrl' is assigned a value but never used                                                                                                           @typescript-eslint/no-unused-vars
+  Line 528:25:  'setBackgroundUrl' is assigned a value but never used                                                                                                        @typescript-eslint/no-unused-vars
+  Line 552:10:  'connectionError' is assigned a value but never used                                                                                                         @typescript-eslint/no-unused-vars
+  Line 565:10:  'selectedDatabases' is assigned a value but never used                                                                                                       @typescript-eslint/no-unused-vars
+  Line 566:21:  'setDatabases' is assigned a value but never used                                                                                                            @typescript-eslint/no-unused-vars
+  Line 792:6:   React Hook useEffect has missing dependencies: 'initialPagination.limit' and 'initialPagination.offset'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+  Line 1319:9:  'handleDatabaseSelect' is assigned a value but never used                                                                                                    @typescript-eslint/no-unused-vars
+
+src/components/MarkdownEditor.tsx
+  Line 28:10:  'relative' is defined but never used                                                                                                         @typescript-eslint/no-unused-vars
+  Line 474:8:  React Hook useEffect has missing dependencies: 'setLeftDocument' and 'setRightDocument'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/App.tsx
+  Line 35:3:    'saveMessageToDb' is defined but never used                                                                                                                  @typescript-eslint/no-unused-vars
+  Line 39:3:    'StoredMessage' is defined but never used                                                                                                                    @typescript-eslint/no-unused-vars
+  Line 48:3:    'DatabaseType' is defined but never used                                                                                                                     @typescript-eslint/no-unused-vars
+  Line 49:3:    'Contributor' is defined but never used                                                                                                                      @typescript-eslint/no-unused-vars
+  Line 50:3:    'DatabaseFilterOptions' is defined but never used                                                                                                            @typescript-eslint/no-unused-vars
+  Line 528:10:  'backgroundUrl' is assigned a value but never used                                                                                                           @typescript-eslint/no-unused-vars
+  Line 528:25:  'setBackgroundUrl' is assigned a value but never used                                                                                                        @typescript-eslint/no-unused-vars
+  Line 552:10:  'connectionError' is assigned a value but never used                                                                                                         @typescript-eslint/no-unused-vars
+  Line 565:10:  'selectedDatabases' is assigned a value but never used                                                                                                       @typescript-eslint/no-unused-vars
+  Line 566:21:  'setDatabases' is assigned a value but never used                                                                                                            @typescript-eslint/no-unused-vars
+  Line 792:6:   React Hook useEffect has missing dependencies: 'initialPagination.limit' and 'initialPagination.offset'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+  Line 1319:9:  'handleDatabaseSelect' is assigned a value but never used                                                                                                    @typescript-eslint/no-unused-vars
+
+src/components/MarkdownEditor.tsx
+  Line 28:10:  'relative' is defined but never used                                                                                                         @typescript-eslint/no-unused-vars
+  Line 474:8:  React Hook useEffect has missing dependencies: 'setLeftDocument' and 'setRightDocument'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+
+webpack compiled with 1 warning
+No issues found.
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/App.tsx
+  Line 35:3:    'saveMessageToDb' is defined but never used                                                                                                                  @typescript-eslint/no-unused-vars
+  Line 39:3:    'StoredMessage' is defined but never used                                                                                                                    @typescript-eslint/no-unused-vars
+  Line 48:3:    'DatabaseType' is defined but never used                                                                                                                     @typescript-eslint/no-unused-vars
+  Line 49:3:    'Contributor' is defined but never used                                                                                                                      @typescript-eslint/no-unused-vars
+  Line 50:3:    'DatabaseFilterOptions' is defined but never used                                                                                                            @typescript-eslint/no-unused-vars
+  Line 528:10:  'backgroundUrl' is assigned a value but never used                                                                                                           @typescript-eslint/no-unused-vars
+  Line 528:25:  'setBackgroundUrl' is assigned a value but never used                                                                                                        @typescript-eslint/no-unused-vars
+  Line 552:10:  'connectionError' is assigned a value but never used                                                                                                         @typescript-eslint/no-unused-vars
+  Line 565:10:  'selectedDatabases' is assigned a value but never used                                                                                                       @typescript-eslint/no-unused-vars
+  Line 566:21:  'setDatabases' is assigned a value but never used                                                                                                            @typescript-eslint/no-unused-vars
+  Line 792:6:   React Hook useEffect has missing dependencies: 'initialPagination.limit' and 'initialPagination.offset'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+  Line 1319:9:  'handleDatabaseSelect' is assigned a value but never used                                                                                                    @typescript-eslint/no-unused-vars
+
+src/components/MarkdownEditor.tsx
+  Line 28:10:  'relative' is defined but never used                                                                                                         @typescript-eslint/no-unused-vars
+  Line 474:8:  React Hook useEffect has missing dependencies: 'setLeftDocument' and 'setRightDocument'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/App.tsx
+  Line 35:3:    'saveMessageToDb' is defined but never used                                                                                                                  @typescript-eslint/no-unused-vars
+  Line 39:3:    'StoredMessage' is defined but never used                                                                                                                    @typescript-eslint/no-unused-vars
+  Line 48:3:    'DatabaseType' is defined but never used                                                                                                                     @typescript-eslint/no-unused-vars
+  Line 49:3:    'Contributor' is defined but never used                                                                                                                      @typescript-eslint/no-unused-vars
+  Line 50:3:    'DatabaseFilterOptions' is defined but never used                                                                                                            @typescript-eslint/no-unused-vars
+  Line 528:10:  'backgroundUrl' is assigned a value but never used                                                                                                           @typescript-eslint/no-unused-vars
+  Line 528:25:  'setBackgroundUrl' is assigned a value but never used                                                                                                        @typescript-eslint/no-unused-vars
+  Line 552:10:  'connectionError' is assigned a value but never used                                                                                                         @typescript-eslint/no-unused-vars
+  Line 565:10:  'selectedDatabases' is assigned a value but never used                                                                                                       @typescript-eslint/no-unused-vars
+  Line 566:21:  'setDatabases' is assigned a value but never used                                                                                                            @typescript-eslint/no-unused-vars
+  Line 792:6:   React Hook useEffect has missing dependencies: 'initialPagination.limit' and 'initialPagination.offset'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+  Line 1319:9:  'handleDatabaseSelect' is assigned a value but never used                                                                                                    @typescript-eslint/no-unused-vars
+
+src/components/MarkdownEditor.tsx
+  Line 28:10:  'relative' is defined but never used                                                                                                         @typescript-eslint/no-unused-vars
+  Line 474:8:  React Hook useEffect has missing dependencies: 'setLeftDocument' and 'setRightDocument'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+
+webpack compiled with 1 warning
+Files successfully emitted, waiting for typecheck results...
+Issues checking in progress...
+ERROR in src/components/BuyMeACoffeSVG.tsx:57:18
+TS2304: Cannot find name 'size'.
+    55 |       <div>
+    56 |         <svg
+  > 57 |           width={size}
+       |                  ^^^^
+    58 |           height={size}
+    59 |           viewBox="0 0 24 24"
+    60 |           fill={color}
+
+ERROR in src/components/BuyMeACoffeSVG.tsx:58:19
+TS2304: Cannot find name 'size'.
+    56 |         <svg
+    57 |           width={size}
+  > 58 |           height={size}
+       |                   ^^^^
+    59 |           viewBox="0 0 24 24"
+    60 |           fill={color}
+    61 |           xmlns="http://www.w3.org/2000/svg"
+
+ERROR in src/components/BuyMeACoffeSVG.tsx:60:17
+TS2304: Cannot find name 'color'.
+    58 |           height={size}
+    59 |           viewBox="0 0 24 24"
+  > 60 |           fill={color}
+       |                 ^^^^^
+    61 |           xmlns="http://www.w3.org/2000/svg"
+    62 |           aria-label="Heart icon"
+    63 |           role="img"
+
+ERROR in src/components/MarkdownEditor.tsx:660:19
+TS2322: Type '{ svgUrl: string; fillColor: string; width: number; height: number; }' is not assignable to type 'IntrinsicAttributes & SvgBackgroundProps'.
+  Property 'width' does not exist on type 'IntrinsicAttributes & SvgBackgroundProps'.
+    658 |                     .getPropertyValue("--color-secondary")
+    659 |                     .trim()}
+  > 660 |                   width={16}
+        |                   ^^^^^
+    661 |                   height={16}
+    662 |                 />
+    663 |               </button>
+
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/App.tsx
+  Line 35:3:    'saveMessageToDb' is defined but never used                                                                                                                  @typescript-eslint/no-unused-vars
+  Line 39:3:    'StoredMessage' is defined but never used                                                                                                                    @typescript-eslint/no-unused-vars
+  Line 48:3:    'DatabaseType' is defined but never used                                                                                                                     @typescript-eslint/no-unused-vars
+  Line 49:3:    'Contributor' is defined but never used                                                                                                                      @typescript-eslint/no-unused-vars
+  Line 50:3:    'DatabaseFilterOptions' is defined but never used                                                                                                            @typescript-eslint/no-unused-vars
+  Line 528:10:  'backgroundUrl' is assigned a value but never used                                                                                                           @typescript-eslint/no-unused-vars
+  Line 528:25:  'setBackgroundUrl' is assigned a value but never used                                                                                                        @typescript-eslint/no-unused-vars
+  Line 552:10:  'connectionError' is assigned a value but never used                                                                                                         @typescript-eslint/no-unused-vars
+  Line 565:10:  'selectedDatabases' is assigned a value but never used                                                                                                       @typescript-eslint/no-unused-vars
+  Line 566:21:  'setDatabases' is assigned a value but never used                                                                                                            @typescript-eslint/no-unused-vars
+  Line 792:6:   React Hook useEffect has missing dependencies: 'initialPagination.limit' and 'initialPagination.offset'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+  Line 1319:9:  'handleDatabaseSelect' is assigned a value but never used                                                                                                    @typescript-eslint/no-unused-vars
+
+src/components/MarkdownEditor.tsx
+  Line 28:10:  'relative' is defined but never used                                                                                                         @typescript-eslint/no-unused-vars
+  Line 474:8:  React Hook useEffect has missing dependencies: 'setLeftDocument' and 'setRightDocument'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/App.tsx
+  Line 35:3:    'saveMessageToDb' is defined but never used                                                                                                                  @typescript-eslint/no-unused-vars
+  Line 39:3:    'StoredMessage' is defined but never used                                                                                                                    @typescript-eslint/no-unused-vars
+  Line 48:3:    'DatabaseType' is defined but never used                                                                                                                     @typescript-eslint/no-unused-vars
+  Line 49:3:    'Contributor' is defined but never used                                                                                                                      @typescript-eslint/no-unused-vars
+  Line 50:3:    'DatabaseFilterOptions' is defined but never used                                                                                                            @typescript-eslint/no-unused-vars
+  Line 528:10:  'backgroundUrl' is assigned a value but never used                                                                                                           @typescript-eslint/no-unused-vars
+  Line 528:25:  'setBackgroundUrl' is assigned a value but never used                                                                                                        @typescript-eslint/no-unused-vars
+  Line 552:10:  'connectionError' is assigned a value but never used                                                                                                         @typescript-eslint/no-unused-vars
+  Line 565:10:  'selectedDatabases' is assigned a value but never used                                                                                                       @typescript-eslint/no-unused-vars
+  Line 566:21:  'setDatabases' is assigned a value but never used                                                                                                            @typescript-eslint/no-unused-vars
+  Line 792:6:   React Hook useEffect has missing dependencies: 'initialPagination.limit' and 'initialPagination.offset'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+  Line 1319:9:  'handleDatabaseSelect' is assigned a value but never used                                                                                                    @typescript-eslint/no-unused-vars
+
+src/components/MarkdownEditor.tsx
+  Line 28:10:  'relative' is defined but never used                                                                                                         @typescript-eslint/no-unused-vars
+  Line 474:8:  React Hook useEffect has missing dependencies: 'setLeftDocument' and 'setRightDocument'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+
+webpack compiled with 1 warning
+Files successfully emitted, waiting for typecheck results...
+Issues checking in progress...
+ERROR in src/components/BuyMeACoffeSVG.tsx:57:18
+TS2304: Cannot find name 'size'.
+    55 |       <div>
+    56 |         <svg
+  > 57 |           width={size}
+       |                  ^^^^
+    58 |           height={size}
+    59 |           viewBox="0 0 24 24"
+    60 |           fill={color}
+
+ERROR in src/components/BuyMeACoffeSVG.tsx:58:19
+TS2304: Cannot find name 'size'.
+    56 |         <svg
+    57 |           width={size}
+  > 58 |           height={size}
+       |                   ^^^^
+    59 |           viewBox="0 0 24 24"
+    60 |           fill={color}
+    61 |           xmlns="http://www.w3.org/2000/svg"
+
+ERROR in src/components/BuyMeACoffeSVG.tsx:60:17
+TS2304: Cannot find name 'color'.
+    58 |           height={size}
+    59 |           viewBox="0 0 24 24"
+  > 60 |           fill={color}
+       |                 ^^^^^
+    61 |           xmlns="http://www.w3.org/2000/svg"
+    62 |           aria-label="Heart icon"
+    63 |           role="img"
+
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/App.tsx
+  Line 35:3:    'saveMessageToDb' is defined but never used                                                                                                                  @typescript-eslint/no-unused-vars
+  Line 39:3:    'StoredMessage' is defined but never used                                                                                                                    @typescript-eslint/no-unused-vars
+  Line 48:3:    'DatabaseType' is defined but never used                                                                                                                     @typescript-eslint/no-unused-vars
+  Line 49:3:    'Contributor' is defined but never used                                                                                                                      @typescript-eslint/no-unused-vars
+  Line 50:3:    'DatabaseFilterOptions' is defined but never used                                                                                                            @typescript-eslint/no-unused-vars
+  Line 528:10:  'backgroundUrl' is assigned a value but never used                                                                                                           @typescript-eslint/no-unused-vars
+  Line 528:25:  'setBackgroundUrl' is assigned a value but never used                                                                                                        @typescript-eslint/no-unused-vars
+  Line 552:10:  'connectionError' is assigned a value but never used                                                                                                         @typescript-eslint/no-unused-vars
+  Line 565:10:  'selectedDatabases' is assigned a value but never used                                                                                                       @typescript-eslint/no-unused-vars
+  Line 566:21:  'setDatabases' is assigned a value but never used                                                                                                            @typescript-eslint/no-unused-vars
+  Line 792:6:   React Hook useEffect has missing dependencies: 'initialPagination.limit' and 'initialPagination.offset'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+  Line 1319:9:  'handleDatabaseSelect' is assigned a value but never used                                                                                                    @typescript-eslint/no-unused-vars
+
+src/components/MarkdownEditor.tsx
+  Line 28:10:  'relative' is defined but never used                                                                                                         @typescript-eslint/no-unused-vars
+  Line 474:8:  React Hook useEffect has missing dependencies: 'setLeftDocument' and 'setRightDocument'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/App.tsx
+  Line 35:3:    'saveMessageToDb' is defined but never used                                                                                                                  @typescript-eslint/no-unused-vars
+  Line 39:3:    'StoredMessage' is defined but never used                                                                                                                    @typescript-eslint/no-unused-vars
+  Line 48:3:    'DatabaseType' is defined but never used                                                                                                                     @typescript-eslint/no-unused-vars
+  Line 49:3:    'Contributor' is defined but never used                                                                                                                      @typescript-eslint/no-unused-vars
+  Line 50:3:    'DatabaseFilterOptions' is defined but never used                                                                                                            @typescript-eslint/no-unused-vars
+  Line 528:10:  'backgroundUrl' is assigned a value but never used                                                                                                           @typescript-eslint/no-unused-vars
+  Line 528:25:  'setBackgroundUrl' is assigned a value but never used                                                                                                        @typescript-eslint/no-unused-vars
+  Line 552:10:  'connectionError' is assigned a value but never used                                                                                                         @typescript-eslint/no-unused-vars
+  Line 565:10:  'selectedDatabases' is assigned a value but never used                                                                                                       @typescript-eslint/no-unused-vars
+  Line 566:21:  'setDatabases' is assigned a value but never used                                                                                                            @typescript-eslint/no-unused-vars
+  Line 792:6:   React Hook useEffect has missing dependencies: 'initialPagination.limit' and 'initialPagination.offset'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+  Line 1319:9:  'handleDatabaseSelect' is assigned a value but never used                                                                                                    @typescript-eslint/no-unused-vars
+
+src/components/MarkdownEditor.tsx
+  Line 28:10:  'relative' is defined but never used                                                                                                         @typescript-eslint/no-unused-vars
+  Line 474:8:  React Hook useEffect has missing dependencies: 'setLeftDocument' and 'setRightDocument'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+
+webpack compiled with 1 warning
+No issues found.
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/App.tsx
+  Line 35:3:    'saveMessageToDb' is defined but never used                                                                                                                  @typescript-eslint/no-unused-vars
+  Line 39:3:    'StoredMessage' is defined but never used                                                                                                                    @typescript-eslint/no-unused-vars
+  Line 48:3:    'DatabaseType' is defined but never used                                                                                                                     @typescript-eslint/no-unused-vars
+  Line 49:3:    'Contributor' is defined but never used                                                                                                                      @typescript-eslint/no-unused-vars
+  Line 50:3:    'DatabaseFilterOptions' is defined but never used                                                                                                            @typescript-eslint/no-unused-vars
+  Line 528:10:  'backgroundUrl' is assigned a value but never used                                                                                                           @typescript-eslint/no-unused-vars
+  Line 528:25:  'setBackgroundUrl' is assigned a value but never used                                                                                                        @typescript-eslint/no-unused-vars
+  Line 552:10:  'connectionError' is assigned a value but never used                                                                                                         @typescript-eslint/no-unused-vars
+  Line 565:10:  'selectedDatabases' is assigned a value but never used                                                                                                       @typescript-eslint/no-unused-vars
+  Line 566:21:  'setDatabases' is assigned a value but never used                                                                                                            @typescript-eslint/no-unused-vars
+  Line 792:6:   React Hook useEffect has missing dependencies: 'initialPagination.limit' and 'initialPagination.offset'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+  Line 1319:9:  'handleDatabaseSelect' is assigned a value but never used                                                                                                    @typescript-eslint/no-unused-vars
+
+src/components/MarkdownEditor.tsx
+  Line 28:10:  'relative' is defined but never used                                                                                                         @typescript-eslint/no-unused-vars
+  Line 474:8:  React Hook useEffect has missing dependencies: 'setLeftDocument' and 'setRightDocument'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/App.tsx
+  Line 35:3:    'saveMessageToDb' is defined but never used                                                                                                                  @typescript-eslint/no-unused-vars
+  Line 39:3:    'StoredMessage' is defined but never used                                                                                                                    @typescript-eslint/no-unused-vars
+  Line 48:3:    'DatabaseType' is defined but never used                                                                                                                     @typescript-eslint/no-unused-vars
+  Line 49:3:    'Contributor' is defined but never used                                                                                                                      @typescript-eslint/no-unused-vars
+  Line 50:3:    'DatabaseFilterOptions' is defined but never used                                                                                                            @typescript-eslint/no-unused-vars
+  Line 528:10:  'backgroundUrl' is assigned a value but never used                                                                                                           @typescript-eslint/no-unused-vars
+  Line 528:25:  'setBackgroundUrl' is assigned a value but never used                                                                                                        @typescript-eslint/no-unused-vars
+  Line 552:10:  'connectionError' is assigned a value but never used                                                                                                         @typescript-eslint/no-unused-vars
+  Line 565:10:  'selectedDatabases' is assigned a value but never used                                                                                                       @typescript-eslint/no-unused-vars
+  Line 566:21:  'setDatabases' is assigned a value but never used                                                                                                            @typescript-eslint/no-unused-vars
+  Line 792:6:   React Hook useEffect has missing dependencies: 'initialPagination.limit' and 'initialPagination.offset'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+  Line 1319:9:  'handleDatabaseSelect' is assigned a value but never used                                                                                                    @typescript-eslint/no-unused-vars
+
+src/components/MarkdownEditor.tsx
+  Line 28:10:  'relative' is defined but never used                                                                                                         @typescript-eslint/no-unused-vars
+  Line 474:8:  React Hook useEffect has missing dependencies: 'setLeftDocument' and 'setRightDocument'. Either include them or remove the dependency array  react-hooks/exhaustive-deps
+
+webpack compiled with 1 warning
+No issues found.

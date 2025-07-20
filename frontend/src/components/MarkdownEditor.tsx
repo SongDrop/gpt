@@ -657,8 +657,6 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProps>(
                   fillColor={getComputedStyle(document.documentElement)
                     .getPropertyValue("--color-secondary")
                     .trim()}
-                  width={16}
-                  height={16}
                 />
               </button>
             </div>
