@@ -253,8 +253,11 @@ mkdir -p /etc/letsencrypt
 curl -s "{letsencrypt_options_url}" > /etc/letsencrypt/options-ssl-nginx.conf
 curl -s "{ssl_dhparams_url}" > /etc/letsencrypt/ssl-dhparams.pem
 
-certbot --nginx -d "{DOMAIN_NAME}" --non-interactive --agree-tos --email "{ADMIN_EMAIL}" --redirect
-#certbot --nginx -d "{DOMAIN_NAME}" --staging --agree-tos --email "{ADMIN_EMAIL}" --redirect --no-eff-email
+# Real certificate issuance (commented out)
+# certbot --nginx -d "{DOMAIN_NAME}" --non-interactive --agree-tos --email "{ADMIN_EMAIL}" --redirect
+
+# Staging/testing certificate issuance (active command)
+certbot --nginx -d "{DOMAIN_NAME}" --staging --agree-tos --email "{ADMIN_EMAIL}" --redirect --no-eff-email
 
 # ========== NGINX CONFIG ==========
 echo "[11/11] Configuring Nginx..."
