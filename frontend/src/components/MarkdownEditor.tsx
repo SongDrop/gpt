@@ -644,17 +644,8 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProps>(
             <div className="hover:bg-[var(--color-secondary-hover)] p-2 rounded transition-colors">
               <button
                 onClick={() => setShowBmcWidget((prev) => !prev)}
-                // id="w-support"
-                // className="w-support"
+                className="w-support"
                 title="Thanks for using"
-                // style={{
-                //   backgroundImage: `url("https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20coffee&emoji=%E2%98%95&slug=gabzlabs&button_colour=${encodeURIComponent(
-                //     getComputedStyle(document.documentElement)
-                //       .getPropertyValue("--color-foreground")
-                //       .trim()
-                //       .replace(/^#/, "")
-                //   )}&font_colour=000000&font_family=Arial&outline_colour=000000&coffee_colour=ffffff")`,
-                // }}
               >
                 <BuyMeACoffeeSVG
                   svgUrl={`https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20coffee&emoji=%E2%98%95&slug=gabzlabs&button_colour=${encodeURIComponent(

@@ -163,7 +163,6 @@
   width: 16px;
   cursor: pointer;
   overflow: hidden;
-  z-index: 10000;
   background-color: transparent;
   background-size: cover;
   background-position: right;

@@ -1,19 +1,19 @@
 import React, { useEffect, useState } from "react";
 
-interface BuyMeACoffeeSVGProps {
+interface SvgBackgroundProps {
   svgUrl: string;
-  fillColor: string; // color to set on path fill(s)
+  fillColor: string;
   width?: number | string;
   height?: number | string;
 }
 
-const BuyMeACoffeeSVG: React.FC<BuyMeACoffeeSVGProps> = ({
+const SvgBackground: React.FC<SvgBackgroundProps> = ({
   svgUrl,
   fillColor,
-  width = 16,
-  height = 16,
+  width = 100,
+  height = 100,
 }) => {
-  const [svgContent, setSvgContent] = useState<string | null>(null);
+  const [dataUrl, setDataUrl] = useState<string | null>(null);
 
   useEffect(() => {
     let isMounted = true;
@@ -23,34 +23,33 @@ const BuyMeACoffeeSVG: React.FC<BuyMeACoffeeSVGProps> = ({
       .then((svgText) => {
         if (!isMounted) return;
 
-        // Parse SVG text to a DOM element
         const parser = new DOMParser();
         const doc = parser.parseFromString(svgText, "image/svg+xml");
         const svgElement = doc.querySelector("svg");
-
         if (!svgElement) {
-          setSvgContent(svgText); // fallback to raw if no svg found
+          setDataUrl(null);
           return;
         }
 
-        // Modify all <path> fill attributes
-        svgElement.querySelectorAll("path").forEach((path) => {
-          path.setAttribute("fill", fillColor);
+        // Modify fill color of paths and text
+        svgElement.querySelectorAll("path, text").forEach((el) => {
+          el.setAttribute("fill", fillColor);
         });
 
-        // Modify all <text> fill attributes
-        svgElement.querySelectorAll("text").forEach((textEl) => {
-          textEl.setAttribute("fill", fillColor);
-        });
-
-        // Serialize back to string
         const serializer = new XMLSerializer();
-        const newSvgStr = serializer.serializeToString(svgElement);
+        const modifiedSvg = serializer.serializeToString(svgElement);
 
-        setSvgContent(newSvgStr);
+        // Encode SVG for use in data URI
+        const encoded = encodeURIComponent(modifiedSvg)
+          .replace(/'/g, "%27")
+          .replace(/"/g, "%22");
+
+        const uri = `data:image/svg+xml;utf8,${encoded}`;
+
+        setDataUrl(uri);
       })
       .catch(() => {
-        setSvgContent(null);
+        setDataUrl(null);
       });
 
     return () => {
@@ -58,20 +57,20 @@ const BuyMeACoffeeSVG: React.FC<BuyMeACoffeeSVGProps> = ({
     };
   }, [svgUrl, fillColor]);
 
-  if (!svgContent) {
-    return <div>Loading SVG...</div>;
+  if (!dataUrl) {
+    return <div>Loading...</div>;
   }
 
   return (
     <div
-      id="w-support"
       className="w-support"
-      style={{ width, height, display: "inline-block" }}
-      dangerouslySetInnerHTML={{ __html: svgContent }}
-      aria-label="Buy Me a Coffee button"
+      style={{
+        backgroundImage: `url("${dataUrl}")`,
+      }}
       role="img"
+      aria-label="SVG icon"
     />
   );
 };
 
-export default BuyMeACoffeeSVG;
+export default SvgBackground;

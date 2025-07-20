@@ -1629,7 +1629,10 @@ export default function ChatApp() {
         </div>
 
         {/* Top bar */}
-        <div className="bg-[var(--color-background)] p-4 shadow-sm overflow-x-auto border-b border-[var(--color-border)]">
+        <div
+          id="top-scroll"
+          className="bg-[var(--color-background)] p-4 shadow-sm overflow-x-auto border-b border-[var(--color-border)]"
+        >
           <div className="flex items-center justify-between min-w-[320px]">
             <div className="flex items-center gap-2 flex-shrink-0">
               <div
