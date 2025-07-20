@@ -34,3 +34,7 @@ else
 fi
 
 echo "GitHub repos refreshed."
+
+echo "Restarting services."
+chmod +x docker_restart_services.sh
+./docker_restart_services.sh

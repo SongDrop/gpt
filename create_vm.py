@@ -79,15 +79,15 @@ async def main():
 
     username = prompt_input("Enter VM username", "azureuser")
     password = prompt_input("Enter VM password", "azurepassword1234!", secret=True)
-    domain = prompt_input("Enter main domain", "gitgpt.chat")
-    subdomain = prompt_input("Enter subdomain or leave empty", "")
+    domain = prompt_input("Enter main domain", "win10dev.xyz")
+    subdomain = prompt_input("Enter subdomain or leave empty", "gpt")
     if subdomain:
         subdomain = subdomain.strip().strip('.')
         fqdn = f"{subdomain}.{domain}"
     else:
         fqdn = domain
     print_info(f"Full domain to configure: {fqdn}")
-    resource_group = prompt_input("Enter resource group name", "gitgptchat")
+    resource_group = prompt_input("Enter resource group name", "win10dev")
     pc_name = 'gitgptchat'#''.join(random.choices(string.ascii_lowercase, k=6))
     vm_name = prompt_input("Enter VM name", pc_name)
     location = prompt_input("Enter Azure region", "uksouth")
