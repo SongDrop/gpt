@@ -24,6 +24,13 @@ const SvgBackground: React.FC<SvgBackgroundProps> = ({ svgUrl, fillColor }) => {
           return;
         }
 
+        // Get all paths with original fill "#000000" (or black)
+        const blackPaths = svgElement.querySelectorAll('path[fill="#000000"]');
+        // Set opacity on black paths
+        blackPaths.forEach((el) => {
+          el.setAttribute("opacity", "0");
+        });
+
         // Modify fill color of paths and text
         svgElement.querySelectorAll("path, text").forEach((el) => {
           el.setAttribute("fill", fillColor);
@@ -74,8 +81,6 @@ const SvgBackground: React.FC<SvgBackgroundProps> = ({ svgUrl, fillColor }) => {
       style={{
         backgroundImage: `url("${dataUrl}")`,
       }}
-      role="img"
-      aria-label="SVG icon"
     />
   );
 };

@@ -1729,9 +1729,9 @@ export default function ChatApp() {
                 >
                   <div
                     style={{
-                      boxShadow: `0 10px 15px -3px var(--color-border-hover)`,
+                      boxShadow: `0 10px 15px -3px var(--color-border)`,
                     }}
-                    className={`max-w-[80%] rounded-lg p-6 mt-0 shadow-lg ${
+                    className={`max-w-[80%] rounded-lg p-6 mt-0 shadow-lg border border-[var(--color-secondary)] ${
                       message.role === "user"
                         ? "bg-[var(--color-background)] text-[var(--color-foreground)] ml-auto"
                         : "bg-[var(--color-background)] text-[var(--color-foreground)] mr-auto"
