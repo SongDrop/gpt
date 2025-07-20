@@ -48,6 +48,7 @@ fi
 source venv/bin/activate
 
 echo "Upgrading pip and installing dependencies..."
+# Uncomment and adjust if you want to install dependencies:
 # pip install --upgrade pip
 # pip install -r requirements.txt
 
@@ -58,7 +59,6 @@ if ! command -v uvicorn &> /dev/null; then
 fi
 
 echo "Launching backend..."
-# nohup uvicorn main:app --reload > "$LOG_DIR/backend.log" 2>&1 &
 nohup uvicorn main:app --host 0.0.0.0 --port 8000 > "$LOG_DIR/backend.log" 2>&1 &
 BACKEND_PID=$!
 sleep 2
@@ -73,24 +73,41 @@ echo "✅ Backend started with PID $BACKEND_PID"
 echo "Backend logs: $LOG_DIR/backend.log"
 
 # ========================
-# START FRONTEND
+# BUILD FRONTEND
 # ========================
-echo "Starting frontend..."
+echo "Building frontend for production..."
 cd "$FRONTEND_DIR" || { echo "❌ Frontend directory not found"; exit 1; }
 
-#nohup npm start > "$LOG_DIR/frontend.log" 2>&1 &
-nohup env HOST=0.0.0.0 npm start > "$LOG_DIR/frontend.log" 2>&1 &
+npm install
+npm run build
 
+if [ $? -ne 0 ]; then
+  echo "❌ Frontend build failed. Check logs."
+  exit 1
+fi
+echo "✅ Frontend build completed."
+
+# ========================
+# SERVE FRONTEND
+# ========================
+# You need to serve the built static files.
+# Option 1: Serve with 'serve' package (install if missing)
+if ! command -v serve &> /dev/null; then
+  echo "Installing 'serve' static server globally..."
+  npm install -g serve
+fi
+
+nohup serve -s build -l 3000 > "$LOG_DIR/frontend.log" 2>&1 &
 FRONTEND_PID=$!
 sleep 2
 
 if ! ps -p $FRONTEND_PID > /dev/null; then
-  echo "❌ Frontend failed to start. Check logs:"
+  echo "❌ Frontend static server failed to start. Check logs:"
   tail -n 20 "$LOG_DIR/frontend.log"
   exit 1
 fi
 
-echo "✅ Frontend started with PID $FRONTEND_PID"
+echo "✅ Frontend static server started with PID $FRONTEND_PID"
 echo "Frontend logs: $LOG_DIR/frontend.log"
 
 # ========================
@@ -102,6 +119,6 @@ echo "Frontend PID: $FRONTEND_PID"
 echo ""
 echo "To view backend logs: tail -f $LOG_DIR/backend.log"
 echo "To view frontend logs: tail -f $LOG_DIR/frontend.log"
-# After starting backend and frontend, add:
 
-tail -f /app/logs/backend.log
+# Tail backend logs by default
+tail -f "$LOG_DIR/backend.log"
