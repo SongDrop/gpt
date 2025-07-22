@@ -891,10 +891,6 @@ export default function ChatApp() {
   useEffect(() => {
     console.log("Config WS_URL:", config.WS_URL);
     if (!useHttpFallback && sessionId) {
-      console.log(
-        "!useHttpFallback && sessionId | Config WS_URL:",
-        config.WS_URL
-      );
       const manager = WebSocketManager.getInstance({
         url: config.WS_URL,
         maxReconnectAttempts: config.MAX_RECONNECT_ATTEMPTS,
@@ -938,7 +934,8 @@ export default function ChatApp() {
         onConnectionChange: (connected: boolean) => {
           setWsConnected(connected);
           setError(null);
-          setUseHttpFallback(!connected);
+          setUseHttpFallback(false);
+          // setUseHttpFallback(!connected);
           if (!connected) setTyping(false);
           setReconnectCount((prev) => (connected ? 0 : prev + 1));
           if (connected) setConnectionError(null);

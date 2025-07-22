@@ -9,9 +9,6 @@ export NVM_DIR="$HOME/.nvm"
 export NODE_OPTIONS=--openssl-legacy-provider
 node -v
 npm -v
-chmod +x docker_install.sh
-./docker_install.sh
-
 
 # Backend update
 if [ -d "./backend" ]; then
@@ -36,5 +33,5 @@ fi
 echo "GitHub repos refreshed."
 
 echo "Restarting services."
-chmod +x docker_restart_services.sh
-./docker_restart_services.sh
+chmod +x docker_install.sh
+./docker_install.sh
