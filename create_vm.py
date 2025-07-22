@@ -419,6 +419,7 @@ async def main():
         print_success(f"Deployed Custom Script Extension '{extension.name}'.")
         await cleanup_temp_storage_on_success(resource_group, storage_client, storage_account_name, blob_service_client, container_name, blob_name)
 
+        time.sleep(200)
         print_success("-----------------------------------------------------")
         print_success("Azure Windows VM provisioning completed successfully!")
         print_success("-----------------------------------------------------")

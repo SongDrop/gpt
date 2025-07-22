@@ -465,24 +465,29 @@ const ConnectionStatus: React.FC<{
   wsConnected: boolean;
   useHttpFallback: boolean;
   reconnectCount: number;
-}> = ({ wsConnected, useHttpFallback, reconnectCount }) => (
-  <div className="flex items-center gap-2 text-sm">
-    <span
-      className={`w-2 h-2 rounded-full ${
-        wsConnected ? "bg-green-500" : "bg-red-500"
-      }`}
-      aria-label={wsConnected ? "Connected" : "Disconnected"}
-      title={wsConnected ? "Connected" : "Disconnected"}
-    />
-    {useHttpFallback ? (
-      <span>Using HTTP Mode</span>
-    ) : wsConnected ? (
-      <span>Connected (reconnects: {reconnectCount})</span>
-    ) : (
-      <span>Disconnected</span>
-    )}
-  </div>
-);
+}> = ({ wsConnected, useHttpFallback, reconnectCount }) => {
+  // Log here, before the return statement
+  console.log(wsConnected, useHttpFallback, reconnectCount);
+
+  return (
+    <div className="flex items-center gap-2 text-sm">
+      <span
+        className={`w-2 h-2 rounded-full ${
+          wsConnected ? "bg-green-500" : "bg-red-500"
+        }`}
+        aria-label={wsConnected ? "Connected" : "Disconnected"}
+        title={wsConnected ? "Connected" : "Disconnected"}
+      />
+      {useHttpFallback ? (
+        <span>Using HTTP Mode</span>
+      ) : wsConnected ? (
+        <span>Connected (reconnects: {reconnectCount})</span>
+      ) : (
+        <span>Disconnected</span>
+      )}
+    </div>
+  );
+};
 
 const MessageActions: React.FC<{
   content: string;
@@ -958,7 +963,7 @@ export default function ChatApp() {
         el.scrollIntoView({ behavior: "smooth", block: "start" });
       }
     }
-  }, [messages, highlightedMessageId, typing]);
+  }, [messages, highlightedMessageId]);
 
   // Auto-scroll on window load, only if no highlighted message
   useEffect(() => {

@@ -27,6 +27,8 @@ docker build -t gpt-app .
 docker run -d --name gpt-container -p 3000:3000 -p 8000:8000 gpt-app
 ```
 
+ 
+
 ```
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
