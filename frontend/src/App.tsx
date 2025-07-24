@@ -539,7 +539,7 @@ export default function ChatApp() {
     []
   );
   const [messages, setMessages] = useState<Message[]>([]);
-  const PAGE_SIZE = 50; // or suitable chunk size
+  const PAGE_SIZE = 1000; // or suitable chunk size
 
   const [messagePageOffset, setMessagePageOffset] = useState(0);
   const [hasMoreMessages, setHasMoreMessages] = useState(true);
@@ -598,7 +598,7 @@ export default function ChatApp() {
 
   // Add this state at the top of your component
   const [isInitializing, setIsInitializing] = useState(true);
-  const initialPagination = { offset: 0, limit: 200 }; // Explicit initial state
+  const initialPagination = { offset: 0, limit: 1000 }; // Explicit initial state
   const [highlightedMessageId, setHighlightedMessageId] = React.useState<
     string | null
   >(null);
@@ -821,7 +821,7 @@ export default function ChatApp() {
       console.log(`[Message Loading] Cleanup - unmounting`);
       isMounted = false;
     };
-  }, [sessionId, updateSessionName]); // Add any other dependencies if needed
+  }, [sessionId]); // Add any other dependencies if needed
 
   // 4. Save messages when they change (debounced)
   useEffect(() => {
@@ -934,8 +934,8 @@ export default function ChatApp() {
         onConnectionChange: (connected: boolean) => {
           setWsConnected(connected);
           setError(null);
-          setUseHttpFallback(false);
-          // setUseHttpFallback(!connected);
+          // setUseHttpFallback(false);
+          setUseHttpFallback(!connected);
           if (!connected) setTyping(false);
           setReconnectCount((prev) => (connected ? 0 : prev + 1));
           if (connected) setConnectionError(null);
@@ -1750,7 +1750,7 @@ export default function ChatApp() {
           id="messages"
           className="flex-1 overflow-y-auto px-4 py-4 space-y-4 w-full max-w-full sm:max-w-[90%] mx-auto lg:max-w-[1200px]"
         >
-          {hasMoreMessages && !loadingMessages && (
+          {/* {hasMoreMessages && !loadingMessages && (
             <button
               onClick={() =>
                 setMessagePageOffset((offset) => offset + PAGE_SIZE)
@@ -1759,7 +1759,7 @@ export default function ChatApp() {
             >
               Load Older Messages
             </button>
-          )}
+          )} */}
 
           {loadingMessages && (
             <div className="text-sm italic text-[var(--color-secondary)] mb-2">
