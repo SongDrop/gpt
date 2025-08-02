@@ -9,6 +9,7 @@ import {
   Code,
   Wand,
   ArrowLeftRight,
+  Info,
 } from "lucide-react";
 
 // Define response type for the diff-based improvement
@@ -295,7 +296,12 @@ const CodeImprove: React.FC<CodeImproveProps> = ({
   const [isImproving, setIsImproving] = useState(false);
   const [copied, setCopied] = useState<Record<string, boolean>>({});
   const [diffLines, setDiffLines] = useState<DiffLine[]>([]);
-  const [viewMode, setViewMode] = useState<"code" | "diff">("code");
+  const [viewMode, setViewMode] = useLocalStorage<"code" | "diff">(
+    "codeImprove-viewMode",
+    "code"
+  );
+  const [explanation, setExplanation] = useState<string>("");
+  const [showExplanation, setShowExplanation] = useState(false);
   const sourceFileInputRef = useRef<HTMLInputElement>(null);
   const improvedFileInputRef = useRef<HTMLInputElement>(null);
 
@@ -311,17 +317,19 @@ const CodeImprove: React.FC<CodeImproveProps> = ({
     setIsImproving(true);
     try {
       const result = await onImprove(sourceCode, language, instructions);
-      // Extract the improved code string from the response
       const improvedCodeString = result.improved_code || result.diff || "";
       setImprovedCode(improvedCodeString);
+      setExplanation(result.explanation || "");
+      setShowExplanation(true);
       setViewMode("diff");
     } catch (error) {
       console.error("Improvement failed:", error);
-      setImprovedCode(
-        `// Improvement error: ${
-          error instanceof Error ? error.message : String(error)
-        }`
-      );
+      const errorMsg = `// Improvement error: ${
+        error instanceof Error ? error.message : String(error)
+      }`;
+      setImprovedCode(errorMsg);
+      setExplanation(errorMsg);
+      setShowExplanation(true);
     } finally {
       setIsImproving(false);
     }
@@ -357,6 +365,8 @@ const CodeImprove: React.FC<CodeImproveProps> = ({
     if (improvedCode) {
       setSourceCode(improvedCode);
       setImprovedCode("");
+      setExplanation("");
+      setShowExplanation(false);
       onClose();
     }
   };
@@ -373,73 +383,99 @@ const CodeImprove: React.FC<CodeImproveProps> = ({
           border: "1px solid var(--color-border)",
         }}
       >
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="language-selector">
-            <label
-              className="block text-sm font-medium mb-1"
-              style={{ color: "var(--color-foreground)" }}
-            >
-              Language
-            </label>
-            <select
-              value={language}
-              onChange={(e) => setLanguage(e.target.value as Language)}
-              className="p-2 rounded hover:bg-[var(--color-secondary)] bg-[var(--color-background)] cursor-pointer border rounded border-[var(--color-border)] w-full"
-            >
-              {SUPPORTED_LANGUAGES.map((lang, index) => (
-                <option key={`source-${lang}-${index}`} value={lang}>
-                  {lang}
-                </option>
-              ))}
-            </select>
+        <div className="flex flex-col gap-4">
+          <div className="flex flex-col md:flex-row gap-4">
+            <div className="language-selector flex-1">
+              <label
+                className="block text-sm font-medium mb-1"
+                style={{ color: "var(--color-foreground)" }}
+              >
+                Language
+              </label>
+              <select
+                value={language}
+                onChange={(e) => setLanguage(e.target.value as Language)}
+                className="p-2 rounded hover:bg-[var(--color-secondary)] bg-[var(--color-background)] cursor-pointer border rounded border-[var(--color-border)] w-full"
+              >
+                {SUPPORTED_LANGUAGES.map((lang, index) => (
+                  <option key={`source-${lang}-${index}`} value={lang}>
+                    {lang}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            <div className="flex-1">
+              <label
+                className="block text-sm font-medium mb-1"
+                style={{ color: "var(--color-foreground)" }}
+              >
+                Improvement Instructions
+              </label>
+              <textarea
+                value={instructions}
+                onChange={(e) => setInstructions(e.target.value)}
+                className="w-full p-2 rounded border border-[var(--color-border)] bg-[var(--color-background)] text-[var(--color-foreground)]"
+                rows={2}
+                placeholder="Describe how to improve the code..."
+              />
+            </div>
           </div>
 
-          <div className="instructions">
-            <label
-              className="block text-sm font-medium mb-1"
-              style={{ color: "var(--color-foreground)" }}
+          <div className="flex flex-wrap gap-2 mt-2">
+            <button
+              onClick={handleImprove}
+              disabled={isImproving || !sourceCode.trim()}
+              className="flex items-center gap-2 px-4 py-2 rounded transition-colors"
+              style={{
+                backgroundColor: "var(--color-primary)",
+                color: "white",
+                cursor:
+                  isImproving || !sourceCode.trim() ? "not-allowed" : "pointer",
+                opacity: isImproving || !sourceCode.trim() ? 0.5 : 1,
+              }}
             >
-              Improvement Instructions
-            </label>
-            <textarea
-              value={instructions}
-              onChange={(e) => setInstructions(e.target.value)}
-              className="w-full p-2 rounded border border-[var(--color-border)] bg-[var(--color-background)] text-[var(--color-foreground)]"
-              rows={2}
-              placeholder="Describe how to improve the code..."
-            />
+              <Wand className="w-5 h-5" />
+              {isImproving ? "Improving..." : "Improve Code"}
+            </button>
+
+            <button
+              onClick={() => setViewMode(viewMode === "code" ? "diff" : "code")}
+              className="flex items-center gap-2 px-4 py-2 rounded transition-colors"
+              style={{
+                backgroundColor: "var(--color-secondary)",
+                color: "var(--color-foreground)",
+              }}
+              disabled={!improvedCode}
+            >
+              <ArrowLeftRight className="w-5 h-5" />
+              {viewMode === "code" ? "Show Diff" : "Show Code"}
+            </button>
+
+            {explanation && (
+              <button
+                onClick={() => setShowExplanation(!showExplanation)}
+                className="flex items-center gap-2 px-4 py-2 rounded transition-colors"
+                style={{
+                  backgroundColor: "var(--color-secondary)",
+                  color: "var(--color-foreground)",
+                }}
+              >
+                <Info className="w-5 h-5" />
+                {showExplanation ? "Hide Explanation" : "Show Explanation"}
+              </button>
+            )}
+            <button
+              onClick={onClose}
+              className="px-4 py-2 rounded transition-colors"
+              style={{
+                backgroundColor: "var(--color-error)",
+                color: "white",
+              }}
+            >
+              Close
+            </button>
           </div>
-        </div>
-
-        <div className="flex gap-2 mt-4">
-          <button
-            onClick={handleImprove}
-            disabled={isImproving || !sourceCode.trim()}
-            className="flex items-center gap-2 px-4 py-2 rounded transition-colors"
-            style={{
-              backgroundColor: "var(--color-primary)",
-              color: "white",
-              cursor:
-                isImproving || !sourceCode.trim() ? "not-allowed" : "pointer",
-              opacity: isImproving || !sourceCode.trim() ? 0.5 : 1,
-            }}
-          >
-            <Wand className="w-5 h-5" />
-            {isImproving ? "Improving..." : "Improve Code"}
-          </button>
-
-          <button
-            onClick={() => setViewMode(viewMode === "code" ? "diff" : "code")}
-            className="flex items-center gap-2 px-4 py-2 rounded transition-colors"
-            style={{
-              backgroundColor: "var(--color-secondary)",
-              color: "var(--color-foreground)",
-            }}
-            disabled={!improvedCode}
-          >
-            <ArrowLeftRight className="w-5 h-5" />
-            {viewMode === "code" ? "Show Diff" : "Show Code"}
-          </button>
         </div>
       </div>
 
@@ -698,31 +734,37 @@ const CodeImprove: React.FC<CodeImproveProps> = ({
         </div>
       </div>
 
-      <div className="flex gap-2 flex-wrap p-4 justify-start">
-        <button
-          onClick={applyChanges}
-          disabled={!improvedCode}
-          className="px-4 py-2 rounded transition-colors"
-          style={{
-            backgroundColor: "var(--color-success)",
-            color: "white",
-            opacity: improvedCode ? 1 : 0.5,
-            cursor: improvedCode ? "pointer" : "not-allowed",
-          }}
+      {showExplanation && explanation && (
+        <div
+          className="mt-4 p-4 rounded-lg border border-[var(--color-border)] bg-[var(--color-background)]"
+          style={{ color: "var(--color-foreground)" }}
         >
-          Apply Changes to Editor
-        </button>
-        <button
-          onClick={onClose}
-          className="px-4 py-2 rounded transition-colors"
-          style={{
-            backgroundColor: "var(--color-error)",
-            color: "white",
-          }}
-        >
-          Close
-        </button>
-      </div>
+          <div className="flex justify-between items-center mb-2">
+            <h3 className="text-lg font-medium">Explanation</h3>
+            <div className="flex gap-2">
+              <button
+                onClick={() => copyToClipboard(explanation, "explanation")}
+                className="text-[var(--color-border)] hover:text-[var(--color-foreground)]"
+                title="Copy explanation"
+              >
+                {copied["explanation"] ? (
+                  <Check className="w-5 h-5 text-[var(--color-success)]" />
+                ) : (
+                  <Copy className="w-5 h-5" />
+                )}
+              </button>
+              <button
+                onClick={() => setShowExplanation(false)}
+                className="text-[var(--color-border)] hover:text-[var(--color-foreground)]"
+                title="Close explanation"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
+          <div className="whitespace-pre-wrap text-sm">{explanation}</div>
+        </div>
+      )}
     </div>
   );
 };
