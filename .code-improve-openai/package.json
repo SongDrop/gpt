@@ -1,0 +1,96 @@
+{
+  "name": "code-improve-openai",
+  "displayName": "Code Improve OPENAI",
+  "description": "AI-powered code improvements with diff view",
+  "version": "1.0.0",
+  "publisher": "your-name",
+  "engines": {
+    "vscode": "^1.75.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:codeImprove.improve",
+    "onCommand:codeImprove.improveSelection"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "codeImprove.improve",
+        "title": "Improve Current File"
+      },
+      {
+        "command": "codeImprove.improveSelection",
+        "title": "Improve Selection"
+      },
+      {
+        "command": "codeImprove.applyChanges",
+        "title": "Apply Improvements"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "command": "codeImprove.improveSelection",
+          "group": "codeImprove",
+          "when": "editorHasSelection"
+        }
+      ],
+      "commandPalette": [
+        {
+          "command": "codeImprove.improve",
+          "when": "editorHasSelection"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Code Improve",
+      "properties": {
+        "codeImprove.openai.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "OpenAI API key"
+        },
+        "codeImprove.openai.apiBase": {
+          "type": "string",
+          "default": "https://api.openai.com/v1",
+          "description": "OpenAI API base URL"
+        },
+        "codeImprove.openai.model": {
+          "type": "string",
+          "default": "gpt-4",
+          "description": "OpenAI model to use"
+        },
+        "codeImprove.maxTokens": {
+          "type": "number",
+          "default": 2000,
+          "description": "Maximum tokens for completion"
+        },
+        "codeImprove.temperature": {
+          "type": "number",
+          "default": 0.7,
+          "description": "Temperature for completions"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.75.0",
+    "@types/node": "16.x",
+    "eslint": "^8.0.1",
+    "typescript": "^4.9.4"
+  },
+  "dependencies": {
+    "axios": "^1.3.4"
+  }
+}

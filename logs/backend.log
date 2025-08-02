@@ -84,3 +84,8 @@ INFO:     connection open
 INFO:     127.0.0.1:57599 - "OPTIONS /diff-improve HTTP/1.1" 200 OK
 2025-08-03 00:14:47,588 - httpx - INFO - HTTP Request: POST https://gabz-mb97c15u-swedencentral.cognitiveservices.azure.com/openai/deployments/gpt-4.1-mini/chat/completions?api-version=2024-05-01-preview "HTTP/1.1 200 OK"
 INFO:     127.0.0.1:57599 - "POST /diff-improve HTTP/1.1" 200 OK
+2025-08-03 00:23:47,605 - main - INFO - WebSocket disconnected: 127.0.0.1:57558
+2025-08-03 00:23:47,605 - main - INFO - Client 127.0.0.1:57558 disconnected. Active connections: 0
+2025-08-03 00:23:47,605 - main - INFO - Connection cleaned up for 127.0.0.1:57558
+2025-08-03 00:23:47,605 - main - INFO - Client 127.0.0.1:57558 disconnected. Active connections: 0
+INFO:     connection closed
