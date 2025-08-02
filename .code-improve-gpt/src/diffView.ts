@@ -1,75 +1,87 @@
-import * as vscode from 'vscode';
-import * as difflib from 'difflib';
+import * as vscode from "vscode";
+import * as difflib from "difflib";
 
 interface DiffViewOptions {
-    original: string;
-    improved: string;
-    language: string;
-    fileName: string;
-    explanation: string;
-    changedLines: number[];
+  original: string;
+  improved: string;
+  language: string;
+  fileName: string;
+  explanation: string;
+  changedLines: number[];
 }
 
 export class DiffView {
-    private context: vscode.ExtensionContext;
-    private diffDocument?: vscode.TextDocument;
-    private originalContent?: string;
-    private improvedContent?: string;
-    private language?: string;
-    private changedLines: number[] = [];
+  private context: vscode.ExtensionContext;
+  private diffDocument?: vscode.TextDocument;
+  private originalContent?: string;
+  private improvedContent?: string;
+  private language?: string;
+  private changedLines: number[] = [];
 
-    constructor(context: vscode.ExtensionContext) {
-        this.context = context;
-    }
+  constructor(context: vscode.ExtensionContext) {
+    this.context = context;
+  }
 
-    showDiff(options: DiffViewOptions) {
-        this.originalContent = options.original;
-        this.improvedContent = options.improved;
-        this.language = options.language;
-        this.changedLines = options.changedLines;
+  showDiff(options: DiffViewOptions) {
+    this.originalContent = options.original;
+    this.improvedContent = options.improved;
+    this.language = options.language;
+    this.changedLines = options.changedLines;
 
-        // Create a virtual document for the diff
-        const uri = vscode.Uri.parse(`code-improve://diff/${options.fileName}.diff`);
-        const diffContent = this.generateDiffContent(options.original, options.improved);
+    // Create a virtual document for the diff
+    const uri = vscode.Uri.parse(
+      `code-improve://diff/${options.fileName}.diff`
+    );
+    const diffContent = this.generateDiffContent(
+      options.original,
+      options.improved
+    );
 
-        vscode.workspace.openTextDocument(uri).then(doc => {
-            const edit = new vscode.WorkspaceEdit();
-            edit.replace(uri, new vscode.Range(0, 0, doc.lineCount, 0), diffContent;
-            return vscode.workspace.applyEdit(edit);
-        }).then(() => {
-            vscode.window.showTextDocument(uri, {
-                viewColumn: vscode.ViewColumn.Beside,
-                preview: false
-            });
-
-            // Show explanation in a webview
-            if (options.explanation) {
-                this.showExplanation(options.explanation);
-            }
-        });
-    }
-
-    private generateDiffContent(original: string, improved: string): string {
-        const originalLines = original.split('\n');
-        const improvedLines = improved.split('\n');
-        const diff = difflib.unifiedDiff(originalLines, improvedLines, {
-            fromfile: 'Original',
-            tofile: 'Improved',
-            lineterm: ''
-        });
-
-        return Array.from(diff).join('\n');
-    }
-
-    private showExplanation(explanation: string) {
-        const panel = vscode.window.createWebviewPanel(
-            'codeImproveExplanation',
-            'Code Improvement Explanation',
-            vscode.ViewColumn.Two,
-            {}
+    vscode.workspace
+      .openTextDocument(uri)
+      .then((doc) => {
+        const edit = new vscode.WorkspaceEdit();
+        edit.replace(
+          uri,
+          new vscode.Range(0, 0, doc.lineCount, 0),
+          diffContent
         );
+        return vscode.workspace.applyEdit(edit);
+      })
+      .then(() => {
+        vscode.window.showTextDocument(uri, {
+          viewColumn: vscode.ViewColumn.Beside,
+          preview: false,
+        });
 
-        panel.webview.html = `
+        // Show explanation in a webview
+        if (options.explanation) {
+          this.showExplanation(options.explanation);
+        }
+      });
+  }
+
+  private generateDiffContent(original: string, improved: string): string {
+    const originalLines = original.split("\n");
+    const improvedLines = improved.split("\n");
+    const diff = difflib.unifiedDiff(originalLines, improvedLines, {
+      fromfile: "Original",
+      tofile: "Improved",
+      lineterm: "",
+    });
+
+    return Array.from(diff).join("\n");
+  }
+
+  private showExplanation(explanation: string) {
+    const panel = vscode.window.createWebviewPanel(
+      "codeImproveExplanation",
+      "Code Improvement Explanation",
+      vscode.ViewColumn.Two,
+      {}
+    );
+
+    panel.webview.html = `
             <!DOCTYPE html>
             <html lang="en">
             <head>
@@ -128,57 +140,63 @@ export class DiffView {
             </html>
         `;
 
-        panel.webview.onDidReceiveMessage(message => {
-            switch (message.command) {
-                case 'copy':
-                    vscode.window.showInformationMessage('Explanation copied to clipboard');
-                    break;
-                case 'apply':
-                    this.applyChanges();
-                    panel.dispose();
-                    break;
-            }
-        });
+    panel.webview.onDidReceiveMessage((message) => {
+      switch (message.command) {
+        case "copy":
+          vscode.window.showInformationMessage(
+            "Explanation copied to clipboard"
+          );
+          break;
+        case "apply":
+          this.applyChanges();
+          panel.dispose();
+          break;
+      }
+    });
+  }
+
+  applyChanges() {
+    if (!this.improvedContent) {
+      vscode.window.showErrorMessage("No improvements to apply");
+      return;
     }
 
-    applyChanges() {
-        if (!this.improvedContent) {
-            vscode.window.showErrorMessage('No improvements to apply');
-            return;
-        }
+    const editor = vscode.window.activeTextEditor;
+    if (editor) {
+      const fullRange = new vscode.Range(
+        editor.document.positionAt(0),
+        editor.document.positionAt(editor.document.getText().length)
+      );
 
-        const editor = vscode.window.activeTextEditor;
-        if (editor) {
-            const fullRange = new vscode.Range(
-                editor.document.positionAt(0),
-                editor.document.positionAt(editor.document.getText().length)
+      editor
+        .edit((editBuilder) => {
+          editBuilder.replace(fullRange, this.improvedContent!);
+        })
+        .then((success) => {
+          if (success) {
+            vscode.window.showInformationMessage(
+              "Improvements applied successfully"
             );
 
-            editor.edit(editBuilder => {
-                editBuilder.replace(fullRange, this.improvedContent!);
-            }).then(success => {
-                if (success) {
-                    vscode.window.showInformationMessage('Improvements applied successfully');
-                    
-                    // Highlight changed lines
-                    if (this.changedLines.length > 0) {
-                        const decorations = this.changedLines.map(line => {
-                            return {
-                                range: new vscode.Range(line, 0, line, 0),
-                                hoverMessage: 'Changed by Code Improve'
-                            };
-                        });
+            // Highlight changed lines
+            if (this.changedLines.length > 0) {
+              const decorations = this.changedLines.map((line) => {
+                return {
+                  range: new vscode.Range(line, 0, line, 0),
+                  hoverMessage: "Changed by Code Improve",
+                };
+              });
 
-                        editor.setDecorations(
-                            vscode.window.createTextEditorDecorationType({
-                                backgroundColor: 'rgba(46, 160, 67, 0.1)',
-                                isWholeLine: true
-                            }),
-                            decorations
-                        );
-                    }
-                }
-            });
-        }
+              editor.setDecorations(
+                vscode.window.createTextEditorDecorationType({
+                  backgroundColor: "rgba(46, 160, 67, 0.1)",
+                  isWholeLine: true,
+                }),
+                decorations
+              );
+            }
+          }
+        });
     }
+  }
 }
