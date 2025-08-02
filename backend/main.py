@@ -21,6 +21,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from fastapi import Form
 from fastapi import UploadFile, File, BackgroundTasks
+import difflib
+from typing import Tuple, List
 
 # Configure logging first
 logging.basicConfig(
@@ -39,6 +41,9 @@ client = AzureOpenAI(
     api_key=settings.openai_api_key,
     api_version="2024-05-01-preview"
 )
+
+max_completion_tokens = 10000
+max_model_tokens = 20000
 
 # Classes
 class ChatMessage(BaseModel):
@@ -66,6 +71,21 @@ class TranslationRequest(BaseModel):
 
 class TranslationResponse(BaseModel):
     translatedCode: str
+
+# Add these models with your other Pydantic models
+class CodeImprovementRequest(BaseModel):
+    original_code: str
+    instructions: str 
+    language: str
+    max_tokens: Optional[int] = 4000
+    temperature: Optional[float] = 0.7
+    generate_full_code: Optional[bool] = True
+
+class CodeDiffResponse(BaseModel):
+    diff: str
+    improved_code: Optional[str] = None
+    explanation: str
+    changed_lines: List[int]
 
 class StreamMetrics:
     def __init__(self):
@@ -840,6 +860,121 @@ def truncate_messages(messages: List[Dict[str, str]], model_name: str):
             break
     return messages
 
+# Update the apply_unified_diff function to preserve context
+def apply_unified_diff(original: str, diff_text: str) -> Tuple[str, List[int]]:
+    original_lines = original.splitlines(keepends=True)
+    patched = []
+    changed = []
+    line_num = 0
+    
+    # Parse diff lines
+    diff_lines = diff_text.splitlines()
+    i = 0
+    while i < len(diff_lines):
+        line = diff_lines[i]
+        
+        # Handle context lines
+        if line.startswith(' '):
+            patched.append(line[1:] + '\n')
+            line_num += 1
+            i += 1
+        # Handle added lines
+        elif line.startswith('+') and not line.startswith('+++'):
+            patched.append(line[1:] + '\n')
+            changed.append(line_num)
+            line_num += 1
+            i += 1
+        # Handle removed lines
+        elif line.startswith('-') and not line.startswith('---'):
+            changed.append(line_num)
+            i += 1
+        # Handle block headers
+        elif line.startswith('@@'):
+            i += 1  # Skip block header
+        else:
+            i += 1  # Skip other meta lines
+    
+    return ''.join(patched), changed
+
+@app.post("/diff-improve", response_model=CodeDiffResponse)
+async def improve_code_with_diff(request: CodeImprovementRequest):
+    # Construct the prompt for AI
+    prompt = (
+        f"Improve this {request.language} code:\n"
+        f"```{request.language}\n"
+        f"{request.original_code}\n"
+        f"```\n\n"
+        f"Changes requested: {request.instructions}\n\n"
+        f"Respond STRICTLY in this format:\n"
+        f"```diff\n"
+        f"[Unified diff showing changes]\n"
+        f"```\n\n"
+        f"Explanation:\n"
+        f"[Brief explanation]"
+    )
+    
+    try:
+        # Prepare messages for OpenAI
+        messages = [
+            {
+                "role": "system", 
+                "content": "You are a code improvement assistant. Return changes in unified diff format."
+            },
+            {
+                "role": "user", 
+                "content": prompt
+            }
+        ]
+        
+        # Call OpenAI API
+        completion = await generate_chat_completion(
+            messages=messages,
+            max_tokens=request.max_tokens,
+            temperature=request.temperature,
+            stream=False,
+            vector_search_enabled=False
+        )
+        
+        # Extract response content
+        response = completion.choices[0].message.content
+        
+        # Parse diff section
+        if '```diff' in response:
+            diff_part = response.split('```diff')[1].split('```')[0].strip()
+        else:
+            diff_part = response.split('```')[1].strip() if '```' in response else ""
+        
+        # Parse explanation
+        if 'Explanation:' in response:
+            explanation = response.split('Explanation:')[1].strip()
+        else:
+            explanation = "No explanation provided"
+        
+        # Generate improved code if requested
+        improved_code = None
+        changed_lines = []
+        
+        if request.generate_full_code and diff_part:
+            improved_code, changed_lines = apply_unified_diff(
+                request.original_code, 
+                diff_part
+            )
+        
+        # Return response
+        return CodeDiffResponse(
+            diff=diff_part,
+            improved_code=improved_code,
+            explanation=explanation,
+            changed_lines=changed_lines
+        )
+        
+    except Exception as e:
+        logger.error(f"Error in diff-improve endpoint: {str(e)}")
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=str(e)
+        )
+    
 if __name__ == "__main__":
     uvicorn.run(
         "main:app",

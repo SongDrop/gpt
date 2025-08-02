@@ -53,6 +53,14 @@ import { SearchComponent } from "./components/SearchComponent";
 
 const baseUrlLogo = "https://i.postimg.cc/C53CqTfx/chatgpt.png";
 
+// Define response type for the diff-based improvement
+interface CodeDiffResponse {
+  diff: string;
+  improved_code: string | null;
+  explanation: string;
+  changed_lines: number[];
+}
+
 type Role = "assistant" | "user" | "system";
 
 class Message {
@@ -1441,6 +1449,47 @@ export default function ChatApp() {
     }
   };
 
+  // Send code improvement request using diff format
+  const onImproveCode = async (
+    source: string,
+    language: string,
+    instructions: string
+  ): Promise<CodeDiffResponse> => {
+    try {
+      const response = await fetch(`${config.API_URL}/diff-improve`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          original_code: source,
+          instructions,
+          language,
+          generate_full_code: true, // Request full improved code
+        }),
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(`Code improvement failed: ${errorText}`);
+      }
+
+      return (await response.json()) as CodeDiffResponse;
+    } catch (error) {
+      console.error("Code improvement error:", error);
+
+      // Return error in same format as successful response
+      return {
+        diff: `// Code improvement error: ${
+          error instanceof Error ? error.message : String(error)
+        }`,
+        improved_code: null,
+        explanation: "Error occurred during code improvement",
+        changed_lines: [],
+      };
+    }
+  };
+
   //CONNECTION ERROR
   if (initError) {
     return (
@@ -1744,7 +1793,6 @@ export default function ChatApp() {
             </div>
           </div>
         </div>
-
         {/* Messages section */}
         <div
           id="messages"
@@ -1882,6 +1930,7 @@ export default function ChatApp() {
               onDatabase={handleDatabase}
               onDownload={handleDownloadSession}
               onTranslate={onTranslate}
+              onImprove={onImproveCode}
               onImage={() => setShowGptImageWindow(true)}
               placeholder="Type your message... (Shift + Enter for new line)"
               disabled={isLoading || typing}

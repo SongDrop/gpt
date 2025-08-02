@@ -7,6 +7,7 @@ import React, {
 } from "react";
 import useLocalStorage from "./useLocalStorage";
 import CodeTranslator from "./CodeTranslator";
+import CodeImprove from "./CodeImprove";
 import {
   Bold,
   Italic,
@@ -24,10 +25,21 @@ import {
   Image,
   Database,
   Code,
+  Star,
+  Wand,
 } from "lucide-react";
+
 import { relative } from "path";
 import BuyMeACoffeeWidget from "./BuyMeACoffeeWidget";
 import BuyMeACoffeeSVG from "./BuyMeACoffeSVG";
+
+// Define response type for the diff-based improvement
+interface CodeDiffResponse {
+  diff: string;
+  improved_code: string | null;
+  explanation: string;
+  changed_lines: number[];
+}
 
 interface MarkdownEditorProps {
   value: string;
@@ -41,6 +53,11 @@ interface MarkdownEditorProps {
     sourceLang: string,
     targetLang: string
   ) => Promise<string>;
+  onImprove?: (
+    source: string,
+    language: string,
+    instructions: string
+  ) => Promise<CodeDiffResponse>;
   placeholder?: string;
   disabled?: boolean;
 }
@@ -165,6 +182,7 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProps>(
       onDatabase,
       onDownload,
       onTranslate,
+      onImprove,
       disabled,
     },
     ref
@@ -226,6 +244,9 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProps>(
     const leftFileInputRef = useRef<HTMLInputElement>(null);
     const rightFileInputRef = useRef<HTMLInputElement>(null);
     const mainFileInputRef = useRef<HTMLInputElement>(null);
+    // Add these to the component body
+    const [showAIImprovement, setShowAIImprovement] = useState(false);
+
     // NEW: Manage textarea height state for resizing
     const [textareaHeight, setTextareaHeight] = useLocalStorage<number>(
       "text-area-height-markdown-editor-1",
@@ -500,6 +521,25 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProps>(
       setShowLanguages(!showLanguages);
     };
 
+    const handleImproveCode = async (
+      source: string,
+      language: Language,
+      instructions: string
+    ): Promise<CodeDiffResponse> => {
+      if (!onImprove) {
+        return {
+          diff: "",
+          improved_code: "",
+          explanation: "Function not implemented",
+          changed_lines: [],
+        };
+      }
+
+      // Language type is already a string (the specific language name)
+      // So we can use them directly as strings
+      return onImprove(source, language, instructions);
+    };
+
     return (
       <div className="not-prose p-0 m-0 !p-0 !m-0 z-40">
         <div
@@ -607,6 +647,16 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProps>(
             </button>
             <button
               type="button"
+              onClick={() => {
+                setShowAIImprovement((prev) => !prev);
+              }}
+              className="hover:bg-[var(--color-secondary-hover)] p-2 rounded transition-colors"
+              title="AI Code Improvement"
+            >
+              <Wand className="w-4 h-4 text-[var(--color-foreground)]" />
+            </button>
+            <button
+              type="button"
               onClick={() => setShowTranslatorTool((prev) => !prev)}
               className="hover:bg-[var(--color-secondary-hover)] p-2 rounded transition-colors"
               title="Code Translator"
@@ -685,7 +735,6 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProps>(
               </a>
             </div>
           </div>
-
           <input
             type="file"
             ref={mainFileInputRef}
@@ -700,6 +749,13 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProps>(
               onTranslate={handleOnTranslate}
               onClose={() => setShowTranslatorTool(false)}
               initialSourceCode="// Enter your JavaScript code here"
+            />
+          )}
+          {showAIImprovement && (
+            <CodeImprove
+              initialSourceCode={value}
+              onImprove={handleImproveCode}
+              onClose={() => setShowAIImprovement(false)}
             />
           )}
           {showDiffTool && (
@@ -1087,7 +1143,6 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProps>(
               )}
             </div>
           )}
-
           {/* Resize handle centered above the textarea */}
           <div className="flex justify-center">
             <div
@@ -1097,7 +1152,6 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProps>(
               title="Drag to resize textarea"
             />
           </div>
-
           <textarea
             ref={textareaRef}
             value={value}
