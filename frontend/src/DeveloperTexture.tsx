@@ -6,7 +6,7 @@ import TextureComparison from "./components/TextureComparison";
 import TextureHistorySection from "./components/TextureHistorySection";
 import { TextureHistoryItem } from "./components/types";
 
-function TextureDeveloper() {
+function DeveloperTexture() {
   const [activeTab, setActiveTab] = useState<
     "upscaler" | "comparison" | "maps"
   >("upscaler");
@@ -118,4 +118,4 @@ function TextureDeveloper() {
   );
 }
 
-export default TextureDeveloper;
+export default DeveloperTexture;

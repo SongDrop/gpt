@@ -1600,3 +1600,99 @@ src/components/Textures.tsx
 
 webpack compiled with 1 warning
 No issues found.
+Compiling...
+Failed to compile.
+
+Module not found: Error: Can't resolve './TextureDeveloper' in '/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/src'
+WARNING in [eslint] 
+src/ChatApp.tsx
+  Line 6:3:  'Navigate' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/TextureDeveloper.tsx
+  Line 2:27:   'useRef' is defined but never used            @typescript-eslint/no-unused-vars
+  Line 2:35:   'useEffect' is defined but never used         @typescript-eslint/no-unused-vars
+  Line 14:16:  'setUser' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+src/components/Textures.tsx
+  Line 2:27:   'useRef' is defined but never used            @typescript-eslint/no-unused-vars
+  Line 2:35:   'useEffect' is defined but never used         @typescript-eslint/no-unused-vars
+  Line 14:16:  'setUser' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+ERROR in ./src/ChatApp.tsx 9:0-50
+Module not found: Error: Can't resolve './TextureDeveloper' in '/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/src'
+
+webpack compiled with 1 error and 1 warning
+ERROR in src/ChatApp.tsx:11:30
+TS2307: Cannot find module './TextureDeveloper' or its corresponding type declarations.
+     9 | import App from "./App";
+    10 | import Developer from "./Developer";
+  > 11 | import TextureDeveloper from "./TextureDeveloper";
+       |                              ^^^^^^^^^^^^^^^^^^^^
+    12 |
+    13 | function ChatApp() {
+    14 |   return (
+
+Compiling...
+Failed to compile.
+
+Module not found: Error: Can't resolve './TextureDeveloper' in '/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/src'
+WARNING in [eslint] 
+src/ChatApp.tsx
+  Line 6:3:  'Navigate' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/TextureDeveloper.tsx
+  Line 2:27:   'useRef' is defined but never used            @typescript-eslint/no-unused-vars
+  Line 2:35:   'useEffect' is defined but never used         @typescript-eslint/no-unused-vars
+  Line 14:16:  'setUser' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+src/components/Textures.tsx
+  Line 2:27:   'useRef' is defined but never used            @typescript-eslint/no-unused-vars
+  Line 2:35:   'useEffect' is defined but never used         @typescript-eslint/no-unused-vars
+  Line 14:16:  'setUser' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+ERROR in ./src/ChatApp.tsx 9:0-50
+Module not found: Error: Can't resolve './TextureDeveloper' in '/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/src'
+
+webpack compiled with 1 error and 1 warning
+ERROR in src/ChatApp.tsx:11:30
+TS2307: Cannot find module './TextureDeveloper' or its corresponding type declarations.
+     9 | import App from "./App";
+    10 | import Developer from "./Developer";
+  > 11 | import TextureDeveloper from "./TextureDeveloper";
+       |                              ^^^^^^^^^^^^^^^^^^^^
+    12 |
+    13 | function ChatApp() {
+    14 |   return (
+
+Compiling...
+Failed to compile.
+
+Module not found: Error: Can't resolve './TextureDeveloper' in '/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/src'
+WARNING in [eslint] 
+src/ChatApp.tsx
+  Line 6:3:  'Navigate' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/TextureDeveloper.tsx
+  Line 2:27:   'useRef' is defined but never used            @typescript-eslint/no-unused-vars
+  Line 2:35:   'useEffect' is defined but never used         @typescript-eslint/no-unused-vars
+  Line 14:16:  'setUser' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+src/components/Textures.tsx
+  Line 2:27:   'useRef' is defined but never used            @typescript-eslint/no-unused-vars
+  Line 2:35:   'useEffect' is defined but never used         @typescript-eslint/no-unused-vars
+  Line 14:16:  'setUser' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+ERROR in ./src/ChatApp.tsx 9:0-50
+Module not found: Error: Can't resolve './TextureDeveloper' in '/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/src'
+
+webpack compiled with 1 error and 1 warning
+ERROR in src/ChatApp.tsx:11:30
+TS2307: Cannot find module './TextureDeveloper' or its corresponding type declarations.
+     9 | import App from "./App";
+    10 | import Developer from "./Developer";
+  > 11 | import TextureDeveloper from "./TextureDeveloper";
+       |                              ^^^^^^^^^^^^^^^^^^^^
+    12 |
+    13 | function ChatApp() {
+    14 |   return (
+
