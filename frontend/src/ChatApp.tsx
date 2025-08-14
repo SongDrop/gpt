@@ -8,7 +8,7 @@ import {
 //
 import App from "./App";
 import Developer from "./Developer";
-import TextureDeveloper from "./TextureDeveloper";
+import DeveloperTexture from "./DeveloperTexture";
 
 function ChatApp() {
   return (
@@ -20,7 +20,7 @@ function ChatApp() {
         <Route path="/:sessionId" element={<App />} />
         {/* Developer tools */}
         <Route path="/developer" element={<Developer />} />
-        <Route path="/textures" element={<TextureDeveloper />} />
+        <Route path="/textures" element={<DeveloperTexture />} />
       </Routes>
     </Router>
   );
