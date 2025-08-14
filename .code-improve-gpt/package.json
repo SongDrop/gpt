@@ -19,20 +19,27 @@
     "Programming Languages",
     "Other"
   ],
+  "activationEvents": [
+    "onCommand:codeImprove.improve",
+    "onCommand:codeImprove.improveSelection"
+  ],
   "main": "./dist/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "codeImprove.improve",
-        "title": "Improve Current File"
+        "command": "codeImprove.improveSelection",
+        "title": "Improve Selection",
+        "category": "Code Improve"
       },
       {
-        "command": "codeImprove.improveSelection",
-        "title": "Improve Selection"
+        "command": "codeImprove.improve",
+        "title": "Improve Current File",
+        "category": "Code Improve"
       },
       {
         "command": "codeImprove.applyChanges",
-        "title": "Apply Improvements"
+        "title": "Apply Improvements",
+        "category": "Code Improve"
       }
     ],
     "menus": {

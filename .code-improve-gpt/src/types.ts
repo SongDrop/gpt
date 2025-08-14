@@ -7,9 +7,9 @@ export interface CodeImprovementRequest {
   generate_full_code?: boolean;
 }
 
-export interface CodeDiffResponse {
+export interface CodeImprovementResponse {
   diff: string;
-  improved_code: string | null;
+  improved_code: string;
   explanation: string;
   changed_lines: number[];
 }

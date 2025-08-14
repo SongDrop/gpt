@@ -1,21 +1,6 @@
 import * as vscode from "vscode";
 import axios from "axios";
-
-interface CodeImprovementRequest {
-  original_code: string;
-  instructions: string;
-  language: string;
-  max_tokens?: number;
-  temperature?: number;
-  generate_full_code?: boolean;
-}
-
-interface CodeDiffResponse {
-  diff: string;
-  improved_code: string | null;
-  explanation: string;
-  changed_lines: number[];
-}
+import { CodeImprovementRequest, CodeImprovementResponse } from "./types";
 
 export class OpenAI {
   private getConfig() {
@@ -31,7 +16,7 @@ export class OpenAI {
 
   async improveCode(
     request: CodeImprovementRequest
-  ): Promise<CodeDiffResponse> {
+  ): Promise<CodeImprovementResponse> {
     const config = this.getConfig();
 
     if (!config.apiKey) {
@@ -45,7 +30,7 @@ export class OpenAI {
     };
 
     try {
-      const response = await axios.post(
+      const response = await axios.post<CodeImprovementResponse>(
         `${config.apiBase}/diff-improve`,
         payload,
         {
@@ -53,15 +38,34 @@ export class OpenAI {
             "Content-Type": "application/json",
             Authorization: `Bearer ${config.apiKey}`,
           },
+          timeout: 30000, // 30 second timeout
         }
       );
 
-      return response.data;
+      // Validate response structure
+      if (!response.data || typeof response.data !== "object") {
+        throw new Error("Invalid API response format");
+      }
+
+      return {
+        improved_code: response.data.improved_code || "",
+        explanation: response.data.explanation || "",
+        changed_lines: response.data.changed_lines || [],
+        diff: response.data.diff || "",
+      };
     } catch (error) {
       if (axios.isAxiosError(error)) {
-        throw new Error(error.response?.data?.error?.message || error.message);
+        const errorMessage =
+          error.response?.data?.error?.message ||
+          error.response?.data?.message ||
+          error.message;
+        throw new Error(`API Error: ${errorMessage}`);
       }
-      throw error;
+      throw new Error(
+        `Request failed: ${
+          error instanceof Error ? error.message : "Unknown error"
+        }`
+      );
     }
   }
 }

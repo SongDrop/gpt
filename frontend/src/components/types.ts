@@ -39,3 +39,21 @@ export interface DatabaseFilterOptions {
   sortBy: "lastUpdated" | "name" | "documentCount" | "usageCount";
   sortDirection: "asc" | "desc";
 }
+
+// types.ts
+export interface TextureHistoryItem {
+  id: string;
+  name: string;
+  resolution: string;
+  format: "TGA" | "PNG" | "DDS" | "JPG";
+  type: "upscale" | "pbr";
+  timestamp: string;
+  originalName: string;
+}
+
+export interface MapType {
+  name: string;
+  description: string;
+  key: string;
+  icon: string;
+}

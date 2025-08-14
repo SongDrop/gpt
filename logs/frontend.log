@@ -2,9 +2,9 @@
 > ai-chat-assistant@0.1.0 start
 > react-scripts start --host 0.0.0.0
 
-(node:49412) [DEP_WEBPACK_DEV_SERVER_ON_AFTER_SETUP_MIDDLEWARE] DeprecationWarning: 'onAfterSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+(node:8455) [DEP_WEBPACK_DEV_SERVER_ON_AFTER_SETUP_MIDDLEWARE] DeprecationWarning: 'onAfterSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
 (Use `node --trace-deprecation ...` to show where the warning was created)
-(node:49412) [DEP_WEBPACK_DEV_SERVER_ON_BEFORE_SETUP_MIDDLEWARE] DeprecationWarning: 'onBeforeSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
+(node:8455) [DEP_WEBPACK_DEV_SERVER_ON_BEFORE_SETUP_MIDDLEWARE] DeprecationWarning: 'onBeforeSetupMiddleware' option is deprecated. Please use the 'setupMiddlewares' option.
 Starting the development server...
 
 Compiled successfully!
@@ -24,20 +24,1507 @@ No issues found.
 Compiling...
 Compiled successfully!
 webpack compiled successfully
+ERROR in src/components/Textures.tsx
+TS1208: 'Textures.tsx' cannot be compiled under '--isolatedModules' because it is considered a global script file. Add an import, export, or an empty 'export {}' statement to make it a module.
+
+Compiling...
+Compiled successfully!
+webpack compiled successfully
+ERROR in src/components/Textures.tsx:3:29
+TS2307: Cannot find module './components/TextureUpscaler' or its corresponding type declarations.
+    1 | // Textures.tsx
+    2 | import React, { useState, useRef, useEffect } from "react";
+  > 3 | import TextureUpscaler from "./components/TextureUpscaler";
+      |                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    4 | import PBRMapGenerator from "./components/PBRMapGenerator";
+    5 | import TextureComparison from "./components/TextureComparison";
+    6 | import HistorySection from "./components/HistorySection";
+
+ERROR in src/components/Textures.tsx:4:29
+TS2307: Cannot find module './components/PBRMapGenerator' or its corresponding type declarations.
+    2 | import React, { useState, useRef, useEffect } from "react";
+    3 | import TextureUpscaler from "./components/TextureUpscaler";
+  > 4 | import PBRMapGenerator from "./components/PBRMapGenerator";
+      |                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    5 | import TextureComparison from "./components/TextureComparison";
+    6 | import HistorySection from "./components/HistorySection";
+    7 | import { TextureHistoryItem } from "./types";
+
+ERROR in src/components/Textures.tsx:5:31
+TS2307: Cannot find module './components/TextureComparison' or its corresponding type declarations.
+    3 | import TextureUpscaler from "./components/TextureUpscaler";
+    4 | import PBRMapGenerator from "./components/PBRMapGenerator";
+  > 5 | import TextureComparison from "./components/TextureComparison";
+      |                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    6 | import HistorySection from "./components/HistorySection";
+    7 | import { TextureHistoryItem } from "./types";
+    8 |
+
+ERROR in src/components/Textures.tsx:6:28
+TS2307: Cannot find module './components/HistorySection' or its corresponding type declarations.
+    4 | import PBRMapGenerator from "./components/PBRMapGenerator";
+    5 | import TextureComparison from "./components/TextureComparison";
+  > 6 | import HistorySection from "./components/HistorySection";
+      |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    7 | import { TextureHistoryItem } from "./types";
+    8 |
+    9 | function Textures() {
+
+ERROR in src/components/Textures.tsx:7:10
+TS2305: Module '"./types"' has no exported member 'TextureHistoryItem'.
+     5 | import TextureComparison from "./components/TextureComparison";
+     6 | import HistorySection from "./components/HistorySection";
+  >  7 | import { TextureHistoryItem } from "./types";
+       |          ^^^^^^^^^^^^^^^^^^
+     8 |
+     9 | function Textures() {
+    10 |   const [activeTab, setActiveTab] = useState<
+
+Compiling...
+Compiled successfully!
+webpack compiled successfully
+ERROR in src/components/Textures.tsx:3:29
+TS2307: Cannot find module './components/TextureUpscaler' or its corresponding type declarations.
+    1 | // Textures.tsx
+    2 | import React, { useState, useRef, useEffect } from "react";
+  > 3 | import TextureUpscaler from "./components/TextureUpscaler";
+      |                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    4 | import PBRMapGenerator from "./components/PBRMapGenerator";
+    5 | import TextureComparison from "./components/TextureComparison";
+    6 | import HistorySection from "./components/HistorySection";
+
+ERROR in src/components/Textures.tsx:4:29
+TS2307: Cannot find module './components/PBRMapGenerator' or its corresponding type declarations.
+    2 | import React, { useState, useRef, useEffect } from "react";
+    3 | import TextureUpscaler from "./components/TextureUpscaler";
+  > 4 | import PBRMapGenerator from "./components/PBRMapGenerator";
+      |                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    5 | import TextureComparison from "./components/TextureComparison";
+    6 | import HistorySection from "./components/HistorySection";
+    7 | import { TextureHistoryItem } from "./types";
+
+ERROR in src/components/Textures.tsx:5:31
+TS2307: Cannot find module './components/TextureComparison' or its corresponding type declarations.
+    3 | import TextureUpscaler from "./components/TextureUpscaler";
+    4 | import PBRMapGenerator from "./components/PBRMapGenerator";
+  > 5 | import TextureComparison from "./components/TextureComparison";
+      |                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    6 | import HistorySection from "./components/HistorySection";
+    7 | import { TextureHistoryItem } from "./types";
+    8 |
+
+ERROR in src/components/Textures.tsx:6:28
+TS2307: Cannot find module './components/HistorySection' or its corresponding type declarations.
+    4 | import PBRMapGenerator from "./components/PBRMapGenerator";
+    5 | import TextureComparison from "./components/TextureComparison";
+  > 6 | import HistorySection from "./components/HistorySection";
+      |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    7 | import { TextureHistoryItem } from "./types";
+    8 |
+    9 | function Textures() {
+
+ERROR in src/components/Textures.tsx:7:10
+TS2305: Module '"./types"' has no exported member 'TextureHistoryItem'.
+     5 | import TextureComparison from "./components/TextureComparison";
+     6 | import HistorySection from "./components/HistorySection";
+  >  7 | import { TextureHistoryItem } from "./types";
+       |          ^^^^^^^^^^^^^^^^^^
+     8 |
+     9 | function Textures() {
+    10 |   const [activeTab, setActiveTab] = useState<
+
+ERROR in src/components/TextureUpscaler.tsx
+TS1208: 'TextureUpscaler.tsx' cannot be compiled under '--isolatedModules' because it is considered a global script file. Add an import, export, or an empty 'export {}' statement to make it a module.
+
+Compiling...
+Compiled successfully!
+webpack compiled successfully
+ERROR in src/components/Textures.tsx:3:29
+TS2307: Cannot find module './components/TextureUpscaler' or its corresponding type declarations.
+    1 | // Textures.tsx
+    2 | import React, { useState, useRef, useEffect } from "react";
+  > 3 | import TextureUpscaler from "./components/TextureUpscaler";
+      |                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    4 | import PBRMapGenerator from "./components/PBRMapGenerator";
+    5 | import TextureComparison from "./components/TextureComparison";
+    6 | import HistorySection from "./components/HistorySection";
+
+ERROR in src/components/Textures.tsx:4:29
+TS2307: Cannot find module './components/PBRMapGenerator' or its corresponding type declarations.
+    2 | import React, { useState, useRef, useEffect } from "react";
+    3 | import TextureUpscaler from "./components/TextureUpscaler";
+  > 4 | import PBRMapGenerator from "./components/PBRMapGenerator";
+      |                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    5 | import TextureComparison from "./components/TextureComparison";
+    6 | import HistorySection from "./components/HistorySection";
+    7 | import { TextureHistoryItem } from "./types";
+
+ERROR in src/components/Textures.tsx:5:31
+TS2307: Cannot find module './components/TextureComparison' or its corresponding type declarations.
+    3 | import TextureUpscaler from "./components/TextureUpscaler";
+    4 | import PBRMapGenerator from "./components/PBRMapGenerator";
+  > 5 | import TextureComparison from "./components/TextureComparison";
+      |                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    6 | import HistorySection from "./components/HistorySection";
+    7 | import { TextureHistoryItem } from "./types";
+    8 |
+
+ERROR in src/components/Textures.tsx:6:28
+TS2307: Cannot find module './components/HistorySection' or its corresponding type declarations.
+    4 | import PBRMapGenerator from "./components/PBRMapGenerator";
+    5 | import TextureComparison from "./components/TextureComparison";
+  > 6 | import HistorySection from "./components/HistorySection";
+      |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    7 | import { TextureHistoryItem } from "./types";
+    8 |
+    9 | function Textures() {
+
+ERROR in src/components/Textures.tsx:7:10
+TS2305: Module '"./types"' has no exported member 'TextureHistoryItem'.
+     5 | import TextureComparison from "./components/TextureComparison";
+     6 | import HistorySection from "./components/HistorySection";
+  >  7 | import { TextureHistoryItem } from "./types";
+       |          ^^^^^^^^^^^^^^^^^^
+     8 |
+     9 | function Textures() {
+    10 |   const [activeTab, setActiveTab] = useState<
+
+ERROR in src/components/TextureUpscaler.tsx
+TS1208: 'TextureUpscaler.tsx' cannot be compiled under '--isolatedModules' because it is considered a global script file. Add an import, export, or an empty 'export {}' statement to make it a module.
+
+Compiling...
+Compiled successfully!
+webpack compiled successfully
+Files successfully emitted, waiting for typecheck results...
+Issues checking in progress...
+ERROR in src/components/Textures.tsx:3:29
+TS2307: Cannot find module './components/TextureUpscaler' or its corresponding type declarations.
+    1 | // Textures.tsx
+    2 | import React, { useState, useRef, useEffect } from "react";
+  > 3 | import TextureUpscaler from "./components/TextureUpscaler";
+      |                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    4 | import PBRMapGenerator from "./components/PBRMapGenerator";
+    5 | import TextureComparison from "./components/TextureComparison";
+    6 | import HistorySection from "./components/HistorySection";
+
+ERROR in src/components/Textures.tsx:4:29
+TS2307: Cannot find module './components/PBRMapGenerator' or its corresponding type declarations.
+    2 | import React, { useState, useRef, useEffect } from "react";
+    3 | import TextureUpscaler from "./components/TextureUpscaler";
+  > 4 | import PBRMapGenerator from "./components/PBRMapGenerator";
+      |                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    5 | import TextureComparison from "./components/TextureComparison";
+    6 | import HistorySection from "./components/HistorySection";
+    7 | import { TextureHistoryItem } from "./types";
+
+ERROR in src/components/Textures.tsx:5:31
+TS2307: Cannot find module './components/TextureComparison' or its corresponding type declarations.
+    3 | import TextureUpscaler from "./components/TextureUpscaler";
+    4 | import PBRMapGenerator from "./components/PBRMapGenerator";
+  > 5 | import TextureComparison from "./components/TextureComparison";
+      |                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    6 | import HistorySection from "./components/HistorySection";
+    7 | import { TextureHistoryItem } from "./types";
+    8 |
+
+ERROR in src/components/Textures.tsx:6:28
+TS2307: Cannot find module './components/HistorySection' or its corresponding type declarations.
+    4 | import PBRMapGenerator from "./components/PBRMapGenerator";
+    5 | import TextureComparison from "./components/TextureComparison";
+  > 6 | import HistorySection from "./components/HistorySection";
+      |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    7 | import { TextureHistoryItem } from "./types";
+    8 |
+    9 | function Textures() {
+
+ERROR in src/components/Textures.tsx:7:10
+TS2305: Module '"./types"' has no exported member 'TextureHistoryItem'.
+     5 | import TextureComparison from "./components/TextureComparison";
+     6 | import HistorySection from "./components/HistorySection";
+  >  7 | import { TextureHistoryItem } from "./types";
+       |          ^^^^^^^^^^^^^^^^^^
+     8 |
+     9 | function Textures() {
+    10 |   const [activeTab, setActiveTab] = useState<
+
+Compiling...
+Compiled successfully!
+webpack compiled successfully
+ERROR in src/components/TextureComparison.tsx
+TS1208: 'TextureComparison.tsx' cannot be compiled under '--isolatedModules' because it is considered a global script file. Add an import, export, or an empty 'export {}' statement to make it a module.
+
+ERROR in src/components/Textures.tsx:3:29
+TS2307: Cannot find module './components/TextureUpscaler' or its corresponding type declarations.
+    1 | // Textures.tsx
+    2 | import React, { useState, useRef, useEffect } from "react";
+  > 3 | import TextureUpscaler from "./components/TextureUpscaler";
+      |                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    4 | import PBRMapGenerator from "./components/PBRMapGenerator";
+    5 | import TextureComparison from "./components/TextureComparison";
+    6 | import HistorySection from "./components/HistorySection";
+
+ERROR in src/components/Textures.tsx:4:29
+TS2307: Cannot find module './components/PBRMapGenerator' or its corresponding type declarations.
+    2 | import React, { useState, useRef, useEffect } from "react";
+    3 | import TextureUpscaler from "./components/TextureUpscaler";
+  > 4 | import PBRMapGenerator from "./components/PBRMapGenerator";
+      |                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    5 | import TextureComparison from "./components/TextureComparison";
+    6 | import HistorySection from "./components/HistorySection";
+    7 | import { TextureHistoryItem } from "./types";
+
+ERROR in src/components/Textures.tsx:5:31
+TS2307: Cannot find module './components/TextureComparison' or its corresponding type declarations.
+    3 | import TextureUpscaler from "./components/TextureUpscaler";
+    4 | import PBRMapGenerator from "./components/PBRMapGenerator";
+  > 5 | import TextureComparison from "./components/TextureComparison";
+      |                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    6 | import HistorySection from "./components/HistorySection";
+    7 | import { TextureHistoryItem } from "./types";
+    8 |
+
+ERROR in src/components/Textures.tsx:6:28
+TS2307: Cannot find module './components/HistorySection' or its corresponding type declarations.
+    4 | import PBRMapGenerator from "./components/PBRMapGenerator";
+    5 | import TextureComparison from "./components/TextureComparison";
+  > 6 | import HistorySection from "./components/HistorySection";
+      |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    7 | import { TextureHistoryItem } from "./types";
+    8 |
+    9 | function Textures() {
+
+ERROR in src/components/Textures.tsx:7:10
+TS2305: Module '"./types"' has no exported member 'TextureHistoryItem'.
+     5 | import TextureComparison from "./components/TextureComparison";
+     6 | import HistorySection from "./components/HistorySection";
+  >  7 | import { TextureHistoryItem } from "./types";
+       |          ^^^^^^^^^^^^^^^^^^
+     8 |
+     9 | function Textures() {
+    10 |   const [activeTab, setActiveTab] = useState<
+
+Compiling...
+Compiled successfully!
+webpack compiled successfully
+ERROR in src/components/TextureComparison.tsx
+TS1208: 'TextureComparison.tsx' cannot be compiled under '--isolatedModules' because it is considered a global script file. Add an import, export, or an empty 'export {}' statement to make it a module.
+
+ERROR in src/components/Textures.tsx:3:29
+TS2307: Cannot find module './components/TextureUpscaler' or its corresponding type declarations.
+    1 | // Textures.tsx
+    2 | import React, { useState, useRef, useEffect } from "react";
+  > 3 | import TextureUpscaler from "./components/TextureUpscaler";
+      |                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    4 | import PBRMapGenerator from "./components/PBRMapGenerator";
+    5 | import TextureComparison from "./components/TextureComparison";
+    6 | import HistorySection from "./components/HistorySection";
+
+ERROR in src/components/Textures.tsx:4:29
+TS2307: Cannot find module './components/PBRMapGenerator' or its corresponding type declarations.
+    2 | import React, { useState, useRef, useEffect } from "react";
+    3 | import TextureUpscaler from "./components/TextureUpscaler";
+  > 4 | import PBRMapGenerator from "./components/PBRMapGenerator";
+      |                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    5 | import TextureComparison from "./components/TextureComparison";
+    6 | import HistorySection from "./components/HistorySection";
+    7 | import { TextureHistoryItem } from "./types";
+
+ERROR in src/components/Textures.tsx:5:31
+TS2307: Cannot find module './components/TextureComparison' or its corresponding type declarations.
+    3 | import TextureUpscaler from "./components/TextureUpscaler";
+    4 | import PBRMapGenerator from "./components/PBRMapGenerator";
+  > 5 | import TextureComparison from "./components/TextureComparison";
+      |                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    6 | import HistorySection from "./components/HistorySection";
+    7 | import { TextureHistoryItem } from "./types";
+    8 |
+
+ERROR in src/components/Textures.tsx:6:28
+TS2307: Cannot find module './components/HistorySection' or its corresponding type declarations.
+    4 | import PBRMapGenerator from "./components/PBRMapGenerator";
+    5 | import TextureComparison from "./components/TextureComparison";
+  > 6 | import HistorySection from "./components/HistorySection";
+      |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    7 | import { TextureHistoryItem } from "./types";
+    8 |
+    9 | function Textures() {
+
+ERROR in src/components/Textures.tsx:7:10
+TS2305: Module '"./types"' has no exported member 'TextureHistoryItem'.
+     5 | import TextureComparison from "./components/TextureComparison";
+     6 | import HistorySection from "./components/HistorySection";
+  >  7 | import { TextureHistoryItem } from "./types";
+       |          ^^^^^^^^^^^^^^^^^^
+     8 |
+     9 | function Textures() {
+    10 |   const [activeTab, setActiveTab] = useState<
+
+Compiling...
+Compiled successfully!
+webpack compiled successfully
+ERROR in src/components/Textures.tsx:3:29
+TS2307: Cannot find module './components/TextureUpscaler' or its corresponding type declarations.
+    1 | // Textures.tsx
+    2 | import React, { useState, useRef, useEffect } from "react";
+  > 3 | import TextureUpscaler from "./components/TextureUpscaler";
+      |                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    4 | import PBRMapGenerator from "./components/PBRMapGenerator";
+    5 | import TextureComparison from "./components/TextureComparison";
+    6 | import HistorySection from "./components/HistorySection";
+
+ERROR in src/components/Textures.tsx:4:29
+TS2307: Cannot find module './components/PBRMapGenerator' or its corresponding type declarations.
+    2 | import React, { useState, useRef, useEffect } from "react";
+    3 | import TextureUpscaler from "./components/TextureUpscaler";
+  > 4 | import PBRMapGenerator from "./components/PBRMapGenerator";
+      |                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    5 | import TextureComparison from "./components/TextureComparison";
+    6 | import HistorySection from "./components/HistorySection";
+    7 | import { TextureHistoryItem } from "./types";
+
+ERROR in src/components/Textures.tsx:5:31
+TS2307: Cannot find module './components/TextureComparison' or its corresponding type declarations.
+    3 | import TextureUpscaler from "./components/TextureUpscaler";
+    4 | import PBRMapGenerator from "./components/PBRMapGenerator";
+  > 5 | import TextureComparison from "./components/TextureComparison";
+      |                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    6 | import HistorySection from "./components/HistorySection";
+    7 | import { TextureHistoryItem } from "./types";
+    8 |
+
+ERROR in src/components/Textures.tsx:6:28
+TS2307: Cannot find module './components/HistorySection' or its corresponding type declarations.
+    4 | import PBRMapGenerator from "./components/PBRMapGenerator";
+    5 | import TextureComparison from "./components/TextureComparison";
+  > 6 | import HistorySection from "./components/HistorySection";
+      |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    7 | import { TextureHistoryItem } from "./types";
+    8 |
+    9 | function Textures() {
+
+ERROR in src/components/Textures.tsx:7:10
+TS2305: Module '"./types"' has no exported member 'TextureHistoryItem'.
+     5 | import TextureComparison from "./components/TextureComparison";
+     6 | import HistorySection from "./components/HistorySection";
+  >  7 | import { TextureHistoryItem } from "./types";
+       |          ^^^^^^^^^^^^^^^^^^
+     8 |
+     9 | function Textures() {
+    10 |   const [activeTab, setActiveTab] = useState<
+
+Compiling...
+Compiled successfully!
+webpack compiled successfully
+ERROR in src/components/Textures.tsx:4:29
+TS2307: Cannot find module './PBRMapGenerator' or its corresponding type declarations.
+    2 | import React, { useState, useRef, useEffect } from "react";
+    3 | import TextureUpscaler from "./TextureUpscaler";
+  > 4 | import PBRMapGenerator from "./PBRMapGenerator";
+      |                             ^^^^^^^^^^^^^^^^^^^
+    5 | import TextureComparison from "./TextureComparison";
+    6 | import HistorySection from "./HistorySection";
+    7 | import { TextureHistoryItem } from "./types";
+
+ERROR in src/components/Textures.tsx:6:28
+TS2307: Cannot find module './HistorySection' or its corresponding type declarations.
+    4 | import PBRMapGenerator from "./PBRMapGenerator";
+    5 | import TextureComparison from "./TextureComparison";
+  > 6 | import HistorySection from "./HistorySection";
+      |                            ^^^^^^^^^^^^^^^^^^
+    7 | import { TextureHistoryItem } from "./types";
+    8 |
+    9 | function Textures() {
+
+ERROR in src/components/Textures.tsx:7:10
+TS2305: Module '"./types"' has no exported member 'TextureHistoryItem'.
+     5 | import TextureComparison from "./TextureComparison";
+     6 | import HistorySection from "./HistorySection";
+  >  7 | import { TextureHistoryItem } from "./types";
+       |          ^^^^^^^^^^^^^^^^^^
+     8 |
+     9 | function Textures() {
+    10 |   const [activeTab, setActiveTab] = useState<
+
+Compiling...
+Compiled successfully!
+webpack compiled successfully
+ERROR in src/components/HistorySection.tsx
+TS1208: 'HistorySection.tsx' cannot be compiled under '--isolatedModules' because it is considered a global script file. Add an import, export, or an empty 'export {}' statement to make it a module.
+
+ERROR in src/components/Textures.tsx:4:29
+TS2307: Cannot find module './PBRMapGenerator' or its corresponding type declarations.
+    2 | import React, { useState, useRef, useEffect } from "react";
+    3 | import TextureUpscaler from "./TextureUpscaler";
+  > 4 | import PBRMapGenerator from "./PBRMapGenerator";
+      |                             ^^^^^^^^^^^^^^^^^^^
+    5 | import TextureComparison from "./TextureComparison";
+    6 | import HistorySection from "./HistorySection";
+    7 | import { TextureHistoryItem } from "./types";
+
+ERROR in src/components/Textures.tsx:6:28
+TS2307: Cannot find module './HistorySection' or its corresponding type declarations.
+    4 | import PBRMapGenerator from "./PBRMapGenerator";
+    5 | import TextureComparison from "./TextureComparison";
+  > 6 | import HistorySection from "./HistorySection";
+      |                            ^^^^^^^^^^^^^^^^^^
+    7 | import { TextureHistoryItem } from "./types";
+    8 |
+    9 | function Textures() {
+
+ERROR in src/components/Textures.tsx:7:10
+TS2305: Module '"./types"' has no exported member 'TextureHistoryItem'.
+     5 | import TextureComparison from "./TextureComparison";
+     6 | import HistorySection from "./HistorySection";
+  >  7 | import { TextureHistoryItem } from "./types";
+       |          ^^^^^^^^^^^^^^^^^^
+     8 |
+     9 | function Textures() {
+    10 |   const [activeTab, setActiveTab] = useState<
+
+Compiling...
+Compiled successfully!
+webpack compiled successfully
+ERROR in src/components/HistorySection.tsx
+TS1208: 'HistorySection.tsx' cannot be compiled under '--isolatedModules' because it is considered a global script file. Add an import, export, or an empty 'export {}' statement to make it a module.
+
+ERROR in src/components/Textures.tsx:4:29
+TS2307: Cannot find module './PBRMapGenerator' or its corresponding type declarations.
+    2 | import React, { useState, useRef, useEffect } from "react";
+    3 | import TextureUpscaler from "./TextureUpscaler";
+  > 4 | import PBRMapGenerator from "./PBRMapGenerator";
+      |                             ^^^^^^^^^^^^^^^^^^^
+    5 | import TextureComparison from "./TextureComparison";
+    6 | import HistorySection from "./HistorySection";
+    7 | import { TextureHistoryItem } from "./types";
+
+ERROR in src/components/Textures.tsx:6:28
+TS2307: Cannot find module './HistorySection' or its corresponding type declarations.
+    4 | import PBRMapGenerator from "./PBRMapGenerator";
+    5 | import TextureComparison from "./TextureComparison";
+  > 6 | import HistorySection from "./HistorySection";
+      |                            ^^^^^^^^^^^^^^^^^^
+    7 | import { TextureHistoryItem } from "./types";
+    8 |
+    9 | function Textures() {
+
+ERROR in src/components/Textures.tsx:7:10
+TS2305: Module '"./types"' has no exported member 'TextureHistoryItem'.
+     5 | import TextureComparison from "./TextureComparison";
+     6 | import HistorySection from "./HistorySection";
+  >  7 | import { TextureHistoryItem } from "./types";
+       |          ^^^^^^^^^^^^^^^^^^
+     8 |
+     9 | function Textures() {
+    10 |   const [activeTab, setActiveTab] = useState<
+
+Compiling...
+Compiled successfully!
+webpack compiled successfully
+ERROR in src/components/HistorySection.tsx:3:10
+TS2305: Module '"../types"' has no exported member 'TextureHistoryItem'.
+    1 | // components/HistorySection.tsx
+    2 | import React from "react";
+  > 3 | import { TextureHistoryItem } from "../types";
+      |          ^^^^^^^^^^^^^^^^^^
+    4 |
+    5 | interface HistorySectionProps {
+    6 |   history: TextureHistoryItem[];
+
+ERROR in src/components/Textures.tsx:4:29
+TS2307: Cannot find module './PBRMapGenerator' or its corresponding type declarations.
+    2 | import React, { useState, useRef, useEffect } from "react";
+    3 | import TextureUpscaler from "./TextureUpscaler";
+  > 4 | import PBRMapGenerator from "./PBRMapGenerator";
+      |                             ^^^^^^^^^^^^^^^^^^^
+    5 | import TextureComparison from "./TextureComparison";
+    6 | import HistorySection from "./HistorySection";
+    7 | import { TextureHistoryItem } from "./types";
+
+ERROR in src/components/Textures.tsx:7:10
+TS2305: Module '"./types"' has no exported member 'TextureHistoryItem'.
+     5 | import TextureComparison from "./TextureComparison";
+     6 | import HistorySection from "./HistorySection";
+  >  7 | import { TextureHistoryItem } from "./types";
+       |          ^^^^^^^^^^^^^^^^^^
+     8 |
+     9 | function Textures() {
+    10 |   const [activeTab, setActiveTab] = useState<
+
+Compiling...
+Compiled successfully!
+webpack compiled successfully
+ERROR in src/components/HistorySection.tsx:3:10
+TS2305: Module '"../types"' has no exported member 'TextureHistoryItem'.
+    1 | // components/HistorySection.tsx
+    2 | import React from "react";
+  > 3 | import { TextureHistoryItem } from "../types";
+      |          ^^^^^^^^^^^^^^^^^^
+    4 |
+    5 | interface HistorySectionProps {
+    6 |   history: TextureHistoryItem[];
+
+ERROR in src/components/PBRMapGenerator.tsx
+TS1208: 'PBRMapGenerator.tsx' cannot be compiled under '--isolatedModules' because it is considered a global script file. Add an import, export, or an empty 'export {}' statement to make it a module.
+
+ERROR in src/components/Textures.tsx:4:29
+TS2307: Cannot find module './PBRMapGenerator' or its corresponding type declarations.
+    2 | import React, { useState, useRef, useEffect } from "react";
+    3 | import TextureUpscaler from "./TextureUpscaler";
+  > 4 | import PBRMapGenerator from "./PBRMapGenerator";
+      |                             ^^^^^^^^^^^^^^^^^^^
+    5 | import TextureComparison from "./TextureComparison";
+    6 | import HistorySection from "./HistorySection";
+    7 | import { TextureHistoryItem } from "./types";
+
+ERROR in src/components/Textures.tsx:7:10
+TS2305: Module '"./types"' has no exported member 'TextureHistoryItem'.
+     5 | import TextureComparison from "./TextureComparison";
+     6 | import HistorySection from "./HistorySection";
+  >  7 | import { TextureHistoryItem } from "./types";
+       |          ^^^^^^^^^^^^^^^^^^
+     8 |
+     9 | function Textures() {
+    10 |   const [activeTab, setActiveTab] = useState<
+
+Compiling...
+Compiled successfully!
+webpack compiled successfully
+ERROR in src/components/HistorySection.tsx:3:10
+TS2305: Module '"../types"' has no exported member 'TextureHistoryItem'.
+    1 | // components/HistorySection.tsx
+    2 | import React from "react";
+  > 3 | import { TextureHistoryItem } from "../types";
+      |          ^^^^^^^^^^^^^^^^^^
+    4 |
+    5 | interface HistorySectionProps {
+    6 |   history: TextureHistoryItem[];
+
+ERROR in src/components/PBRMapGenerator.tsx:3:10
+TS2305: Module '"../types"' has no exported member 'MapType'.
+    1 | // components/PBRMapGenerator.tsx
+    2 | import React, { useState, useRef } from "react";
+  > 3 | import { MapType, TextureHistoryItem } from "../types";
+      |          ^^^^^^^
+    4 |
+    5 | interface PBRMapGeneratorProps {
+    6 |   processTexture: (
+
+ERROR in src/components/PBRMapGenerator.tsx:3:19
+TS2305: Module '"../types"' has no exported member 'TextureHistoryItem'.
+    1 | // components/PBRMapGenerator.tsx
+    2 | import React, { useState, useRef } from "react";
+  > 3 | import { MapType, TextureHistoryItem } from "../types";
+      |                   ^^^^^^^^^^^^^^^^^^
+    4 |
+    5 | interface PBRMapGeneratorProps {
+    6 |   processTexture: (
+
+ERROR in src/components/Textures.tsx:7:10
+TS2305: Module '"./types"' has no exported member 'TextureHistoryItem'.
+     5 | import TextureComparison from "./TextureComparison";
+     6 | import HistorySection from "./HistorySection";
+  >  7 | import { TextureHistoryItem } from "./types";
+       |          ^^^^^^^^^^^^^^^^^^
+     8 |
+     9 | function Textures() {
+    10 |   const [activeTab, setActiveTab] = useState<
+
+Compiling...
+Compiled successfully!
+webpack compiled successfully
+ERROR in src/components/HistorySection.tsx:3:10
+TS2305: Module '"../types"' has no exported member 'TextureHistoryItem'.
+    1 | // components/HistorySection.tsx
+    2 | import React from "react";
+  > 3 | import { TextureHistoryItem } from "../types";
+      |          ^^^^^^^^^^^^^^^^^^
+    4 |
+    5 | interface HistorySectionProps {
+    6 |   history: TextureHistoryItem[];
+
+ERROR in src/components/PBRMapGenerator.tsx:3:10
+TS2305: Module '"../types"' has no exported member 'MapType'.
+    1 | // components/PBRMapGenerator.tsx
+    2 | import React, { useState, useRef } from "react";
+  > 3 | import { MapType, TextureHistoryItem } from "../types";
+      |          ^^^^^^^
+    4 |
+    5 | interface PBRMapGeneratorProps {
+    6 |   processTexture: (
+
+ERROR in src/components/PBRMapGenerator.tsx:3:19
+TS2305: Module '"../types"' has no exported member 'TextureHistoryItem'.
+    1 | // components/PBRMapGenerator.tsx
+    2 | import React, { useState, useRef } from "react";
+  > 3 | import { MapType, TextureHistoryItem } from "../types";
+      |                   ^^^^^^^^^^^^^^^^^^
+    4 |
+    5 | interface PBRMapGeneratorProps {
+    6 |   processTexture: (
+
+ERROR in src/components/Textures.tsx:7:10
+TS2305: Module '"./types"' has no exported member 'TextureHistoryItem'.
+     5 | import TextureComparison from "./TextureComparison";
+     6 | import HistorySection from "./HistorySection";
+  >  7 | import { TextureHistoryItem } from "./types";
+       |          ^^^^^^^^^^^^^^^^^^
+     8 |
+     9 | function Textures() {
+    10 |   const [activeTab, setActiveTab] = useState<
+
+Compiling...
+Compiled successfully!
+webpack compiled successfully
+Files successfully emitted, waiting for typecheck results...
+Issues checking in progress...
+ERROR in src/components/HistorySection.tsx:3:10
+TS2305: Module '"../types"' has no exported member 'TextureHistoryItem'.
+    1 | // components/HistorySection.tsx
+    2 | import React from "react";
+  > 3 | import { TextureHistoryItem } from "../types";
+      |          ^^^^^^^^^^^^^^^^^^
+    4 |
+    5 | interface HistorySectionProps {
+    6 |   history: TextureHistoryItem[];
+
+ERROR in src/components/PBRMapGenerator.tsx:3:10
+TS2305: Module '"../types"' has no exported member 'MapType'.
+    1 | // components/PBRMapGenerator.tsx
+    2 | import React, { useState, useRef } from "react";
+  > 3 | import { MapType, TextureHistoryItem } from "../types";
+      |          ^^^^^^^
+    4 |
+    5 | interface PBRMapGeneratorProps {
+    6 |   processTexture: (
+
+ERROR in src/components/PBRMapGenerator.tsx:3:19
+TS2305: Module '"../types"' has no exported member 'TextureHistoryItem'.
+    1 | // components/PBRMapGenerator.tsx
+    2 | import React, { useState, useRef } from "react";
+  > 3 | import { MapType, TextureHistoryItem } from "../types";
+      |                   ^^^^^^^^^^^^^^^^^^
+    4 |
+    5 | interface PBRMapGeneratorProps {
+    6 |   processTexture: (
+
+Compiling...
+Compiled successfully!
+webpack compiled successfully
+ERROR in src/components/PBRMapGenerator.tsx:3:10
+TS2305: Module '"../types"' has no exported member 'MapType'.
+    1 | // components/PBRMapGenerator.tsx
+    2 | import React, { useState, useRef } from "react";
+  > 3 | import { MapType, TextureHistoryItem } from "../types";
+      |          ^^^^^^^
+    4 |
+    5 | interface PBRMapGeneratorProps {
+    6 |   processTexture: (
+
+ERROR in src/components/PBRMapGenerator.tsx:3:19
+TS2305: Module '"../types"' has no exported member 'TextureHistoryItem'.
+    1 | // components/PBRMapGenerator.tsx
+    2 | import React, { useState, useRef } from "react";
+  > 3 | import { MapType, TextureHistoryItem } from "../types";
+      |                   ^^^^^^^^^^^^^^^^^^
+    4 |
+    5 | interface PBRMapGeneratorProps {
+    6 |   processTexture: (
+
+Compiling...
+Compiled successfully!
+webpack compiled successfully
+Files successfully emitted, waiting for typecheck results...
+Issues checking in progress...
 No issues found.
 Compiling...
 Compiled with warnings.
 
 [eslint] 
-src/components/CodeImprove.tsx
-  Line 361:9:  'applyChanges' is assigned a value but never used  @typescript-eslint/no-unused-vars
+src/ChatApp.tsx
+  Line 6:3:  'Navigate' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/Textures.tsx
+  Line 2:27:   'useRef' is defined but never used            @typescript-eslint/no-unused-vars
+  Line 2:35:   'useEffect' is defined but never used         @typescript-eslint/no-unused-vars
+  Line 14:16:  'setUser' is assigned a value but never used  @typescript-eslint/no-unused-vars
 
 Search for the keywords to learn more about each warning.
 To ignore, add // eslint-disable-next-line to the line before.
 
 WARNING in [eslint] 
-src/components/CodeImprove.tsx
-  Line 361:9:  'applyChanges' is assigned a value but never used  @typescript-eslint/no-unused-vars
+src/ChatApp.tsx
+  Line 6:3:  'Navigate' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/Textures.tsx
+  Line 2:27:   'useRef' is defined but never used            @typescript-eslint/no-unused-vars
+  Line 2:35:   'useEffect' is defined but never used         @typescript-eslint/no-unused-vars
+  Line 14:16:  'setUser' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+webpack compiled with 1 warning
+No issues found.
+Compiling...
+Failed to compile.
+
+Module not found: Error: Can't resolve './components/Textures' in '/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/src'
+WARNING in [eslint] 
+src/ChatApp.tsx
+  Line 6:3:  'Navigate' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/Textures.tsx
+  Line 2:27:   'useRef' is defined but never used            @typescript-eslint/no-unused-vars
+  Line 2:35:   'useEffect' is defined but never used         @typescript-eslint/no-unused-vars
+  Line 14:16:  'setUser' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+ERROR in ./src/ChatApp.tsx 8:0-45
+Module not found: Error: Can't resolve './components/Textures' in '/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/src'
+
+webpack compiled with 1 error and 1 warning
+ERROR in src/ChatApp.tsx:10:22
+TS2307: Cannot find module './components/Textures' or its corresponding type declarations.
+     8 | import App from "./App";
+     9 | import Developer from "./Developer";
+  > 10 | import Textures from "./components/Textures";
+       |                      ^^^^^^^^^^^^^^^^^^^^^^^
+    11 |
+    12 | function ChatApp() {
+    13 |   return (
+
+Compiling...
+Failed to compile.
+
+Module not found: Error: Can't resolve './components/Textures' in '/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/src'
+WARNING in [eslint] 
+src/ChatApp.tsx
+  Line 6:3:  'Navigate' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/Textures.tsx
+  Line 2:27:   'useRef' is defined but never used            @typescript-eslint/no-unused-vars
+  Line 2:35:   'useEffect' is defined but never used         @typescript-eslint/no-unused-vars
+  Line 14:16:  'setUser' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+ERROR in ./src/ChatApp.tsx 8:0-45
+Module not found: Error: Can't resolve './components/Textures' in '/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/src'
+
+webpack compiled with 1 error and 1 warning
+ERROR in src/ChatApp.tsx:10:22
+TS2307: Cannot find module './components/Textures' or its corresponding type declarations.
+     8 | import App from "./App";
+     9 | import Developer from "./Developer";
+  > 10 | import Textures from "./components/Textures";
+       |                      ^^^^^^^^^^^^^^^^^^^^^^^
+    11 |
+    12 | function ChatApp() {
+    13 |   return (
+
+Compiling...
+Failed to compile.
+
+Module not found: Error: Can't resolve './components/Textures' in '/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/src'
+WARNING in [eslint] 
+src/ChatApp.tsx
+  Line 6:3:  'Navigate' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/Textures.tsx
+  Line 2:27:   'useRef' is defined but never used            @typescript-eslint/no-unused-vars
+  Line 2:35:   'useEffect' is defined but never used         @typescript-eslint/no-unused-vars
+  Line 14:16:  'setUser' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+ERROR in ./src/ChatApp.tsx 8:0-45
+Module not found: Error: Can't resolve './components/Textures' in '/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/src'
+
+webpack compiled with 1 error and 1 warning
+ERROR in src/ChatApp.tsx:10:22
+TS2307: Cannot find module './components/Textures' or its corresponding type declarations.
+     8 | import App from "./App";
+     9 | import Developer from "./Developer";
+  > 10 | import Textures from "./components/Textures";
+       |                      ^^^^^^^^^^^^^^^^^^^^^^^
+    11 |
+    12 | function ChatApp() {
+    13 |   return (
+
+Compiling...
+Failed to compile.
+
+Module not found: Error: Can't resolve './components/Textures' in '/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/src'
+WARNING in [eslint] 
+src/ChatApp.tsx
+  Line 6:3:  'Navigate' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/Textures.tsx
+  Line 2:27:   'useRef' is defined but never used            @typescript-eslint/no-unused-vars
+  Line 2:35:   'useEffect' is defined but never used         @typescript-eslint/no-unused-vars
+  Line 14:16:  'setUser' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+ERROR in ./src/ChatApp.tsx 8:0-45
+Module not found: Error: Can't resolve './components/Textures' in '/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/src'
+
+webpack compiled with 1 error and 1 warning
+ERROR in src/ChatApp.tsx:10:22
+TS2307: Cannot find module './components/Textures' or its corresponding type declarations.
+     8 | import App from "./App";
+     9 | import Developer from "./Developer";
+  > 10 | import Textures from "./components/Textures";
+       |                      ^^^^^^^^^^^^^^^^^^^^^^^
+    11 |
+    12 | function ChatApp() {
+    13 |   return (
+
+ERROR in src/components/TextureDeveloper.tsx:4:36
+TS2307: Cannot find module './TexturePBRMapGenerator' or its corresponding type declarations.
+    2 | import React, { useState, useRef, useEffect } from "react";
+    3 | import TextureUpscaler from "./TextureUpscaler";
+  > 4 | import TexturePBRMapGenerator from "./TexturePBRMapGenerator";
+      |                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    5 | import TextureComparison from "./TextureComparison";
+    6 | import TextureHistorySection from "./TextureHistorySection";
+    7 | import { TextureHistoryItem } from "./types";
+
+ERROR in src/components/TextureDeveloper.tsx:6:35
+TS2307: Cannot find module './TextureHistorySection' or its corresponding type declarations.
+    4 | import TexturePBRMapGenerator from "./TexturePBRMapGenerator";
+    5 | import TextureComparison from "./TextureComparison";
+  > 6 | import TextureHistorySection from "./TextureHistorySection";
+      |                                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+    7 | import { TextureHistoryItem } from "./types";
+    8 |
+    9 | function TextureDeveloper() {
+
+ERROR in src/components/TextureDeveloper.tsx:102:14
+TS2304: Cannot find name 'PBRMapGenerator'.
+    100 |
+    101 |           {activeTab === "maps" && (
+  > 102 |             <PBRMapGenerator
+        |              ^^^^^^^^^^^^^^^
+    103 |               processTexture={processTexture}
+    104 |               addToHistory={addToHistory}
+    105 |             />
+
+ERROR in src/components/TextureDeveloper.tsx:112:10
+TS2304: Cannot find name 'HistorySection'.
+    110 |
+    111 |         {/* History Section */}
+  > 112 |         <HistorySection history={history} clearHistory={() => setHistory([])} />
+        |          ^^^^^^^^^^^^^^
+    113 |       </div>
+    114 |     </div>
+    115 |   );
+
+Compiling...
+Failed to compile.
+
+Module not found: Error: Can't resolve './components/Textures' in '/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/src'
+WARNING in [eslint] 
+src/ChatApp.tsx
+  Line 6:3:  'Navigate' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/Textures.tsx
+  Line 2:27:   'useRef' is defined but never used            @typescript-eslint/no-unused-vars
+  Line 2:35:   'useEffect' is defined but never used         @typescript-eslint/no-unused-vars
+  Line 14:16:  'setUser' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+ERROR in ./src/ChatApp.tsx 8:0-45
+Module not found: Error: Can't resolve './components/Textures' in '/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/src'
+
+webpack compiled with 1 error and 1 warning
+ERROR in src/ChatApp.tsx:10:22
+TS2307: Cannot find module './components/Textures' or its corresponding type declarations.
+     8 | import App from "./App";
+     9 | import Developer from "./Developer";
+  > 10 | import Textures from "./components/Textures";
+       |                      ^^^^^^^^^^^^^^^^^^^^^^^
+    11 |
+    12 | function ChatApp() {
+    13 |   return (
+
+ERROR in src/components/TextureDeveloper.tsx:4:36
+TS2307: Cannot find module './TexturePBRMapGenerator' or its corresponding type declarations.
+    2 | import React, { useState, useRef, useEffect } from "react";
+    3 | import TextureUpscaler from "./TextureUpscaler";
+  > 4 | import TexturePBRMapGenerator from "./TexturePBRMapGenerator";
+      |                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    5 | import TextureComparison from "./TextureComparison";
+    6 | import TextureHistorySection from "./TextureHistorySection";
+    7 | import { TextureHistoryItem } from "./types";
+
+ERROR in src/components/TextureDeveloper.tsx:102:14
+TS2304: Cannot find name 'PBRMapGenerator'.
+    100 |
+    101 |           {activeTab === "maps" && (
+  > 102 |             <PBRMapGenerator
+        |              ^^^^^^^^^^^^^^^
+    103 |               processTexture={processTexture}
+    104 |               addToHistory={addToHistory}
+    105 |             />
+
+ERROR in src/components/TextureDeveloper.tsx:112:10
+TS2304: Cannot find name 'HistorySection'.
+    110 |
+    111 |         {/* History Section */}
+  > 112 |         <HistorySection history={history} clearHistory={() => setHistory([])} />
+        |          ^^^^^^^^^^^^^^
+    113 |       </div>
+    114 |     </div>
+    115 |   );
+
+Compiling...
+Failed to compile.
+
+Module not found: Error: Can't resolve './components/Textures' in '/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/src'
+WARNING in [eslint] 
+src/ChatApp.tsx
+  Line 6:3:  'Navigate' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/Textures.tsx
+  Line 2:27:   'useRef' is defined but never used            @typescript-eslint/no-unused-vars
+  Line 2:35:   'useEffect' is defined but never used         @typescript-eslint/no-unused-vars
+  Line 14:16:  'setUser' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+ERROR in ./src/ChatApp.tsx 8:0-45
+Module not found: Error: Can't resolve './components/Textures' in '/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/src'
+
+webpack compiled with 1 error and 1 warning
+ERROR in src/ChatApp.tsx:10:22
+TS2307: Cannot find module './components/Textures' or its corresponding type declarations.
+     8 | import App from "./App";
+     9 | import Developer from "./Developer";
+  > 10 | import Textures from "./components/Textures";
+       |                      ^^^^^^^^^^^^^^^^^^^^^^^
+    11 |
+    12 | function ChatApp() {
+    13 |   return (
+
+ERROR in src/components/TextureDeveloper.tsx:4:36
+TS2307: Cannot find module './TexturePBRMapGenerator' or its corresponding type declarations.
+    2 | import React, { useState, useRef, useEffect } from "react";
+    3 | import TextureUpscaler from "./TextureUpscaler";
+  > 4 | import TexturePBRMapGenerator from "./TexturePBRMapGenerator";
+      |                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    5 | import TextureComparison from "./TextureComparison";
+    6 | import TextureHistorySection from "./TextureHistorySection";
+    7 | import { TextureHistoryItem } from "./types";
+
+ERROR in src/components/TextureDeveloper.tsx:102:14
+TS2304: Cannot find name 'PBRMapGenerator'.
+    100 |
+    101 |           {activeTab === "maps" && (
+  > 102 |             <PBRMapGenerator
+        |              ^^^^^^^^^^^^^^^
+    103 |               processTexture={processTexture}
+    104 |               addToHistory={addToHistory}
+    105 |             />
+
+ERROR in src/components/TextureDeveloper.tsx:112:10
+TS2304: Cannot find name 'HistorySection'.
+    110 |
+    111 |         {/* History Section */}
+  > 112 |         <HistorySection history={history} clearHistory={() => setHistory([])} />
+        |          ^^^^^^^^^^^^^^
+    113 |       </div>
+    114 |     </div>
+    115 |   );
+
+Compiling...
+Failed to compile.
+
+Module not found: Error: Can't resolve './components/Textures' in '/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/src'
+WARNING in [eslint] 
+src/ChatApp.tsx
+  Line 6:3:  'Navigate' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/Textures.tsx
+  Line 2:27:   'useRef' is defined but never used            @typescript-eslint/no-unused-vars
+  Line 2:35:   'useEffect' is defined but never used         @typescript-eslint/no-unused-vars
+  Line 14:16:  'setUser' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+ERROR in ./src/ChatApp.tsx 8:0-45
+Module not found: Error: Can't resolve './components/Textures' in '/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/src'
+
+webpack compiled with 1 error and 1 warning
+ERROR in src/ChatApp.tsx:10:22
+TS2307: Cannot find module './components/Textures' or its corresponding type declarations.
+     8 | import App from "./App";
+     9 | import Developer from "./Developer";
+  > 10 | import Textures from "./components/Textures";
+       |                      ^^^^^^^^^^^^^^^^^^^^^^^
+    11 |
+    12 | function ChatApp() {
+    13 |   return (
+
+ERROR in src/components/TextureDeveloper.tsx:4:36
+TS2307: Cannot find module './TexturePBRMapGenerator' or its corresponding type declarations.
+    2 | import React, { useState, useRef, useEffect } from "react";
+    3 | import TextureUpscaler from "./TextureUpscaler";
+  > 4 | import TexturePBRMapGenerator from "./TexturePBRMapGenerator";
+      |                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    5 | import TextureComparison from "./TextureComparison";
+    6 | import TextureHistorySection from "./TextureHistorySection";
+    7 | import { TextureHistoryItem } from "./types";
+
+ERROR in src/components/TextureDeveloper.tsx:102:14
+TS2304: Cannot find name 'PBRMapGenerator'.
+    100 |
+    101 |           {activeTab === "maps" && (
+  > 102 |             <PBRMapGenerator
+        |              ^^^^^^^^^^^^^^^
+    103 |               processTexture={processTexture}
+    104 |               addToHistory={addToHistory}
+    105 |             />
+
+ERROR in src/components/TextureDeveloper.tsx:112:10
+TS2304: Cannot find name 'HistorySection'.
+    110 |
+    111 |         {/* History Section */}
+  > 112 |         <HistorySection history={history} clearHistory={() => setHistory([])} />
+        |          ^^^^^^^^^^^^^^
+    113 |       </div>
+    114 |     </div>
+    115 |   );
+
+ERROR in src/components/TextureHistorySection.tsx:124:16
+TS2304: Cannot find name 'Texture'.
+    122 | };
+    123 |
+  > 124 | export default Texture;
+        |                ^^^^^^^
+    125 |
+
+Compiling...
+Failed to compile.
+
+Module not found: Error: Can't resolve './components/Textures' in '/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/src'
+WARNING in [eslint] 
+src/ChatApp.tsx
+  Line 6:3:  'Navigate' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/Textures.tsx
+  Line 2:27:   'useRef' is defined but never used            @typescript-eslint/no-unused-vars
+  Line 2:35:   'useEffect' is defined but never used         @typescript-eslint/no-unused-vars
+  Line 14:16:  'setUser' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+ERROR in ./src/ChatApp.tsx 8:0-45
+Module not found: Error: Can't resolve './components/Textures' in '/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/src'
+
+webpack compiled with 1 error and 1 warning
+ERROR in src/ChatApp.tsx:10:22
+TS2307: Cannot find module './components/Textures' or its corresponding type declarations.
+     8 | import App from "./App";
+     9 | import Developer from "./Developer";
+  > 10 | import Textures from "./components/Textures";
+       |                      ^^^^^^^^^^^^^^^^^^^^^^^
+    11 |
+    12 | function ChatApp() {
+    13 |   return (
+
+ERROR in src/components/TextureDeveloper.tsx:4:36
+TS2307: Cannot find module './TexturePBRMapGenerator' or its corresponding type declarations.
+    2 | import React, { useState, useRef, useEffect } from "react";
+    3 | import TextureUpscaler from "./TextureUpscaler";
+  > 4 | import TexturePBRMapGenerator from "./TexturePBRMapGenerator";
+      |                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    5 | import TextureComparison from "./TextureComparison";
+    6 | import TextureHistorySection from "./TextureHistorySection";
+    7 | import { TextureHistoryItem } from "./types";
+
+ERROR in src/components/TextureDeveloper.tsx:102:14
+TS2304: Cannot find name 'PBRMapGenerator'.
+    100 |
+    101 |           {activeTab === "maps" && (
+  > 102 |             <PBRMapGenerator
+        |              ^^^^^^^^^^^^^^^
+    103 |               processTexture={processTexture}
+    104 |               addToHistory={addToHistory}
+    105 |             />
+
+ERROR in src/components/TextureDeveloper.tsx:112:10
+TS2304: Cannot find name 'HistorySection'.
+    110 |
+    111 |         {/* History Section */}
+  > 112 |         <HistorySection history={history} clearHistory={() => setHistory([])} />
+        |          ^^^^^^^^^^^^^^
+    113 |       </div>
+    114 |     </div>
+    115 |   );
+
+Compiling...
+Failed to compile.
+
+Module not found: Error: Can't resolve './components/Textures' in '/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/src'
+WARNING in [eslint] 
+src/ChatApp.tsx
+  Line 6:3:  'Navigate' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/Textures.tsx
+  Line 2:27:   'useRef' is defined but never used            @typescript-eslint/no-unused-vars
+  Line 2:35:   'useEffect' is defined but never used         @typescript-eslint/no-unused-vars
+  Line 14:16:  'setUser' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+ERROR in ./src/ChatApp.tsx 8:0-45
+Module not found: Error: Can't resolve './components/Textures' in '/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/src'
+
+webpack compiled with 1 error and 1 warning
+Files successfully emitted, waiting for typecheck results...
+Issues checking in progress...
+ERROR in src/ChatApp.tsx:10:22
+TS2307: Cannot find module './components/Textures' or its corresponding type declarations.
+     8 | import App from "./App";
+     9 | import Developer from "./Developer";
+  > 10 | import Textures from "./components/Textures";
+       |                      ^^^^^^^^^^^^^^^^^^^^^^^
+    11 |
+    12 | function ChatApp() {
+    13 |   return (
+
+ERROR in src/components/TextureDeveloper.tsx:102:14
+TS2304: Cannot find name 'PBRMapGenerator'.
+    100 |
+    101 |           {activeTab === "maps" && (
+  > 102 |             <PBRMapGenerator
+        |              ^^^^^^^^^^^^^^^
+    103 |               processTexture={processTexture}
+    104 |               addToHistory={addToHistory}
+    105 |             />
+
+ERROR in src/components/TextureDeveloper.tsx:112:10
+TS2304: Cannot find name 'HistorySection'.
+    110 |
+    111 |         {/* History Section */}
+  > 112 |         <HistorySection history={history} clearHistory={() => setHistory([])} />
+        |          ^^^^^^^^^^^^^^
+    113 |       </div>
+    114 |     </div>
+    115 |   );
+
+Compiling...
+Failed to compile.
+
+Module not found: Error: Can't resolve './components/Textures' in '/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/src'
+WARNING in [eslint] 
+src/ChatApp.tsx
+  Line 6:3:  'Navigate' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/Textures.tsx
+  Line 2:27:   'useRef' is defined but never used            @typescript-eslint/no-unused-vars
+  Line 2:35:   'useEffect' is defined but never used         @typescript-eslint/no-unused-vars
+  Line 14:16:  'setUser' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+ERROR in ./src/ChatApp.tsx 8:0-45
+Module not found: Error: Can't resolve './components/Textures' in '/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/src'
+
+webpack compiled with 1 error and 1 warning
+ERROR in src/ChatApp.tsx:10:22
+TS2307: Cannot find module './components/Textures' or its corresponding type declarations.
+     8 | import App from "./App";
+     9 | import Developer from "./Developer";
+  > 10 | import Textures from "./components/Textures";
+       |                      ^^^^^^^^^^^^^^^^^^^^^^^
+    11 |
+    12 | function ChatApp() {
+    13 |   return (
+
+ERROR in src/components/TextureDeveloper.tsx:102:14
+TS2304: Cannot find name 'PBRMapGenerator'.
+    100 |
+    101 |           {activeTab === "maps" && (
+  > 102 |             <PBRMapGenerator
+        |              ^^^^^^^^^^^^^^^
+    103 |               processTexture={processTexture}
+    104 |               addToHistory={addToHistory}
+    105 |             />
+
+ERROR in src/components/TextureDeveloper.tsx:112:10
+TS2304: Cannot find name 'HistorySection'.
+    110 |
+    111 |         {/* History Section */}
+  > 112 |         <HistorySection history={history} clearHistory={() => setHistory([])} />
+        |          ^^^^^^^^^^^^^^
+    113 |       </div>
+    114 |     </div>
+    115 |   );
+
+Compiling...
+Failed to compile.
+
+Module not found: Error: Can't resolve './components/Textures' in '/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/src'
+WARNING in [eslint] 
+src/ChatApp.tsx
+  Line 6:3:  'Navigate' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/Textures.tsx
+  Line 2:27:   'useRef' is defined but never used            @typescript-eslint/no-unused-vars
+  Line 2:35:   'useEffect' is defined but never used         @typescript-eslint/no-unused-vars
+  Line 14:16:  'setUser' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+ERROR in ./src/ChatApp.tsx 8:0-45
+Module not found: Error: Can't resolve './components/Textures' in '/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/src'
+
+webpack compiled with 1 error and 1 warning
+ERROR in src/ChatApp.tsx:10:22
+TS2307: Cannot find module './components/Textures' or its corresponding type declarations.
+     8 | import App from "./App";
+     9 | import Developer from "./Developer";
+  > 10 | import Textures from "./components/Textures";
+       |                      ^^^^^^^^^^^^^^^^^^^^^^^
+    11 |
+    12 | function ChatApp() {
+    13 |   return (
+
+ERROR in src/components/TextureDeveloper.tsx:102:14
+TS2304: Cannot find name 'PBRMapGenerator'.
+    100 |
+    101 |           {activeTab === "maps" && (
+  > 102 |             <PBRMapGenerator
+        |              ^^^^^^^^^^^^^^^
+    103 |               processTexture={processTexture}
+    104 |               addToHistory={addToHistory}
+    105 |             />
+
+ERROR in src/components/TextureDeveloper.tsx:112:10
+TS2304: Cannot find name 'HistorySection'.
+    110 |
+    111 |         {/* History Section */}
+  > 112 |         <HistorySection history={history} clearHistory={() => setHistory([])} />
+        |          ^^^^^^^^^^^^^^
+    113 |       </div>
+    114 |     </div>
+    115 |   );
+
+Compiling...
+Failed to compile.
+
+Module not found: Error: Can't resolve './components/Textures' in '/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/src'
+WARNING in [eslint] 
+src/ChatApp.tsx
+  Line 6:3:  'Navigate' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/components/Textures.tsx
+  Line 2:27:   'useRef' is defined but never used            @typescript-eslint/no-unused-vars
+  Line 2:35:   'useEffect' is defined but never used         @typescript-eslint/no-unused-vars
+  Line 14:16:  'setUser' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+ERROR in ./src/ChatApp.tsx 8:0-45
+Module not found: Error: Can't resolve './components/Textures' in '/Users/gabrielmajorsky/Documents/dev-json/unrealstudio3/__________win10dev.xyz/gpt/gpt/frontend/src'
+
+webpack compiled with 1 error and 1 warning
+ERROR in src/ChatApp.tsx:10:22
+TS2307: Cannot find module './components/Textures' or its corresponding type declarations.
+     8 | import App from "./App";
+     9 | import Developer from "./Developer";
+  > 10 | import Textures from "./components/Textures";
+       |                      ^^^^^^^^^^^^^^^^^^^^^^^
+    11 |
+    12 | function ChatApp() {
+    13 |   return (
+
+ERROR in src/TextureDeveloper.tsx:3:29
+TS2307: Cannot find module './TextureUpscaler' or its corresponding type declarations.
+    1 | // Textures.tsx
+    2 | import React, { useState, useRef, useEffect } from "react";
+  > 3 | import TextureUpscaler from "./TextureUpscaler";
+      |                             ^^^^^^^^^^^^^^^^^^^
+    4 | import TexturePBRMapGenerator from "./TexturePBRMapGenerator";
+    5 | import TextureComparison from "./TextureComparison";
+    6 | import TextureHistorySection from "./TextureHistorySection";
+
+ERROR in src/TextureDeveloper.tsx:4:36
+TS2307: Cannot find module './TexturePBRMapGenerator' or its corresponding type declarations.
+    2 | import React, { useState, useRef, useEffect } from "react";
+    3 | import TextureUpscaler from "./TextureUpscaler";
+  > 4 | import TexturePBRMapGenerator from "./TexturePBRMapGenerator";
+      |                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+    5 | import TextureComparison from "./TextureComparison";
+    6 | import TextureHistorySection from "./TextureHistorySection";
+    7 | import { TextureHistoryItem } from "./types";
+
+ERROR in src/TextureDeveloper.tsx:5:31
+TS2307: Cannot find module './TextureComparison' or its corresponding type declarations.
+    3 | import TextureUpscaler from "./TextureUpscaler";
+    4 | import TexturePBRMapGenerator from "./TexturePBRMapGenerator";
+  > 5 | import TextureComparison from "./TextureComparison";
+      |                               ^^^^^^^^^^^^^^^^^^^^^
+    6 | import TextureHistorySection from "./TextureHistorySection";
+    7 | import { TextureHistoryItem } from "./types";
+    8 |
+
+ERROR in src/TextureDeveloper.tsx:6:35
+TS2307: Cannot find module './TextureHistorySection' or its corresponding type declarations.
+    4 | import TexturePBRMapGenerator from "./TexturePBRMapGenerator";
+    5 | import TextureComparison from "./TextureComparison";
+  > 6 | import TextureHistorySection from "./TextureHistorySection";
+      |                                   ^^^^^^^^^^^^^^^^^^^^^^^^^
+    7 | import { TextureHistoryItem } from "./types";
+    8 |
+    9 | function TextureDeveloper() {
+
+ERROR in src/TextureDeveloper.tsx:7:10
+TS2305: Module '"./types"' has no exported member 'TextureHistoryItem'.
+     5 | import TextureComparison from "./TextureComparison";
+     6 | import TextureHistorySection from "./TextureHistorySection";
+  >  7 | import { TextureHistoryItem } from "./types";
+       |          ^^^^^^^^^^^^^^^^^^
+     8 |
+     9 | function TextureDeveloper() {
+    10 |   const [activeTab, setActiveTab] = useState<
+
+ERROR in src/TextureDeveloper.tsx:102:14
+TS2304: Cannot find name 'PBRMapGenerator'.
+    100 |
+    101 |           {activeTab === "maps" && (
+  > 102 |             <PBRMapGenerator
+        |              ^^^^^^^^^^^^^^^
+    103 |               processTexture={processTexture}
+    104 |               addToHistory={addToHistory}
+    105 |             />
+
+ERROR in src/TextureDeveloper.tsx:112:10
+TS2304: Cannot find name 'HistorySection'.
+    110 |
+    111 |         {/* History Section */}
+  > 112 |         <HistorySection history={history} clearHistory={() => setHistory([])} />
+        |          ^^^^^^^^^^^^^^
+    113 |       </div>
+    114 |     </div>
+    115 |   );
+
+Compiling...
+Failed to compile.
+
+[eslint] 
+src/TextureDeveloper.tsx
+  Line 102:14:  'PBRMapGenerator' is not defined  react/jsx-no-undef
+  Line 112:10:  'HistorySection' is not defined   react/jsx-no-undef
+
+Search for the keywords to learn more about each error.
+WARNING in [eslint] 
+src/ChatApp.tsx
+  Line 6:3:  'Navigate' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/TextureDeveloper.tsx
+  Line 2:27:   'useRef' is defined but never used                  @typescript-eslint/no-unused-vars
+  Line 2:35:   'useEffect' is defined but never used               @typescript-eslint/no-unused-vars
+  Line 4:8:    'TexturePBRMapGenerator' is defined but never used  @typescript-eslint/no-unused-vars
+  Line 6:8:    'TextureHistorySection' is defined but never used   @typescript-eslint/no-unused-vars
+  Line 14:16:  'setUser' is assigned a value but never used        @typescript-eslint/no-unused-vars
+
+src/components/Textures.tsx
+  Line 2:27:   'useRef' is defined but never used            @typescript-eslint/no-unused-vars
+  Line 2:35:   'useEffect' is defined but never used         @typescript-eslint/no-unused-vars
+  Line 14:16:  'setUser' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+ERROR in [eslint] 
+src/TextureDeveloper.tsx
+  Line 102:14:  'PBRMapGenerator' is not defined  react/jsx-no-undef
+  Line 112:10:  'HistorySection' is not defined   react/jsx-no-undef
+
+Search for the keywords to learn more about each error.
+
+webpack compiled with 1 error and 1 warning
+ERROR in src/TextureDeveloper.tsx:102:14
+TS2304: Cannot find name 'PBRMapGenerator'.
+    100 |
+    101 |           {activeTab === "maps" && (
+  > 102 |             <PBRMapGenerator
+        |              ^^^^^^^^^^^^^^^
+    103 |               processTexture={processTexture}
+    104 |               addToHistory={addToHistory}
+    105 |             />
+
+ERROR in src/TextureDeveloper.tsx:112:10
+TS2304: Cannot find name 'HistorySection'.
+    110 |
+    111 |         {/* History Section */}
+  > 112 |         <HistorySection history={history} clearHistory={() => setHistory([])} />
+        |          ^^^^^^^^^^^^^^
+    113 |       </div>
+    114 |     </div>
+    115 |   );
+
+Compiling...
+Failed to compile.
+
+[eslint] 
+src/TextureDeveloper.tsx
+  Line 102:14:  'PBRMapGenerator' is not defined  react/jsx-no-undef
+  Line 112:10:  'HistorySection' is not defined   react/jsx-no-undef
+
+Search for the keywords to learn more about each error.
+WARNING in [eslint] 
+src/ChatApp.tsx
+  Line 6:3:  'Navigate' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/TextureDeveloper.tsx
+  Line 2:27:   'useRef' is defined but never used                  @typescript-eslint/no-unused-vars
+  Line 2:35:   'useEffect' is defined but never used               @typescript-eslint/no-unused-vars
+  Line 4:8:    'TexturePBRMapGenerator' is defined but never used  @typescript-eslint/no-unused-vars
+  Line 6:8:    'TextureHistorySection' is defined but never used   @typescript-eslint/no-unused-vars
+  Line 14:16:  'setUser' is assigned a value but never used        @typescript-eslint/no-unused-vars
+
+src/components/Textures.tsx
+  Line 2:27:   'useRef' is defined but never used            @typescript-eslint/no-unused-vars
+  Line 2:35:   'useEffect' is defined but never used         @typescript-eslint/no-unused-vars
+  Line 14:16:  'setUser' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+ERROR in [eslint] 
+src/TextureDeveloper.tsx
+  Line 102:14:  'PBRMapGenerator' is not defined  react/jsx-no-undef
+  Line 112:10:  'HistorySection' is not defined   react/jsx-no-undef
+
+Search for the keywords to learn more about each error.
+
+webpack compiled with 1 error and 1 warning
+ERROR in src/TextureDeveloper.tsx:102:14
+TS2304: Cannot find name 'PBRMapGenerator'.
+    100 |
+    101 |           {activeTab === "maps" && (
+  > 102 |             <PBRMapGenerator
+        |              ^^^^^^^^^^^^^^^
+    103 |               processTexture={processTexture}
+    104 |               addToHistory={addToHistory}
+    105 |             />
+
+ERROR in src/TextureDeveloper.tsx:112:10
+TS2304: Cannot find name 'HistorySection'.
+    110 |
+    111 |         {/* History Section */}
+  > 112 |         <HistorySection history={history} clearHistory={() => setHistory([])} />
+        |          ^^^^^^^^^^^^^^
+    113 |       </div>
+    114 |     </div>
+    115 |   );
+
+Compiling...
+Compiled with warnings.
+
+[eslint] 
+src/ChatApp.tsx
+  Line 6:3:  'Navigate' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/TextureDeveloper.tsx
+  Line 2:27:   'useRef' is defined but never used            @typescript-eslint/no-unused-vars
+  Line 2:35:   'useEffect' is defined but never used         @typescript-eslint/no-unused-vars
+  Line 14:16:  'setUser' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+src/components/Textures.tsx
+  Line 2:27:   'useRef' is defined but never used            @typescript-eslint/no-unused-vars
+  Line 2:35:   'useEffect' is defined but never used         @typescript-eslint/no-unused-vars
+  Line 14:16:  'setUser' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+Search for the keywords to learn more about each warning.
+To ignore, add // eslint-disable-next-line to the line before.
+
+WARNING in [eslint] 
+src/ChatApp.tsx
+  Line 6:3:  'Navigate' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/TextureDeveloper.tsx
+  Line 2:27:   'useRef' is defined but never used            @typescript-eslint/no-unused-vars
+  Line 2:35:   'useEffect' is defined but never used         @typescript-eslint/no-unused-vars
+  Line 14:16:  'setUser' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+src/components/Textures.tsx
+  Line 2:27:   'useRef' is defined but never used            @typescript-eslint/no-unused-vars
+  Line 2:35:   'useEffect' is defined but never used         @typescript-eslint/no-unused-vars
+  Line 14:16:  'setUser' is assigned a value but never used  @typescript-eslint/no-unused-vars
 
 webpack compiled with 1 warning
 No issues found.
@@ -45,15 +1532,35 @@ Compiling...
 Compiled with warnings.
 
 [eslint] 
-src/components/CodeImprove.tsx
-  Line 361:9:  'applyChanges' is assigned a value but never used  @typescript-eslint/no-unused-vars
+src/ChatApp.tsx
+  Line 6:3:  'Navigate' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/TextureDeveloper.tsx
+  Line 2:27:   'useRef' is defined but never used            @typescript-eslint/no-unused-vars
+  Line 2:35:   'useEffect' is defined but never used         @typescript-eslint/no-unused-vars
+  Line 14:16:  'setUser' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+src/components/Textures.tsx
+  Line 2:27:   'useRef' is defined but never used            @typescript-eslint/no-unused-vars
+  Line 2:35:   'useEffect' is defined but never used         @typescript-eslint/no-unused-vars
+  Line 14:16:  'setUser' is assigned a value but never used  @typescript-eslint/no-unused-vars
 
 Search for the keywords to learn more about each warning.
 To ignore, add // eslint-disable-next-line to the line before.
 
 WARNING in [eslint] 
-src/components/CodeImprove.tsx
-  Line 361:9:  'applyChanges' is assigned a value but never used  @typescript-eslint/no-unused-vars
+src/ChatApp.tsx
+  Line 6:3:  'Navigate' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/TextureDeveloper.tsx
+  Line 2:27:   'useRef' is defined but never used            @typescript-eslint/no-unused-vars
+  Line 2:35:   'useEffect' is defined but never used         @typescript-eslint/no-unused-vars
+  Line 14:16:  'setUser' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+src/components/Textures.tsx
+  Line 2:27:   'useRef' is defined but never used            @typescript-eslint/no-unused-vars
+  Line 2:35:   'useEffect' is defined but never used         @typescript-eslint/no-unused-vars
+  Line 14:16:  'setUser' is assigned a value but never used  @typescript-eslint/no-unused-vars
 
 webpack compiled with 1 warning
 No issues found.
@@ -61,15 +1568,35 @@ Compiling...
 Compiled with warnings.
 
 [eslint] 
-src/components/CodeImprove.tsx
-  Line 364:9:  'applyChanges' is assigned a value but never used  @typescript-eslint/no-unused-vars
+src/ChatApp.tsx
+  Line 6:3:  'Navigate' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/TextureDeveloper.tsx
+  Line 2:27:   'useRef' is defined but never used            @typescript-eslint/no-unused-vars
+  Line 2:35:   'useEffect' is defined but never used         @typescript-eslint/no-unused-vars
+  Line 14:16:  'setUser' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+src/components/Textures.tsx
+  Line 2:27:   'useRef' is defined but never used            @typescript-eslint/no-unused-vars
+  Line 2:35:   'useEffect' is defined but never used         @typescript-eslint/no-unused-vars
+  Line 14:16:  'setUser' is assigned a value but never used  @typescript-eslint/no-unused-vars
 
 Search for the keywords to learn more about each warning.
 To ignore, add // eslint-disable-next-line to the line before.
 
 WARNING in [eslint] 
-src/components/CodeImprove.tsx
-  Line 364:9:  'applyChanges' is assigned a value but never used  @typescript-eslint/no-unused-vars
+src/ChatApp.tsx
+  Line 6:3:  'Navigate' is defined but never used  @typescript-eslint/no-unused-vars
+
+src/TextureDeveloper.tsx
+  Line 2:27:   'useRef' is defined but never used            @typescript-eslint/no-unused-vars
+  Line 2:35:   'useEffect' is defined but never used         @typescript-eslint/no-unused-vars
+  Line 14:16:  'setUser' is assigned a value but never used  @typescript-eslint/no-unused-vars
+
+src/components/Textures.tsx
+  Line 2:27:   'useRef' is defined but never used            @typescript-eslint/no-unused-vars
+  Line 2:35:   'useEffect' is defined but never used         @typescript-eslint/no-unused-vars
+  Line 14:16:  'setUser' is assigned a value but never used  @typescript-eslint/no-unused-vars
 
 webpack compiled with 1 warning
 No issues found.
