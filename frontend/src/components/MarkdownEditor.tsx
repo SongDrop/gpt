@@ -46,6 +46,7 @@ interface MarkdownEditorProps {
   onChange: (value: string) => void;
   onSubmit: () => void;
   onImage: () => void;
+  onRemoveBg: () => void;
   onDatabase: () => void;
   onDownload: () => void;
   onTranslate?: (
@@ -179,6 +180,7 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProps>(
       onChange,
       onSubmit,
       onImage,
+      onRemoveBg,
       onDatabase,
       onDownload,
       onTranslate,
@@ -673,6 +675,34 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProps>(
             </button>
             <button
               type="button"
+              onClick={() => onRemoveBg()}
+              className="hover:bg-[var(--color-secondary-hover)] p-2 rounded transition-colors"
+              title="RemoveBg"
+            >
+              <img
+                src={
+                  "https://media.moddb.com/images/mods/1/68/67704/profile/removebg.svg"
+                }
+                alt="Remove Background"
+                className="w-4 h-4"
+              />
+              {/* <Image className="w-4 h-4 text-[var(--color-foreground)]" /> */}
+              {/* <div
+                style={{
+                  width: 16,
+                  height: 16,
+                  WebkitMaskSize: "cover",
+                  maskSize: "cover",
+                  WebkitMaskImage:
+                    'url("https://media.moddb.com/images/mods/1/68/67704/profile/removebg.svg")',
+                  maskImage:
+                    'url("https://media.moddb.com/images/mods/1/68/67704/profile/removebg.svg")',
+                  backgroundColor: "var(--color-foreground)",
+                }}
+              /> */}
+            </button>
+            <button
+              type="button"
               onClick={() => onDatabase()}
               className="hover:bg-[var(--color-secondary-hover)] p-2 rounded transition-colors"
               title="Rag Database"
@@ -732,6 +762,72 @@ const MarkdownEditor = forwardRef<HTMLTextAreaElement, MarkdownEditorProps>(
                     backgroundColor: "var(--color-foreground)",
                   }}
                 />
+              </a>
+            </div>
+            <div className="hover:bg-[var(--color-secondary-hover)] p-2 rounded transition-colors">
+              <a
+                id="g-support"
+                className="g-support"
+                href="/developer"
+                target="_blank"
+                rel="noreferrer"
+                title="AI Developer Assistant"
+              >
+                {/* <SVGColor
+                  svgUrl="https://media.moddb.com/images/mods/1/68/67704/profile/developer1.svg"
+                  fillColor="white"
+                /> */}
+                <img
+                  src={
+                    "https://media.moddb.com/images/mods/1/68/67704/profile/developer1.svg"
+                  }
+                  alt="Remove Background"
+                  className="w-4 h-4"
+                />
+                {/* <div
+                  style={{
+                    width: 16,
+                    height: 16,
+                    WebkitMaskSize: "cover",
+                    maskSize: "cover",
+                    WebkitMaskImage:
+                      'url("https://media.moddb.com/images/mods/1/68/67704/profile/developer1.svg")',
+                    maskImage:
+                      'url("https://media.moddb.com/images/mods/1/68/67704/profile/developer1.svg")',
+                    backgroundColor: "var(--color-foreground)",
+                  }}
+                /> */}
+              </a>
+            </div>
+            <div className="hover:bg-[var(--color-secondary-hover)] p-2 rounded transition-colors">
+              <a
+                id="g-support"
+                // className="g-support"
+                href="/textures"
+                target="_blank"
+                rel="noreferrer"
+                title="AI Texture Assistant"
+              >
+                <img
+                  src={
+                    "https://media.moddb.com/images/mods/1/68/67704/profile/texture1.svg"
+                  }
+                  alt="Remove Background"
+                  className="w-4 h-4"
+                />
+                {/* <div
+                  style={{
+                    width: 16,
+                    height: 16,
+                    WebkitMaskSize: "cover",
+                    maskSize: "cover",
+                    WebkitMaskImage:
+                      'url("https://media.moddb.com/images/mods/1/68/67704/profile/texture.svg")',
+                    maskImage:
+                      'url("https://media.moddb.com/images/mods/1/68/67704/profile/texture.svg")',
+                    backgroundColor: "var(--color-foreground)",
+                  }}
+                /> */}
               </a>
             </div>
           </div>

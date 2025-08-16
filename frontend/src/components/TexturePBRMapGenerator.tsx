@@ -1,4 +1,3 @@
-// components/PBRMapGenerator.tsx
 import React, { useState, useRef } from "react";
 import { MapType, TextureHistoryItem } from "./types";
 
@@ -97,9 +96,20 @@ const TexturePBRMapGenerator: React.FC<TexturePBRMapGeneratorProps> = ({
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm p-6 mb-8">
-      <h2 className="text-xl font-semibold mb-6">PBR Map Generator</h2>
-      <p className="text-gray-600 mb-6">
+    <div
+      className="rounded-xl shadow-sm p-6 mb-8 border border-[var(--color-border)]"
+      style={{ backgroundColor: "var(--color-background)" }}
+    >
+      <h2
+        className="text-xl font-semibold mb-6"
+        style={{ color: "var(--color-foreground)" }}
+      >
+        PBR Map Generator
+      </h2>
+      <p
+        className="mb-6 opacity-80"
+        style={{ color: "var(--color-foreground)" }}
+      >
         Generate Physically-Based Rendering maps from your source textures for
         realistic game materials.
       </p>
@@ -107,12 +117,18 @@ const TexturePBRMapGenerator: React.FC<TexturePBRMapGeneratorProps> = ({
       <div className="flex flex-col lg:flex-row gap-8">
         <div className="w-full lg:w-1/3">
           <div
-            className={`drop-zone border-2 border-dashed rounded-lg p-8 text-center cursor-pointer transition-colors ${
+            className={`drop-zone rounded-lg p-8 text-center cursor-pointer transition-colors ${
               !previewUrl
-                ? "border-gray-300 hover:border-primary"
+                ? "border-dashed hover:border-primary"
                 : "border-primary"
             }`}
             onClick={triggerFileInput}
+            style={{
+              border: !previewUrl
+                ? "2px dashed var(--color-border)"
+                : "1px solid var(--color-primary)",
+              backgroundColor: "var(--color-secondary)",
+            }}
           >
             <input
               type="file"
@@ -124,16 +140,28 @@ const TexturePBRMapGenerator: React.FC<TexturePBRMapGeneratorProps> = ({
 
             {!previewUrl ? (
               <>
-                <span className="material-icons text-4xl text-gray-400 mb-3">
+                <span
+                  className="material-icons text-4xl mb-3"
+                  style={{ color: "var(--color-border)" }}
+                >
                   cloud_upload
                 </span>
-                <p className="font-medium text-gray-700">
+                <p
+                  className="font-medium"
+                  style={{ color: "var(--color-foreground)" }}
+                >
                   Drag & drop an image file here
                 </p>
-                <p className="text-sm text-gray-500 mt-2">
+                <p
+                  className="text-sm mt-2 opacity-80"
+                  style={{ color: "var(--color-foreground)" }}
+                >
                   or click to browse files
                 </p>
-                <p className="text-xs text-gray-400 mt-4">
+                <p
+                  className="text-xs mt-4 opacity-70"
+                  style={{ color: "var(--color-foreground)" }}
+                >
                   Supports JPG, PNG, TGA (Max 10MB)
                 </p>
               </>
@@ -145,20 +173,33 @@ const TexturePBRMapGenerator: React.FC<TexturePBRMapGeneratorProps> = ({
                   className="max-w-full max-h-48 mx-auto rounded-md"
                 />
                 <div className="source-info mt-3">
-                  <p className="text-sm font-medium truncate">{file?.name}</p>
+                  <p
+                    className="text-sm font-medium truncate"
+                    style={{ color: "var(--color-foreground)" }}
+                  >
+                    {file?.name}
+                  </p>
                 </div>
               </div>
             )}
           </div>
 
           <div className="mt-6">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label
+              className="block text-sm font-medium mb-2"
+              style={{ color: "var(--color-foreground)" }}
+            >
               Material Type
             </label>
             <select
               value={materialType}
               onChange={(e) => setMaterialType(e.target.value)}
-              className="w-full border border-gray-300 rounded-md px-3 py-2"
+              className="w-full rounded-md px-3 py-2"
+              style={{
+                border: "1px solid var(--color-border)",
+                backgroundColor: "var(--color-background)",
+                color: "var(--color-foreground)",
+              }}
             >
               <option value="">Select material type</option>
               <option value="wood">Wood</option>
@@ -172,13 +213,21 @@ const TexturePBRMapGenerator: React.FC<TexturePBRMapGeneratorProps> = ({
           </div>
 
           <div className="mt-6">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label
+              className="block text-sm font-medium mb-2"
+              style={{ color: "var(--color-foreground)" }}
+            >
               Output Format
             </label>
             <select
               value={outputFormat}
               onChange={(e) => setOutputFormat(e.target.value)}
-              className="w-full border border-gray-300 rounded-md px-3 py-2"
+              className="w-full rounded-md px-3 py-2"
+              style={{
+                border: "1px solid var(--color-border)",
+                backgroundColor: "var(--color-background)",
+                color: "var(--color-foreground)",
+              }}
             >
               <option value="tga">TGA (Recommended)</option>
               <option value="png">PNG (Lossless)</option>
@@ -188,10 +237,15 @@ const TexturePBRMapGenerator: React.FC<TexturePBRMapGeneratorProps> = ({
 
           <button
             className={`w-full mt-6 px-4 py-3 text-white rounded-md transition flex items-center justify-center ${
-              file && !loading
-                ? "bg-primary hover:bg-secondary"
-                : "bg-gray-400 cursor-not-allowed"
+              !file || loading ? "opacity-70 cursor-not-allowed" : ""
             }`}
+            style={{
+              backgroundColor:
+                file && !loading
+                  ? "var(--color-primary)"
+                  : "var(--color-secondary)",
+              color: file && !loading ? "white" : "gray",
+            }}
             onClick={handleGenerateMaps}
             disabled={!file || loading}
           >
@@ -204,6 +258,7 @@ const TexturePBRMapGenerator: React.FC<TexturePBRMapGeneratorProps> = ({
                     fill="none"
                     viewBox="0 0 24 24"
                     stroke="currentColor"
+                    style={{ color: "var(--color-background)" }}
                   >
                     <path
                       strokeLinecap="round"
@@ -225,41 +280,92 @@ const TexturePBRMapGenerator: React.FC<TexturePBRMapGeneratorProps> = ({
             {mapTypes.map((map) => (
               <div
                 key={map.key}
-                className={`map-type p-4 border rounded-lg cursor-pointer transition-transform ${
+                className={`map-type p-4 rounded-lg cursor-pointer transition-transform ${
                   selectedMap === map.key
-                    ? "border-primary bg-blue-50"
+                    ? "border-primary"
                     : "border-gray-200 hover:shadow-md"
                 }`}
                 onClick={() => setSelectedMap(map.key)}
+                style={{
+                  border:
+                    selectedMap === map.key
+                      ? "1px solid var(--color-primary)"
+                      : "1px solid var(--color-border)",
+                  backgroundColor:
+                    selectedMap === map.key
+                      ? "var(--color-secondary)"
+                      : "var(--color-background)",
+                  transform:
+                    selectedMap === map.key ? "translateY(-2px)" : "none",
+                }}
               >
                 <div className="flex items-center mb-3">
                   <div
-                    className={`w-10 h-10 rounded-md flex items-center justify-center mr-3 ${
-                      selectedMap === map.key
-                        ? "bg-blue-100 text-blue-600"
-                        : "bg-gray-100 text-gray-600"
-                    }`}
+                    className={`w-10 h-10 rounded-md flex items-center justify-center mr-3`}
+                    style={{
+                      backgroundColor:
+                        selectedMap === map.key
+                          ? "var(--color-primary)"
+                          : "var(--color-secondary)",
+                      color:
+                        selectedMap === map.key
+                          ? "var(--color-background)"
+                          : "var(--color-foreground)",
+                    }}
                   >
                     <span className="material-icons">{map.icon}</span>
                   </div>
-                  <h3 className="font-medium">{map.name}</h3>
+                  <h3
+                    className="font-medium"
+                    style={{ color: "var(--color-foreground)" }}
+                  >
+                    {map.name}
+                  </h3>
                 </div>
-                <p className="text-sm text-gray-600 mb-4">{map.description}</p>
-                <div className="bg-gray-200 border-2 border-dashed rounded-xl w-full h-32 flex items-center justify-center">
-                  <span className="text-gray-500 text-sm">Preview</span>
+                <p
+                  className="text-sm mb-4 opacity-80"
+                  style={{ color: "var(--color-foreground)" }}
+                >
+                  {map.description}
+                </p>
+                <div
+                  className="border-2 border-dashed rounded-xl w-full h-32 flex items-center justify-center"
+                  style={{
+                    backgroundColor: "var(--color-secondary)",
+                    borderColor: "var(--color-border)",
+                  }}
+                >
+                  <span
+                    className="text-sm opacity-70"
+                    style={{ color: "var(--color-foreground)" }}
+                  >
+                    Preview
+                  </span>
                 </div>
               </div>
             ))}
           </div>
 
           {selectedMap && (
-            <div className="mt-6 p-4 bg-gray-50 rounded-lg">
-              <h4 className="font-medium mb-3">
+            <div
+              className="mt-6 p-4 rounded-lg"
+              style={{
+                backgroundColor: "var(--color-secondary)",
+                border: "1px solid var(--color-border)",
+              }}
+            >
+              <h4
+                className="font-medium mb-3"
+                style={{ color: "var(--color-foreground)" }}
+              >
                 {mapTypes.find((m) => m.key === selectedMap)?.name} Map Settings
               </h4>
 
               <div className="intensity-control">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
+                <label
+                  className="block text-sm font-medium mb-2"
+                  style={{ color: "var(--color-foreground)" }}
+                >
                   Intensity: {mapIntensity}%
                 </label>
                 <input
@@ -269,11 +375,17 @@ const TexturePBRMapGenerator: React.FC<TexturePBRMapGeneratorProps> = ({
                   value={mapIntensity}
                   onChange={(e) => setMapIntensity(parseInt(e.target.value))}
                   className="w-full"
+                  style={{
+                    accentColor: "var(--color-primary)",
+                  }}
                 />
               </div>
 
               <div className="mt-4">
-                <p className="text-sm text-gray-600">
+                <p
+                  className="text-sm opacity-80"
+                  style={{ color: "var(--color-foreground)" }}
+                >
                   Adjust the intensity to control how pronounced the effect will
                   be in your material.
                 </p>

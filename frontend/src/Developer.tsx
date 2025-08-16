@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from "react";
 import { marked } from "marked";
+import { Pin, FlagTriangleRight, Expand } from "lucide-react";
 
 interface Tab {
   id: string;
@@ -32,23 +33,6 @@ const FullscreenIcon = () => (
   </svg>
 );
 
-const MaximizeIcon = () => (
-  <svg
-    width="16"
-    height="16"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      d="M4 8V4m0 0h4M4 4l5 5m7-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m7 5v-4m0 0h-4m4 0l-5-5"
-    />
-  </svg>
-);
-
 const RestoreIcon = () => (
   <svg
     width="16"
@@ -57,12 +41,11 @@ const RestoreIcon = () => (
     fill="none"
     stroke="currentColor"
     strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
   >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      d="M9 9V4.5M9 9H4.5M9 9L3.75 3.75M9 15v4.5M9 15H4.5M9 15l-5.25 5.25M15 9h4.5M15 9V4.5M15 9l5.25-5.25M15 15h4.5m0 0V20M15 15l5.25 5.25"
-    />
+    <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
+    <rect x="7" y="7" width="10" height="10" rx="1" ry="1" />
   </svg>
 );
 
@@ -96,6 +79,10 @@ const Panel: React.FC<PanelProps> = ({
   const [isInnerResizing, setIsInnerResizing] = useState(false);
   const innerResizeStartY = useRef(0);
   const initialBrowserHeight = useRef(70);
+
+  useEffect(() => {
+    document.title = "AI Developer Assistant";
+  }, []);
 
   // Convert YouTube URLs to embed format
   const getEmbedUrl = (url: string) => {
@@ -152,13 +139,10 @@ const Panel: React.FC<PanelProps> = ({
     setIsInnerResizing(true);
     innerResizeStartY.current = e.clientY;
     initialBrowserHeight.current = browserHeight;
-
-    // Prevent text selection during resize
     document.body.style.userSelect = "none";
   };
 
   useEffect(() => {
-    // Replace the existing handleInnerMouseMove function with this corrected version
     const handleInnerMouseMove = (e: MouseEvent) => {
       if (!isInnerResizing) return;
 
@@ -166,11 +150,11 @@ const Panel: React.FC<PanelProps> = ({
       if (!container) return;
 
       const containerRect = container.getBoundingClientRect();
-      const deltaY = innerResizeStartY.current - e.clientY; // Inverted this calculation
+      const deltaY = innerResizeStartY.current - e.clientY;
       const heightDelta = (deltaY / containerRect.height) * 100;
 
       const newHeight = Math.min(
-        Math.max(30, initialBrowserHeight.current - heightDelta), // Changed to addition
+        Math.max(30, initialBrowserHeight.current - heightDelta),
         85
       );
 
@@ -197,15 +181,25 @@ const Panel: React.FC<PanelProps> = ({
 
   return (
     <div
-      className={`flex flex-col h-full border border-gray-300 rounded-lg overflow-hidden bg-white shadow-lg ${
+      className={`flex flex-col h-full rounded-lg overflow-hidden shadow-lg ${
         isTopPanel ? "mb-4" : ""
       }`}
-      style={style}
+      style={{
+        ...style,
+        backgroundColor: "var(--color-background)",
+        border: "1px solid var(--color-border)",
+      }}
       onDragOver={(e) => e.preventDefault()}
       onDrop={onTabDrop}
     >
       {/* Tab Bar */}
-      <div className="flex items-center bg-gray-100 p-1 border-b">
+      <div
+        className="flex items-center p-1 border-b"
+        style={{
+          backgroundColor: "var(--color-secondary)",
+          borderColor: "var(--color-border)",
+        }}
+      >
         <div className="flex flex-1 overflow-x-auto">
           {tabs.map((tab) => (
             <div
@@ -215,10 +209,18 @@ const Panel: React.FC<PanelProps> = ({
               onDragEnd={onTabDragEnd}
               className={`flex items-center px-3 py-1 mx-1 rounded-t-lg cursor-pointer ${
                 activeTab === tab.id
-                  ? "bg-white border-t border-l border-r border-gray-300"
-                  : "bg-gray-200 hover:bg-gray-300"
+                  ? "border-t border-l border-r"
+                  : "hover:bg-[var(--color-secondary-hover)]"
               }`}
               onClick={() => onTabClick(tab.id)}
+              style={{
+                backgroundColor:
+                  activeTab === tab.id
+                    ? "var(--color-background)"
+                    : "var(--color-secondary)",
+                borderColor: "var(--color-border)",
+                color: "var(--color-foreground)",
+              }}
             >
               <span className="truncate max-w-xs">{tab.title}</span>
               <button
@@ -226,7 +228,8 @@ const Panel: React.FC<PanelProps> = ({
                   e.stopPropagation();
                   onTabClose(tab.id);
                 }}
-                className="ml-2 text-gray-500 hover:text-gray-700"
+                className="ml-2 hover:text-[var(--color-primary)]"
+                style={{ color: "var(--color-foreground)" }}
               >
                 ×
               </button>
@@ -235,10 +238,15 @@ const Panel: React.FC<PanelProps> = ({
                   e.stopPropagation();
                   onTabPin(tab.id);
                 }}
-                className="ml-1 text-gray-500 hover:text-gray-700"
+                className="ml-1 hover:text-[var(--color-primary)]"
                 title={tab.pinned ? "Unpin" : "Pin to top"}
+                style={{ color: "var(--color-foreground)" }}
               >
-                {tab.pinned ? "📌" : "📍"}
+                {tab.pinned ? (
+                  <FlagTriangleRight width={16} height={16} />
+                ) : (
+                  <Pin width={16} height={16} />
+                )}
               </button>
             </div>
           ))}
@@ -252,13 +260,19 @@ const Panel: React.FC<PanelProps> = ({
                 value={inputUrl}
                 onChange={(e) => setInputUrl(e.target.value)}
                 placeholder="Enter URL..."
-                className="px-2 py-1 border rounded-l text-sm"
+                className="px-2 py-1 rounded-l text-sm"
                 onKeyDown={(e) => e.key === "Enter" && addTab()}
                 autoFocus
+                style={{
+                  backgroundColor: "var(--color-background)",
+                  border: "1px solid var(--color-border)",
+                  color: "var(--color-foreground)",
+                }}
               />
               <button
                 onClick={addTab}
-                className="px-2 py-1 bg-blue-500 text-white rounded-r text-sm"
+                className="px-2 py-1 text-white rounded-r text-sm"
+                style={{ backgroundColor: "var(--color-primary)" }}
               >
                 Go
               </button>
@@ -266,7 +280,12 @@ const Panel: React.FC<PanelProps> = ({
           ) : (
             <button
               onClick={() => setShowUrlInput(true)}
-              className="px-2 py-1 bg-gray-200 hover:bg-gray-300 rounded text-sm"
+              className="px-2 py-1 rounded text-sm"
+              style={{
+                backgroundColor: "var(--color-secondary)",
+                color: "var(--color-foreground)",
+                border: "1px solid var(--color-border)",
+              }}
             >
               +
             </button>
@@ -276,10 +295,15 @@ const Panel: React.FC<PanelProps> = ({
           {onMaximize && (
             <button
               onClick={onMaximize}
-              className="ml-1 p-1 text-gray-500 hover:text-gray-700"
+              className="ml-1 p-1 hover:text-[var(--color-primary)]"
               title={isMaximized ? "Restore" : "Maximize"}
+              style={{ color: "var(--color-foreground)" }}
             >
-              {isMaximized ? <RestoreIcon /> : <MaximizeIcon />}
+              {isMaximized ? (
+                <RestoreIcon />
+              ) : (
+                <Expand width={16} height={16} />
+              )}
             </button>
           )}
 
@@ -287,8 +311,9 @@ const Panel: React.FC<PanelProps> = ({
           {onFullscreen && (
             <button
               onClick={onFullscreen}
-              className="ml-1 p-1 text-gray-500 hover:text-gray-700"
+              className="ml-1 p-1 hover:text-[var(--color-primary)]"
               title="Fullscreen"
+              style={{ color: "var(--color-foreground)" }}
             >
               <FullscreenIcon />
             </button>
@@ -302,10 +327,15 @@ const Panel: React.FC<PanelProps> = ({
         style={{ height: `${browserHeight}%` }}
       >
         {tabs.length === 0 && isTopPanel && isDragging ? (
-          <div className="w-full h-full flex items-center justify-center border-2 border-dashed border-blue-500 bg-blue-50">
-            <p className="text-blue-500 font-medium">
-              Drop here to pin to top panel
-            </p>
+          <div
+            className="w-full h-full flex items-center justify-center border-2 border-dashed"
+            style={{
+              backgroundColor: "var(--color-secondary)",
+              borderColor: "var(--color-primary)",
+              color: "var(--color-primary)",
+            }}
+          >
+            <p className="font-medium">Drop here to pin to top panel</p>
           </div>
         ) : (
           <iframe
@@ -321,44 +351,75 @@ const Panel: React.FC<PanelProps> = ({
       {/* Inner resize handle for browser/chat */}
       {!isTopPanel && (
         <div
-          className="h-1 bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-30 hover:opacity-100 cursor-row-resize transition-opacity"
+          className="h-1 cursor-row-resize transition-opacity"
           onMouseDown={startInnerResize}
+          style={{
+            background:
+              "linear-gradient(to right, transparent, var(--color-primary), transparent)",
+            opacity: 0.3,
+          }}
         />
       )}
 
       {/* Chat */}
       {!isTopPanel && (
         <div
-          className="flex flex-col border-t border-gray-300 min-h-0"
-          style={{ height: `${100 - browserHeight}%` }}
+          className="flex flex-col border-t min-h-0"
+          style={{
+            height: `${100 - browserHeight}%`,
+            borderColor: "var(--color-border)",
+          }}
         >
-          <div className="flex-1 overflow-y-auto p-2 bg-gray-50">
+          <div
+            className="flex-1 overflow-y-auto p-2"
+            style={{ backgroundColor: "var(--color-secondary)" }}
+          >
             {chatMessages.map((msg, i) => (
               <div
                 key={i}
                 className={`mb-2 p-2 rounded ${
-                  msg.role === "user"
-                    ? "bg-blue-100 text-blue-900 ml-auto max-w-xs"
-                    : "bg-gray-200 text-gray-900 mr-auto max-w-xs"
+                  msg.role === "user" ? "ml-auto max-w-xs" : "mr-auto max-w-xs"
                 }`}
+                style={{
+                  backgroundColor:
+                    msg.role === "user"
+                      ? "var(--color-primary)"
+                      : "var(--color-secondary)",
+                  color:
+                    msg.role === "user"
+                      ? "var(--color-background)"
+                      : "var(--color-foreground)",
+                }}
                 dangerouslySetInnerHTML={{
                   __html: marked.parse(msg.content),
                 }}
               />
             ))}
           </div>
-          <div className="flex p-2 border-t border-gray-300">
+          <div
+            className="flex p-2 border-t"
+            style={{
+              borderColor: "var(--color-border)",
+              backgroundColor: "var(--color-secondary)",
+            }}
+          >
             <input
               type="text"
               value={chatInput}
               onChange={(e) => setChatInput(e.target.value)}
               placeholder="Ask AI about development..."
-              className="flex-1 px-2 py-1 border rounded-l text-sm"
+              className="flex-1 px-2 py-1 rounded-l text-sm"
               onKeyDown={(e) => e.key === "Enter" && sendChatMessage()}
+              style={{
+                backgroundColor: "var(--color-background)",
+                border: "1px solid var(--color-border)",
+                color: "var(--color-foreground)",
+              }}
             />
             <button
               onClick={sendChatMessage}
-              className="px-4 py-1 bg-blue-500 text-white rounded-r text-sm"
+              className="px-4 py-1 text-white rounded-r text-sm"
+              style={{ backgroundColor: "var(--color-primary)" }}
             >
               Send
             </button>
@@ -671,8 +732,6 @@ const Developer: React.FC = () => {
   ) => {
     e.preventDefault();
     setIsResizing(type);
-
-    // Store initial mouse position and current sizes
     initialMousePosition.current = { x: e.clientX, y: e.clientY };
     initialSizes.current = {
       top: topPanelHeight,
@@ -772,15 +831,62 @@ const Developer: React.FC = () => {
   return (
     <div
       id="developer-container"
-      className="h-screen w-screen bg-gray-100 p-4 overflow-hidden flex flex-col"
+      className="h-screen w-screen p-4 overflow-hidden flex flex-col"
       ref={containerRef}
+      style={{ backgroundColor: "var(--color-background)" }}
     >
       <div className="flex justify-between items-center mb-4">
-        <h1 className="text-2xl font-bold">Game Development Workspace</h1>
+        <h1
+          className="text-3xl font-bold flex items-center gap-2"
+          style={{ color: "var(--color-foreground)" }}
+        >
+          <a
+            href="/"
+            className="cursor-pointer transition-transform active:scale-95 rounded-md p-1 flex-shrink-0 inline-flex"
+            style={{
+              width: "40px",
+              height: "40px",
+              position: "relative",
+              backgroundColor: "var(--color-secondary)",
+              border: "1px solid var(--color-border)",
+            }}
+          >
+            <div
+              style={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                width: 32,
+                height: 32,
+                transform: "translate(-50%, -50%)",
+                WebkitMaskSize: "cover",
+                maskSize: "cover",
+                WebkitMaskImage: 'url("./gitgptlogo.svg")',
+                maskImage: 'url("./gitgptlogo.svg")',
+                backgroundColor: "var(--color-foreground)",
+              }}
+            />
+          </a>
+          Game Development Workspace
+        </h1>
         <div className="flex space-x-2">
           <button
             onClick={saveLayout}
-            className="px-3 py-1 bg-green-500 text-white rounded text-sm"
+            className="px-3 py-1 rounded text-sm"
+            style={{
+              backgroundColor: "var(--color-primary)",
+              color: "var(--color-background)",
+            }}
+          >
+            Load Layout
+          </button>
+          <button
+            onClick={saveLayout}
+            className="px-3 py-1 rounded text-sm"
+            style={{
+              backgroundColor: "var(--color-success)",
+              color: "var(--color-background)",
+            }}
           >
             Save Layout
           </button>
@@ -789,7 +895,13 @@ const Developer: React.FC = () => {
 
       {/* Shortcut Popup */}
       {showShortcutPopup && (
-        <div className="fixed bottom-4 right-4 bg-black bg-opacity-80 text-white p-4 rounded-lg z-50 shadow-lg">
+        <div
+          className="fixed bottom-4 right-4 p-4 rounded-lg z-50 shadow-lg"
+          style={{
+            backgroundColor: "var(--color-footer)",
+            color: "var(--color-footer-text)",
+          }}
+        >
           <p className="font-semibold">Keyboard Shortcuts:</p>
           <p>Ctrl+Esc: Exit Full screen</p>
           <p>Ctrl+M: Exit Maximum window</p>
@@ -823,8 +935,14 @@ const Developer: React.FC = () => {
           />
           {/* Top panel resize handle */}
           <div
-            className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-blue-500 to-transparent opacity-30 hover:opacity-100 cursor-row-resize z-10 transition-opacity"
+            className="absolute bottom-0 left-0 right-0 h-1 z-10 transition-opacity"
             onMouseDown={(e) => startResize("top", e)}
+            style={{
+              background:
+                "linear-gradient(to right, transparent, var(--color-primary), transparent)",
+              opacity: 0.3,
+              cursor: "row-resize",
+            }}
           />
         </div>
       )}
@@ -864,8 +982,14 @@ const Developer: React.FC = () => {
 
           {/* Panel 1-2 resize handle */}
           <div
-            className="w-1 bg-gradient-to-t from-transparent via-blue-500 to-transparent opacity-30 hover:opacity-100 cursor-col-resize z-10 transition-opacity"
+            className="w-1 z-10 transition-opacity"
             onMouseDown={(e) => startResize("panel1", e)}
+            style={{
+              background:
+                "linear-gradient(to bottom, transparent, var(--color-primary), transparent)",
+              opacity: 0.3,
+              cursor: "col-resize",
+            }}
           />
 
           {/* Panel 2 */}
@@ -894,8 +1018,14 @@ const Developer: React.FC = () => {
 
           {/* Panel 2-3 resize handle */}
           <div
-            className="w-1 bg-gradient-to-t from-transparent via-blue-500 to-transparent opacity-30 hover:opacity-100 cursor-col-resize z-10 transition-opacity"
+            className="w-1 z-10 transition-opacity"
             onMouseDown={(e) => startResize("panel2", e)}
+            style={{
+              background:
+                "linear-gradient(to bottom, transparent, var(--color-primary), transparent)",
+              opacity: 0.3,
+              cursor: "col-resize",
+            }}
           />
 
           {/* Panel 3 */}
@@ -926,7 +1056,10 @@ const Developer: React.FC = () => {
 
       {/* Maximized Panel View */}
       {maximizedPanel && (
-        <div className="fixed inset-0 z-50 bg-white">
+        <div
+          className="fixed inset-0 z-50"
+          style={{ backgroundColor: "var(--color-background)" }}
+        >
           {maximizedPanel === "top" && (
             <Panel
               tabs={topPanelTabs}
@@ -1005,14 +1138,22 @@ const Developer: React.FC = () => {
 
       {/* Drop Indicator */}
       {draggedTabId && (
-        <div className="fixed inset-0 bg-black bg-opacity-20 z-50 flex items-center justify-center pointer-events-none">
-          <div className="bg-white p-4 rounded-lg shadow-lg">
+        <div className="fixed inset-0 z-50 flex items-center justify-center pointer-events-none">
+          <div
+            className="p-4 rounded-lg shadow-lg"
+            style={{
+              backgroundColor: "var(--color-background)",
+              border: "1px solid var(--color-border)",
+              color: "var(--color-foreground)",
+            }}
+          >
             <p>Drag tab to move between panels</p>
             <p>Drop on top panel to pin</p>
             <p>Pin to top using 📍 icon</p>
             <button
-              className="mt-2 px-3 py-1 bg-red-500 text-white rounded"
+              className="mt-2 px-3 py-1 text-white rounded"
               onClick={() => setDraggedTabId(null)}
+              style={{ backgroundColor: "var(--color-error)" }}
             >
               Cancel Drag
             </button>

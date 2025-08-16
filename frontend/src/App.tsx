@@ -29,6 +29,7 @@ import DragDropArea, { DroppedItem } from "./components/DragDropArea";
 import FileUpload from "./components/FileUpload";
 import UploadCompletePopup from "./components/UploadCompletePopup";
 import GptImage from "./components/GptImage";
+import RemoveBg from "./components/RemoveBg";
 import DatabaseCreate from "./components/DatabaseCreate";
 import ThemeManager from "./components/ThemeManager";
 import {
@@ -584,6 +585,8 @@ export default function ChatApp() {
     setShowSidebar((prev) => !prev);
   };
   const [showGptImageWindow, setShowGptImageWindow] = useState(false);
+  const [showRemoveBgImageWindow, setShowRemoveBgImageWindow] = useState(false);
+
   const [showDatabaseWindow, setShowDatabaseWindow] = useState(false);
   const [selectedDatabases, setSelectedDatabases] = useState<RagDatabase[]>([]);
   const [databases, setDatabases] = useState<RagDatabase[]>([]);
@@ -639,6 +642,10 @@ export default function ChatApp() {
     //await onCreateDatabase(data);
     // Optionally refresh your list or update state here
   };
+
+  useEffect(() => {
+    document.title = "AI Chat Assistant";
+  }, []); // empty dependency array means this runs once on mount
 
   // 1. On mount or paramSessionId change, set sessionId or load last session
   useEffect(() => {
@@ -1907,6 +1914,10 @@ export default function ChatApp() {
             <GptImage onClose={() => setShowGptImageWindow(false)} />
           )}
 
+          {showRemoveBgImageWindow && (
+            <RemoveBg onClose={() => setShowRemoveBgImageWindow(false)} />
+          )}
+
           {showDatabaseWindow && (
             <DatabaseSelector
               ref={chatRef}
@@ -1932,6 +1943,7 @@ export default function ChatApp() {
               onTranslate={onTranslate}
               onImprove={onImproveCode}
               onImage={() => setShowGptImageWindow(true)}
+              onRemoveBg={() => setShowRemoveBgImageWindow(true)}
               placeholder="Type your message... (Shift + Enter for new line)"
               disabled={isLoading || typing}
             />

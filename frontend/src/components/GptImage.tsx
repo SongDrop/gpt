@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import useLocalStorage from "./useLocalStorage";
 import axios from "axios";
 import GptImageGridItem from "./GptImageGridItem";
-import { ArrowLeft, ChevronDown, ChevronUp, Sparkles } from "lucide-react";
+import { ArrowLeft, ChevronDown, ChevronUp, Sparkles, X } from "lucide-react";
 import {
   saveImageToDb,
   getAllImagesFromDb,
@@ -271,19 +271,6 @@ const GptImage: React.FC<GptImageProps> = ({ onClose }) => {
           <div className="image-generator-card bg-[var(--color-secondary)] shadow-lg">
             <header className="image-generator-header">
               <div className="flex items-center justify-between">
-                <button
-                  className="bg-[var(--color-background)] text-[var(--color-foreground)] hover:bg-[var(--color-secondary)] border border-[var(--color-border)] rounded"
-                  onClick={onClose}
-                  id="back-button-gpt-1"
-                  aria-label="Back to console"
-                >
-                  <ArrowLeft className="w-4 h-4" />
-                </button>
-
-                <h1 className="image-generator-title text-[var(--color-primary)]">
-                  gpt-image-1
-                </h1>
-
                 {/* Minimize button */}
                 <button
                   className="bg-[var(--color-background)] text-[var(--color-foreground)] hover:bg-[var(--color-secondary)] border border-[var(--color-border)] rounded"
@@ -292,6 +279,20 @@ const GptImage: React.FC<GptImageProps> = ({ onClose }) => {
                   title="Minimize"
                 >
                   <ChevronDown className="w-4 h-4" />
+                </button>
+
+                <h1 className="image-generator-title text-[var(--color-primary)]">
+                  gpt-image-1
+                </h1>
+
+                {/* Close button */}
+                <button
+                  className="bg-[var(--color-background)] text-[var(--color-foreground)] hover:bg-[var(--color-secondary)] border border-[var(--color-border)] rounded"
+                  onClick={onClose}
+                  id="back-button-gpt-1"
+                  title="Close"
+                >
+                  <X className="w-4 h-4" />
                 </button>
               </div>
 

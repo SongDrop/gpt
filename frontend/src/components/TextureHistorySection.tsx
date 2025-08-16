@@ -1,4 +1,3 @@
-// components/HistorySection.tsx
 import React from "react";
 import { TextureHistoryItem } from "./types";
 
@@ -15,31 +14,48 @@ const TextureHistorySection: React.FC<TextureHistorySectionProps> = ({
     switch (format) {
       case "TGA":
         return (
-          <span className="material-icons text-green-600 mr-1 text-sm">
+          <span
+            className="material-icons mr-1 text-sm"
+            style={{ color: "var(--color-success)" }}
+          >
             image
           </span>
         );
       case "PNG":
         return (
-          <span className="material-icons text-blue-600 mr-1 text-sm">
+          <span
+            className="material-icons mr-1 text-sm"
+            style={{ color: "var(--color-primary)" }}
+          >
             collections
           </span>
         );
       case "DDS":
         return (
-          <span className="material-icons text-purple-600 mr-1 text-sm">
+          <span
+            className="material-icons mr-1 text-sm"
+            style={{ color: "var(--color-primary)" }}
+          >
             texture
           </span>
         );
       case "JPG":
         return (
-          <span className="material-icons text-yellow-600 mr-1 text-sm">
+          <span
+            className="material-icons mr-1 text-sm"
+            style={{ color: "var(--color-primary)" }}
+          >
             photo
           </span>
         );
       default:
         return (
-          <span className="material-icons mr-1 text-sm">insert_drive_file</span>
+          <span
+            className="material-icons mr-1 text-sm"
+            style={{ color: "var(--color-foreground)", opacity: 0.7 }}
+          >
+            insert_drive_file
+          </span>
         );
     }
   };
@@ -47,26 +63,50 @@ const TextureHistorySection: React.FC<TextureHistorySectionProps> = ({
   const typeBadge = (type: string) => {
     if (type === "upscale") {
       return (
-        <span className="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">
+        <span
+          className="text-xs px-2 py-1 rounded"
+          style={{
+            backgroundColor: "var(--color-success)",
+            color: "var(--color-background)",
+          }}
+        >
           Upscaled
         </span>
       );
     }
     return (
-      <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">
+      <span
+        className="text-xs px-2 py-1 rounded"
+        style={{
+          backgroundColor: "var(--color-primary)",
+          color: "var(--color-background)",
+        }}
+      >
         PBR Map
       </span>
     );
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm p-6 mt-8">
+    <div
+      className="rounded-xl shadow-sm p-6 mt-8 border border-[var(--color-border)]"
+      style={{ backgroundColor: "var(--color-background)" }}
+    >
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-xl font-semibold">Recent Textures</h2>
+        <h2
+          className="text-xl font-semibold"
+          style={{ color: "var(--color-foreground)" }}
+        >
+          Recent Textures
+        </h2>
         {history.length > 0 && (
           <button
-            className="text-sm text-primary hover:text-secondary font-medium"
+            className="text-sm font-medium"
             onClick={clearHistory}
+            style={{
+              color: "var(--color-primary)",
+              cursor: "pointer",
+            }}
           >
             Clear All
           </button>
@@ -75,11 +115,22 @@ const TextureHistorySection: React.FC<TextureHistorySectionProps> = ({
 
       {history.length === 0 ? (
         <div className="text-center py-10">
-          <span className="material-icons text-gray-300 text-6xl">
+          <span
+            className="material-icons text-6xl"
+            style={{ color: "var(--color-border)", opacity: 0.5 }}
+          >
             folder_open
           </span>
-          <p className="text-gray-500 mt-4">No processed textures yet</p>
-          <p className="text-sm text-gray-400 mt-2">
+          <p
+            className="mt-4 opacity-80"
+            style={{ color: "var(--color-foreground)" }}
+          >
+            No processed textures yet
+          </p>
+          <p
+            className="text-sm mt-2 opacity-70"
+            style={{ color: "var(--color-foreground)" }}
+          >
             Your processed textures will appear here
           </p>
         </div>
@@ -88,26 +139,56 @@ const TextureHistorySection: React.FC<TextureHistorySectionProps> = ({
           {history.map((item) => (
             <div
               key={item.id}
-              className="border border-gray-200 rounded-lg overflow-hidden hover:shadow-md transition-shadow"
+              className="rounded-lg overflow-hidden transition-shadow"
+              style={{
+                border: "1px solid var(--color-border)",
+                backgroundColor: "var(--color-background)",
+                cursor: "pointer",
+              }}
             >
-              <div className="bg-gray-200 h-32 flex items-center justify-center">
-                <span className="material-icons text-gray-400 text-4xl">
+              <div
+                className="h-32 flex items-center justify-center"
+                style={{ backgroundColor: "var(--color-secondary)" }}
+              >
+                <span
+                  className="material-icons text-4xl"
+                  style={{
+                    color: "var(--color-foreground)",
+                    opacity: 0.5,
+                  }}
+                >
                   {item.type === "upscale" ? "zoom_in" : "texture"}
                 </span>
               </div>
               <div className="p-3">
-                <div className="text-sm font-medium truncate">{item.name}</div>
+                <div
+                  className="text-sm font-medium truncate"
+                  style={{ color: "var(--color-foreground)" }}
+                >
+                  {item.name}
+                </div>
                 <div className="flex justify-between items-center mt-2">
-                  <span className="text-xs text-gray-500">
+                  <span
+                    className="text-xs opacity-80"
+                    style={{ color: "var(--color-foreground)" }}
+                  >
                     {item.resolution}
                   </span>
                   <div className="flex items-center">
                     {formatIcon(item.format)}
-                    <span className="text-xs">{item.format}</span>
+                    <span
+                      className="text-xs opacity-80"
+                      style={{ color: "var(--color-foreground)" }}
+                    >
+                      {item.format}
+                    </span>
                   </div>
                 </div>
                 <div className="mt-2 flex justify-between">
-                  <span className="text-xs text-gray-500">
+                  <span
+                    className="text-xs opacity-70"
+                    style={{ color: "var(--color-foreground)" }}
+                  >
                     {new Date(item.timestamp).toLocaleDateString()}
                   </span>
                   {typeBadge(item.type)}

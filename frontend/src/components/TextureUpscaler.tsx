@@ -1,4 +1,3 @@
-// components/TextureUpscaler.tsx
 import React, { useState, useRef } from "react";
 
 interface TextureUpscalerProps {
@@ -52,17 +51,31 @@ const TextureUpscaler: React.FC<TextureUpscalerProps> = ({
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-sm p-6 mb-8">
+    <div
+      className="rounded-xl shadow-sm p-6 mb-8 border border-[var(--color-border)]"
+      style={{ backgroundColor: "var(--color-background)" }}
+    >
       <div className="flex flex-col md:flex-row gap-8">
         <div className="w-full md:w-1/2">
-          <h2 className="text-xl font-semibold mb-4">Texture Upscaler</h2>
-          <p className="text-gray-600 mb-6">
+          <h2
+            className="text-xl font-semibold mb-4"
+            style={{ color: "var(--color-foreground)" }}
+          >
+            Texture Upscaler
+          </h2>
+          <p
+            className="mb-6 opacity-80"
+            style={{ color: "var(--color-foreground)" }}
+          >
             Enhance your game textures with AI-powered upscaling while
             preserving details.
           </p>
 
           <div className="mb-6">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label
+              className="block text-sm font-medium mb-2"
+              style={{ color: "var(--color-foreground)" }}
+            >
               Upload Texture
             </label>
             <div className="flex items-center">
@@ -74,26 +87,45 @@ const TextureUpscaler: React.FC<TextureUpscalerProps> = ({
                 onChange={handleFileChange}
               />
               <button
-                className="px-4 py-2 bg-primary text-white rounded-md hover:bg-secondary transition"
+                className="px-4 py-2 text-white rounded-md transition"
+                style={{
+                  backgroundColor: "var(--color-primary)",
+                  color: "var(--color-background)",
+                }}
                 onClick={triggerFileInput}
               >
                 Choose File
               </button>
-              <span className="ml-4 text-sm text-gray-600 truncate max-w-xs">
+              <span
+                className="ml-4 text-sm truncate max-w-xs opacity-80"
+                style={{ color: "var(--color-foreground)" }}
+              >
                 {file ? file.name : "No file selected"}
               </span>
             </div>
-            <p className="mt-1 text-sm text-gray-500">
+            <p
+              className="mt-1 text-sm opacity-70"
+              style={{ color: "var(--color-foreground)" }}
+            >
               Supports JPG, PNG, TGA. Max file size: 10MB.
             </p>
           </div>
 
           {previewUrl && (
             <div className="mb-6">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label
+                className="block text-sm font-medium mb-2"
+                style={{ color: "var(--color-foreground)" }}
+              >
                 Preview
               </label>
-              <div className="border border-gray-200 rounded-lg p-2">
+              <div
+                className="rounded-lg p-2"
+                style={{
+                  border: "1px solid var(--color-border)",
+                  backgroundColor: "var(--color-secondary)",
+                }}
+              >
                 <img
                   src={previewUrl}
                   alt="Preview"
@@ -105,13 +137,21 @@ const TextureUpscaler: React.FC<TextureUpscalerProps> = ({
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label
+                className="block text-sm font-medium mb-2"
+                style={{ color: "var(--color-foreground)" }}
+              >
                 Upscale Factor
               </label>
               <select
                 value={upscaleFactor}
                 onChange={(e) => setUpscaleFactor(e.target.value)}
-                className="w-full border border-gray-300 rounded-md px-3 py-2"
+                className="w-full rounded-md px-3 py-2"
+                style={{
+                  border: "1px solid var(--color-border)",
+                  backgroundColor: "var(--color-background)",
+                  color: "var(--color-foreground)",
+                }}
               >
                 <option value="2">2x (Good)</option>
                 <option value="4">4x (Recommended)</option>
@@ -119,13 +159,21 @@ const TextureUpscaler: React.FC<TextureUpscalerProps> = ({
               </select>
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700 mb-2">
+              <label
+                className="block text-sm font-medium mb-2"
+                style={{ color: "var(--color-foreground)" }}
+              >
                 Output Format
               </label>
               <select
                 value={outputFormat}
                 onChange={(e) => setOutputFormat(e.target.value)}
-                className="w-full border border-gray-300 rounded-md px-3 py-2"
+                className="w-full rounded-md px-3 py-2"
+                style={{
+                  border: "1px solid var(--color-border)",
+                  backgroundColor: "var(--color-background)",
+                  color: "var(--color-foreground)",
+                }}
               >
                 <option value="png">PNG (Lossless)</option>
                 <option value="tga">TGA (Game Texture)</option>
@@ -137,10 +185,15 @@ const TextureUpscaler: React.FC<TextureUpscalerProps> = ({
 
           <button
             className={`w-full px-4 py-3 text-white rounded-md transition flex items-center justify-center ${
-              file && !loading
-                ? "bg-green-600 hover:bg-green-700"
-                : "bg-gray-400 cursor-not-allowed"
+              !file || loading ? "cursor-not-allowed" : ""
             }`}
+            style={{
+              backgroundColor:
+                file && !loading
+                  ? "var(--color-primary)"
+                  : "var(--color-secondary)",
+              color: file && !loading ? "white" : "gray",
+            }}
             onClick={handleUpscale}
             disabled={!file || loading}
           >
@@ -170,43 +223,114 @@ const TextureUpscaler: React.FC<TextureUpscalerProps> = ({
         </div>
 
         <div className="w-full md:w-1/2">
-          <div className="bg-gray-50 rounded-xl p-6 h-full">
-            <h3 className="text-lg font-semibold mb-4">How it works</h3>
+          <div
+            className="rounded-xl p-6 h-full"
+            style={{
+              backgroundColor: "var(--color-secondary)",
+              border: "1px solid var(--color-border)",
+            }}
+          >
+            <h3
+              className="text-lg font-semibold mb-4"
+              style={{ color: "var(--color-foreground)" }}
+            >
+              How it works
+            </h3>
             <div className="space-y-4">
-              <div className="workflow-step active p-4 rounded-lg">
+              <div
+                className="p-4 rounded-lg"
+                style={{
+                  backgroundColor: "var(--color-background)",
+                  border: "1px solid var(--color-border)",
+                }}
+              >
                 <div className="flex items-center">
-                  <div className="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-white mr-3">
+                  <div
+                    className="w-8 h-8 rounded-full flex items-center justify-center mr-3"
+                    style={{
+                      backgroundColor: "var(--color-primary)",
+                      color: "var(--color-background)",
+                    }}
+                  >
                     1
                   </div>
-                  <h4 className="font-medium">Upload your texture</h4>
+                  <h4
+                    className="font-medium"
+                    style={{ color: "var(--color-foreground)" }}
+                  >
+                    Upload your texture
+                  </h4>
                 </div>
-                <p className="text-sm text-gray-600 mt-2 ml-11">
+                <p
+                  className="text-sm mt-2 ml-11 opacity-80"
+                  style={{ color: "var(--color-foreground)" }}
+                >
                   Game textures are often low resolution. Upload your base
                   texture for enhancement.
                 </p>
               </div>
 
-              <div className="workflow-step p-4 rounded-lg">
+              <div
+                className="p-4 rounded-lg"
+                style={{
+                  backgroundColor: "var(--color-secondary)",
+                  border: "1px solid var(--color-border)",
+                }}
+              >
                 <div className="flex items-center">
-                  <div className="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center text-white mr-3">
+                  <div
+                    className="w-8 h-8 rounded-full flex items-center justify-center mr-3"
+                    style={{
+                      backgroundColor: "var(--color-border)",
+                      color: "var(--color-foreground)",
+                    }}
+                  >
                     2
                   </div>
-                  <h4 className="font-medium">AI Upscaling</h4>
+                  <h4
+                    className="font-medium"
+                    style={{ color: "var(--color-foreground)" }}
+                  >
+                    AI Upscaling
+                  </h4>
                 </div>
-                <p className="text-sm text-gray-600 mt-2 ml-11">
+                <p
+                  className="text-sm mt-2 ml-11 opacity-80"
+                  style={{ color: "var(--color-foreground)" }}
+                >
                   Our AI analyzes your texture and enhances details while
                   preserving artistic style.
                 </p>
               </div>
 
-              <div className="workflow-step p-4 rounded-lg">
+              <div
+                className="p-4 rounded-lg"
+                style={{
+                  backgroundColor: "var(--color-secondary)",
+                  border: "1px solid var(--color-border)",
+                }}
+              >
                 <div className="flex items-center">
-                  <div className="w-8 h-8 rounded-full bg-gray-300 flex items-center justify-center text-white mr-3">
+                  <div
+                    className="w-8 h-8 rounded-full flex items-center justify-center mr-3"
+                    style={{
+                      backgroundColor: "var(--color-border)",
+                      color: "var(--color-foreground)",
+                    }}
+                  >
                     3
                   </div>
-                  <h4 className="font-medium">Compare & Export</h4>
+                  <h4
+                    className="font-medium"
+                    style={{ color: "var(--color-foreground)" }}
+                  >
+                    Compare & Export
+                  </h4>
                 </div>
-                <p className="text-sm text-gray-600 mt-2 ml-11">
+                <p
+                  className="text-sm mt-2 ml-11 opacity-80"
+                  style={{ color: "var(--color-foreground)" }}
+                >
                   Compare before/after results and export in your preferred game
                   format.
                 </p>
@@ -214,32 +338,33 @@ const TextureUpscaler: React.FC<TextureUpscalerProps> = ({
             </div>
 
             <div className="mt-8">
-              <h4 className="font-medium mb-3">Tips for best results</h4>
-              <ul className="space-y-2 text-sm text-gray-600">
-                <li className="flex items-start">
-                  <span className="material-icons text-primary mr-2 text-sm">
-                    check_circle
-                  </span>
-                  Use source textures rather than compressed in-game assets
-                </li>
-                <li className="flex items-start">
-                  <span className="material-icons text-primary mr-2 text-sm">
-                    check_circle
-                  </span>
-                  For tileable textures, ensure edges match before upscaling
-                </li>
-                <li className="flex items-start">
-                  <span className="material-icons text-primary mr-2 text-sm">
-                    check_circle
-                  </span>
-                  Higher resolution inputs produce better results
-                </li>
-                <li className="flex items-start">
-                  <span className="material-icons text-primary mr-2 text-sm">
-                    check_circle
-                  </span>
-                  Use TGA for lossless quality, DDS for compressed game assets
-                </li>
+              <h4
+                className="font-medium mb-3"
+                style={{ color: "var(--color-foreground)" }}
+              >
+                Tips for best results
+              </h4>
+              <ul className="space-y-2 text-sm">
+                {[
+                  "Use source textures rather than compressed in-game assets",
+                  "For tileable textures, ensure edges match before upscaling",
+                  "Higher resolution inputs produce better results",
+                  "Use TGA for lossless quality, DDS for compressed game assets",
+                ].map((tip, index) => (
+                  <li
+                    key={index}
+                    className="flex items-start"
+                    style={{ color: "var(--color-foreground)" }}
+                  >
+                    <span
+                      className="mr-2 text-sm"
+                      style={{ color: "var(--color-primary)" }}
+                    >
+                      ✓
+                    </span>
+                    {tip}
+                  </li>
+                ))}
               </ul>
             </div>
           </div>

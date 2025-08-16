@@ -421,7 +421,7 @@ const CodeTranslator: React.FC<CodeTranslatorProps> = ({
                     e.target.value = "";
                   }
                 }}
-                className="p-2 rounded hover:bg-[var(--color-secondary)] bg-[var(--color-background)] cursor-pointer border rounded border-[var(--color-border)]"
+                className="p-2 rounded bg-[var(--color-secondary)] hover:bg-[var(--color-secondary)] cursor-pointer border rounded border-[var(--color-border)]"
               >
                 <option value="">Add Language...</option>
                 {SUPPORTED_LANGUAGES.filter(
